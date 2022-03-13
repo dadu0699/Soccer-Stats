@@ -1,0 +1,12 @@
+DROP DATABASE IF EXISTS UStorage;
+CREATE DATABASE UStorage;
+USE UStorage;
+
+CREATE TABLE Bitacora(
+    bitacoraID INT NOT NULL AUTO_INCREMENT,
+    registro VARCHAR(255) NOT NULL,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuarioID INT NOT NULL,
+    PRIMARY KEY (bitacoraID),
+    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
+);
