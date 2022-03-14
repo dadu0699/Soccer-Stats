@@ -72,3 +72,59 @@ CREATE TABLE ContradoDT(
     FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID),
     FOREIGN KEY (directorTecnicoID) REFERENCES DirectorTecnico(directorTecnicoID)
 );
+
+CREATE TABLE Noticia(
+    noticiaID INT NOT NULL AUTO_INCREMENT,
+    titulo VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    equipoID INT NOT NULL,
+    PRIMARY KEY (noticiaID),
+    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID)
+);
+
+CREATE TABLE ContratoJugador(
+    contratoJugadorID INT NOT NULL AUTO_INCREMENT,
+    fechaInicio DATETIME NOT NULL,
+    fechaFin DATETIME NOT NULL,
+    jugadorID INT NOT NULL,
+    equipoID INT NOT NULL,
+    PRIMARY KEY (contratoJugadorID),
+    FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
+    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID)
+);
+
+CREATE TABLE Gol(
+    golID INT NOT NULL AUTO_INCREMENT,
+    tipo VARCHAR(255) NOT NULL,
+    distancia VARCHAR(255) NOT NULL,
+    sufreID INT NOT NULL,
+    cometeID INT NOT NULL,
+    asistenteID INT NOT NULL,
+    incidenciaID INT NOT NULL,
+    PRIMARY KEY (golID),
+    FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
+    FOREIGN KEY (sufreID) REFERENCES Jugador(jugadorID),
+    FOREIGN KEY (cometeID) REFERENCES Jugador(jugadorID),
+    FOREIGN KEY (asistenteID) REFERENCES Jugador(jugadorID),
+    FOREIGN KEY (incidenciaID) REFERENCES Incidencia(incidenciaID)
+);
+
+CREATE TABLE Incidencia(
+    incidenciaID INT NOT NULL AUTO_INCREMENT,
+    minuto VARCHAR(255) NOT NULL,
+    jugadorID INT NOT NULL,
+    partidoID INT NOT NULL,
+    PRIMARY KEY (incidenciaID),
+    FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
+    FOREIGN KEY (partidoID) REFERENCES Partido(partidoID)
+);
+
+CREATE TABLE Tarjeta(
+    tarjetaID INT NOT NULL AUTO_INCREMENT,
+    color VARCHAR(255) NOT NULL,
+    incidenciaID INT NOT NULL,
+    PRIMARY KEY (tarjetaID),
+    FOREIGN KEY (incidenciaID) REFERENCES Incidencia(incidenciaID)
+);
+
