@@ -2,6 +2,49 @@ DROP DATABASE IF EXISTS UStorage;
 CREATE DATABASE UStorage;
 USE UStorage;
 
+CREATE TABLE PosicionJugador(
+    posicionJugadorID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Jugador(
+    jugadorID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    apellido VARCHAR(255) NOT NULL,
+    fechaNacimiento DATE NOT NULL,
+    estado VARCHAR(255) NOT NULL,
+    posicionJugadorID INT NOT NULL,
+    paisID INT NOT NULL,
+    FOREIGN KEY (posicionJugadorID) REFERENCES PosicionJugador(posicionJugadorID),
+    FOREIGN KEY (paisID) REFERENCES Pais(paisID)
+);
+
+CREATE TABLE Equipo(
+    equipoID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    fechaFundacion DATE NOT NULL,
+    fotoLogo VARCHAR(500) NOT NULL,
+    paisID INT NOT NULL,
+    FOREIGN KEY (paisID) REFERENCES Pais(paisID)
+);
+
+CREATE TABLE Competencia(
+    competenciaID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    ano INT NOT NULL,
+    tipo VARCHAR(255) NOT NULL,
+    equipoCampeonID  INT NULL,
+    FOREIGN KEY (equipoCampeonID) REFERENCES Equipo(equipoCampeonID)
+);
+
+CREATE TABLE CompetenciaEquipo(
+    competenciaID INT NOT NULL AUTO_INCREMENT,
+    equipoID INT NOT NULL,
+    competenciaID INT NOT NULL,
+    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID),
+    FOREIGN KEY (competenciaID) REFERENCES Competencia(competenciaID)
+);
+
 CREATE TABLE Bitacora(
     bitacoraID INT NOT NULL AUTO_INCREMENT,
     registro VARCHAR(255) NOT NULL,
