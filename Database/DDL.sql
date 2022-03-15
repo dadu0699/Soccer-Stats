@@ -49,7 +49,7 @@ CREATE TABLE Competencia(
     tipo VARCHAR(100) NOT NULL,
     equipoCampeonID INT NULL,
     PRIMARY KEY (competenciaID),
-    FOREIGN KEY (equipoCampeonID) REFERENCES Equipo(equipoCampeonID)
+    FOREIGN KEY (equipoCampeonID) REFERENCES Equipo(equipoID)
 );
 
 CREATE TABLE CompetenciaEquipo(
@@ -74,7 +74,7 @@ CREATE TABLE Usuario(
     fechaRegistro DATE NOT NULL,
     direccion VARCHAR(255) NOT NULL,
     rol TINYINT NOT NULL,
-    estado VARCHAR(100) NOT NULL
+    estado VARCHAR(100) NOT NULL,
     paisID INT NOT NULL,
     PRIMARY KEY (usuarioID),
     FOREIGN KEY (paisID) REFERENCES Pais(paisID)
@@ -191,6 +191,16 @@ CREATE TABLE ContratoJugador(
     FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID)
 );
 
+CREATE TABLE Incidencia(
+    incidenciaID INT NOT NULL AUTO_INCREMENT,
+    minuto VARCHAR(100) NOT NULL,
+    jugadorID INT NOT NULL,
+    partidoID INT NOT NULL,
+    PRIMARY KEY (incidenciaID),
+    FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
+    FOREIGN KEY (partidoID) REFERENCES Partido(partidoID)
+);
+
 CREATE TABLE Gol(
     golID INT NOT NULL AUTO_INCREMENT,
     tipo VARCHAR(100) NOT NULL,
@@ -200,21 +210,10 @@ CREATE TABLE Gol(
     asistenteID INT NOT NULL,
     incidenciaID INT NOT NULL,
     PRIMARY KEY (golID),
-    FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
     FOREIGN KEY (sufreID) REFERENCES Jugador(jugadorID),
     FOREIGN KEY (cometeID) REFERENCES Jugador(jugadorID),
     FOREIGN KEY (asistenteID) REFERENCES Jugador(jugadorID),
     FOREIGN KEY (incidenciaID) REFERENCES Incidencia(incidenciaID)
-);
-
-CREATE TABLE Incidencia(
-    incidenciaID INT NOT NULL AUTO_INCREMENT,
-    minuto VARCHAR(100) NOT NULL,
-    jugadorID INT NOT NULL,
-    partidoID INT NOT NULL,
-    PRIMARY KEY (incidenciaID),
-    FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
-    FOREIGN KEY (partidoID) REFERENCES Partido(partidoID)
 );
 
 CREATE TABLE Tarjeta(
