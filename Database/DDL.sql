@@ -1,48 +1,83 @@
-DROP DATABASE IF EXISTS UStorage;
-CREATE DATABASE UStorage;
-USE UStorage;
+DROP DATABASE IF EXISTS SoccerStats;
+CREATE DATABASE SoccerStats;
+USE SoccerStats;
+
+CREATE TABLE Pais(
+    paisID INT NOT NULL AUTO_INCREMENT,
+    iso VARCHAR(2) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    nombre2 VARCHAR(100) NOT NULL,
+    iso3 VARCHAR(3) NOT NULL,
+    numcode INT NOT NULL,
+    phonecode INT NOT NULL,
+    PRIMARY KEY (paisID)
+);
 
 CREATE TABLE PosicionJugador(
     posicionJugadorID INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL
+    nombre VARCHAR(100) NOT NULL,
+    PRIMARY KEY (posicionJugadorID)
 );
 
 CREATE TABLE Jugador(
     jugadorID INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL,
-    apellido VARCHAR(255) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
     fechaNacimiento DATE NOT NULL,
-    estado VARCHAR(255) NOT NULL,
+    estado VARCHAR(100) NOT NULL,
     posicionJugadorID INT NOT NULL,
     paisID INT NOT NULL,
+    PRIMARY KEY (jugadorID),
     FOREIGN KEY (posicionJugadorID) REFERENCES PosicionJugador(posicionJugadorID),
     FOREIGN KEY (paisID) REFERENCES Pais(paisID)
 );
 
 CREATE TABLE Equipo(
     equipoID INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
     fechaFundacion DATE NOT NULL,
-    fotoLogo VARCHAR(500) NOT NULL,
+    fotoLogo VARCHAR(255) NOT NULL,
     paisID INT NOT NULL,
+    PRIMARY KEY (equipoID),
     FOREIGN KEY (paisID) REFERENCES Pais(paisID)
 );
 
 CREATE TABLE Competencia(
     competenciaID INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL,
-    ano INT NOT NULL,
-    tipo VARCHAR(255) NOT NULL,
-    equipoCampeonID  INT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    anio INT NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
+    equipoCampeonID INT NULL,
+    PRIMARY KEY (competenciaID),
     FOREIGN KEY (equipoCampeonID) REFERENCES Equipo(equipoCampeonID)
 );
 
 CREATE TABLE CompetenciaEquipo(
-    competenciaID INT NOT NULL AUTO_INCREMENT,
+    competenciaEquipoID INT NOT NULL AUTO_INCREMENT,
     equipoID INT NOT NULL,
     competenciaID INT NOT NULL,
+    PRIMARY KEY (competenciaEquipoID),
     FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID),
     FOREIGN KEY (competenciaID) REFERENCES Competencia(competenciaID)
+);
+
+CREATE TABLE Usuario(
+    usuarioID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    claveAcceso VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    telefono VARCHAR(100) NOT NULL,
+    fotografia VARCHAR(255) NOT NULL,
+    genero BOOLEAN NOT NULL,
+    fechaNacimiento DATE NOT NULL,
+    fechaRegistro DATE NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    rol TINYINT NOT NULL,
+    estado VARCHAR(100) NOT NULL
+    paisID INT NOT NULL,
+    PRIMARY KEY (usuarioID),
+    FOREIGN KEY (paisID) REFERENCES Pais(paisID)
 );
 
 CREATE TABLE Bitacora(
@@ -54,46 +89,65 @@ CREATE TABLE Bitacora(
     FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
 );
 
+CREATE TABLE Membresia(
+    membresiaID INT NOT NULL AUTO_INCREMENT,
+    fechaInicio DATE NOT NULL,
+    fechaFin DATE NOT NULL,
+    pagada BOOLEAN NOT NULL,
+    usuarioID INT NOT NULL,
+    PRIMARY KEY (membresiaID),
+    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
+);
+
+CREATE TABLE Favorito(
+    favoritoID INT NOT NULL AUTO_INCREMENT,
+    usuarioID INT NOT NULL,
+    equipoID INT NOT NULL,
+    PRIMARY KEY (favoritoID),
+    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID),
+    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID)
+);
+
 CREATE TABLE DirectorTecnico(
-	directorTecnicoID INT NOT NULL AUTO_INCREMENT,
-    nombre varchar(255) NOT NULL,
-    apellido varchar(255) NOT NULL,
-    fechaNacimiento DATETIME NOT NULL,
-    estado varchar(255) NOT NULL, /*duda con el tipo*/
-    foto varchar(255) NOT NULL,
+    directorTecnicoID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    fechaNacimiento DATE NOT NULL,
+    estado VARCHAR(100) NOT NULL, /*duda con el tipo*/
+    foto VARCHAR(255) NOT NULL,
     paisID INT NOT NULL,
     PRIMARY KEY (directorTecnicoID),
     FOREIGN KEY (paisID) REFERENCES Pais(paisID)
 );
 
 CREATE TABLE Estadio(
-	estadioID INT NOT NULL AUTO_INCREMENT,
-    nombre varchar(255) NOT NULL,
+    estadioID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
     capacidad INT NOT NULL,
-    direccion varchar(255) NOT NULL,
-    estado varchar(255) NOT NULL, /*duda con el tipo*/
-    foto varchar(255) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    estado VARCHAR(100) NOT NULL, /*duda con el tipo*/
+    foto VARCHAR(255) NOT NULL,
     paisID INT NOT NULL,
     PRIMARY KEY (estadioID),
     FOREIGN KEY (paisID) REFERENCES Pais(paisID)
 );
 
 CREATE TABLE Arbitro(
-	arbitroID INT NOT NULL AUTO_INCREMENT,
-    nombre varchar(255) NOT NULL,
-    fechaNacimiento DATETIME NOT NULL,
+    arbitroID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    fechaNacimiento DATE NOT NULL,
     paisID INT NOT NULL,
     PRIMARY KEY (arbitroID),
     FOREIGN KEY (paisID) REFERENCES Pais(paisID)
 );
 
 CREATE TABLE Partido(
-	partidoID INT NOT NULL AUTO_INCREMENT,
+    partidoID INT NOT NULL AUTO_INCREMENT,
     asistencia INT NOT NULL,
     fechaHora DATETIME NOT NULL,
     equipoVisitaID INT NOT NULL,
     equipoLocalID INT NOT NULL,
-    estado varchar(255) NOT NULL, /*duda con el tipo*/
+    estado VARCHAR(100) NOT NULL, /*duda con el tipo*/
     estadioID INT NOT NULL,
     arbitroID INT NOT NULL,
     competenciaID INT NOT NULL,
@@ -106,9 +160,9 @@ CREATE TABLE Partido(
 );
 
 CREATE TABLE ContradoDT(
-	contratoDTID INT NOT NULL AUTO_INCREMENT,
-    fechaInicio DATETIME NOT NULL,
-    fechaFin DATETIME NOT NULL,
+    contratoDTID INT NOT NULL AUTO_INCREMENT,
+    fechaInicio DATE NOT NULL,
+    fechaFin DATE NOT NULL,
     equipoID INT NOT NULL,
     directorTecnicoID INT NOT NULL,
     PRIMARY KEY (contratoDTID),
@@ -128,8 +182,8 @@ CREATE TABLE Noticia(
 
 CREATE TABLE ContratoJugador(
     contratoJugadorID INT NOT NULL AUTO_INCREMENT,
-    fechaInicio DATETIME NOT NULL,
-    fechaFin DATETIME NOT NULL,
+    fechaInicio DATE NOT NULL,
+    fechaFin DATE NOT NULL,
     jugadorID INT NOT NULL,
     equipoID INT NOT NULL,
     PRIMARY KEY (contratoJugadorID),
@@ -139,8 +193,8 @@ CREATE TABLE ContratoJugador(
 
 CREATE TABLE Gol(
     golID INT NOT NULL AUTO_INCREMENT,
-    tipo VARCHAR(255) NOT NULL,
-    distancia VARCHAR(255) NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
+    distancia VARCHAR(100) NOT NULL,
     sufreID INT NOT NULL,
     cometeID INT NOT NULL,
     asistenteID INT NOT NULL,
@@ -155,7 +209,7 @@ CREATE TABLE Gol(
 
 CREATE TABLE Incidencia(
     incidenciaID INT NOT NULL AUTO_INCREMENT,
-    minuto VARCHAR(255) NOT NULL,
+    minuto VARCHAR(100) NOT NULL,
     jugadorID INT NOT NULL,
     partidoID INT NOT NULL,
     PRIMARY KEY (incidenciaID),
@@ -165,9 +219,8 @@ CREATE TABLE Incidencia(
 
 CREATE TABLE Tarjeta(
     tarjetaID INT NOT NULL AUTO_INCREMENT,
-    color VARCHAR(255) NOT NULL,
+    color VARCHAR(100) NOT NULL,
     incidenciaID INT NOT NULL,
     PRIMARY KEY (tarjetaID),
     FOREIGN KEY (incidenciaID) REFERENCES Incidencia(incidenciaID)
 );
-
