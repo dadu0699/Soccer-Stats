@@ -2,14 +2,18 @@ DROP DATABASE IF EXISTS SoccerStats;
 CREATE DATABASE SoccerStats;
 USE SoccerStats;
 
+-- DROP DATABASE IF EXISTS SoccerStatsDevelop;
+-- CREATE DATABASE SoccerStatsDevelop;
+-- USE SoccerStatsDevelop;
+
 CREATE TABLE Pais(
-    paisID INT NOT NULL AUTO_INCREMENT,
-    iso VARCHAR(2) NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
-    nombre2 VARCHAR(100) NOT NULL,
-    iso3 VARCHAR(3) NOT NULL,
-    numcode INT NOT NULL,
-    phonecode INT NOT NULL,
+    paisID INT NOT NULL,
+    iso VARCHAR(2) NULL,
+    nombre VARCHAR(100) NULL,
+    nombre2 VARCHAR(100) NULL,
+    iso3 VARCHAR(3) NULL,
+    numcode INT NULL,
+    phonecode INT NULL,
     PRIMARY KEY (paisID)
 );
 
@@ -25,6 +29,7 @@ CREATE TABLE Jugador(
     apellido VARCHAR(100) NOT NULL,
     fechaNacimiento DATE NOT NULL,
     estado VARCHAR(100) NOT NULL,
+    foto VARCHAR(255) NOT NULL,
     posicionJugadorID INT NOT NULL,
     paisID INT NOT NULL,
     PRIMARY KEY (jugadorID),
@@ -47,8 +52,10 @@ CREATE TABLE Competencia(
     nombre VARCHAR(100) NOT NULL,
     anio INT NOT NULL,
     tipo VARCHAR(100) NOT NULL,
+    paisID INT NULL,
     equipoCampeonID INT NULL,
     PRIMARY KEY (competenciaID),
+    FOREIGN KEY (paisID) REFERENCES Pais(paisID),
     FOREIGN KEY (equipoCampeonID) REFERENCES Equipo(equipoID)
 );
 
@@ -66,6 +73,7 @@ CREATE TABLE Usuario(
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
     claveAcceso VARCHAR(100) NOT NULL,
+    fechaHoraClaveAcceso DATETIME NULL,
     correo VARCHAR(100) NOT NULL,
     telefono VARCHAR(100) NOT NULL,
     fotografia VARCHAR(255) NOT NULL,
@@ -93,7 +101,7 @@ CREATE TABLE Membresia(
     membresiaID INT NOT NULL AUTO_INCREMENT,
     fechaInicio DATE NOT NULL,
     fechaFin DATE NOT NULL,
-    pagada BOOLEAN NOT NULL,
+    pagada BOOLEAN NULL DEFAULT False,
     usuarioID INT NOT NULL,
     PRIMARY KEY (membresiaID),
     FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
@@ -123,6 +131,7 @@ CREATE TABLE DirectorTecnico(
 CREATE TABLE Estadio(
     estadioID INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
+    fechaFundacion DATE NOT NULL,
     capacidad INT NOT NULL,
     direccion VARCHAR(255) NOT NULL,
     estado VARCHAR(100) NOT NULL, /*duda con el tipo*/
@@ -147,6 +156,8 @@ CREATE TABLE Partido(
     fechaHora DATETIME NOT NULL,
     equipoVisitaID INT NOT NULL,
     equipoLocalID INT NOT NULL,
+    resultadoLocal INT NOT NULL,
+    resultadoVisitante INT NOT NULL,
     estado VARCHAR(100) NOT NULL, /*duda con el tipo*/
     estadioID INT NOT NULL,
     arbitroID INT NOT NULL,
