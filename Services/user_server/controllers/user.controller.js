@@ -5,6 +5,12 @@ const dispatchEmail = require('../configs/nodemail');
 
 const { CRYPTO_KEY } = process.env;
 
+iniciarSesion = (req, res) => {
+    userModel.signin(req.body, (err, results) => {
+        if (err) return response(res, 500, err);
+        response(res, 200, results[0]);
+    });
+}
 
 obtenerPaises = (req, res) => {
     userModel.getCountry(req, (err, results) => {
@@ -61,4 +67,4 @@ const response = (res, code, data, msj = '') => {
     res.status(code).send({ code, data, msj });
 };
 
-module.exports = { obtenerPaises, crearUsuario, validarCuenta, obtenerPerfil };
+module.exports = { obtenerPaises, crearUsuario, validarCuenta, obtenerPerfil, iniciarSesion };

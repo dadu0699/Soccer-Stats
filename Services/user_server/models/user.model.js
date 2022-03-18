@@ -4,6 +4,16 @@ const execute = (query, params, callback) => {
   mysqlConnection.query(query, params, (err, res) => callback(err, res));
 };
 
+const signin = (params, callback) => {
+  const user = [params.email, params.password];
+  const query = `
+        SELECT usuarioID id_usuario, rol id_rol, estado statusAccount, fechaHoraClaveAcceso expire
+        FROM Usuario
+        WHERE correo = ? AND claveAcceso = ?;
+  `;
+  return execute(query, user, callback);
+}
+
 const getCountry = (params, callback) => {
   const query = `
         SELECT paisID id, nombre2 nicename FROM Pais;
@@ -38,30 +48,17 @@ const validate = (params, callback) => {
 }
 
 const create = (params, callback) => {
-  const user = {
-    nombre: params.name,
-    apellido: params.lastname,
-    claveAcceso: params.password,
-    correo: params.email,
-    telefono: params.telephone,
-    fotografia: params.photo,
-    genero: params.genre,
-    fechaNacimiento: params.birthday,
-    fechaRegistro: params.created,
-    direccion: params.address,
-    rol: params.id_rol,
-    estado: params.id_status,
-    paisID: params.id_country
-  };
-  const newUser = [user.nombre, user.apellido, user.claveAcceso, user.correo, user.telefono, user.fotografia,
-  user.genero, user.fechaNacimiento, user.fechaRegistro, user.direccion, user.rol, user.estado, user.paisID]
+  const newUser = [params.name, params.lastname, params.password, params.email,
+    params.telephone, params.photo, params.genre, params.birthday, params.created,
+    params.address, params.id_rol, params.id_status, params.id_country]
 
   const query = `
-  INSERT INTO Usuario (nombre, apellido, claveAcceso, correo, telefono, fotografia, genero, fechaNacimiento, fechaRegistro, direccion, rol, estado, paisID)
+  INSERT INTO Usuario (nombre, apellido, claveAcceso, correo, telefono, fotografia, genero, fechaNacimiento, 
+    fechaRegistro, direccion, rol, estado, paisID)
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
   `;
 
   return execute(query, newUser, callback);
 };
 
-module.exports = { getCountry, create, validate, getProfile };
+module.exports = { getCountry, create, validate, getProfile, signin };
