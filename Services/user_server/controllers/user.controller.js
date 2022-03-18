@@ -2,6 +2,7 @@ const userModel = require("../models/user.model");
 const CryptoJS = require("crypto-js")
 const s3 = require('../configs/s3');
 const dispatchEmail = require('../configs/nodemail');
+const { generateToken } = require('../helpers/jwt');
 
 const key = CryptoJS.enc.Hex.parse(process.env.CRYPTO_KEY);
 const iv = CryptoJS.enc.Hex.parse(process.env.CRYPTO_IV);
@@ -9,10 +10,13 @@ const iv = CryptoJS.enc.Hex.parse(process.env.CRYPTO_IV);
 iniciarSesion = (req, res) => {
     req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
         iv,
-      }).toString();
-    userModel.signin(req.body, (err, results) => {
+    }).toString();
+    userModel.signin(req.body, async (err, results) => {
         if (err) return response(res, 500, err);
-        response(res, 200, results[0]);
+        const payload = { id_usuario: results[0]['id_usuario'], id_rol: results[0]['id_rol'] }
+        const token = await generateToken(payload);
+        const statusAccount = results[0]['statusAccount']
+        response(res, 200, { token, statusAccount });
     });
 }
 
@@ -30,7 +34,7 @@ crearUsuario = async (req, res) => {
         req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + keyS3
         req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
             iv,
-          }).toString();
+        }).toString();
         userModel.create(req.body, (err, results) => {
             if (err) return response(res, 500, err);
             dispatchEmail(req.body['email'], 'Verify Email', results['insertId']);
