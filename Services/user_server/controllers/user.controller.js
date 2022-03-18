@@ -20,15 +20,22 @@ crearUsuario = async (req, res) => {
         userModel.create(req.body, (err, results) => {
             if (err) return response(res, 500, err);
             response(res,200, results);
-        })
+        });
     }catch (error){
         return response(res, 500, error);
     }
 
 }
 
+validarCuenta = (req, res) =>{
+    userModel.validate(req.params, (err, results) => {
+        if (err) return response(res,500,err);
+        response(res, 200, results)
+    });
+}
+
 const response = (res, code, data) => {
     res.status(code).send({ code, data });
 };
 
-module.exports = { obtenerPaises, crearUsuario };
+module.exports = { obtenerPaises, crearUsuario, validarCuenta };

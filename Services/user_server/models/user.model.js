@@ -12,6 +12,18 @@ const getCountry = (params, callback) => {
   return execute(query, null, callback);
 };
 
+const validate = (params, callback) => {
+  const id = params.id
+  const query = `
+        UPDATE Usuario
+        SET estado = 1
+        WHERE usuarioID = ?;
+  `;
+
+  return execute(query, id, callback);
+
+}
+
 const create = (params, callback) => {
   console.log(params)
   const user = {
@@ -40,4 +52,4 @@ const create = (params, callback) => {
   return execute(query, newUser, callback);
 };
 
-module.exports = { getCountry, create };
+module.exports = { getCountry, create, validate };
