@@ -25,7 +25,6 @@ const itemUpload = async (base64) => {
     Body: buffer,
   };
 
-  console.log(`Successfully created ${key} and uploaded it to ${params.Bucket}/${key}`);
   return await client.upload(params).promise();
 };
 
