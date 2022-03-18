@@ -24,8 +24,6 @@ async function dispatchEmail(to, subject, id) {
 
     transporter.use('compile', hbs(handlebarOptions))
 
-    console.log(id)
-
     const mailOptions = {
         from: 'Soccer Stats <support@soccerstats.com>',
         to,

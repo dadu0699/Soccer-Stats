@@ -25,7 +25,6 @@ const validate = (params, callback) => {
 }
 
 const create = (params, callback) => {
-  console.log(params)
   const user = {
     nombre: params.name,
     apellido: params.lastname,
