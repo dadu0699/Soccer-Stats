@@ -2,9 +2,6 @@ const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars')
 const path = require('path')
 
-require('dotenv').config()
-
-
 async function dispatchEmail(to, subject, id) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',

@@ -12,6 +12,19 @@ const getCountry = (params, callback) => {
   return execute(query, null, callback);
 };
 
+const getProfile = (params, callback) => {
+  const id = params.id
+  const query = `
+        SELECT u.nombre name, apellido lastname, correo email, 
+        telefono telephone, fotografia photo, genero genre, DATE_FORMAT(fechaNacimiento, "%Y-%m-%d") birthday,
+        direccion address, u.paisID id_country, p.nombre2 country
+        FROM Usuario u, Pais p
+        WHERE usuarioID = 39 AND p.paisID = u.paisID;
+    `;
+
+  return execute(query, id, callback);
+};
+
 const validate = (params, callback) => {
   const id = params.id
   const query = `
@@ -32,9 +45,9 @@ const create = (params, callback) => {
     correo: params.email,
     telefono: params.telephone,
     fotografia: params.photo,
-    genero: params.gender,
-    fechaNacimiento: params.birth_date,
-    fechaRegistro: params.signup_date,
+    genero: params.genre,
+    fechaNacimiento: params.birthday,
+    fechaRegistro: params.created,
     direccion: params.address,
     rol: params.id_rol,
     estado: params.id_status,
@@ -51,4 +64,4 @@ const create = (params, callback) => {
   return execute(query, newUser, callback);
 };
 
-module.exports = { getCountry, create, validate };
+module.exports = { getCountry, create, validate, getProfile };
