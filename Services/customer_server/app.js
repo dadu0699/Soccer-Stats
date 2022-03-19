@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index.route'));
 app.use('/client/membership', require('./routes/membresia.route'));
 app.use('/client/follow', require('./routes/favorito.route'));
+app.use('/client/reports', require('./routes/reporte.route'));
 
 // Port assignment
 const server = app.listen(PORT, () => {

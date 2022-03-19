@@ -230,3 +230,35 @@ CREATE TABLE Incidencia(
     FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
     FOREIGN KEY (partidoID) REFERENCES Partido(partidoID)
 );
+
+-- Reportes
+--- Jugadores o Técnico de X equipo
+DROP PROCEDURE IF EXISTS sp_reporte1_cliente;
+DELIMITER $$
+CREATE PROCEDURE sp_reporte1_cliente (
+    IN _equipoDestinoID INT
+)
+BEGIN
+    (
+        SELECT Jugador.jugadorID AS id_person, Jugador.nombre AS name, 
+            apellido AS lastName, foto AS photo, equipoID AS id_team, 
+            Equipo.nombre AS name_team, 'Jugador' AS type
+        FROM Jugador
+        INNER JOIN ContratoJugador ON (ContratoJugador.jugadorID = Jugador.jugadorID)
+        INNER JOIN Equipo ON (Equipo.equipoID = ContratoJugador.equipoDestinoID)
+        WHERE (NOW() BETWEEN ContratoJugador.fechaInicio AND ContratoJugador.fechaFin) 
+            AND ContratoJugador.equipoDestinoID = _equipoDestinoID
+    )
+    UNION ALL
+    (
+        SELECT DirectorTecnico.directorTecnicoID AS id_person, DirectorTecnico.nombre AS name, 
+            apellido AS lastName, foto AS photo, equipoID AS id_team, 
+            Equipo.nombre AS name_team, 'Técnico' AS type
+        FROM DirectorTecnico
+        INNER JOIN ContratoDT ON (ContratoDT.directorTecnicoID = DirectorTecnico.directorTecnicoID)
+        INNER JOIN Equipo ON (Equipo.equipoID = ContratoDT.equipoDestinoID)
+        WHERE (NOW() BETWEEN ContratoDT.fechaInicio AND ContratoDT.fechaFin) 
+            AND ContratoDT.equipoDestinoID = _equipoDestinoID
+    );
+END$$
+DELIMITER ;
