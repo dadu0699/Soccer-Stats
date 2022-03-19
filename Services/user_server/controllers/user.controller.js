@@ -13,6 +13,7 @@ iniciarSesion = (req, res) => {
     }).toString();
     userModel.signin(req.body, async (err, results) => {
         if (err) return response(res, 500, err);
+        if(!results[0]) return response(res, 500, [], 'Incorrect mail or password.');
         const payload = { id_usuario: results[0]['id_usuario'], id_rol: results[0]['id_rol'] }
         const token = await generateToken(payload);
         const statusAccount = results[0]['statusAccount']
