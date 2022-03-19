@@ -113,7 +113,8 @@ CREATE TABLE Favorito(
     equipoID INT NOT NULL,
     PRIMARY KEY (favoritoID),
     FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID),
-    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID)
+    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID),
+    UNIQUE (usuarioID, equipoID)
 );
 
 CREATE TABLE DirectorTecnico(
