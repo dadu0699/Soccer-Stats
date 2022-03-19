@@ -8,6 +8,7 @@ const {
   obtenerPerfil,
   iniciarSesion,
   actualizarPerfil,
+  eliminarCuenta,
 } = require('../controllers/user.controller');
 const validateToken = require('../middlewares/validateToken');
 
@@ -17,5 +18,7 @@ router.route('/countries').get(obtenerPaises);
 router.route('/client/check/:id').get(validarCuenta)
 router.route('/client/:id').get(validateToken, obtenerPerfil)
 router.route('/client/update').put(validateToken, actualizarPerfil)
+router.route('/delete').delete(eliminarCuenta)
+
 
 module.exports = router;

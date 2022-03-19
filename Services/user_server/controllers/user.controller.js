@@ -79,7 +79,14 @@ actualizarPerfil = async (req, res) => {
 
     userModel.update(req.body, (err, results) => {
         if (err) return response(res, 500, err, 'Error al actualizar datos')
-        response(res, 200, results, [], 'Datos actualizados')
+        response(res, 200, results, 'Datos actualizados')
+    });
+}
+
+eliminarCuenta = (req, res) => {
+    userModel.deleteAccount(req.body, (err, results) => {
+        if (err) return response(res, 500, err)
+        response(res, 200, results)
     });
 }
 
@@ -106,4 +113,4 @@ const response = (res, code, data, msj = '') => {
     res.status(code).send({ code, data, msj });
 };
 
-module.exports = { obtenerPaises, crearUsuario, validarCuenta, obtenerPerfil, iniciarSesion, actualizarPerfil };
+module.exports = { obtenerPaises, crearUsuario, validarCuenta, obtenerPerfil, iniciarSesion, actualizarPerfil, eliminarCuenta };

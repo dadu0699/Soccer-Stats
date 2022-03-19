@@ -77,4 +77,15 @@ const update = (params, callback) => {
   return execute(query, newUser, callback);
 }
 
-module.exports = { getCountry, create, validate, getProfile, signin, update };
+const deleteAccount = (params, callback) => {
+  const id = params.no_id
+  const query = `
+        UPDATE Usuario
+        SET estado = 3
+        WHERE usuarioID = ?;
+  `;
+
+  return execute(query, id, callback);
+}
+
+module.exports = { getCountry, create, validate, getProfile, signin, update, deleteAccount };
