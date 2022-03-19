@@ -7,7 +7,7 @@ const execute = (query, params, callback) => {
 const signin = (params, callback) => {
   const user = [params.email, params.password];
   const query = `
-        SELECT usuarioID id_usuario, rol id_rol, estado statusAccount, fechaHoraClaveAcceso expire
+        SELECT usuarioID id_usuario, rol id_rol, estado statusAccount, fechaHoraClaveAcceso expire_date
         FROM Usuario
         WHERE correo = ? AND claveAcceso = ?;
   `;

@@ -16,8 +16,20 @@ iniciarSesion = (req, res) => {
         const payload = { id_usuario: results[0]['id_usuario'], id_rol: results[0]['id_rol'] }
         const token = await generateToken(payload);
         const statusAccount = results[0]['statusAccount']
+        if (!results[0]['expire_date']) return response(res, 200, { token, statusAccount });
+        const passwordExpired = verificarTiempo(results[0]['expire_date'])
+        if (passwordExpired) return response(res, 200, [], 'Password Expired')
         response(res, 200, { token, statusAccount });
     });
+}
+
+function verificarTiempo( expireDateString) {
+    const today = new Date();
+    const expireDate = new Date(expireDateString);
+    const time = Math.abs(expireDate-today)/(1000*60);
+    console.log(time);
+    if (time>2) return true
+    return false
 }
 
 obtenerPaises = (req, res) => {

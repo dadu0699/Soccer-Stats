@@ -13,7 +13,7 @@ const validateToken = require('../middlewares/validateToken');
 router.route('/login').post(iniciarSesion);
 router.route('/add').post(crearUsuario);
 router.route('/countries').get(obtenerPaises);
-router.route('/client/:id').get(validarCuenta)
-router.route('/client/profile/:id').get(validateToken, obtenerPerfil)
+router.route('/client/check/:id').get(validarCuenta)
+router.route('/client/:id').get(validateToken, obtenerPerfil)
 
 module.exports = router;
