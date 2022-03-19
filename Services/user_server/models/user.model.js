@@ -49,8 +49,8 @@ const validate = (params, callback) => {
 
 const create = (params, callback) => {
   const newUser = [params.name, params.lastname, params.password, params.email,
-    params.telephone, params.photo, params.genre, params.birthday, params.created,
-    params.address, params.id_rol, params.id_status, params.id_country]
+  params.telephone, params.photo, params.genre, params.birthday, params.created,
+  params.address, params.id_rol, params.id_status, params.id_country]
 
   const query = `
   INSERT INTO Usuario (nombre, apellido, claveAcceso, correo, telefono, fotografia, genero, fechaNacimiento, 
@@ -61,4 +61,20 @@ const create = (params, callback) => {
   return execute(query, newUser, callback);
 };
 
-module.exports = { getCountry, create, validate, getProfile, signin };
+const update = (params, callback) => {
+  const newUser = [params.name, params.lastname, params.password, params.email,
+  params.telephone, params.photo, params.genre, params.birthday,
+  params.address, params.id_country, params.id]
+
+  const query = `
+    UPDATE Usuario 
+    SET  nombre =  ?, apellido = ?, claveAcceso = ?,
+    correo = ?, telefono = ?,  fotografia = ?, genero = ?,
+    fechaNacimiento = ?, direccion = ?, paisID = ?
+    WHERE usuarioID = ?;
+    `;
+
+  return execute(query, newUser, callback);
+}
+
+module.exports = { getCountry, create, validate, getProfile, signin, update };

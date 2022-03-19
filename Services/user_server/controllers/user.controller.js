@@ -13,7 +13,7 @@ iniciarSesion = (req, res) => {
     }).toString();
     userModel.signin(req.body, async (err, results) => {
         if (err) return response(res, 500, err);
-        if(!results[0]) return response(res, 500, [], 'Incorrect mail or password.');
+        if (!results[0]) return response(res, 500, [], 'Incorrect mail or password.');
         const payload = { id_usuario: results[0]['id_usuario'], id_rol: results[0]['id_rol'] }
         const token = await generateToken(payload);
         const statusAccount = results[0]['statusAccount']
@@ -22,14 +22,6 @@ iniciarSesion = (req, res) => {
         if (passwordExpired) return response(res, 200, [], 'Password Expired')
         response(res, 200, { token, statusAccount });
     });
-}
-
-function verificarTiempo( expireDateString) {
-    const today = new Date();
-    const expireDate = new Date(expireDateString);
-    const time = Math.abs(expireDate-today)/(1000*60);
-    if (time>2) return true
-    return false
 }
 
 obtenerPaises = (req, res) => {
@@ -42,8 +34,8 @@ obtenerPaises = (req, res) => {
 crearUsuario = async (req, res) => {
     try {
         const { keyS3 } = await s3.itemUpload(req.body['photo']);
-        req.body['genre'] = req.body['genre'] == 'F' ? 0 : 1;
         req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + keyS3
+        req.body['genre'] = req.body['genre'] == 'F' ? 0 : 1;
         req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
             iv,
         }).toString();
@@ -66,12 +58,37 @@ validarCuenta = (req, res) => {
 
 obtenerPerfil = (req, res) => {
     userModel.getProfile(req.params, (err, results) => {
-        if (err) return response(res, 500, err, '');
+        if (err) return response(res, 500, err);
         results[0]['genre'] = results['genre'] ? 'M' : 'F';
         results[0]['age'] = calcularEdad(results[0]['birthday']);
         response(res, 200, results[0])
     })
 
+}
+
+actualizarPerfil = async (req, res) => {
+    if (req.body['password'])
+        req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
+            iv,
+        }).toString();
+    if (req.body['photo']) {
+        const { keyS3 } = await s3.itemUpload(req.body['photo']);
+        req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + keyS3
+    }
+    if (req.body['genre']) req.body['genre'] = req.body['genre'] == 'F' ? 0 : 1;
+
+    userModel.update(req.body, (err, results) => {
+        if (err) return response(res, 500, err, 'Error al actualizar datos')
+        response(res, 200, results, [], 'Datos actualizados')
+    });
+}
+
+function verificarTiempo(expireDateString) {
+    const today = new Date();
+    const expireDate = new Date(expireDateString);
+    const time = Math.abs(expireDate - today) / (1000 * 60);
+    if (time > 2) return true
+    return false
 }
 
 function calcularEdad(fechaNacimiento) {
@@ -89,4 +106,4 @@ const response = (res, code, data, msj = '') => {
     res.status(code).send({ code, data, msj });
 };
 
-module.exports = { obtenerPaises, crearUsuario, validarCuenta, obtenerPerfil, iniciarSesion };
+module.exports = { obtenerPaises, crearUsuario, validarCuenta, obtenerPerfil, iniciarSesion, actualizarPerfil };
