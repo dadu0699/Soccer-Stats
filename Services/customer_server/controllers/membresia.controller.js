@@ -1,10 +1,10 @@
 const membresiaModel = require('../models/membresia.model');
 
 const comprarMembresia = (req, res) => {
-  membresiaModel.comprarMembresia(req.body, (err, _results) => {
-    if (err) return response(res, 400, 'Error al obtener membresía ', []);
+  membresiaModel.comprarMembresia(req.body, (err, results) => {
+    if (err) return response(res, 400, 'Error al obtener membresía ', err);
 
-    return response(res, 200, 'Ahora cuenta con una membresía', []);
+    return response(res, 200, 'Ahora cuenta con una membresía', results);
   });
 };
 
