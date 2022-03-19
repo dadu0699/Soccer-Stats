@@ -6,6 +6,10 @@ USE SoccerStats;
 -- CREATE DATABASE SoccerStatsDevelop;
 -- USE SoccerStatsDevelop;
 
+-- DROP DATABASE IF EXISTS SoccerStatsTesting;
+-- CREATE DATABASE SoccerStatsTesting;
+-- USE SoccerStatsTesting;
+
 CREATE TABLE Pais(
     paisID INT NOT NULL,
     iso VARCHAR(2) NULL,
@@ -171,15 +175,19 @@ CREATE TABLE Partido(
     FOREIGN KEY (competenciaID) REFERENCES Competencia(competenciaID)
 );
 
-CREATE TABLE ContradoDT(
+CREATE TABLE ContratoDT(
     contratoDTID INT NOT NULL AUTO_INCREMENT,
     fechaInicio DATE NOT NULL,
-    fechaFin DATE NOT NULL,
-    equipoID INT NOT NULL,
+    fechaFin DATE NULL,
+    equipoOrigenID INT NOT NULL,
+    equipoDestinoID INT NULL,
     directorTecnicoID INT NOT NULL,
+    usuarioID INT NOT NULL,
     PRIMARY KEY (contratoDTID),
-    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID),
-    FOREIGN KEY (directorTecnicoID) REFERENCES DirectorTecnico(directorTecnicoID)
+    FOREIGN KEY (equipoOrigenID) REFERENCES Equipo(equipoID),
+    FOREIGN KEY (equipoDestinoID) REFERENCES Equipo(equipoID),
+    FOREIGN KEY (directorTecnicoID) REFERENCES DirectorTecnico(directorTecnicoID),
+    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
 );
 
 CREATE TABLE Noticia(
@@ -195,12 +203,22 @@ CREATE TABLE Noticia(
 CREATE TABLE ContratoJugador(
     contratoJugadorID INT NOT NULL AUTO_INCREMENT,
     fechaInicio DATE NOT NULL,
-    fechaFin DATE NOT NULL,
+    fechaFin DATE NULL,
     jugadorID INT NOT NULL,
-    equipoID INT NOT NULL,
+    equipoOrigenID INT NOT NULL,
+    equipoDestinoID INT NULL,
+    usuarioID INT NOT NULL,
     PRIMARY KEY (contratoJugadorID),
     FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
-    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID)
+    FOREIGN KEY (equipoOrigenID) REFERENCES Equipo(equipoID),
+    FOREIGN KEY (equipoDestinoID) REFERENCES Equipo(equipoID),
+    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
+);
+
+CREATE TABLE TipoIncidencia(
+    tipoIncidenciaID INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    PRIMARY KEY (tipoIncidenciaID)
 );
 
 CREATE TABLE Incidencia(
@@ -211,27 +229,4 @@ CREATE TABLE Incidencia(
     PRIMARY KEY (incidenciaID),
     FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
     FOREIGN KEY (partidoID) REFERENCES Partido(partidoID)
-);
-
-CREATE TABLE Gol(
-    golID INT NOT NULL AUTO_INCREMENT,
-    tipo VARCHAR(100) NOT NULL,
-    distancia VARCHAR(100) NOT NULL,
-    sufreID INT NOT NULL,
-    cometeID INT NOT NULL,
-    asistenteID INT NOT NULL,
-    incidenciaID INT NOT NULL,
-    PRIMARY KEY (golID),
-    FOREIGN KEY (sufreID) REFERENCES Jugador(jugadorID),
-    FOREIGN KEY (cometeID) REFERENCES Jugador(jugadorID),
-    FOREIGN KEY (asistenteID) REFERENCES Jugador(jugadorID),
-    FOREIGN KEY (incidenciaID) REFERENCES Incidencia(incidenciaID)
-);
-
-CREATE TABLE Tarjeta(
-    tarjetaID INT NOT NULL AUTO_INCREMENT,
-    color VARCHAR(100) NOT NULL,
-    incidenciaID INT NOT NULL,
-    PRIMARY KEY (tarjetaID),
-    FOREIGN KEY (incidenciaID) REFERENCES Incidencia(incidenciaID)
 );
