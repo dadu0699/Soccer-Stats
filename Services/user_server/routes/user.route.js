@@ -18,7 +18,7 @@ router.route('/countries').get(obtenerPaises);
 router.route('/client/check/:id').get(validarCuenta)
 router.route('/client/:id').get(validateToken, obtenerPerfil)
 router.route('/client/update').put(validateToken, actualizarPerfil)
-router.route('/delete').delete(eliminarCuenta)
+router.route('/delete').delete(validateToken, eliminarCuenta)
 
 
 module.exports = router;
