@@ -27,7 +27,6 @@ function verificarTiempo( expireDateString) {
     const today = new Date();
     const expireDate = new Date(expireDateString);
     const time = Math.abs(expireDate-today)/(1000*60);
-    console.log(time);
     if (time>2) return true
     return false
 }
