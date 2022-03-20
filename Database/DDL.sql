@@ -94,6 +94,8 @@ CREATE TABLE Usuario(
 
 CREATE TABLE Bitacora(
     bitacoraID INT NOT NULL AUTO_INCREMENT,
+    accion VARCHAR(100) NOT NULL,
+    nombreTabla VARCHAR(100) NOT NULL,
     registro VARCHAR(255) NOT NULL,
     fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     usuarioID INT NOT NULL,
@@ -165,7 +167,7 @@ CREATE TABLE Partido(
     resultadoVisitante INT NOT NULL,
     estado VARCHAR(100) NOT NULL, /*duda con el tipo*/
     estadioID INT NOT NULL,
-    arbitroID INT NOT NULL,
+    arbitroID INT NULL,
     competenciaID INT NOT NULL,
     PRIMARY KEY (partidoID),
     FOREIGN KEY (equipoVisitaID) REFERENCES Equipo(equipoID),
@@ -182,12 +184,10 @@ CREATE TABLE ContratoDT(
     equipoOrigenID INT NOT NULL,
     equipoDestinoID INT NULL,
     directorTecnicoID INT NOT NULL,
-    usuarioID INT NOT NULL,
     PRIMARY KEY (contratoDTID),
     FOREIGN KEY (equipoOrigenID) REFERENCES Equipo(equipoID),
     FOREIGN KEY (equipoDestinoID) REFERENCES Equipo(equipoID),
-    FOREIGN KEY (directorTecnicoID) REFERENCES DirectorTecnico(directorTecnicoID),
-    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
+    FOREIGN KEY (directorTecnicoID) REFERENCES DirectorTecnico(directorTecnicoID)
 );
 
 CREATE TABLE Noticia(
@@ -196,8 +196,10 @@ CREATE TABLE Noticia(
     descripcion VARCHAR(255) NOT NULL,
     fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     equipoID INT NOT NULL,
+    usuarioID INT NOT NULL,
     PRIMARY KEY (noticiaID),
-    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID)
+    FOREIGN KEY (equipoID) REFERENCES Equipo(equipoID),
+    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
 );
 
 CREATE TABLE ContratoJugador(
@@ -207,12 +209,10 @@ CREATE TABLE ContratoJugador(
     jugadorID INT NOT NULL,
     equipoOrigenID INT NOT NULL,
     equipoDestinoID INT NULL,
-    usuarioID INT NOT NULL,
     PRIMARY KEY (contratoJugadorID),
     FOREIGN KEY (jugadorID) REFERENCES Jugador(jugadorID),
     FOREIGN KEY (equipoOrigenID) REFERENCES Equipo(equipoID),
-    FOREIGN KEY (equipoDestinoID) REFERENCES Equipo(equipoID),
-    FOREIGN KEY (usuarioID) REFERENCES Usuario(usuarioID)
+    FOREIGN KEY (equipoDestinoID) REFERENCES Equipo(equipoID)
 );
 
 CREATE TABLE TipoIncidencia(
