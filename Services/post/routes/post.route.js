@@ -5,9 +5,10 @@ const {
   crearNoticia,
   obtenerNoticias,
 } = require('../controllers/post.controller');
+const validateToken = require('../middlewares/validateToken');
 
-router.route('/').post(crearNoticia);
-router.route('/').get(obtenerNoticias);
+router.route('/').post(validateToken, crearNoticia);
+router.route('/').get(validateToken, obtenerNoticias);
 
 
 module.exports = router;
