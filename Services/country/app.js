@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', require('./routes/index.route.js'));
+app.use('/country', require('./routes/country.route.js'));
 
 // Port assignment
 const server = app.listen(PORT, () => {
