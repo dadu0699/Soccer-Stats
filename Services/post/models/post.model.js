@@ -5,24 +5,29 @@ const execute = (query, params, callback) => {
 };
 
 const get = (params, callback) => {
-  const query = `
+  const id = params.id;
+  let query = `
     SELECT noticiaID id, e.equipoID id_team, nombre team, usuarioID id_user,
-    titulo tittle, descripcion description, fecha date
+    titulo tittle, descripcion description, DATE_FORMAT(fecha, "%Y-%m-%d") date
     FROM Noticia n, Equipo e
     WHERE n.equipoID = e.equipoID`;
 
-  if (params.id)
-    query += `AND noticiaID = ?`;
+  if (id)
+    query += ` AND noticiaID = ?;`;
 
-  return execute(query, params.id, callback);
+    return execute(query, id, callback);
 };
 
 const post = (params, callback) => {
-  const query = `
+  const noticia = [params.title, params.description, params.date,
+  params.id_team, params.id_user]
 
+  const query = `
+    INSERT INTO Noticia( titulo, descripcion, fecha, equipoID, usuarioID)
+    VALUES (?, ?, ?, ?, ?);
     `;
 
-  return execute(query, null, callback);
+  return execute(query, noticia, callback);
 };
 
 
