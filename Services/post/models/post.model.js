@@ -6,10 +6,15 @@ const execute = (query, params, callback) => {
 
 const get = (params, callback) => {
   const query = `
+    SELECT noticiaID id, e.equipoID id_team, nombre team, usuarioID id_user,
+    titulo tittle, descripcion description, fecha date
+    FROM Noticia n, Equipo e
+    WHERE n.equipoID = e.equipoID`;
 
-    `;
+  if (params.id)
+    query += `AND noticiaID = ?`;
 
-  return execute(query, null, callback);
+  return execute(query, params.id, callback);
 };
 
 const post = (params, callback) => {

@@ -2,7 +2,7 @@ const postModel = require("../models/post.model");
 
 
 obtenerNoticias = (req, res) => {
-  postModel.get(req, (err, results) => {
+  postModel.get(req.params, (err, results) => {
     if (err) return response(res, 400, 'Error al obtener noticia(s).', err);
     response(res, 200, 'Noticia(s) obtenida(s) con éxito.', results);
   });
