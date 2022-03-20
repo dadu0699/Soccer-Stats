@@ -12,12 +12,7 @@ USE SoccerStats;
 
 CREATE TABLE Pais(
     paisID INT NOT NULL,
-    iso VARCHAR(2) NULL,
     nombre VARCHAR(100) NULL,
-    nombre2 VARCHAR(100) NULL,
-    iso3 VARCHAR(3) NULL,
-    numcode INT NULL,
-    phonecode INT NULL,
     PRIMARY KEY (paisID)
 );
 
