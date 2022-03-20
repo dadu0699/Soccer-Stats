@@ -1,6 +1,7 @@
 USE SoccerStats;
 
 -- USE SoccerStatsDevelop;
+-- USE SoccerStatsTesting;
 
 INSERT INTO  Pais (`paisID`, `iso`, `nombre`, `nombre2`, `iso3`, `numcode`, `phonecode`) VALUES
 (1, 'AF', 'AFGHANISTAN', 'Afghanistan', 'AFG', 4, 93),
