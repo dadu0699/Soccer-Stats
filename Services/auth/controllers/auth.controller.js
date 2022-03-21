@@ -9,6 +9,7 @@ iniciarSesion = (req, res) => {
     req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
         iv,
     }).toString();
+    console.log(req.body['password']);
     authModel.signin(req.body, async (err, results) => {
         if (err) return response(res, 400, 'Error de autenticación.', [err]);
         if (!results[0]) return response(res, 400, 'Error de autenticación.', []);
@@ -23,7 +24,7 @@ iniciarSesion = (req, res) => {
 }
 
 validarCuenta = (req, res) => {
-    authModel.validate(req.params, (err, results) => {
+    authModel.validate(req.query, (err, results) => {
         if (err) return response(res, 400,  'Error al verificar correo.', [err]);
         response(res, 200,'Correo verificado con éxito.', [] )
     });

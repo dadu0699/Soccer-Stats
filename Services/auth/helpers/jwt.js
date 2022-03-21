@@ -5,7 +5,7 @@ const generateToken = (payload) => {
     jwt.sign(
       payload,
       process.env.SECRET_JWT_SEED,
-      { expiresIn: '1h' },
+      { expiresIn: '24h' },
       (err, token) => {
         if (err) reject(err);
         resolve(token);
