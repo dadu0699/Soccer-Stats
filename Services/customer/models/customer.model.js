@@ -6,8 +6,8 @@ const execute = (query, params, callback) => {
 
 const create = (params, callback) => {
   const newUser = [params.name, params.lastname, params.password, params.email,
-  params.telephone, params.photo, params.genre, params.birthday, params.created,
-  params.address, params.id_rol, params.id_status, params.id_country]
+  params.phone, params.photo, params.gender, params.birth_date,
+  params.address, params.id_country]
 
   const query = `
   INSERT INTO Usuario (nombre, apellido, claveAcceso, correo, telefono, fotografia, genero, fechaNacimiento,
@@ -22,10 +22,10 @@ const getProfile = (params, callback) => {
   const id = params.id
   const query = `
         SELECT u.nombre name, apellido lastname, correo email,
-        telefono telephone, fotografia photo, genero genre, DATE_FORMAT(fechaNacimiento, "%Y-%m-%d") birthday,
-        direccion address, u.paisID id_country, p.nombre2 country
+        telefono phone, fotografia photo, genero gender, DATE_FORMAT(fechaNacimiento, "%Y-%m-%d") birth_date,
+        direccion address, u.paisID id_country, p.nombre country
         FROM Usuario u, Pais p
-        WHERE usuarioID = 39 AND p.paisID = u.paisID;
+        WHERE usuarioID = ? AND p.paisID = u.paisID;
     `;
 
   return execute(query, id, callback);
@@ -33,7 +33,7 @@ const getProfile = (params, callback) => {
 
 const update = (params, callback) => {
   const newUser = [params.name, params.lastname, params.password, params.email,
-  params.telephone, params.photo, params.genre, params.birthday,
+  params.phone, params.photo, params.gender, params.birth_date,
   params.address, params.id_country, params.id]
 
   const query = `
@@ -48,7 +48,7 @@ const update = (params, callback) => {
 }
 
 const deleteAccount = (params, callback) => {
-  const id = params.no_id
+  const id = params.id
   const query = `
         UPDATE Usuario
         SET estado = 3

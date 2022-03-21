@@ -10,26 +10,26 @@ crearUsuario = async (req, res) => {
   try {
     const { keyS3 } = await s3.itemUpload(req.body['photo']);
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + keyS3
-    req.body['genre'] = req.body['genre'] == 'F' ? 0 : 1;
+    req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
     req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
       iv,
     }).toString();
     customerModel.create(req.body, (err, results) => {
-      if (err) return response(res, 500, err);
+      if (err) return response(res, 400, 'Error al guardar el usuario.', [err]);
       dispatchEmail(req.body['email'], 'Verify Email', results['insertId']);
-      response(res, 200, results);
+      response(res, 200, 'Usuario creado con éxito.', results);
     });
   } catch (error) {
-    return response(res, 500, error);
+    return response(res, 400, 'Error al guardar el usuario.', [error]);
   }
 }
 
 obtenerPerfil = (req, res) => {
   customerModel.getProfile(req.params, (err, results) => {
-    if (err) return response(res, 500, err);
-    results[0]['genre'] = results['genre'] ? 'M' : 'F';
-    results[0]['age'] = calcularEdad(results[0]['birthday']);
-    response(res, 200, results[0])
+    if (err) return response(res, 400, 'Error al obtener el usuario.', [err]);
+    results[0]['gender'] = results['gender'] ? 'M' : 'F';
+    results[0]['age'] = calcularEdad(results[0]['birth_date']);
+    response(res, 200, 'Usuario obtenido con éxito.', results)
   })
 
 }
@@ -43,18 +43,18 @@ actualizarPerfil = async (req, res) => {
     const { keyS3 } = await s3.itemUpload(req.body['photo']);
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + keyS3
   }
-  if (req.body['genre']) req.body['genre'] = req.body['genre'] == 'F' ? 0 : 1;
+  if (req.body['gender']) req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
 
   customerModel.update(req.body, (err, results) => {
-    if (err) return response(res, 500, err, 'Error al actualizar datos')
-    response(res, 200, results, 'Datos actualizados')
+    if (err) return response(res, 400, 'Error al actualizar el usuario.', [err])
+    response(res, 200, 'Usuario actualizado con éxito.', results)
   });
 }
 
 eliminarCuenta = (req, res) => {
   customerModel.deleteAccount(req.body, (err, results) => {
-    if (err) return response(res, 500, err)
-    response(res, 200, results)
+    if (err) return response(res, 400, 'Error al eliminar el usuario.', [err])
+    response(res, 200, 'Usuario eliminado con éxito.', results)
   });
 }
 
@@ -69,8 +69,8 @@ function calcularEdad(fechaNacimiento) {
   return age;
 }
 
-const response = (res, code, data, msj = '') => {
-  res.status(code).send({ code, data, msj });
+const response = (res, code, msg, data) => {
+  res.status(code).send({ status: code, msg, data });
 };
 
 module.exports = { obtenerPaises, crearUsuario, validarCuenta, obtenerPerfil, iniciarSesion, actualizarPerfil, eliminarCuenta };
