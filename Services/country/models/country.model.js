@@ -5,11 +5,15 @@ const execute = (query, params, callback) => {
 };
 
 const get = (params, callback) => {
-  const query = `
-        SELECT paisID id, nombre name FROM Pais;
-    `;
+  const id = params.id
+  let query = `
+        SELECT paisID id, nombre name FROM Pais
+      `;
 
-  return execute(query, null, callback);
+  if (id)
+    query += ' WHERE paisID = ?'
+
+  return execute(query, id, callback);
 };
 
 
