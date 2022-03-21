@@ -10,22 +10,22 @@ iniciarSesion = (req, res) => {
         iv,
     }).toString();
     authModel.signin(req.body, async (err, results) => {
-        if (err) return response(res, 500, err);
-        if (!results[0]) return response(res, 500, [], 'Incorrect mail or password.');
+        if (err) return response(res, 400, 'Error de autenticación.', [err]);
+        if (!results[0]) return response(res, 400, 'Error de autenticación.', []);
         const payload = { id_usuario: results[0]['id_usuario'], id_rol: results[0]['id_rol'] }
         const token = await generateToken(payload);
-        const statusAccount = results[0]['statusAccount']
-        if (!results[0]['expire_date']) return response(res, 200, { token, statusAccount });
+        const id_status = results[0]['id_status']
+        if (!results[0]['expire_date']) return response(res, 200, '', { token, id_status });
         const passwordExpired = verificarTiempo(results[0]['expire_date'])
-        if (passwordExpired) return response(res, 200, [], 'Password Expired')
-        response(res, 200, { token, statusAccount });
+        if (passwordExpired) return response(res, 400, 'Error de autenticación. Contraseña expirada', [])
+        response(res, 200, '', { token, id_status });
     });
 }
 
 validarCuenta = (req, res) => {
     authModel.validate(req.params, (err, results) => {
-        if (err) return response(res, 500, err, 'Error al verificar correo');
-        response(res, 200, [], 'Correo verificado')
+        if (err) return response(res, 400,  'Error al verificar correo.', [err]);
+        response(res, 200,'Correo verificado con éxito.', [] )
     });
 }
 
@@ -37,8 +37,8 @@ function verificarTiempo(expireDateString) {
     return false
 }
 
-const response = (res, code, data, msj = '') => {
-    res.status(code).send({ code, data, msj });
+const response = (res, code, msg, data) => {
+    res.status(code).send({ status: code, msg, data });
 };
 
 module.exports = {  iniciarSesion, validarCuenta };
