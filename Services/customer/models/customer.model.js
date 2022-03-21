@@ -32,17 +32,20 @@ const getProfile = (params, callback) => {
 };
 
 const update = (params, callback) => {
-  const newUser = [params.name, params.lastname, params.password, params.email,
-  params.phone, params.photo, params.gender, params.birth_date,
+  const newUser = [params.name, params.lastname, params.email,
+  params.phone, params.gender, params.birth_date,
   params.address, params.id_country, params.id]
 
-  const query = `
+  let query = `
     UPDATE Usuario
-    SET  nombre =  ?, apellido = ?, claveAcceso = ?,
-    correo = ?, telefono = ?,  fotografia = ?, genero = ?,
-    fechaNacimiento = ?, direccion = ?, paisID = ?
-    WHERE usuarioID = ?;
-    `;
+    SET  nombre =  ?, apellido = ?, correo = ?, telefono = ?, genero = ?,
+    fechaNacimiento = ?, direccion = ?, paisID = ?`;
+
+  if (params.password != '') query += `, claveAcceso = '${params.password}'`
+
+  if (params.photo != '') query += `, fotografia = '${params.photo}'`
+
+  query += ` WHERE usuarioID = ? `;
 
   return execute(query, newUser, callback);
 }

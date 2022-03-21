@@ -3,15 +3,15 @@ const CryptoJS = require("crypto-js")
 const s3 = require('../configs/s3');
 const dispatchEmail = require('../configs/nodemail');
 
-const key = CryptoJS.enc.Hex.parse(process.env.CRYPTO_KEY);
+const keyCrypto = CryptoJS.enc.Hex.parse(process.env.CRYPTO_KEY);
 const iv = CryptoJS.enc.Hex.parse(process.env.CRYPTO_IV);
 
 crearUsuario = async (req, res) => {
   try {
-    const { keyS3 } = await s3.itemUpload(req.body['photo']);
-    req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + keyS3
+    const { key } = await s3.itemUpload(req.body['photo']);
+    req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key
     req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
-    req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
+    req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], keyCrypto, {
       iv,
     }).toString();
     customerModel.create(req.body, (err, results) => {
@@ -35,13 +35,13 @@ obtenerPerfil = (req, res) => {
 }
 
 actualizarPerfil = async (req, res) => {
-  if (req.body['password'])
-    req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
+  if (req.body['password'] != '')
+    req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], keyCrypto, {
       iv,
     }).toString();
-  if (req.body['photo']) {
-    const { keyS3 } = await s3.itemUpload(req.body['photo']);
-    req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + keyS3
+  if (req.body['photo'] != '') {
+    const { key } = await s3.itemUpload(req.body['photo']);
+    req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key
   }
   if (req.body['gender']) req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
 
