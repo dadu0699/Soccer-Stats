@@ -5,10 +5,15 @@ const execute = (query, params, callback) => {
 };
 
 const playerTransfer = (params, callback) => {
+  const player = [params.start_date, params.end_date, params.id_player,
+  params.id_team_origin, params.id_team_destination];
+
   const query = `
+      INSERT INTO ContratoJugador (fechaInicio, fechaFin, jugadorID, equipoOrigenID, equipoDestinoID)
+      VALUES (?,?,?,?,?);
       `;
 
-  return execute(query, null, callback);
+  return execute(query, player, callback);
 };
 
 

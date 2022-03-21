@@ -17,7 +17,7 @@ CREATE TABLE Pais(
 );
 
 CREATE TABLE PosicionJugador(
-    posicionJugadorID INT NOT NULL AUTO_INCREMENT,
+    posicionJugadorID INT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     PRIMARY KEY (posicionJugadorID)
 );

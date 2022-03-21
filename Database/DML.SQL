@@ -3,6 +3,12 @@ USE SoccerStats;
 -- USE SoccerStatsDevelop;
 -- USE SoccerStatsTesting;
 
+INSERT INTO PosicionJugador (posicionJugadorID, nombre) VALUES 
+(1, 'Portero'), 
+(2, 'Defensa'),
+(3, 'Medio'),
+(4, 'Delantero');
+
 INSERT INTO Pais (paisID, nombre) VALUES
 (1, 'Afghanistan'),
 (2, 'Albania'),
