@@ -47,14 +47,14 @@ actualizarPerfil = async (req, res) => {
 
   customerModel.update(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al actualizar el usuario.', [err])
-    response(res, 200, 'Usuario actualizado con éxito.', results)
+    response(res, 200, 'Usuario actualizado con éxito.', [results])
   });
 }
 
 eliminarCuenta = (req, res) => {
   customerModel.deleteAccount(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al eliminar el usuario.', [err])
-    response(res, 200, 'Usuario eliminado con éxito.', results)
+    response(res, 200, 'Usuario eliminado con éxito.', [results])
   });
 }
 
