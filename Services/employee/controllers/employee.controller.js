@@ -1,10 +1,20 @@
 const employeeModel = require("../models/employee.model");
+const { writeLog } = require("../helpers/logHandler")
 
 
 transferirJugador = (req, res) => {
   employeeModel.playerTransfer(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al transferir jugador.', [err]);
-    response(res, 200, 'Jugador transferido con éxito.', [results]);
+
+    writeLog({
+      accion: 'CREATE',
+      nombreTabla: 'ContratoJugador',
+      registro: `Nueva transferencia de jugador, id de tranferencia ${results['insertId']}`,
+      usuarioID: req.user['id_user']
+    }, (error, result) => {
+      if (err) return response(res, 400, 'Error al transferir jugador.', [error]);
+      response(res, 200, 'Jugador transferido con éxito.', [results]);
+    });
   });
 };
 
@@ -18,7 +28,16 @@ logTransferenciaJugador = (req, res) => {
 transferirDirectorTecnico = (req, res) => {
   employeeModel.technicalDirectorTransfer(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al transferir director técnico.', [err]);
-    response(res, 200, 'Director técnico transferido con éxito.', [results]);
+
+    writeLog({
+      accion: 'CREATE',
+      nombreTabla: 'ContratoDT',
+      registro: `Nueva transferencia de director técnico, id de tranferencia ${results['insertId']}`,
+      usuarioID: req.user['id_user']
+    }, (error, result) => {
+      if (err) return response(res, 400, 'Error al transferir director técnico.', [error]);
+      response(res, 200, 'Director técnico transferido con éxito.', [results]);
+    });
   });
 };
 
