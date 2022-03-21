@@ -7,10 +7,11 @@ const {
   transferirDirectorTecnico,
   logTransferenciaDirectorTecnico
 } = require('../controllers/employee.controller');
+const validateToken = require('../middlewares/validateToken');
 
-router.route('/player-transfer').post(transferirJugador);
+router.route('/player-transfer').post(validateToken, transferirJugador);
 router.route('/player-transfer').get(logTransferenciaJugador);
-router.route('/technical-director-transfer').post(transferirDirectorTecnico);
+router.route('/technical-director-transfer').post(validateToken, transferirDirectorTecnico);
 router.route('/technical-director-transfer').get(logTransferenciaDirectorTecnico);
 
 
