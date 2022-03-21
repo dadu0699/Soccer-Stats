@@ -78,7 +78,7 @@ CREATE TABLE Usuario(
     fotografia VARCHAR(255) NOT NULL,
     genero BOOLEAN NOT NULL,
     fechaNacimiento DATE NOT NULL,
-    fechaRegistro DATE NOT NULL,
+    fechaRegistro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     direccion VARCHAR(255) NOT NULL,
     rol TINYINT NOT NULL,
     estado VARCHAR(100) NOT NULL,

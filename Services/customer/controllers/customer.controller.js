@@ -73,4 +73,4 @@ const response = (res, code, msg, data) => {
   res.status(code).send({ status: code, msg, data });
 };
 
-module.exports = { obtenerPaises, crearUsuario, validarCuenta, obtenerPerfil, iniciarSesion, actualizarPerfil, eliminarCuenta };
+module.exports = { crearUsuario, obtenerPerfil, actualizarPerfil, eliminarCuenta };

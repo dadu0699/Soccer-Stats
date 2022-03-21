@@ -7,12 +7,12 @@ const execute = (query, params, callback) => {
 const create = (params, callback) => {
   const newUser = [params.name, params.lastname, params.password, params.email,
   params.phone, params.photo, params.gender, params.birth_date,
-  params.address, params.id_country]
+  params.address, 3, 2, params.id_country]
 
   const query = `
-  INSERT INTO Usuario (nombre, apellido, claveAcceso, correo, telefono, fotografia, genero, fechaNacimiento,
-    fechaRegistro, direccion, rol, estado, paisID)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+  INSERT INTO Usuario (nombre, apellido, claveAcceso, correo, telefono, fotografia, genero,
+                      fechaNacimiento, direccion, rol, estado, paisID)
+  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
   `;
 
   return execute(query, newUser, callback);
