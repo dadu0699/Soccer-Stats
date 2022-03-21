@@ -25,7 +25,7 @@ const getProfile = (params, callback) => {
         telefono phone, fotografia photo, genero gender, DATE_FORMAT(fechaNacimiento, "%Y-%m-%d") birth_date,
         direccion address, u.paisID id_country, p.nombre country
         FROM Usuario u, Pais p
-        WHERE usuarioID = ? AND p.paisID = u.paisID;
+        WHERE p.paisID = u.paisID AND usuarioID = ?;
     `;
 
   return execute(query, id, callback);

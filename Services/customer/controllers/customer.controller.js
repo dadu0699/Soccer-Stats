@@ -25,7 +25,7 @@ crearUsuario = async (req, res) => {
 }
 
 obtenerPerfil = (req, res) => {
-  customerModel.getProfile(req.params, (err, results) => {
+  customerModel.getProfile(req.query, (err, results) => {
     if (err) return response(res, 400, 'Error al obtener el usuario.', [err]);
     results[0]['gender'] = results['gender'] ? 'M' : 'F';
     results[0]['age'] = calcularEdad(results[0]['birth_date']);
