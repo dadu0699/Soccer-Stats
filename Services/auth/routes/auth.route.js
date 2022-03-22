@@ -6,8 +6,6 @@ const {
   iniciarSesion,
 } = require('../controllers/auth.controller');
 
-router.route('/').post(iniciarSesion);
-router.route('/').get(validarCuenta)
-
+router.route('/').post(iniciarSesion).get(validarCuenta);
 
 module.exports = router;

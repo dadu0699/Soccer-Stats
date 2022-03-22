@@ -7,23 +7,22 @@ const execute = (query, params, callback) => {
 const signin = (params, callback) => {
   const user = [params.email, params.password];
   const query = `
-        SELECT usuarioID id_usuario, rol id_rol, estado id_status, fechaHoraClaveAcceso expire_date
-        FROM Usuario
-        WHERE correo = ? AND claveAcceso = ?;
+    SELECT usuarioID id_usuario, rol id_rol,
+      estado id_status, fechaHoraClaveAcceso expire_date
+    FROM Usuario
+    WHERE correo = ? AND claveAcceso = ?;
   `;
   return execute(query, user, callback);
-}
+};
 
 const validate = (params, callback) => {
-  const id = params.id
+  const id = params.id;
   const query = `
-        UPDATE Usuario
-        SET estado = 1
-        WHERE usuarioID = ?;
+    UPDATE Usuario SET estado = 1
+    WHERE usuarioID = ?;
   `;
 
   return execute(query, id, callback);
+};
 
-}
-
-module.exports = { validate, signin,};
+module.exports = { validate, signin };
