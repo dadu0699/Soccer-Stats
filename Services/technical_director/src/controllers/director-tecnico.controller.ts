@@ -13,6 +13,68 @@ export default class DirectorTecnicoController {
         return this._instance || (this._instance = new this());
     }
 
+    /**
+     * ACTUALIZAR DIRECTOR TECNICO
+     */
+    update = async (req: Request, res: Response) => {
+        const { body } = req;
+
+        let objUsuario: any = {
+            id: body?.id,
+            nombre: body?.name,
+            apellido: body?.lastname,
+            fechaNacimiento: body?.birth_date,
+            estado: body?.status,
+            paisID: body?.id_country,
+        }
+
+        try {
+            const data = await DirectorTecnico.findByPk(objUsuario.id);
+
+            if (data) {
+
+                if (body.photo != '') {
+                    console.log("entro")
+                    let url: any;
+
+                    let extension = this.extension(body.photo)
+                    let base64 = body.photo.replace(`data:image/${this.extensionRemove(body.photo)};base64,`, '')
+
+                    await UploadFile(base64, extension).then((data) => url = data);
+
+                    if (url == null) {
+                        return res.status(409).json({
+                            status: false
+                        })
+                    }
+
+                    //INCRUSTAR IMAGEN
+                    objUsuario.foto = 'https://grupof.s3.us-east-2.amazonaws.com/' + url.Key;
+                }
+
+                await data.update(objUsuario);
+                return res.json({
+                    status: 200,
+                    msg: "Director técnico actualizado con éxito.",
+                    data: [data]
+                });
+            } else {
+                return res.status(400).json({
+                    status: 400,
+                    msg: "Error al actualizar director técnico.",
+                    data: []
+                })
+            }
+        } catch (error) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al actualizar director técnico.",
+                data: [],
+                error
+            })
+        }
+    }
+
 
     /**
      * CREAR DIRECTOR TECNICO
