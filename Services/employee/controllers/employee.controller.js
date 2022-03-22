@@ -51,7 +51,16 @@ logTransferenciaDirectorTecnico = (req, res) => {
 agregarIncidencia = (req, res) => {
   employeeModel.createIncidence(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al agregar incidencia.', [err]);
-    response(res, 200, 'Incidencia agregada con éxito.', [results]);
+
+    writeLog({
+      accion: 'CREATE',
+      nombreTabla: 'Incidencia',
+      registro: `Nueva incidencia agregada, id de incidencia ${results['insertId']}`,
+      usuarioID: req.user['id_user']
+    }, (error, result) => {
+      if (err) return response(res, 400, 'Error al agregar incidencia.', [error]);
+      response(res, 200, 'Incidencia agregada con éxito.', [results]);
+    });
   });
 }
 
@@ -59,5 +68,7 @@ const response = (res, code, msg, data) => {
   res.status(code).send({ status: code, msg, data });
 };
 
-module.exports = { transferirJugador, logTransferenciaJugador, transferirDirectorTecnico,
-  logTransferenciaDirectorTecnico, agregarIncidencia };
+module.exports = {
+  transferirJugador, logTransferenciaJugador, transferirDirectorTecnico,
+  logTransferenciaDirectorTecnico, agregarIncidencia
+};
