@@ -18,8 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
+const apiURL = '/customer';
 app.use('/', require('./routes/index.route.js'));
-app.use('/customer', require('./routes/customer.route'));
+app.use(apiURL, require('./routes/customer.route'));
 
 // Port assignment
 const server = app.listen(PORT, () => {
