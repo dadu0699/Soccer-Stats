@@ -64,4 +64,16 @@ logTechnicalDirectorTransfer = (params, callback) => {
   return execute(query, id, callback);
 };
 
-module.exports = { playerTransfer, logPlayerTransfer, technicalDirectorTransfer, logTechnicalDirectorTransfer };
+const createIncidence = (params, callback) => {
+  const player = [params.minute, params.description, params.type,
+     params.id_player, params.id_game];
+
+  const query = `
+      INSERT INTO Incidencia (minuto, descripcion, tipo, jugadorID, partidoID)
+      VALUES (?, ?, ?, ?, ?);
+      `;
+
+  return execute(query, player, callback);
+};
+
+module.exports = { playerTransfer, logPlayerTransfer, technicalDirectorTransfer, logTechnicalDirectorTransfer, createIncidence };

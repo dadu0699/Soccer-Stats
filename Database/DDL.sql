@@ -210,15 +210,11 @@ CREATE TABLE ContratoJugador(
     FOREIGN KEY (equipoDestinoID) REFERENCES Equipo(equipoID)
 );
 
-CREATE TABLE TipoIncidencia(
-    tipoIncidenciaID INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    PRIMARY KEY (tipoIncidenciaID)
-);
-
 CREATE TABLE Incidencia(
     incidenciaID INT NOT NULL AUTO_INCREMENT,
     minuto VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(100) NOT NULL,
+    tipo INT NOT NULL,
     jugadorID INT NOT NULL,
     partidoID INT NOT NULL,
     PRIMARY KEY (incidenciaID),
