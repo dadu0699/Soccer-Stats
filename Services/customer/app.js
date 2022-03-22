@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const apiURL = '/customer';
 app.use('/', require('./routes/index.route.js'));
 app.use(apiURL, require('./routes/customer.route'));
+app.use(`${apiURL}/membership`, require('./routes/membership.route'));
 
 // Port assignment
 const server = app.listen(PORT, () => {
