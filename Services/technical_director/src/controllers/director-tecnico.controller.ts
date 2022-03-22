@@ -57,8 +57,31 @@ export default class DirectorTecnicoController {
             return res.status(400).json({
                 status: 400,
                 msg: "Error al crear directo técnico.",
-                data: [],
-                error
+                data: []
+            })
+        }
+    }
+
+    /**
+     * ELIMINAR DIRECTOR TECNICO
+     */
+    delete = async (req: Request, res: Response) => {
+        const { id } = req.body;
+
+        const data = await DirectorTecnico.findByPk(id);
+        if (data) {
+            await data.destroy();
+            res.json({
+                status: 200,
+                msg: "Director técnico eliminado con éxito.",
+                data: [data]
+            });
+
+        } else {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al eliminar director técnico.",
+                data: []
             })
         }
     }

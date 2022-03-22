@@ -13,5 +13,6 @@ director_tecnico.post('/technical-director', [
     check('status', 'El estado es un campo obligatorio.').not().isEmpty(),
     ValidarCampos
 ], DirectorTecnicoController.getInstance().create);
+director_tecnico.delete('/technical-director', DirectorTecnicoController.getInstance().delete);
 
 export default director_tecnico;
