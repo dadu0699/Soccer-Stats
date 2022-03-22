@@ -1,8 +1,9 @@
 import { DataTypes } from "sequelize";
 import db from "../db/connection";
+import Pais from "./pais.model";
 
 const DirectorTecnico = db.define('DirectorTecnico', {
-    DirectorTecnicoID: {
+    directorTecnicoID: {
         type: DataTypes.INTEGER,
         field: 'directorTecnicoID',
         primaryKey: true,
@@ -28,14 +29,12 @@ const DirectorTecnico = db.define('DirectorTecnico', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    paisID: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
 }, {
     tableName: 'DirectorTecnico',
     paranoid: true,
     timestamps: false
 })
+
+DirectorTecnico.belongsTo(Pais, { as: 'pais', foreignKey: 'paisID' });
 
 export default DirectorTecnico;

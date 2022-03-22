@@ -14,6 +14,65 @@ export default class DirectorTecnicoController {
     }
 
     /**
+     * LISTAR DIRECTORES TECNICOS
+     */
+    getAll = async (req: Request, res: Response) => {
+        const { id } = req.query;
+
+        if (id == null) {
+            const data = await DirectorTecnico.findAll({
+                include: ['pais']
+            });
+
+            let directores = data.map((director: any) => {
+                return {
+                    id: director.directorTecnicoID,
+                    name: director.nombre,
+                    lastname: director.apellido,
+                    birth_date: director.fechaNacimiento,
+                    status: director.estado,
+                    id_country: director.paisID,
+                    country: director.pais.nombre,
+                    photo: director.foto,
+                }
+            });
+
+            return res.json({
+                status: 200,
+                msg: "Director(es) técnico(s) obtenido(s) con éxito.",
+                data: [directores]
+            });
+        } else {
+            const data: any = await DirectorTecnico.findByPk(Number(id), {
+                include: ['pais']
+            });
+            if (data) {
+                return res.json({
+                    status: 200,
+                    msg: "Director(es) técnico(s) obtenido(s) con éxito.",
+                    data: [{
+                        id: data.directorTecnicoID,
+                        name: data.nombre,
+                        lastname: data.apellido,
+                        birth_date: data.fechaNacimiento,
+                        status: data.estado,
+                        id_country: data.paisID,
+                        country: data.pais.nombre,
+                        photo: data.foto,
+                    }]
+                });
+            } else {
+                return res.status(400).json({
+                    status: 400,
+                    msg: "Error al obtener director(es) técnico(s).",
+                    data: []
+                })
+            }
+        }
+    }
+
+
+    /**
      * ACTUALIZAR DIRECTOR TECNICO
      */
     update = async (req: Request, res: Response) => {
@@ -29,7 +88,7 @@ export default class DirectorTecnicoController {
         }
 
         try {
-            const data = await DirectorTecnico.findByPk(objUsuario.id);
+            const data: any = await DirectorTecnico.findByPk(objUsuario.id);
 
             if (data) {
 
@@ -56,7 +115,15 @@ export default class DirectorTecnicoController {
                 return res.json({
                     status: 200,
                     msg: "Director técnico actualizado con éxito.",
-                    data: [data]
+                    data: [{
+                        id: data.directorTecnicoID,
+                        name: data.nombre,
+                        lastname: data.apellido,
+                        birth_date: data.fechaNacimiento,
+                        status: data.estado,
+                        id_country: data.paisID,
+                        photo: data.foto,
+                    }]
                 });
             } else {
                 return res.status(400).json({
@@ -108,12 +175,20 @@ export default class DirectorTecnicoController {
             //INCRUSTAR IMAGEN
             objUsuario.foto = 'https://grupof.s3.us-east-2.amazonaws.com/' + url.Key;
 
-            const data = DirectorTecnico.build(objUsuario);
+            const data: any = DirectorTecnico.build(objUsuario);
             await data.save();
             return res.json({
                 status: 200,
                 msg: "Directo técnico creado con éxito.",
-                data: [data]
+                data: [{
+                    id: data.directorTecnicoID,
+                    name: data.nombre,
+                    lastname: data.apellido,
+                    birth_date: data.fechaNacimiento,
+                    status: data.estado,
+                    id_country: data.paisID,
+                    photo: data.foto,
+                }]
             });
         } catch (error) {
             return res.status(400).json({
@@ -130,13 +205,21 @@ export default class DirectorTecnicoController {
     delete = async (req: Request, res: Response) => {
         const { id } = req.body;
 
-        const data = await DirectorTecnico.findByPk(id);
+        const data: any = await DirectorTecnico.findByPk(id);
         if (data) {
             await data.destroy();
             res.json({
                 status: 200,
                 msg: "Director técnico eliminado con éxito.",
-                data: [data]
+                data: [{
+                    id: data.directorTecnicoID,
+                    name: data.nombre,
+                    lastname: data.apellido,
+                    birth_date: data.fechaNacimiento,
+                    status: data.estado,
+                    id_country: data.paisID,
+                    photo: data.foto,
+                }]
             });
 
         } else {
