@@ -6,7 +6,7 @@ const dispatchEmail = require('../configs/nodemail');
 const keyCrypto = CryptoJS.enc.Hex.parse(process.env.CRYPTO_KEY);
 const iv = CryptoJS.enc.Hex.parse(process.env.CRYPTO_IV);
 
-crearUsuario = async (req, res) => {
+const crearUsuario = async (req, res) => {
   try {
     const { key } = await s3.itemUpload(req.body['photo']);
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key
@@ -24,7 +24,7 @@ crearUsuario = async (req, res) => {
   }
 }
 
-obtenerPerfil = (req, res) => {
+const obtenerPerfil = (req, res) => {
   customerModel.getProfile(req.query, (err, results) => {
     if (err) return response(res, 400, 'Error al obtener el usuario.', [err]);
     results[0]['gender'] = results['gender'] ? 'M' : 'F';
@@ -34,7 +34,7 @@ obtenerPerfil = (req, res) => {
 
 }
 
-actualizarPerfil = async (req, res) => {
+const actualizarPerfil = async (req, res) => {
   if (req.body['password'] != '')
     req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], keyCrypto, {
       iv,
@@ -51,7 +51,7 @@ actualizarPerfil = async (req, res) => {
   });
 }
 
-eliminarCuenta = (req, res) => {
+const eliminarCuenta = (req, res) => {
   customerModel.deleteAccount(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al eliminar el usuario.', [err])
     response(res, 200, 'Usuario eliminado con éxito.', [results])

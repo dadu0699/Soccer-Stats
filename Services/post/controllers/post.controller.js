@@ -1,14 +1,14 @@
 const postModel = require("../models/post.model");
 const { writeLog } = require("../helpers/logHandler")
 
-obtenerNoticias = (req, res) => {
+const obtenerNoticias = (req, res) => {
   postModel.get(req.query, (err, results) => {
     if (err) return response(res, 400, 'Error al obtener noticia(s).', [err]);
     response(res, 200, 'Noticia(s) obtenida(s) con éxito.', results);
   });
 };
 
-crearNoticia = (req, res) => {
+const crearNoticia = (req, res) => {
   postModel.post(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al crear noticia.', [err]);
 

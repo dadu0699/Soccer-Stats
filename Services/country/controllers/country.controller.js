@@ -1,7 +1,7 @@
 const countryModel = require("../models/country.model");
 
 
-obtenerPaises = (req, res) => {
+const obtenerPaises = (req, res) => {
   countryModel.get(req.query, (err, results) => {
     if (err) return response(res, 400, 'Error al obtener (los) pais(es).', [err]);
     response(res, 200, 'Se han obtenido (los) pais(es).', results);

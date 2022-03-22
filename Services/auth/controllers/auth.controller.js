@@ -5,7 +5,7 @@ const { generateToken } = require('../helpers/jwt');
 const key = CryptoJS.enc.Hex.parse(process.env.CRYPTO_KEY);
 const iv = CryptoJS.enc.Hex.parse(process.env.CRYPTO_IV);
 
-iniciarSesion = (req, res) => {
+const iniciarSesion = (req, res) => {
     req.body['password'] = CryptoJS.AES.encrypt(req.body['password'], key, {
         iv,
     }).toString();
@@ -23,7 +23,7 @@ iniciarSesion = (req, res) => {
     });
 }
 
-validarCuenta = (req, res) => {
+const validarCuenta = (req, res) => {
     authModel.validate(req.query, (err, results) => {
         if (err) return response(res, 400,  'Error al verificar correo.', [err]);
         response(res, 200,'Correo verificado con éxito.', [] )
