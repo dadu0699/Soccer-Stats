@@ -12,21 +12,24 @@ const ValidarJWT = (req: any, res: Response, next: NextFunction) => {
         token = authorization.substring(7);
     }
 
-    if (!token) return res.status(400).send(
-        {
-            status: 400,
-            msj: 'Unauthorized'
-        }
-    );
+    if (!token) {
+        return res.status(401).send(
+            {
+                status: 401,
+                msj: 'Unauthorized'
+            }
+        );
+    }
 
     try {
         const decoded = jwt.verify(token, process.env.SECRET_JWT_SEED);
         req.user = decoded;
+        console.log(decoded)
         next();
     } catch (err) {
-        return res.status(400).send(
+        return res.status(401).send(
             {
-                status: 400,
+                status: 401,
                 msj: 'Unauthorized'
             }
         );

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import CryptoJS = require("crypto-js");
 import UploadFile from '../utils/aws-s3.util';
 import DirectorTecnico from '../models/director-tecnico.model';
+import BitacoraController from './bitacora.controller';
 
 export default class DirectorTecnicoController {
     private static _instance: DirectorTecnicoController;
@@ -75,7 +76,7 @@ export default class DirectorTecnicoController {
     /**
      * ACTUALIZAR DIRECTOR TECNICO
      */
-    update = async (req: Request, res: Response) => {
+    update = async (req: any, res: Response) => {
         const { body } = req;
 
         let objUsuario: any = {
@@ -93,7 +94,6 @@ export default class DirectorTecnicoController {
             if (data) {
 
                 if (body.photo != '') {
-                    console.log("entro")
                     let url: any;
 
                     let extension = this.extension(body.photo)
@@ -112,6 +112,10 @@ export default class DirectorTecnicoController {
                 }
 
                 await data.update(objUsuario);
+                await BitacoraController.getInstance().crearBitacora('CREATE',
+                    'DirectorTecnico',
+                    `Director técnico ID: ${objUsuario.id} actualizado con éxito.`,
+                    req?.user.id_user);
                 return res.json({
                     status: 200,
                     msg: "Director técnico actualizado con éxito.",
@@ -146,7 +150,7 @@ export default class DirectorTecnicoController {
     /**
      * CREAR DIRECTOR TECNICO
      */
-    create = async (req: Request, res: Response) => {
+    create = async (req: any, res: Response) => {
         const { body } = req;
 
         let objUsuario = {
@@ -177,6 +181,10 @@ export default class DirectorTecnicoController {
 
             const data: any = DirectorTecnico.build(objUsuario);
             await data.save();
+            await BitacoraController.getInstance().crearBitacora('CREATE',
+                'DirectorTecnico',
+                `Director técnico ID: ${data.directorTecnicoID} creado con éxito.`,
+                req?.user.id_user);
             return res.json({
                 status: 200,
                 msg: "Directo técnico creado con éxito.",
@@ -194,7 +202,8 @@ export default class DirectorTecnicoController {
             return res.status(400).json({
                 status: 400,
                 msg: "Error al crear directo técnico.",
-                data: []
+                data: [],
+                error
             })
         }
     }
@@ -202,13 +211,17 @@ export default class DirectorTecnicoController {
     /**
      * ELIMINAR DIRECTOR TECNICO
      */
-    delete = async (req: Request, res: Response) => {
+    delete = async (req: any, res: Response) => {
         const { id } = req.body;
 
         const data: any = await DirectorTecnico.findByPk(id);
         if (data) {
             await data.destroy();
-            res.json({
+            await BitacoraController.getInstance().crearBitacora('CREATE',
+                'DirectorTecnico',
+                `Director técnico ID: ${data.directorTecnicoID} eliminado con éxito.`,
+                req?.user.id_user);
+            return res.json({
                 status: 200,
                 msg: "Director técnico eliminado con éxito.",
                 data: [{
