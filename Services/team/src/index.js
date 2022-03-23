@@ -22,7 +22,7 @@ app.use('/esb/team',require('./routes/get.all'));
 app.use('/esb/team',require('./routes/delete.route'));
 
 app.listen(port, () => {
-    console.log("Server stadium in the port", port);
+    console.log("Server team in the port", port);
 });
 
 module.exports = app;
