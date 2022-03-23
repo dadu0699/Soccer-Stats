@@ -9,7 +9,8 @@ require('dotenv').config({
 describe('APIs Test Technical Director', () => {
 
     let headers = {
-        'authorization': 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxLCJpZF9yb2wiOjF9.TO1PkVlWFbrGJbUIJvagkTF_jCUIelGrs9-NID5PySs'
+        'authorization': 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxLCJpZF9yb2wiOjF9.TO1PkVlWFbrGJbUIJvagkTF_jCUIelGrs9-NID5PySs',
+        'Accept': 'application/json'
     }
 
     test('GET ALL Technical Director - Obtener todos los directores', async () => {
@@ -30,6 +31,43 @@ describe('APIs Test Technical Director', () => {
             msg: "Error al obtener director(es) técnico(s).",
             data: []
         }
+        // COMPARAR RESPONSE
+        expect(res.body).toEqual(expected);
+    });
+
+    test('UPDATED Technical Director - Actualización director inexistente.', async () => {
+        const expected = {
+            status: 400,
+            msg: "Error al actualizar director técnico.",
+            data: []
+        };
+        const res = await request(server.app).put('/api/technical-director')
+            .send({
+                id: 999999999,
+                name: 'Jose',
+                lastname: 'Morente',
+                birth_date: '1998-10-03',
+                status: 1,
+                photo: '',
+                id_country: 1
+            })
+            .set(headers);
+        // COMPARAR RESPONSE
+        expect(res.body).toEqual(expected);
+    });
+
+    test('DELETE Technical Director - Eliminar director inexistente.', async () => {
+        const expected = {
+            status: 400,
+            msg: "Error al eliminar director técnico.",
+            data: []
+        };
+        const res = await request(server.app)
+            .delete('/api/technical-director')
+            .send({
+                id: 999999999
+            })
+            .set(headers);
         // COMPARAR RESPONSE
         expect(res.body).toEqual(expected);
     });
