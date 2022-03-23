@@ -16,7 +16,7 @@ const ValidarJWT = (req: any, res: Response, next: NextFunction) => {
         return res.status(401).send(
             {
                 status: 401,
-                msj: 'Unauthorized'
+                msg: 'Unauthorized'
             }
         );
     }
@@ -29,7 +29,7 @@ const ValidarJWT = (req: any, res: Response, next: NextFunction) => {
         return res.status(401).send(
             {
                 status: 401,
-                msj: 'Unauthorized'
+                msg: 'Unauthorized'
             }
         );
     }

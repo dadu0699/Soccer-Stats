@@ -9,7 +9,7 @@ const {saveBinnacle} = require("../utils/binnacle");
 
 router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
     
-    const {id, name, fundation_date, capacity, id_country, address, state, photo} = req.body;
+    const {id, name, foundation_date, capacity, id_country, address, state, photo} = req.body;
 
     try {
 
@@ -21,16 +21,16 @@ router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
     
         await saveFile(photo,nombre,ext,(res)=>{console.log(res)});
 
-        pool.query(sql, [name,fundation_date,capacity,address,state,url,id_country,id], async function(err,result){
+        pool.query(sql, [name,foundation_date,capacity,address,state,url,id_country,id], async function(err,result){
             if(err){
-                res.status(400).json({status:400, msj: "Error al actualizar Estadio.", data: [err]});
+                res.status(400).json({status:400, msg: "Error al actualizar Estadio.", data: [err]});
             }else{
                 await saveBinnacle("UPDATE","Estadio",`Estadio con id: ${id}, actualizado con éxito.`, userID(req.headers.authorization.split(' ')[1]),(res)=>{console.log(res);});
-                res.status(200).json({status:200, msj: "Estadio actualizado con éxito.", data: []});
+                res.status(200).json({status:200, msg: "Estadio actualizado con éxito.", data: []});
             }
         });
     } catch (error) {
-        res.status(500).json({status:500, msj: "Error al actualizar Estadio.", data: [error]});
+        res.status(500).json({status:500, msg: "Error al actualizar Estadio.", data: [error]});
     }
 });
 

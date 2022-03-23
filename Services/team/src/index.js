@@ -15,11 +15,11 @@ app.use(express.json({ limit: '50mb' }));
 
 // Routes
 app.use('/',require('./routes/hello-world.route'));
-app.use('/esb/team',require('./routes/create.route'));
-app.use('/esb/team',require('./routes/update.route'));
-app.use('/esb/team',require('./routes/get.one'));
-app.use('/esb/team',require('./routes/get.all'));
-app.use('/esb/team',require('./routes/delete.route'));
+app.use('/team',require('./routes/create.route'));
+app.use('/team',require('./routes/update.route'));
+app.use('/team',require('./routes/get.one'));
+app.use('/team',require('./routes/get.all'));
+app.use('/team',require('./routes/delete.route'));
 
 app.listen(port, () => {
     console.log("Server team in the port", port);

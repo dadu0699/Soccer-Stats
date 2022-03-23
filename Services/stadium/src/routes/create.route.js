@@ -9,7 +9,7 @@ const {saveBinnacle} = require("../utils/binnacle");
 
 router.post('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
 
-    const {name, fundation_date, capacity, id_country, address, state, photo} = req.body;
+    const {name, foundation_date, capacity, id_country, address, state, photo} = req.body;
 
     try {
         
@@ -21,16 +21,16 @@ router.post('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
 
         await saveFile(photo,nombre,ext,(res)=>{console.log(res)});
 
-        pool.query(sql, [name,fundation_date,capacity,address,state,url,id_country], async function(err,result){
+        pool.query(sql, [name,foundation_date,capacity,address,state,url,id_country], async function(err,result){
             if(err){
-                res.status(400).json({status:400, msj: "Error al crear estadio.", data: [err]});
+                res.status(400).json({status:400, msg: "Error al crear estadio.", data: [err]});
             }else{
                 await saveBinnacle("CREATE","Estadio","Estadio creado con éxito.", userID(req.headers.authorization.split(' ')[1]),(res)=>{console.log(res);});
-                res.status(200).json({status:200, msj: "Estadio creado con éxito.", data: []});
+                res.status(200).json({status:200, msg: "Estadio creado con éxito.", data: []});
             }
         });
     } catch (error) {
-        res.status(500).json({status:500, msj: "Error al crear estadio.", data: [error]});
+        res.status(500).json({status:500, msg: "Error al crear estadio.", data: [error]});
     }    
 });
 

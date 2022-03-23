@@ -23,14 +23,14 @@ router.post('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
 
         pool.query(sql, [name,foundation_date,url,id_country], async function(err,result){
             if(err){
-                res.status(400).json({status:400, msj: "Error al crear equipo.", data: [err]});
+                res.status(400).json({status:400, msg: "Error al crear equipo.", data: [err]});
             }else{
                 await saveBinnacle("CREATE","Equipo","Equipo creado con éxito.", userID(req.headers.authorization.split(' ')[1]),(res)=>{console.log(res);});
-                res.status(200).json({status:200, msj: "Equipo creado con éxito.", data: []});
+                res.status(200).json({status:200, msg: "Equipo creado con éxito.", data: []});
             }
         });
     } catch (error) {
-        res.status(500).json({status:500, msj: "Error al crear equipo.", data: [error]});
+        res.status(500).json({status:500, msg: "Error al crear equipo.", data: [error]});
     }    
 });
 

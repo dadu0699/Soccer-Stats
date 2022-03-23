@@ -197,7 +197,7 @@ const request = require("supertest");
 En este caso, en el describe, como su nombre lo dice, se describe el tipo de peticion y a que ruta queremos hacerla, por ejemplo:
 
 ```javascript
-describe('POST /esb/team', () => {
+describe('POST /team', () => {
     //aca los test
 });  
 ```
@@ -216,7 +216,7 @@ Para el tipo de pepticion, se realiza de la siguiente forma:
 - **send**: Se hace la peticion, y se puede enviar un objeto json dentro del mismo, .send( { id: 2, name: "name" } ) 
 
 ```javascript
-const response = await request(app).post('/esb/team')
+const response = await request(app).post('/team')
     .set('Authorization','token')
     .send()
 ```

@@ -3,7 +3,7 @@ const router = Router();
 
 
 router.get('/', (req, res) => {
-    res.status(200).json({msj: "Hello-World, Server Team"});
+    res.status(200).json({msg: "Hello-World, Server Team"});
 });
 
 module.exports = router;

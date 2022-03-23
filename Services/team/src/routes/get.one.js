@@ -14,13 +14,13 @@ router.get('/:id', [verificarToken,isAdminOrEmployee], (req, res) => {
     try {
         pool.query(sql,function(err, result, fields){
             if (err) {
-                res.status(400).json({status:400, msj: "Error al obtener equipo(s).", data: [err]});
+                res.status(400).json({status:400, msg: "Error al obtener equipo(s).", data: [err]});
             }else{
-                res.status(200).json({status:200, msj: "Equipo(s) obtenido(s) con éxito.", data: result});
+                res.status(200).json({status:200, msg: "Equipo(s) obtenido(s) con éxito.", data: result});
             }
         });
     } catch (error) {
-        res.status(500).json({status:500, msj: "Error al obtener equipo(s).", data: [error]});
+        res.status(500).json({status:500, msg: "Error al obtener equipo(s).", data: [error]});
     }
 });
 

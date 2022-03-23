@@ -23,14 +23,14 @@ router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
 
         pool.query(sql, [name,foundation_date,url,id_country,id], async function(err,result){
             if(err){
-                res.status(400).json({status:400, msj: "Error al actualizar equipo.", data: [err]});
+                res.status(400).json({status:400, msg: "Error al actualizar equipo.", data: [err]});
             }else{
                 await saveBinnacle("UPDATE","Equipo",`Equipo con id: ${id}, actualizado con éxito.`, userID(req.headers.authorization.split(' ')[1]),(res)=>{console.log(res);});
-                res.status(200).json({status:200, msj: "Equipo actualizado con éxito.", data: []});
+                res.status(200).json({status:200, msg: "Equipo actualizado con éxito.", data: []});
             }
         });
     } catch (error) {
-        res.status(500).json({status:500, msj: "Error al actualizar equipo.", data: [error]});
+        res.status(500).json({status:500, msg: "Error al actualizar equipo.", data: [error]});
     }
 });
 
