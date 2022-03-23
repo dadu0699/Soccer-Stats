@@ -25,4 +25,25 @@ const validate = (params, callback) => {
   return execute(query, id, callback);
 };
 
-module.exports = { validate, signin };
+const temporalPassword = (params, callback) => {
+  const user = [params.password, params.email];
+  const query = `
+    UPDATE Usuario SET claveTemporal = ?, fechaHoraClaveAcceso = NOW()
+    WHERE correo = ?
+  `;
+  return execute(query, user, callback);
+};
+
+const restablecerPassword = (params, callback) => {
+  const user = [params.new_password, params.email, params.temporal_password];
+  console.log(user);
+  const query = `
+    UPDATE Usuario SET claveAcceso = ?,
+      claveTemporal = NULL, fechaHoraClaveAcceso = NULL
+    WHERE correo = ? AND claveTemporal = ?
+      AND MINUTE(TIMEDIFF(NOW(), fechaHoraClaveAcceso)) <= 2
+  `;
+  return execute(query, user, callback);
+};
+
+module.exports = { signin, validate, temporalPassword, restablecerPassword };

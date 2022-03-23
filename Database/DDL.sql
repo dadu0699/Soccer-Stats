@@ -73,6 +73,7 @@ CREATE TABLE Usuario(
     apellido VARCHAR(100) NOT NULL,
     claveAcceso VARCHAR(100) NOT NULL,
     fechaHoraClaveAcceso DATETIME NULL,
+    claveTemporal VARCHAR(100) NULL,
     correo VARCHAR(100) NOT NULL,
     telefono VARCHAR(100) NOT NULL,
     fotografia VARCHAR(255) NOT NULL,
@@ -84,7 +85,8 @@ CREATE TABLE Usuario(
     estado VARCHAR(100) NOT NULL,
     paisID INT NOT NULL,
     PRIMARY KEY (usuarioID),
-    FOREIGN KEY (paisID) REFERENCES Pais(paisID)
+    FOREIGN KEY (paisID) REFERENCES Pais(paisID),
+    UNIQUE (correo)
 );
 
 CREATE TABLE Bitacora(
