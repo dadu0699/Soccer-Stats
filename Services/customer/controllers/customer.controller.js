@@ -31,8 +31,12 @@ const crearUsuario = async (req, res) => {
 };
 
 const obtenerPerfil = (req, res) => {
+  if (req.query['id'] != req.user['id_user'])
+    return res.status(401).send({ status: 401, msg: 'Unauthorized', data: [] });
+
   customerModel.getProfile(req.query, (err, results) => {
-    if (err) return response(res, 400, 'Error al obtener el usuario.', [err]);
+    if (err || results.length < 1)
+      return response(res, 400, 'Error al obtener el usuario.', [err]);
 
     results[0]['gender'] = results['gender'] ? 'M' : 'F';
     results[0]['age'] = calcularEdad(results[0]['birth_date']);
@@ -42,7 +46,10 @@ const obtenerPerfil = (req, res) => {
 };
 
 const actualizarPerfil = async (req, res) => {
-  if (req.body['password'] != '') {
+  if (req.body['id'] != req.user['id_user'])
+    return res.status(401).send({ status: 401, msg: 'Unauthorized', data: [] });
+
+  if (req.body['password'] && req.body['password'] != '') {
     req.body['password'] = CryptoJS.AES.encrypt(
       req.body['password'],
       keyCrypto,
@@ -50,13 +57,12 @@ const actualizarPerfil = async (req, res) => {
     ).toString();
   }
 
-  if (req.body['photo'] != '') {
+  if (req.body['photo'] && req.body['photo'] != '') {
     const { key } = await s3.itemUpload(req.body['photo']);
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key;
   }
 
-  if (req.body['gender'])
-    req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
+  req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
 
   customerModel.update(req.body, (err, results) => {
     if (err)
@@ -67,6 +73,9 @@ const actualizarPerfil = async (req, res) => {
 };
 
 const eliminarCuenta = (req, res) => {
+  if (req.body['id'] != req.user['id_user'])
+    return res.status(401).send({ status: 401, msg: 'Unauthorized', data: [] });
+
   customerModel.deleteAccount(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al eliminar el usuario.', [err]);
 

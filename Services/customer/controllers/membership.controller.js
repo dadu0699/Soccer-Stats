@@ -1,6 +1,9 @@
 const membershipModel = require('../models/membership.model');
 
 const comprarMembresia = (req, res) => {
+  if (req.body['id_client'] != req.user['id_user'])
+    return res.status(401).send({ status: 401, msg: 'Unauthorized', data: [] });
+
   membershipModel.comprarMembresia(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al comprar membresía.', err);
 
