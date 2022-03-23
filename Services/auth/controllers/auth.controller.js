@@ -36,7 +36,7 @@ const validarCuenta = (req, res) => {
   });
 }
 
-function verificarTiempo(expireDateString) {
+const verificarTiempo = (expireDateString) => {
   const today = new Date();
   const expireDate = new Date(expireDateString);
   const time = Math.abs(expireDate - today) / (1000 * 60);
