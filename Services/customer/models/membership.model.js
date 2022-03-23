@@ -13,4 +13,13 @@ const comprarMembresia = (params, callback) => {
   execute(query, [params.id_client], callback);
 };
 
-module.exports = { comprarMembresia };
+const cancelarMembresia = (params, callback) => {
+  const query = `
+    UPDATE Membresia SET fechaFin = NOW()
+    WHERE (NOW() BETWEEN fechaInicio AND fechaFin) AND usuarioID = ?
+  `;
+
+  execute(query, [params.id_client], callback);
+};
+
+module.exports = { comprarMembresia, cancelarMembresia };
