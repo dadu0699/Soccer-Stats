@@ -21,5 +21,17 @@ describe('APIs Test Technical Director', () => {
         expect(res.statusCode).toEqual(200);
     });
 
+    test('GET SINGLE Technical Director - Obtener director inexistente.', async () => {
+        const res = await request(server.app).get('/api/technical-director?id=9999999999')
+            .set(headers);
+
+        const expected = {
+            status: 400,
+            msg: "Error al obtener director(es) técnico(s).",
+            data: []
+        }
+        // COMPARAR RESPONSE
+        expect(res.body).toEqual(expected);
+    });
 
 });
