@@ -1,16 +1,16 @@
 const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars')
-const path = require('path')
+const hbs = require('nodemailer-express-handlebars');
+const path = require('path');
 
-const ip = process.env.SERVICE_IP
+const ip = process.env.SERVICE_IP;
 
 async function dispatchEmail(to, subject, id) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.MAIL,
-      pass: process.env.PASS
-    }
+      pass: process.env.PASS,
+    },
   });
 
   const handlebarOptions = {
@@ -21,7 +21,7 @@ async function dispatchEmail(to, subject, id) {
     viewPath: path.resolve('./views/'),
   };
 
-  transporter.use('compile', hbs(handlebarOptions))
+  transporter.use('compile', hbs(handlebarOptions));
 
   const mailOptions = {
     from: 'Soccer Stats <support@soccerstats.com>',
@@ -30,8 +30,8 @@ async function dispatchEmail(to, subject, id) {
     template: 'validate-mail',
     context: {
       id,
-      ip
-    }
+      ip,
+    },
   };
 
   return await transporter.sendMail(mailOptions);
