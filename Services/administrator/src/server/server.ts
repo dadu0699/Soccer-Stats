@@ -1,5 +1,6 @@
 import express = require('express');
 import path = require('path');
+import reporte from '../routes/reporte.routes';
 import usuario from '../routes/usuario.routes';
 
 export default class Server {
@@ -51,6 +52,7 @@ export default class Server {
     routes() {
         const api: string = "/api/"
         this.app.use(api, usuario);
+        this.app.use(api, reporte);
     }
 
     /**
