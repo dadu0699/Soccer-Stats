@@ -9,7 +9,7 @@ require('dotenv').config({
 describe('APIs Test Technical Director', () => {
 
     let headers = {
-        'authorization': 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxLCJpZF9yb2wiOjF9.TO1PkVlWFbrGJbUIJvagkTF_jCUIelGrs9-NID5PySs',
+        'authorization': process.env.TOKEN_ADMINISTRADOR,
         'Accept': 'application/json'
     }
 
