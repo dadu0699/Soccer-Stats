@@ -7,13 +7,14 @@ module.exports = (req, res, next) => {
   if (authorization && authorization.toLowerCase().startsWith('bearer '))
     token = authorization.substring(7);
 
-  if (!token) return res.status(401).send({ status: 401, msg: 'Unauthorized' });
+  if (!token)
+    return res.status(401).send({ status: 401, msg: 'Unauthorized', data: [] });
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET_JWT_SEED);
     req.user = decoded;
     next();
   } catch (err) {
-    return res.status(401).send({ status: 401, msg: 'Unauthorized' });
+    return res.status(401).send({ status: 401, msg: 'Unauthorized', data: [] });
   }
 };
