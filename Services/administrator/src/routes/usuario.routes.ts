@@ -27,6 +27,12 @@ usuario.post('/user', [
     check('id_rol', 'El id de rol es un campo obligatorio.').not().isEmpty(),
     ValidarCampos
 ], UsuarioController.getInstance().create);
+usuario.put('/user', [
+    ValidarJWT,
+    ValidarRol(),
+    check('id', 'El id es un campo obligatorio.').not().isEmpty(),
+    ValidarCampos
+], UsuarioController.getInstance().update);
 usuario.put('/user/status', [
     ValidarJWT,
     ValidarRol(),

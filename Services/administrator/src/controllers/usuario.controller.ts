@@ -186,6 +186,93 @@ export default class UsuarioController {
     }
 
     /**
+     * ACTUALIZAR USUARIO
+     */
+    update = async (req: any, res: Response) => {
+        const { body } = req;
+
+        let objUsuario: any = {
+            id: body?.id,
+            nombre: body?.name,
+            apellido: body?.lastname,
+            correo: body?.email,
+            telefono: body?.phone,
+            genero: body?.gender,
+            fechaNacimiento: body?.birth_date,
+            direccion: body?.address,
+            paisID: body?.id_country
+        }
+
+        try {
+            const data: any = await Usuario.findByPk(objUsuario.id);
+
+            if (data) {
+
+                if (body.photo != '') {
+                    let url: any;
+
+                    let extension = this.extension(body.photo)
+                    let base64 = body.photo.replace(`data:image/${this.extensionRemove(body.photo)};base64,`, '')
+
+                    await UploadFile(base64, extension).then((data) => url = data);
+
+                    if (url == null) {
+                        return res.status(409).json({
+                            status: false
+                        })
+                    }
+
+                    //INCRUSTAR IMAGEN
+                    objUsuario.fotografia = 'https://grupof.s3.us-east-2.amazonaws.com/' + url.Key;
+                }
+
+                if (body.password != '') {
+                    //INCRUSTAR CONTRASEÑA
+                    objUsuario.claveAcceso = CryptoJS.AES.encrypt(objUsuario.claveAcceso, String(process.env.CRYPTO_KEY)).toString();
+                }
+
+                await data.update(objUsuario);
+                await BitacoraController.getInstance().crearBitacora('UPDATE',
+                    'Usuario',
+                    `Usuario ID: ${objUsuario.id} actualizado con éxito.`,
+                    req?.user.id_user);
+                return res.json({
+                    status: 200,
+                    msg: "Usuario actualizado con éxito.",
+                    data: [{
+                        id: data.usuarioID,
+                        name: data.nombre,
+                        lastname: data.apellido,
+                        email: data.correo,
+                        phone: data.telefono,
+                        photo: data.fotografia,
+                        gender: data.genero,
+                        birth_date: data.fechaNacimiento,
+                        signup_date: data.fechaHoraClaveAcceso,
+                        address: data.direccion,
+                        id_country: data.paisID,
+                        id_status: data.estado,
+                        id_rol: data.rol,
+                        age: this.getAge(data.fechaNacimiento)
+                    }]
+                });
+            } else {
+                return res.status(400).json({
+                    status: 400,
+                    msg: "Error al actualizar director técnico.",
+                    data: []
+                })
+            }
+        } catch (error) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al actualizar director técnico.",
+                data: []
+            })
+        }
+    }
+
+    /**
      * ACTUALIZAR ESTADO DE MODELO
      */
     changeState = async (req: any, res: Response) => {
