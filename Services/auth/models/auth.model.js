@@ -36,7 +36,6 @@ const temporalPassword = (params, callback) => {
 
 const restablecerPassword = (params, callback) => {
   const user = [params.new_password, params.email, params.temporal_password];
-  console.log(user);
   const query = `
     UPDATE Usuario SET claveAcceso = ?,
       claveTemporal = NULL, fechaHoraClaveAcceso = NULL
