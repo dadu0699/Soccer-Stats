@@ -140,8 +140,7 @@ export default class DirectorTecnicoController {
             return res.status(400).json({
                 status: 400,
                 msg: "Error al actualizar director técnico.",
-                data: [],
-                error
+                data: []
             })
         }
     }
@@ -202,8 +201,7 @@ export default class DirectorTecnicoController {
             return res.status(400).json({
                 status: 400,
                 msg: "Error al crear directo técnico.",
-                data: [],
-                error
+                data: []
             })
         }
     }

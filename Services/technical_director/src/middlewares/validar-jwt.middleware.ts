@@ -24,7 +24,6 @@ const ValidarJWT = (req: any, res: Response, next: NextFunction) => {
     try {
         const decoded = jwt.verify(token, process.env.SECRET_JWT_SEED);
         req.user = decoded;
-        console.log(decoded)
         next();
     } catch (err) {
         return res.status(401).send(
