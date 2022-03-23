@@ -5,8 +5,6 @@
 ### Development
 
 ```.env
-SERVICE_IP=
-
 USER_DB=
 PASSWORD_DB=
 DATABASE_DB=
@@ -24,12 +22,13 @@ S3_BUCKET=
 
 MAIL=
 PASS=
+
+FRONTEND=
 ```
 
 ### Production
 
 ```.env
-SERVICE_IP=
 USER_DB=
 PASSWORD_DB=
 DATABASE_DB=
@@ -47,4 +46,6 @@ S3_BUCKET=
 
 MAIL=
 PASS=
+
+FRONTEND=
 ```
