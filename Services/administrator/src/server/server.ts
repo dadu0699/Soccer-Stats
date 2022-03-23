@@ -1,5 +1,6 @@
 import express = require('express');
 import path = require('path');
+import usuario from '../routes/usuario.routes';
 
 export default class Server {
     public app: express.Application;
@@ -49,6 +50,7 @@ export default class Server {
      */
     routes() {
         const api: string = "/api/"
+        this.app.use(api, usuario);
     }
 
     /**
