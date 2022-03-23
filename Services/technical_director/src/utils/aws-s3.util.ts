@@ -6,11 +6,6 @@ require('dotenv').config({
     path: ".env." + NODE_ENV
 })
 
-
-console.log(process.env.S3_REGION)
-console.log(process.env.S3_ACCESS_KEY_ID)
-console.log(process.env.S3_SECRET_ACCESS_KEY)
-console.log(process.env.S3_BUCKET)
 const S3 = new AWS.S3({
     region: process.env.S3_REGION,
     accessKeyId: process.env.S3_ACCESS_KEY_ID,

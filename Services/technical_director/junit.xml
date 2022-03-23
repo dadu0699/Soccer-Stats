@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Test Microservice Technical Director" tests="1" failures="0" errors="0" time="5.525">
+  <testsuite name="APIs Test Technical Director" errors="0" failures="0" skipped="0" timestamp="2022-03-23T04:19:50" time="5.391" tests="1">
+    <testcase classname="APIs Test Technical Director GET ALL Technical Director - Obtener todos los directores" name="APIs Test Technical Director GET ALL Technical Director - Obtener todos los directores" time="1.856">
+    </testcase>
+  </testsuite>
+</testsuites>
