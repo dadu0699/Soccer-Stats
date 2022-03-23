@@ -7,7 +7,8 @@ const execute = (query, params, callback) => {
 const signin = (params, callback) => {
   const user = [params.email, params.password];
   const query = `
-        SELECT usuarioID id_usuario, rol id_rol, estado id_status, fechaHoraClaveAcceso expire_date
+        SELECT usuarioID id_user, rol id_rol, estado id_status,
+        fechaHoraClaveAcceso expire_date
         FROM Usuario
         WHERE correo = ? AND claveAcceso = ?;
   `;
@@ -26,4 +27,4 @@ const validate = (params, callback) => {
 
 }
 
-module.exports = { validate, signin,};
+module.exports = { validate, signin, };
