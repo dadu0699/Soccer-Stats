@@ -162,7 +162,7 @@ CREATE TABLE Partido(
     equipoLocalID INT NOT NULL,
     resultadoLocal INT NOT NULL,
     resultadoVisitante INT NOT NULL,
-    estado VARCHAR(100) NOT NULL, /*duda con el tipo*/
+    estado INT NOT NULL,
     estadioID INT NOT NULL,
     arbitroID INT NULL,
     competenciaID INT NOT NULL,
