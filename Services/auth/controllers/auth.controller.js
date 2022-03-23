@@ -16,8 +16,8 @@ const iniciarSesion = (req, res) => {
   authModel.signin(req.body, async (err, results) => {
     if (err) return response(res, 400, 'Error de autenticación.', [err]);
 
-    if (!results[0] || results[0]['id_status'] != 1)
-      return response(res, 400, 'Error de autenticación.', []);
+    // if (!results[0] || results[0]['id_status'] != 1)
+    //   return response(res, 400, 'Error de autenticación.', []);
 
     const payload = {
       id_user: results[0]['id_usuario'],
@@ -25,7 +25,11 @@ const iniciarSesion = (req, res) => {
     };
     const token = await generateToken(payload);
 
-    response(res, 200, '', { token, id_status: results[0]['id_status'] });
+    response(res, 200, '', {
+      token,
+      id_status: results[0]['id_status'],
+      id_rol: results[0]['id_rol'],
+    });
   });
 };
 

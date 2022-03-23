@@ -82,7 +82,7 @@ CREATE TABLE Usuario(
     fechaRegistro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     direccion VARCHAR(255) NOT NULL,
     rol TINYINT NOT NULL,
-    estado VARCHAR(100) NOT NULL,
+    estado TINYINT NULL,
     paisID INT NOT NULL,
     PRIMARY KEY (usuarioID),
     FOREIGN KEY (paisID) REFERENCES Pais(paisID),
