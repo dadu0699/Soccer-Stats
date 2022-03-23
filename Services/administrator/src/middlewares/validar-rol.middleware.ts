@@ -15,10 +15,10 @@ const ValidarRol = () => {
 
         const { id_rol } = req.user;
 
-        if (id_rol == 3) {
+        if (id_rol != 1) {
             return res.status(401).json({
                 status: 401,
-                error: `El usuario no tiene privilegios de usuario Administrador o Empleado.`
+                msg: `El usuario no tiene privilegios de usuario Administrador.`
             })
         }
 

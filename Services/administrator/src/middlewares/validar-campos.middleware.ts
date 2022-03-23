@@ -8,9 +8,10 @@ const ValidarCampos = (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        return res.status(409).json({
-            status: false,
-            errors
+        return res.status(400).json({
+            status: 400,
+            msg: "Revisar campos faltantes",
+            data: errors
         })
     }
 
