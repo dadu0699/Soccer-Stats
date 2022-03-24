@@ -382,7 +382,7 @@ pipeline {
             cd Terraform
             
             terraform init -reconfigure \
-              -var-file google_credentials_file=$google_credentials_file \
+              -var google_credentials_file=$google_credentials_file \
               -var gcr_id=$gcr_id \
               -var testing_ip=$testing_ip
             terraform validate
