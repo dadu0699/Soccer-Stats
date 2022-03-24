@@ -376,9 +376,10 @@ pipeline {
             
             export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
 
+            $(gcloud auth print-access-token) >> file.txt
+            cat file.txt
+
             export TF_VAR_google_access_token="$(gcloud auth print-access-token)"
-            echo $TF_VAR_google_access_token
-            echo "ya29.c.b0AXv0zTMrpdeLBF-iXwRKcLGBR7EzJ8bxyOZtkuLgLP-4-Dw6LGZubde38hgcGsgLbPu5bfwi2V6k13OeVhNxukm2n1ejGhr7e5AOCcT3Ib4SBZdlQqXuV4WUuuUjS3ehsOKJx4BdgB0AtLlZfbTX4OjQBvGIpMBVECkW-8ZmB4A1nbVQ2uyCn2QOU3GooYMOFRlWEwL-ah5aCAy6mW3HP0-HmmInj6FCGdQCFmMPSISALE"
             export TF_VAR_gcr_id=${GCR_ID}
             export TF_VAR_testing_ip=${TESTING_IP}
 
