@@ -373,17 +373,21 @@ pipeline {
         script{
           sh '''
             export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+
+            gcloud auth activate-service-account --key-file ${GOOGLE_APPLICATION_CREDENTIALS}
+            gcloud auth print-access-token | export GOOGLE_ACCESS_TOKEN
+            echo $GOOGLE_ACCESS_TOKEN
             
-            export TF_VAR_google_credentials_file=${GOOGLE_APPLICATION_CREDENTIALS}
+            export TF_VAR_google_credentials_file=GOOGLE_ACCESS_TOKEN
             export TF_VAR_gcr_id=${GCR_ID}
             export TF_VAR_testing_ip=${TESTING_IP}
             
             cd Terraform
             
-            terraform init -reconfigure
-            terraform validate
-            terraform apply -destroy -auto-approve
-            terraform apply -auto-approve
+            # terraform init -reconfigure
+            # terraform validate
+            # terraform apply -destroy -auto-approve
+            # terraform apply -auto-approve
           '''
         }
       }
