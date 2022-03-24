@@ -6,12 +6,7 @@
     <app-image-field (selectPicture)="selectPicture($event)"></app-image-field>
     <span class="firstSpace"></span>
     <div>
-      <label>Gender</label>
-      <mat-radio-group [(ngModel)]="new_user.gender" name="genderField" #genderField="ngModel" class="radio-group">
-        <mat-radio-button *ngFor="let gender of genders" [value]="gender">
-          {{gender}}
-        </mat-radio-button>
-      </mat-radio-group>
+      <app-status-field [options]="genders" (selectOption)="selectGender($event)" ></app-status-field>
     </div>
     <span class="secondSpace"></span>
   </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Option } from 'src/app/models/option.model';
 
 import { User } from '../../models/user.model';
 
@@ -9,12 +10,16 @@ import { User } from '../../models/user.model';
 })
 export class RegisterFormComponent implements OnInit {
   public new_user: User;
-  public genders: string[];
+  public genders: Option[];
 
 
   constructor() {
     this.new_user = new User();
-    this.genders = ['Male', 'Female', 'Other']
+    this.genders = [
+      { id: 1, description: 'Male' },
+      { id: 2, description: 'Female' },
+      { id: 3, description: 'Other' },
+    ];
   }
 
   public async signup(): Promise<void> {
@@ -27,6 +32,10 @@ export class RegisterFormComponent implements OnInit {
 
   public selectPicture(base64: any) {
     this.new_user.photo = base64;
+  }
+
+  public selectGender(id_gender: any) {
+    this.new_user.gender = id_gender;
   }
 
   ngOnInit(): void {

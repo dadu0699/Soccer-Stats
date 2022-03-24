@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { CountryFieldComponent } from './country-field/country-field.component';
 import { ImageFieldComponent } from './image-field/image-field.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { StatusFieldComponent } from './status-field/status-field.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RegisterFormComponent,
     CountryFieldComponent,
     ImageFieldComponent,
+    StatusFieldComponent,
   ],
   exports: [
     RegisterFormComponent,
