@@ -5,13 +5,12 @@ pipeline {
     ENV_TEST = credentials('ENV_TEST')
     ENV_PRODUCTION = credentials('ENV_PRODUCTION')
     
-    PROJECT_ID = credentials('PROJECT_ID')
+    GCR_ID = credentials('PROJECT_ID')
     GOOGLE_APPLICATION_CREDENTIALS = credentials('GOOGLE_APPLICATION_CREDENTIALS')
   }
 
   parameters {
     string(name: 'image_tag', defaultValue: 'latest', description: 'Etiqueta de la imagen')  
-    string(name: 'gcr', defaultValue: 'gcr.io/${PROJECT_ID}', description: 'Registro de la imagen')  
   }
 
   stages {
@@ -153,8 +152,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              docker build -t ${gcr}/customer-service:${image_tag} .
-              docker push ${gcr}/customer-service:${image_tag}
+              docker build -t ${GCR_ID}/customer-service:${image_tag} .
+              docker push ${GCR_ID}/customer-service:${image_tag}
             '''
           }
         }
@@ -166,8 +165,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              docker build -t ${gcr}/team-service:${image_tag} .
-              docker push ${gcr}/team-service:${image_tag}
+              docker build -t ${GCR_ID}/team-service:${image_tag} .
+              docker push ${GCR_ID}/team-service:${image_tag}
             '''
           }
         }
@@ -179,8 +178,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              docker build -t ${gcr}/match-service:${image_tag} .
-              docker push ${gcr}/match-service:${image_tag}
+              docker build -t ${GCR_ID}/match-service:${image_tag} .
+              docker push ${GCR_ID}/match-service:${image_tag}
             '''
           }
         }
