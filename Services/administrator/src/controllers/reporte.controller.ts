@@ -294,5 +294,202 @@ export default class ReporteController {
         });
     }
 
+    /**
+     * OBTENER USUARIOS POR GENERO
+     */
+    reporte7 = async (req: Request, res: Response) => {
+        const { age } = req.query;
+
+        if (!age) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al obtener usuarios con al menos x años de edad.",
+                data: []
+            });
+        }
+
+        let query = `
+            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, 
+            usuario.correo, usuario.fotografia, pais.nombre AS pais,
+            floor(datediff (now(), usuario.fechaNacimiento)/365) AS age
+            FROM usuario
+            INNER JOIN pais ON pais.paisID = usuario.paisID
+            WHERE floor(datediff (now(), usuario.fechaNacimiento)/365) <= :age;
+        `;
+
+        const data = await db.query(query, {
+            replacements: {
+                age: age
+            },
+            type: QueryTypes.SELECT
+        })
+
+        let reporte = data.map((res: any) => {
+            return {
+                id: res.usuarioID,
+                name: res.nombre,
+                lastname: res.apellido,
+                email: res.correo,
+                photo: res.fotografia,
+                nationality: res.pais,
+                age: res.age,
+            }
+        })
+
+        return res.json({
+            status: 200,
+            msg: "Usuarios con al menos x años de edad, obtenidos con éxito.",
+            data: reporte
+        });
+    }
+
+    /**
+     * OBTENER USUARIOS POR GENERO
+     */
+    reporte8 = async (req: Request, res: Response) => {
+        const { order } = req.query;
+
+        if (!order) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al obtener empleados con mas o menos noticias publicadas.",
+                data: []
+            });
+        }
+
+        let query = `
+            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
+            usuario.fotografia, pais.nombre AS pais, COUNT(*) count FROM noticia
+            INNER JOIN usuario ON usuario.usuarioID = noticia.usuarioID
+            INNER JOIN pais ON pais.paisID = usuario.paisID
+            GROUP BY usuario.usuarioID
+        `;
+
+        if (order == '0') {
+            query += 'ORDER BY count DESC;';
+        } else {
+            query += 'ORDER BY count ASC;';
+        }
+
+        const data = await db.query(query, {
+            type: QueryTypes.SELECT
+        })
+
+        let reporte = data.map((res: any) => {
+            return {
+                id: res.usuarioID,
+                name: res.nombre,
+                lastname: res.apellido,
+                email: res.correo,
+                photo: res.fotografia,
+                nationality: res.pais,
+                count: res.count,
+            }
+        })
+
+        return res.json({
+            status: 200,
+            msg: "Empleados con mas o menos noticias publicadas, obtenidos con éxito.",
+            data: reporte
+        });
+    }
+
+    /**
+     * OBTENER USUARIOS POR GENERO
+     */
+    reporte9 = async (req: Request, res: Response) => {
+        const { order, id_team } = req.query;
+
+        if (!order) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al obtener empleados con mas o menos noticias publicadas de x equipo.",
+                data: []
+            });
+        }
+
+        if (!id_team) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al obtener empleados con mas o menos noticias publicadas de x equipo.",
+                data: []
+            });
+        }
+
+        let query = `
+            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
+            usuario.fotografia, pais.nombre AS pais, COUNT(*) count FROM noticia
+            INNER JOIN usuario ON usuario.usuarioID = noticia.usuarioID
+            INNER JOIN pais ON pais.paisID = usuario.paisID
+            WHERE noticia.equipoID = :id_team
+            GROUP BY usuario.usuarioID
+        `;
+
+        if (order == '0') {
+            query += 'ORDER BY count DESC;';
+        } else {
+            query += 'ORDER BY count ASC;';
+        }
+
+        const data = await db.query(query, {
+            replacements: {
+                id_team: id_team
+            },
+            type: QueryTypes.SELECT
+        })
+
+        let reporte = data.map((res: any) => {
+            return {
+                id: res.usuarioID,
+                name: res.nombre,
+                lastname: res.apellido,
+                email: res.correo,
+                photo: res.fotografia,
+                nationality: res.pais,
+                count: res.count,
+            }
+        })
+
+        return res.json({
+            status: 200,
+            msg: "Empleados con mas o menos noticias publicadas de x equipo, obtenidos con éxito.",
+            data: reporte
+        });
+    }
+
+    /**
+     * OBTENER BITACORA
+     */
+    reporte10 = async (req: Request, res: Response) => {
+        let query = `
+            SELECT bitacora.bitacoraID, usuario.nombre, usuario.apellido, usuario.correo,
+            usuario.fotografia, accion, nombreTabla, registro, fecha, usuario.rol  FROM bitacora
+            INNER JOIN usuario ON usuario.usuarioID = bitacora.usuarioID;
+        `;
+
+        const data = await db.query(query, {
+            type: QueryTypes.SELECT
+        })
+
+        let reporte = data.map((res: any) => {
+            return {
+                id: res.bitacoraID,
+                user_name: res.nombre,
+                user_lastname: res.apellido,
+                user_photo: res.fotografia,
+                user_role: res.rol,
+                action: res.accion,
+                date: res.fecha,
+                description: res.registro,
+                database_table: res.nombreTabla,
+            }
+        })
+
+        res.json({
+            status: 200,
+            msg: "Bitácora de los administradores obtenida con éxito.",
+            data: reporte
+        });
+    }
 
 }
