@@ -382,9 +382,9 @@ pipeline {
             cd Terraform
             
             terraform init -reconfigure \
-              -var google_credentials_file=$google_credentials_file \
-              -var gcr_id=$gcr_id \
-              -var testing_ip=$testing_ip
+              -backend-config="google_credentials_file"=$google_credentials_file \
+              -backend-config="gcr_id"=$gcr_id \
+              -backend-config="testing_ip"=$testing_ip
             terraform validate
             terraform apply -destroy -auto-approve
             terraform apply -auto-approve
