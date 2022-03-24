@@ -26,7 +26,7 @@ const obtenerPartidos = (req, res) => {
   matchModel.obtenerPartidos(req.query, (err, results) => {
     if (err) return response(res, 400, 'Error al obtener partido(s).', [err]);
 
-    response(res, 200, 'Partido(s) obtenido(s) con éxito.', [results]);
+    response(res, 200, 'Partido(s) obtenido(s) con éxito.', results);
   });
 };
 
