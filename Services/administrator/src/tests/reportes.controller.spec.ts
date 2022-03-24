@@ -16,10 +16,23 @@ describe('APIs Test Administrator', () => {
     test('GET ALL Users - Obtener todos los usuarios', async () => {
         await server.listen();
         const res = await request(server.app)
-            .get('/api/user')
+            .get('/user')
             .set(headers);
         // COMPARAR ESTADO 200
         expect(res.statusCode).toEqual(200);
+    });
+
+    test('GET SINGLE Usuario - Obtener usuario inexistente.', async () => {
+        const res = await request(server.app).get('/user?id=9999999999')
+            .set(headers);
+
+        const expected = {
+            status: 400,
+            msg: "Error al obtener usuario(s).",
+            data: []
+        }
+        // COMPARAR RESPONSE
+        expect(res.body).toEqual(expected);
     });
 
 });
@@ -39,7 +52,7 @@ describe('APIs Test Reportes', () => {
         }
 
         const res = await request(server.app)
-            .get('/api/report/1')
+            .get('/report/1')
             .set(headers);
 
         // COMPARAR RESPONSE
@@ -54,11 +67,51 @@ describe('APIs Test Reportes', () => {
         }
 
         const res = await request(server.app)
-            .get('/api/report/2')
+            .get('/report/2')
             .set(headers);
 
         // COMPARAR RESPONSE
         expect(res.body).toEqual(expected);
+    });
+
+    test('GET ALL Reporte 5 - Obtener error', async () => {
+        const res = await request(server.app)
+            .get('/report/5')
+            .set(headers);
+        // COMPARAR ESTADO 400
+        expect(res.statusCode).toEqual(400);
+    });
+
+    test('GET ALL Reporte 6 - Obtener error', async () => {
+        const res = await request(server.app)
+            .get('/report/6')
+            .set(headers);
+        // COMPARAR ESTADO 400
+        expect(res.statusCode).toEqual(400);
+    });
+
+    test('GET ALL Reporte 7 - Obtener error', async () => {
+        const res = await request(server.app)
+            .get('/report/7')
+            .set(headers);
+        // COMPARAR ESTADO 400
+        expect(res.statusCode).toEqual(400);
+    });
+
+    test('GET ALL Reporte 8 - Obtener error', async () => {
+        const res = await request(server.app)
+            .get('/report/8')
+            .set(headers);
+        // COMPARAR ESTADO 400
+        expect(res.statusCode).toEqual(400);
+    });
+
+    test('GET ALL Reporte 9 - Obtener error', async () => {
+        const res = await request(server.app)
+            .get('/report/9')
+            .set(headers);
+        // COMPARAR ESTADO 400
+        expect(res.statusCode).toEqual(400);
     });
 
 });
