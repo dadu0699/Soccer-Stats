@@ -8,5 +8,9 @@ reporte.get('/report/1', [
     ValidarJWT,
     ValidarRol(),
 ], ReporteController.getInstance().reporte1);
+reporte.get('/report/2', [
+    ValidarJWT,
+    ValidarRol(),
+], ReporteController.getInstance().reporte2);
 
 export default reporte;
