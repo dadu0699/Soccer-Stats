@@ -6,9 +6,11 @@ const {
   obtenerNoticias,
 } = require('../controllers/post.controller');
 const validateToken = require('../middlewares/validateToken');
+const validateRol = require('../middlewares/validateRol');
 
-router.route('/').post(validateToken, crearNoticia);
-router.route('/').get(validateToken, obtenerNoticias);
-
+router
+  .route('/')
+  .get(obtenerNoticias)
+  .post(validateToken, validateRol, crearNoticia);
 
 module.exports = router;
