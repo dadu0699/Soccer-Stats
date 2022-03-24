@@ -1,0 +1,86 @@
+<form fxLayout="column" autocomplete="off" #formSignup="ngForm" (ngSubmit)="signup()" fxLayout="column"
+  fxLayoutAlign="space-evenly center">
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <mat-card class="mat-elevation-z0">
+        <img mat-card-avatar class="header-image" [src]="
+            'https://ibalz.com/wp-content/uploads/2019/10/default-profile.png'
+            " />
+      </mat-card>
+      <button mat-button color="accent" type="button">Upload image
+        <i data-feather="upload-cloud"></i>
+      </button>
+    </div>
+    <span class="firstSpace"></span>
+    <div>
+      <label>Gender</label>
+      <mat-radio-group [(ngModel)]="new_user.gender" name="genderField" #genderField="ngModel" class="radio-group">
+        <mat-radio-button *ngFor="let gender of genders" [value]="gender">
+          {{gender}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <span class="secondSpace"></span>
+  </div>
+
+  <section>
+    <div class="fullSize field-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="new_user.name" name="nameField" #nameField="ngModel" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Lastname</mat-label>
+        <input matInput [(ngModel)]="new_user.lastname" name="lastnameField" #lastnameField="ngModel" required />
+      </mat-form-field>
+    </div>
+  </section>
+
+  <section>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="new_user.email" name="emailField" #emailField="ngModel" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="new_user.password" name="passwordField" #passwordField="ngModel"
+        required />
+    </mat-form-field>
+  </section>
+
+  <section>
+    <mat-form-field appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input matInput [(ngModel)]="new_user.phone" name="phoneField" #phoneField="ngModel" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="dateField">
+      <mat-label>Birth Date</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </section>
+
+  <section>
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input matInput [(ngModel)]="new_user.address" name="addressField" #addressField="ngModel" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Country</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let country of countries" [value]="country.id_country">{{country.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <button mat-stroked-button color="accent" type="submit">
+    Sign me up!
+  </button>
+
+</form>

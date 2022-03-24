@@ -2,8 +2,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap");
 
 
-html, body { height: 100%;  }
-body { margin: 0;}
+html, body {
+  height: 100%;
+  background: #fff ;
+ }
+
+body {
+  margin: 0;
+}
 
 * {
   font-family: "Quicksand", sans-serif !important;
@@ -18,10 +24,10 @@ body { margin: 0;}
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ffccbc;
+  background: #e0f2f1;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #cb9b8c;
+  background: #80cbc4;
 }

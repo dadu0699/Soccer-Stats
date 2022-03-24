@@ -1,0 +1,32 @@
+.header-image {
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.fullSize{
+  width: 100%;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.firstSpace{
+  margin: 45px;
+}
+
+.secondSpace{
+  margin: 15px;
+}
+
+.dateField{
+  width: 200px;
+}
