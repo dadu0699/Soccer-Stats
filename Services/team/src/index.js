@@ -17,7 +17,6 @@ app.use(express.json({ limit: '50mb' }));
 app.use('/',require('./routes/hello-world.route'));
 app.use('/team',require('./routes/create.route'));
 app.use('/team',require('./routes/update.route'));
-app.use('/team',require('./routes/get.one'));
 app.use('/team',require('./routes/get.all'));
 app.use('/team',require('./routes/delete.route'));
 

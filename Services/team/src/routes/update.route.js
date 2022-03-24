@@ -9,19 +9,31 @@ const {saveBinnacle} = require("../utils/binnacle");
 
 router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
     
-    const {id, name, foundation_date, photo, id_country} = req.body;
+    const { id, name, foundation_date, id_country } = req.body;
+    let { photo } = req.body; 
 
     try {
 
-        let ext = await extension(photo);
-        let nombre = v4();
-        let url = "https://grupof.s3.us-east-2.amazonaws.com/equipos/"+nombre+"."+ext;
+        photo = photo != undefined ? photo : '';
+        let url = ''
+        if (photo != '') {
+            let ext = await extension(photo);
+            let nombre = v4();
+            url = "https://grupof.s3.us-east-2.amazonaws.com/equipos/" + nombre + "." + ext;
+            await saveFile(photo,nombre,ext,(res)=>{console.log(res)});
+        }
 
-        let sql = "UPDATE Equipo SET nombre=?,fechaFundacion=?,fotoLogo=?,paisID=? WHERE equipoID = ?";
-    
-        await saveFile(photo,nombre,ext,(res)=>{console.log(res)});
+        let sql = "UPDATE Equipo SET nombre=?,fechaFundacion=?,paisID=?";
+        const values = [name, foundation_date, id_country];
 
-        pool.query(sql, [name,foundation_date,url,id_country,id], async function(err,result){
+        if (photo != '') {
+            sql += ",fotoLogo=?";
+            values.push(url);
+        }
+        sql += " WHERE equipoID = ?";
+        values.push(id);
+
+        pool.query(sql, values, async function(err,result){
             if(err){
                 res.status(400).json({status:400, msg: "Error al actualizar equipo.", data: [err]});
             }else{
@@ -30,7 +42,7 @@ router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
             }
         });
     } catch (error) {
-        res.status(500).json({status:500, msg: "Error al actualizar equipo.", data: [error]});
+        res.status(400).json({status:400, msg: "Error al actualizar equipo.", data: [error]});
     }
 });
 

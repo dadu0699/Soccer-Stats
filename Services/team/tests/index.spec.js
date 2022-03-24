@@ -13,7 +13,7 @@ describe('POST /team', () => {
         const response = await request(app).post('/team')
             .set('Authorization', `Bearer ${process.env.TOKEN_ADMINISTRADOR}`)
             .send();
-        expect(response.statusCode).toBe(500);
+        expect(response.statusCode).toBe(400);
     });
 });
 
@@ -29,7 +29,7 @@ describe('PUT /team', () => {
         const response = await request(app).put('/team')
             .set('Authorization', `Bearer ${process.env.TOKEN_ADMINISTRADOR}`)
             .send();
-        expect(response.statusCode).toBe(500);
+        expect(response.statusCode).toBe(400);
     });
 });
 
@@ -49,16 +49,16 @@ describe('DELETE /team', () => {
     });
 });
 
-describe('GET /team/:id', () => {
+describe('GET /team/?id=number', () => {
     test('Should respond with a 200 status code', async () => {
-        const response = await request(app).get('/team/99')
+        const response = await request(app).get('/team/?id=99')
             .set('Authorization', `Bearer ${process.env.TOKEN_ADMINISTRADOR}`)
             .send();
         expect(response.statusCode).toBe(200);
     });
 
     test('Should respond with an array', async () => {
-        const response = await request(app).get('/team/99')
+        const response = await request(app).get('/team/?id=99')
             .set('Authorization', `Bearer ${process.env.TOKEN_ADMINISTRADOR}`)
             .send();
         expect(response.body.data).toBeInstanceOf(Array);
