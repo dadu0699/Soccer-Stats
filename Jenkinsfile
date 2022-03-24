@@ -375,7 +375,7 @@ pipeline {
             export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
 
             gcloud auth activate-service-account --key-file ${GOOGLE_APPLICATION_CREDENTIALS}
-            gcloud auth print-access-token | export GOOGLE_ACCESS_TOKEN
+            GOOGLE_ACCESS_TOKEN=$(gcloud auth print-access-token)
             echo $GOOGLE_ACCESS_TOKEN
             
             export TF_VAR_google_credentials_file=GOOGLE_ACCESS_TOKEN
