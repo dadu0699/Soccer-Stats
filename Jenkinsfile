@@ -376,7 +376,7 @@ pipeline {
             
             export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
 
-            $(gcloud auth print-access-token) >> file.txt
+            echo $(gcloud auth print-access-token) >> file.txt
             cat file.txt
 
             export TF_VAR_google_access_token="$(gcloud auth print-access-token)"
