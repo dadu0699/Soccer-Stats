@@ -1,4 +1,6 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
 import * as Feather from 'feather-icons';
 
 @Component({
@@ -7,11 +9,18 @@ import * as Feather from 'feather-icons';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit, AfterViewInit {
-  @Input('isHomePage') isHomePage: boolean;
 
+  @Input('whichPage') whichPage: number;
+  @Output('toggleSidNav') show: EventEmitter<boolean>;
 
-  constructor() {
-    this.isHomePage = true;
+  public opened: boolean;
+
+  constructor(
+    private _router: Router,
+  ) {
+    this.whichPage = 0;
+    this.show = new EventEmitter<boolean>();
+    this.opened = false;
   }
 
   ngOnInit(): void {
@@ -19,6 +28,16 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     Feather.replace();
+  }
+
+  logOut() {
+    localStorage.clear();
+    this._router.navigate(['/auth/login']);
+  }
+
+  toggleMenu() {
+    this.opened = !this.opened;
+    this.show.emit(this.opened);
   }
 
 }

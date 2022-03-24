@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap");
 
-
 html, body {
   height: 100%;
   background: #fff ;
@@ -31,3 +30,12 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #80cbc4;
 }
+
+.mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-start,
+.mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-end,
+.mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-gap {
+    border-width: 2px !important;
+}
+
+
+

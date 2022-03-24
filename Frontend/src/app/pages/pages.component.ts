@@ -6,8 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pages.component.css']
 })
 export class PagesComponent implements OnInit {
-  showFiller = false;
-  constructor() { }
+  public opened: boolean;
+
+  constructor() {
+    this.opened = false;
+   }
+
+   showSideNav(opened: any){
+    this.opened = opened;
+   }
 
   ngOnInit(): void {
   }
