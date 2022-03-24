@@ -9,19 +9,31 @@ const {saveBinnacle} = require("../utils/binnacle");
 
 router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
     
-    const {id, name, foundation_date, capacity, id_country, address, state, photo} = req.body;
+    const { id, name, foundation_date, capacity, id_country, address, state } = req.body;
+    let { photo } = req.body; 
 
     try {
 
-        let ext = await extension(photo);
-        let nombre = v4();
-        let url = "https://grupof.s3.us-east-2.amazonaws.com/estadios/"+nombre+"."+ext;
+        photo = photo != undefined ? photo : '';
+        let url = ''
+        if (photo != '') {
+            let ext = await extension(photo);
+            let nombre = v4();
+            url = "https://grupof.s3.us-east-2.amazonaws.com/estadios/" + nombre + "." + ext;
+            await saveFile(photo,nombre,ext,(res)=>{console.log(res)});
+        }
 
-        let sql = "UPDATE Estadio SET nombre=?,fechaFundacion=?,capacidad=?,direccion=?,estado=?,foto=?,paisID=? WHERE estadioID = ?";
-    
-        await saveFile(photo,nombre,ext,(res)=>{console.log(res)});
+        let sql = "UPDATE Estadio SET nombre=?,fechaFundacion=?,capacidad=?,direccion=?,estado=?,paisID=?";
+        const values = [name, foundation_date, capacity, address, state, id_country];
 
-        pool.query(sql, [name,foundation_date,capacity,address,state,url,id_country,id], async function(err,result){
+        if (photo != '') {
+            sql += ",foto=?";
+            values.push(url);
+        }
+        sql += " WHERE estadioID = ?";
+        values.push(id);
+
+        pool.query(sql, values, async function(err,result){
             if(err){
                 res.status(400).json({status:400, msg: "Error al actualizar Estadio.", data: [err]});
             }else{

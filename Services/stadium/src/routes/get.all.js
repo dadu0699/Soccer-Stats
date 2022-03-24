@@ -2,13 +2,15 @@ const {Router} = require("express");
 const router = Router();
 const pool = require('../db_connection');
 
-const {verificarToken,isAdminOrEmployee} = require("../utils/jwt");
-
-router.get('/', [verificarToken,isAdminOrEmployee], (req, res) => {
+router.get('/', (req, res) => {
 
     var sql = `SELECT Estadio.EstadioID as "id", Estadio.nombre as "name", Estadio.fechaFundacion as "foundation_date", Estadio.capacidad as "capacity", 
     Estadio.paisID as "id_country", Pais.nombre as "country ", Estadio.direccion as "address", Estadio.estado as "state", Estadio.foto as "photo" 
-    FROM Estadio JOIN Pais ON Pais.PaisID = Estadio.PaisID;`
+    FROM Estadio JOIN Pais ON Pais.PaisID = Estadio.PaisID`
+
+    if (req.query.id != null) {
+        sql += ` WHERE Estadio.EstadioID = ${req.query.id};`;
+    }
 
     try {
         pool.query(sql,function(err, result, fields){

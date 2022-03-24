@@ -49,16 +49,16 @@ describe('DELETE /stadium', () => {
     });
 });
 
-describe('GET /stadium/:id', () => {
+describe('GET /stadium/?id=number', () => {
     test('Should respond with a 200 status code', async () => {
-        const response = await request(app).get('/stadium/99')
+        const response = await request(app).get('/stadium/?id=99')
             .set('Authorization', `Bearer ${process.env.TOKEN_ADMINISTRADOR}`)
             .send();
         expect(response.statusCode).toBe(200);
     });
 
     test('Should respond with an array', async () => {
-        const response = await request(app).get('/stadium/99')
+        const response = await request(app).get('/stadium/?id=99')
             .set('Authorization', `Bearer ${process.env.TOKEN_ADMINISTRADOR}`)
             .send();
         expect(response.body.data).toBeInstanceOf(Array);
