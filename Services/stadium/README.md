@@ -162,8 +162,7 @@ En la carpeta **src->routes** podemos encontrar los distintos archivos para el c
 
 - **create.route.js**: Crear estadio.
 - **delete.rouste.js**: Eliminar estadio.
-- **get.all.js**: Obtener todos los estadios.
-- **get.one.js**: Obtener un estadio.
+- **get.all.js**: Obtener uno o todos los estadios.
 - **update.route.js**: Actualizar estadio.
 
 Dentro de estos archivos se encuentra la logica segun su objetivo, como por ejemplo en endpoint encargado de eliminar estadio:

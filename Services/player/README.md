@@ -1,4 +1,4 @@
-# EQUIPO - SERVIDOR
+# JUGADOR - SERVIDOR
 
 ### REQUERIMIENTOS:
 
@@ -7,7 +7,7 @@
 
 ### PUERTO:
 
-- 5001
+- 5006
 
 ### DEPENDENCIAS:
 
@@ -141,7 +141,7 @@ Creamos parametros para s3:
 ```javascript
 let params ={
     Bucket: process.env.S3_BUCKET,
-    Key: "equipos/"+nombre+"."+extension,
+    Key: "jugadores/"+nombre+"."+extension,
     Body: buffer
 };
 ```
@@ -160,10 +160,10 @@ await s3.putObject(params).promise()
 
 En la carpeta **src->routes** podemos encontrar los distintos archivos para el consumo de endpoints:
 
-- **create.route.js**: Crear equipo.
-- **delete.rouste.js**: Eliminar equipo.
-- **get.all.js**: Obtener uno o todos los equipos.
-- **update.route.js**: Actualizar equipo.
+- **create.route.js**: Crear jugador.
+- **delete.rouste.js**: Eliminar jugador.
+- **get.all.js**: Obtener uno o todos los jugadores.
+- **update.route.js**: Actualizar jugador.
 
 Dentro de estos archivos se encuentra la logica segun su objetivo, como por ejemplo en endpoint encargado de eliminar estadio:
 
@@ -196,7 +196,7 @@ const request = require("supertest");
 En este caso, en el describe, como su nombre lo dice, se describe el tipo de peticion y a que ruta queremos hacerla, por ejemplo:
 
 ```javascript
-describe('POST /team', () => {
+describe('POST /player', () => {
     //aca los test
 });  
 ```
@@ -204,7 +204,7 @@ describe('POST /team', () => {
 En el test, se describe que deberia o que esperamos de la prueba, por ejemplo:
 
 ```javascript
-test('Should respond with a 500 status code', async () => {
+test('Should respond with a 200 status code', async () => {
     //aca la peticion y lo que se espera
 });
 ```
@@ -215,7 +215,7 @@ Para el tipo de pepticion, se realiza de la siguiente forma:
 - **send**: Se hace la peticion, y se puede enviar un objeto json dentro del mismo, .send( { id: 2, name: "name" } ) 
 
 ```javascript
-const response = await request(app).post('/team')
+const response = await request(app).post('/player')
     .set('Authorization','token')
     .send()
 ```
@@ -225,13 +225,13 @@ Con el expect, se hacen validacion como:
 - Verificar que un campo este definido dentro del json que retorna el servidor.
 
 ```javascript
-expect(response.body.msj).toBeDefined();
+expect(response.body.msg).toBeDefined();
 ```
 
 - Verificar un estado de codigo.
 
 ```javascript
-expect(response.statusCode).toBe(400);
+expect(response.statusCode).toBe(200);
 ```
 
 - Verificar un tipo de dato, en este caso un Array
