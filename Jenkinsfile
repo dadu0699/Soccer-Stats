@@ -14,6 +14,12 @@ pipeline {
   }
 
   stages {
+    stage('Set Credentials') {
+      steps {
+        sh 'cat ${GOOGLE_APPLICATION_CREDENTIALS} | docker login -u _json_key --password-stdin https://gcr.io'
+      }
+    }
+
     stage('Run Tests Phase 1') {
       parallel {
         stage('Test On Customer Service') {
