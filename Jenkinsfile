@@ -377,10 +377,12 @@ pipeline {
             cd Terraform
             
             terraform init -reconfigure
-            terraform validate
+            
             terraform apply -var="google_credentials_file=${GOOGLE_APPLICATION_CREDENTIALS}"
             terraform apply -var="gcr_id=${GCR_ID}"
             terraform apply -var="testing_ip=${TESTING_IP}"
+            
+            terraform validate
             terraform apply -destroy -auto-approve
             terraform apply -auto-approve
           '''
