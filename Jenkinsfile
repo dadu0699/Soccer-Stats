@@ -66,6 +66,19 @@ pipeline {
 
     stage('Run Tests Phase 2') {
       parallel {
+        stage('Test On Competition Service') {
+          steps {
+            sh '''
+              cd Services/competition
+              rm -rf .env.test
+              cp ${ENV_TEST} .env.test
+
+              # npm install
+              # npm run test
+            '''
+          }
+        }
+
         stage('Test On Stadium Service') {
           steps {
             sh '''
@@ -91,6 +104,23 @@ pipeline {
             '''
           }
         }
+      }
+    }
+
+    stage('Run Tests Phase 3') {
+      parallel {
+        stage('Test On Player Service') {
+          steps {
+            sh '''
+              cd Services/player
+              rm -rf .env.test
+              cp ${ENV_TEST} .env.test
+
+              # npm install
+              # npm run test
+            '''
+          }
+        }
 
         stage('Test On Post Service') {
           steps {
@@ -104,11 +134,7 @@ pipeline {
             '''
           }
         }
-      }
-    }
 
-    stage('Run Tests Phase 3') {
-      parallel {
         stage('Test On Auth Service') {
           steps {
             sh '''
@@ -118,6 +144,23 @@ pipeline {
 
               npm install
               npm run test
+            '''
+          }
+        }
+      }
+    }
+
+    stage('Run Tests Phase 4') {
+      parallel {
+        stage('Test On Administrator Service') {
+          steps {
+            sh '''
+              cd Services/administrator
+              rm -rf .env.test
+              cp ${ENV_TEST} .env.test
+
+              # npm install
+              # npm run test
             '''
           }
         }
@@ -195,6 +238,19 @@ pipeline {
 
     stage('Build Images Phase 2') {
       parallel {
+        stage('Build Competition Image') {
+          steps {
+            sh '''
+              cd Services/competition
+              rm -rf .env.production
+              cp ${ENV_PRODUCTION} .env.production
+
+              # docker build -t ${GCR_ID}/competition-service:${image_tag} .
+              # docker push ${GCR_ID}/competition-service:${image_tag}
+            '''
+          }
+        }
+
         stage('Build Stadium Image') {
           steps {
             sh '''
@@ -220,6 +276,23 @@ pipeline {
             '''
           }
         }
+      }
+    }
+
+    stage('Build Images Phase 3') {
+      parallel {
+        stage('Build Player Image') {
+          steps {
+            sh '''
+              cd Services/player
+              rm -rf .env.production
+              cp ${ENV_PRODUCTION} .env.production
+
+              # docker build -t ${GCR_ID}/player-service:${image_tag} .
+              # docker push ${GCR_ID}/player-service:${image_tag}
+            '''
+          }
+        }
 
         stage('Build Post Image') {
           steps {
@@ -233,11 +306,7 @@ pipeline {
             '''
           }
         }
-      }
-    }
 
-    stage('Build Images Phase 3') {
-      parallel {
         stage('Build Auth Image') {
           steps {
             sh '''
@@ -247,6 +316,23 @@ pipeline {
 
               docker build -t ${GCR_ID}/auth-service:${image_tag} .
               docker push ${GCR_ID}/auth-service:${image_tag}
+            '''
+          }
+        }
+      }
+    }
+
+    stage('Build Images Phase 4') {
+      parallel {
+        stage('Build Administrator Image') {
+          steps {
+            sh '''
+              cd Services/administrator
+              rm -rf .env.production
+              cp ${ENV_PRODUCTION} .env.production
+
+              # docker build -t ${GCR_ID}/administrator-service:${image_tag} .
+              # docker push ${GCR_ID}/administrator-service:${image_tag}
             '''
           }
         }
