@@ -57,7 +57,8 @@ export default class ReporteController {
 
         if (membership == '0') {
             let query = `
-                SELECT *, pais.nombre AS pais FROM usuario
+                SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
+                usuario.fotografia, pais.nombre AS pais FROM usuario
                 INNER JOIN pais ON pais.paisID = usuario.paisID
                 wHERE usuarioID NOT IN (SELECT usuarioID FROM membresia);
             `;
@@ -68,7 +69,7 @@ export default class ReporteController {
 
             let reporte = data.map((res: any) => {
                 return {
-                    id: res.id,
+                    id: res.usuarioID,
                     name: res.nombre,
                     lastname: res.apellido,
                     email: res.correo,
@@ -84,7 +85,8 @@ export default class ReporteController {
             });
         } else if (membership == '1') {
             let query = `
-                SELECT *, pais.nombre AS pais FROM usuario
+                SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
+                usuario.fotografia, pais.nombre AS pais FROM usuario
                 INNER JOIN pais ON pais.paisID = usuario.paisID
                 wHERE usuarioID IN (SELECT usuarioID FROM membresia);
             `;
@@ -95,7 +97,7 @@ export default class ReporteController {
 
             let reporte = data.map((res: any) => {
                 return {
-                    id: res.id,
+                    id: res.usuarioID,
                     name: res.nombre,
                     lastname: res.apellido,
                     email: res.correo,
@@ -116,6 +118,43 @@ export default class ReporteController {
                 data: []
             });
         }
+    }
+
+    /**
+     * OBTENER TOP 10 Usuarios con mas membresia
+     */
+    reporte3 = async (req: Request, res: Response) => {
+        let query = `
+            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
+            usuario.fotografia, pais.nombre AS pais, COUNT(*) count FROM membresia
+            INNER JOIN usuario ON usuario.usuarioID = membresia.usuarioID
+            INNER JOIN pais ON pais.paisID = usuario.paisID
+            GROUP BY usuario.usuarioID
+            ORDER BY count DESC
+            LIMIT 10;
+        `;
+
+        const data = await db.query(query, {
+            type: QueryTypes.SELECT
+        })
+
+        let reporte = data.map((res: any) => {
+            return {
+                id: res.usuarioID,
+                name: res.nombre,
+                lastname: res.apellido,
+                email: res.correo,
+                photo: res.fotografia,
+                nationality: res.pais,
+                count: res.count,
+            }
+        })
+
+        res.json({
+            status: 200,
+            msg: "Usuarios con mas membresías obtenidos con éxito.",
+            data: reporte
+        });
     }
 
 }
