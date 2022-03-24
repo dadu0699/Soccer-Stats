@@ -383,10 +383,10 @@ pipeline {
 
             cd Terraform
 
-            terraform init -reconfigure
-            terraform validate
-            terraform apply -destroy -auto-approve
-            terraform apply -auto-approve
+            # terraform init -reconfigure
+            # terraform validate
+            # terraform apply -destroy -auto-approve
+            # terraform apply -auto-approve
           '''
         }
       }
