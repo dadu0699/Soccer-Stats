@@ -49,7 +49,10 @@ const actualizarPerfil = async (req, res) => {
   if (req.body['id'] != req.user['id_user'])
     return res.status(401).send({ status: 401, msg: 'Unauthorized', data: [] });
 
-  if (req.body['password'] && req.body['password'] != '') {
+  req.body['password'] =
+    req.body['password'] != undefined ? req.body['password'] : '';
+
+  if (req.body['password'] != '') {
     req.body['password'] = CryptoJS.AES.encrypt(
       req.body['password'],
       keyCrypto,
@@ -57,7 +60,8 @@ const actualizarPerfil = async (req, res) => {
     ).toString();
   }
 
-  if (req.body['photo'] && req.body['photo'] != '') {
+  req.body['photo'] = req.body['photo'] != undefined ? req.body['photo'] : '';
+  if (req.body['photo'] != '') {
     const { key } = await s3.itemUpload(req.body['photo']);
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key;
   }
