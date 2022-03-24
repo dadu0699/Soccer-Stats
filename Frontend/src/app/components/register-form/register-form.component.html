@@ -58,7 +58,8 @@
 
     <mat-form-field appearance="outline" class="dateField">
       <mat-label>Birth Date</mat-label>
-      <input matInput [matDatepicker]="picker">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="new_user.birth_date" name="birthDateField"
+        #birthDateField="ngModel" required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -71,12 +72,7 @@
       <input matInput [(ngModel)]="new_user.address" name="addressField" #addressField="ngModel" required />
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Country</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let country of countries" [value]="country.id_country">{{country.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <app-country-field (selectCountry)="selectCountry($event)" class="country-field"></app-country-field>
   </section>
 
   <button mat-stroked-button color="accent" type="submit">
