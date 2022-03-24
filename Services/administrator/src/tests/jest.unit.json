@@ -1,0 +1,18 @@
+{
+    "preset": "ts-jest",
+    "coverageDirectory": "./coverage",
+    "testMatch": [
+        "**/?(*.)+(spec).ts"
+    ],
+    "resetMocks": true,
+    "clearMocks": true,
+    "reporters": [
+        "default",
+        [
+            "jest-junit",
+            {
+                "suiteName": "Test Microservice Administrator"
+            }
+        ]
+    ]
+}
