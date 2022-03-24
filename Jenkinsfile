@@ -13,10 +13,8 @@ pipeline {
   }
 
   stages {
-    
-    stage('Run Tests') {
+    stage('Run Tests Phase 1') {
       parallel {
-
         stage('Test On Customer Service') {
           steps {
             sh '''
@@ -28,7 +26,7 @@ pipeline {
             '''
           }
         }
-        
+
         stage('Test On Team Service') {
           steps {
             sh '''
@@ -40,8 +38,99 @@ pipeline {
             '''
           }
         }
+
+        stage('Test On Match Service') {
+          steps {
+            sh '''
+              cd Services/match
+              cp ${ENV_TEST} .env.test
+
+              npm install
+              npm run test
+            '''
+          }
+        }
       }
     }
 
+    stage('Run Tests Phase 2') {
+      parallel {
+        stage('Test On Stadium Service') {
+          steps {
+            sh '''
+              cd Services/stadium
+              cp ${ENV_TEST} .env.test
+
+              npm install
+              npm run test
+            '''
+          }
+        }
+
+        stage('Test On Teachnical Director Service') {
+          steps {
+            sh '''
+              cd Services/technical_director
+              cp ${ENV_TEST} .env.test
+
+              npm install
+              npm run test
+            '''
+          }
+        }
+
+        stage('Test On Post Service') {
+          steps {
+            sh '''
+              cd Services/post
+              cp ${ENV_TEST} .env.test
+
+              npm install
+              npm run test
+            '''
+          }
+        }
+      }
+    }
+
+    stage('Run Tests Phase 3') {
+      parallel {
+        stage('Test On Auth Service') {
+          steps {
+            sh '''
+              cd Services/auth
+              cp ${ENV_TEST} .env.test
+
+              npm install
+              npm run test
+            '''
+          }
+        }
+
+        stage('Test On Employee Service') {
+          steps {
+            sh '''
+              cd Services/employee
+              cp ${ENV_TEST} .env.test
+
+              npm install
+              npm run test
+            '''
+          }
+        }
+
+        stage('Test On Country Service') {
+          steps {
+            sh '''
+              cd Services/country
+              cp ${ENV_TEST} .env.test
+
+              npm install
+              npm run test
+            '''
+          }
+        }
+      }
+    }
   }
 }
