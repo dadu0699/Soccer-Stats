@@ -21,7 +21,7 @@ router.get('/:id', [verificarToken,isAdminOrEmployee], (req, res) => {
             }
         });
     } catch (error) {
-        res.status(500).json({status:500, msg: "Error al obtener estadio(s).", data: [error]});
+        res.status(400).json({status:400, msg: "Error al obtener estadio(s).", data: [error]});
     }
 });
 

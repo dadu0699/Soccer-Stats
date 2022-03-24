@@ -232,7 +232,7 @@ expect(response.body.msg).toBeDefined();
 - Verificar un estado de codigo.
 
 ```javascript
-expect(response.statusCode).toBe(500);
+expect(response.statusCode).toBe(400);
 ```
 
 - Verificar un tipo de dato, en este caso un Array

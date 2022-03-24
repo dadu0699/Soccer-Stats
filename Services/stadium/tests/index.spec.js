@@ -13,7 +13,7 @@ describe('POST /stadium', () => {
         const response = await request(app).post('/stadium')
             .set('Authorization', `Bearer ${process.env.TOKEN_ADMINISTRADOR}`)
             .send();
-        expect(response.statusCode).toBe(500);
+        expect(response.statusCode).toBe(400);
     });
 });
 
@@ -29,7 +29,7 @@ describe('PUT /stadium', () => {
         const response = await request(app).put('/stadium')
             .set('Authorization', `Bearer ${process.env.TOKEN_ADMINISTRADOR}`)
             .send();
-        expect(response.statusCode).toBe(500);
+        expect(response.statusCode).toBe(400);
     });
 });
 

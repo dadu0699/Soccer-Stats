@@ -30,7 +30,7 @@ router.post('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
             }
         });
     } catch (error) {
-        res.status(500).json({status:500, msg: "Error al crear equipo.", data: [error]});
+        res.status(400).json({status:400, msg: "Error al crear equipo.", data: [error]});
     }    
 });
 
