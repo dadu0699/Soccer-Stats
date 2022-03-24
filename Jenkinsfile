@@ -374,14 +374,13 @@ pipeline {
           sh '''
             export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
             
+            export TF_VAR_google_credentials_file=${GOOGLE_APPLICATION_CREDENTIALS}
+            export TF_VAR_gcr_id=${GCR_ID}
+            export TF_VAR_testing_ip=${TESTING_IP}
+            
             cd Terraform
             
             terraform init -reconfigure
-            
-            terraform apply -var="google_credentials_file=${GOOGLE_APPLICATION_CREDENTIALS}"
-            terraform apply -var="gcr_id=${GCR_ID}"
-            terraform apply -var="testing_ip=${TESTING_IP}"
-            
             terraform validate
             terraform apply -destroy -auto-approve
             terraform apply -auto-approve
