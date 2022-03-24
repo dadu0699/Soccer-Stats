@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "start": "cross-env NODE_ENV=production node app.js",
     "dev": "cross-env NODE_ENV=development nodemon app.js",
-    "test": "cross-env NODE_ENV=test jest --verbose --silent",
+    "test": "cross-env NODE_ENV=test jest --verbose --silent --forceExit",
     "test:watch": "npm run test -- --watch"
   },
   "keywords": [],
@@ -21,12 +21,15 @@
     "express": "4.17.3",
     "jsonwebtoken": "8.5.1",
     "morgan": "1.10.0",
-    "mysql": "^2.18.1"
+    "mysql": "2.18.1"
   },
   "devDependencies": {
     "eslint": "8.11.0",
     "jest": "27.5.1",
     "nodemon": "2.0.15",
     "supertest": "6.2.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

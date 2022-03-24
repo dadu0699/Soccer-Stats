@@ -6,16 +6,21 @@ const {
   logTransferenciaJugador,
   transferirDirectorTecnico,
   logTransferenciaDirectorTecnico,
-  agregarIncidencia
+  agregarIncidencia,
 } = require('../controllers/employee.controller');
 const validateToken = require('../middlewares/validateToken');
+const validateRol = require('../middlewares/validateRol');
 
-router.route('/player-transfer').post(validateToken, transferirJugador);
-router.route('/player-transfer').get(logTransferenciaJugador);
-router.route('/technical-director-transfer').post(validateToken, transferirDirectorTecnico);
-router.route('/technical-director-transfer').get(logTransferenciaDirectorTecnico);
-router.route('/incidence').post(validateToken, agregarIncidencia);
+router
+  .route('/player-transfer')
+  .get(logTransferenciaJugador)
+  .post(validateToken, validateRol, transferirJugador);
 
+router
+  .route('/technical-director-transfer')
+  .get(logTransferenciaDirectorTecnico)
+  .post(validateToken, validateRol, transferirDirectorTecnico);
 
+router.route('/incidence').post(validateToken, validateRol, agregarIncidencia);
 
 module.exports = router;

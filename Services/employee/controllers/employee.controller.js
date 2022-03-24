@@ -21,7 +21,7 @@ const transferirJugador = (req, res) => {
 const logTransferenciaJugador = (req, res) => {
   employeeModel.logPlayerTransfer(req.query, (err, results) => {
     if (err) return response(res, 400, 'Error al obtener el log de transferencias.', [err]);
-    response(res, 200, 'Log de transferencias obtenido con éxito.', [results]);
+    response(res, 200, 'Log de transferencias obtenido con éxito.', results);
   });
 }
 
@@ -44,7 +44,7 @@ const transferirDirectorTecnico = (req, res) => {
 const logTransferenciaDirectorTecnico = (req, res) => {
   employeeModel.logTechnicalDirectorTransfer(req.query, (err, results) => {
     if (err) return response(res, 400, 'Error al obtener el log de transferencias.', [err]);
-    response(res, 200, 'Log de transferencias obtenido con éxito.', [results]);
+    response(res, 200, 'Log de transferencias obtenido con éxito.', results);
   });
 }
 
