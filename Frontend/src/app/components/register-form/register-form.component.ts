@@ -25,6 +25,10 @@ export class RegisterFormComponent implements OnInit {
     this.new_user.id_country = id_country;
   }
 
+  public selectPicture(base64: any) {
+    this.new_user.photo = base64;
+  }
+
   ngOnInit(): void {
   }
 

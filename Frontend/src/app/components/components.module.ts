@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RegisterFormComponent } from './register-form/register-form.component';
 
@@ -15,12 +15,15 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { CountryFieldComponent } from './country-field/country-field.component';
+import { ImageFieldComponent } from './image-field/image-field.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   declarations: [
     RegisterFormComponent,
     CountryFieldComponent,
+    ImageFieldComponent,
   ],
   exports: [
     RegisterFormComponent,
@@ -28,6 +31,7 @@ import { CountryFieldComponent } from './country-field/country-field.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     MatCardModule,
     MatFormFieldModule,
@@ -37,6 +41,7 @@ import { CountryFieldComponent } from './country-field/country-field.component';
     MatNativeDateModule,
     MatButtonModule,
     MatRadioModule,
+    MatSnackBarModule,
   ]
 })
 export class ComponentsModule { }

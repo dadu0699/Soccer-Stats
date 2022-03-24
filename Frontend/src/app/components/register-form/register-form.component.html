@@ -2,16 +2,8 @@
   fxLayoutAlign="space-evenly center">
 
   <div fxLayout="row" fxLayoutAlign="start center">
-    <div fxLayout="column" fxLayoutAlign="center center">
-      <mat-card class="mat-elevation-z0">
-        <img mat-card-avatar class="header-image" [src]="
-            'https://ibalz.com/wp-content/uploads/2019/10/default-profile.png'
-            " />
-      </mat-card>
-      <button mat-button color="accent" type="button">Upload image
-        <i data-feather="upload-cloud"></i>
-      </button>
-    </div>
+
+    <app-image-field (selectPicture)="selectPicture($event)"></app-image-field>
     <span class="firstSpace"></span>
     <div>
       <label>Gender</label>

@@ -30,12 +30,12 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     Feather.replace();
   }
 
-  logOut() {
+  public logOut() {
     localStorage.clear();
     this._router.navigate(['/auth/login']);
   }
 
-  toggleMenu() {
+  public toggleMenu() {
     this.opened = !this.opened;
     this.show.emit(this.opened);
   }
