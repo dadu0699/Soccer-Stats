@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Test Microservice Technical Director" tests="4" failures="0" errors="0" time="7.565">
-  <testsuite name="APIs Test Technical Director" errors="0" failures="0" skipped="0" timestamp="2022-03-23T05:41:31" time="7.382" tests="4">
-    <testcase classname="APIs Test Technical Director GET ALL Technical Director - Obtener todos los directores" name="APIs Test Technical Director GET ALL Technical Director - Obtener todos los directores" time="3.281">
+<testsuites name="Test Microservice Technical Director" tests="4" failures="0" errors="0" time="9.396">
+  <testsuite name="APIs Test Technical Director" errors="0" failures="0" skipped="0" timestamp="2022-03-24T04:02:00" time="9.076" tests="4">
+    <testcase classname="APIs Test Technical Director GET ALL Technical Director - Obtener todos los directores" name="APIs Test Technical Director GET ALL Technical Director - Obtener todos los directores" time="1.053">
     </testcase>
-    <testcase classname="APIs Test Technical Director GET SINGLE Technical Director - Obtener director inexistente." name="APIs Test Technical Director GET SINGLE Technical Director - Obtener director inexistente." time="0.131">
+    <testcase classname="APIs Test Technical Director GET SINGLE Technical Director - Obtener director inexistente." name="APIs Test Technical Director GET SINGLE Technical Director - Obtener director inexistente." time="0.092">
     </testcase>
-    <testcase classname="APIs Test Technical Director UPDATED Technical Director - Actualización director inexistente." name="APIs Test Technical Director UPDATED Technical Director - Actualización director inexistente." time="0.136">
+    <testcase classname="APIs Test Technical Director UPDATED Technical Director - Actualización director inexistente." name="APIs Test Technical Director UPDATED Technical Director - Actualización director inexistente." time="0.113">
     </testcase>
-    <testcase classname="APIs Test Technical Director DELETE Technical Director - Eliminar director inexistente." name="APIs Test Technical Director DELETE Technical Director - Eliminar director inexistente." time="0.15">
+    <testcase classname="APIs Test Technical Director DELETE Technical Director - Eliminar director inexistente." name="APIs Test Technical Director DELETE Technical Director - Eliminar director inexistente." time="0.096">
     </testcase>
   </testsuite>
 </testsuites>

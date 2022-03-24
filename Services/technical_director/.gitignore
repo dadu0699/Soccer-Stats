@@ -44,3 +44,4 @@ web_modules/
 .parcel-cache
 
 /dist
+junit.xml

@@ -16,14 +16,14 @@ describe('APIs Test Technical Director', () => {
     test('GET ALL Technical Director - Obtener todos los directores', async () => {
         await server.listen();
         const res = await request(server.app)
-            .get('/api/technical-director')
+            .get('/technical-director')
             .set(headers);
         // COMPARAR ESTADO 200
         expect(res.statusCode).toEqual(200);
     });
 
     test('GET SINGLE Technical Director - Obtener director inexistente.', async () => {
-        const res = await request(server.app).get('/api/technical-director?id=9999999999')
+        const res = await request(server.app).get('/technical-director?id=9999999999')
             .set(headers);
 
         const expected = {
@@ -41,7 +41,7 @@ describe('APIs Test Technical Director', () => {
             msg: "Error al actualizar director técnico.",
             data: []
         };
-        const res = await request(server.app).put('/api/technical-director')
+        const res = await request(server.app).put('/technical-director')
             .send({
                 id: 999999999,
                 name: 'Jose',
@@ -63,7 +63,7 @@ describe('APIs Test Technical Director', () => {
             data: []
         };
         const res = await request(server.app)
-            .delete('/api/technical-director')
+            .delete('/technical-director')
             .send({
                 id: 999999999
             })

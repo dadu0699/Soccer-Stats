@@ -41,7 +41,7 @@ export default class DirectorTecnicoController {
             return res.json({
                 status: 200,
                 msg: "Director(es) técnico(s) obtenido(s) con éxito.",
-                data: [directores]
+                data: directores
             });
         } else {
             const data: any = await DirectorTecnico.findByPk(Number(id), {
@@ -93,6 +93,7 @@ export default class DirectorTecnicoController {
 
             if (data) {
 
+                body.photo = body.photo ? body.photo : '';
                 if (body.photo != '') {
                     let url: any;
 
@@ -102,8 +103,8 @@ export default class DirectorTecnicoController {
                     await UploadFile(base64, extension).then((data) => url = data);
 
                     if (url == null) {
-                        return res.status(409).json({
-                            status: false
+                        return res.status(400).json({
+                            status: 400
                         })
                     }
 
@@ -170,8 +171,8 @@ export default class DirectorTecnicoController {
             await UploadFile(base64, extension).then((data) => url = data);
 
             if (url == null) {
-                return res.status(409).json({
-                    status: false
+                return res.status(400).json({
+                    status: 400
                 })
             }
 
@@ -210,30 +211,38 @@ export default class DirectorTecnicoController {
      * ELIMINAR DIRECTOR TECNICO
      */
     delete = async (req: any, res: Response) => {
-        const { id } = req.body;
+        try {
+            const { id } = req.body;
 
-        const data: any = await DirectorTecnico.findByPk(id);
-        if (data) {
-            await data.destroy();
-            await BitacoraController.getInstance().crearBitacora('CREATE',
-                'DirectorTecnico',
-                `Director técnico ID: ${data.directorTecnicoID} eliminado con éxito.`,
-                req?.user.id_user);
-            return res.json({
-                status: 200,
-                msg: "Director técnico eliminado con éxito.",
-                data: [{
-                    id: data.directorTecnicoID,
-                    name: data.nombre,
-                    lastname: data.apellido,
-                    birth_date: data.fechaNacimiento,
-                    status: data.estado,
-                    id_country: data.paisID,
-                    photo: data.foto,
-                }]
-            });
+            const data: any = await DirectorTecnico.findByPk(id);
+            if (data) {
+                await data.destroy();
+                await BitacoraController.getInstance().crearBitacora('CREATE',
+                    'DirectorTecnico',
+                    `Director técnico ID: ${data.directorTecnicoID} eliminado con éxito.`,
+                    req?.user.id_user);
+                return res.json({
+                    status: 200,
+                    msg: "Director técnico eliminado con éxito.",
+                    data: [{
+                        id: data.directorTecnicoID,
+                        name: data.nombre,
+                        lastname: data.apellido,
+                        birth_date: data.fechaNacimiento,
+                        status: data.estado,
+                        id_country: data.paisID,
+                        photo: data.foto,
+                    }]
+                });
 
-        } else {
+            } else {
+                return res.status(400).json({
+                    status: 400,
+                    msg: "Error al eliminar director técnico.",
+                    data: []
+                })
+            }
+        } catch (error) {
             return res.status(400).json({
                 status: 400,
                 msg: "Error al eliminar director técnico.",
