@@ -18,6 +18,14 @@ export default class ReporteController {
     reporte1 = async (req: Request, res: Response) => {
         const { id_team } = req.query;
 
+        if (!id_team) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al obtener usuarios suscritos al equipo x.",
+                data: []
+            });
+        }
+
         let query = `
             SELECT usuario.nombre, usuario.apellido, usuario.correo, usuario.fotografia, pais.nombre AS pais FROM favorito
             INNER JOIN usuario ON usuario.usuarioID = favorito.usuarioID
@@ -193,5 +201,52 @@ export default class ReporteController {
             data: reporte
         });
     }
+
+    /**
+     * OBTENER USUARIOS POR PAISES
+     */
+    reporte5 = async (req: Request, res: Response) => {
+        const { id_country } = req.query;
+
+        if (!id_country) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al obtener usuarios de x país.",
+                data: []
+            });
+        }
+
+        let query = `
+            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, 
+            usuario.correo, usuario.fotografia, pais.nombre AS pais FROM usuario
+            INNER JOIN pais ON pais.paisID = usuario.paisID
+            WHERE usuario.paisID = :id_country;
+        `;
+
+        const data = await db.query(query, {
+            replacements: {
+                id_country: id_country
+            },
+            type: QueryTypes.SELECT
+        })
+
+        let reporte = data.map((res: any) => {
+            return {
+                id: res.usuarioID,
+                name: res.nombre,
+                lastname: res.apellido,
+                email: res.correo,
+                photo: res.fotografia,
+                nationality: res.pais,
+            }
+        })
+
+        return res.json({
+            status: 200,
+            msg: "Usuarios suscritos al equipo x obtenidos con éxito.",
+            data: reporte
+        });
+    }
+
 
 }
