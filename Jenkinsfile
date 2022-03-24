@@ -19,6 +19,7 @@ pipeline {
           steps {
             sh '''
               cd Services/customer
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
@@ -31,6 +32,7 @@ pipeline {
           steps {
             sh '''
               cd Services/team
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
@@ -43,6 +45,7 @@ pipeline {
           steps {
             sh '''
               cd Services/match
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
@@ -59,6 +62,7 @@ pipeline {
           steps {
             sh '''
               cd Services/stadium
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
@@ -71,6 +75,7 @@ pipeline {
           steps {
             sh '''
               cd Services/technical_director
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
@@ -83,6 +88,7 @@ pipeline {
           steps {
             sh '''
               cd Services/post
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
@@ -99,6 +105,7 @@ pipeline {
           steps {
             sh '''
               cd Services/auth
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
@@ -111,6 +118,7 @@ pipeline {
           steps {
             sh '''
               cd Services/employee
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
@@ -123,6 +131,7 @@ pipeline {
           steps {
             sh '''
               cd Services/country
+              rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
               npm install
