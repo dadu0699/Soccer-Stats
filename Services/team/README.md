@@ -1,4 +1,4 @@
-# ESTADIO - EQUIPO
+# EQUIPO - SERVIDOR
 
 ### REQUERIMIENTOS:
 
@@ -162,8 +162,7 @@ En la carpeta **src->routes** podemos encontrar los distintos archivos para el c
 
 - **create.route.js**: Crear equipo.
 - **delete.rouste.js**: Eliminar equipo.
-- **get.all.js**: Obtener todos los equipo.
-- **get.one.js**: Obtener un equipo.
+- **get.all.js**: Obtener uno o todos los equipos.
 - **update.route.js**: Actualizar equipo.
 
 Dentro de estos archivos se encuentra la logica segun su objetivo, como por ejemplo en endpoint encargado de eliminar estadio:
