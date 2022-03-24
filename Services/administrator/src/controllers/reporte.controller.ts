@@ -157,4 +157,41 @@ export default class ReporteController {
         });
     }
 
+    /**
+     * OBTENER TOP 10 Usuarios con mas membresia
+     */
+    reporte4 = async (req: Request, res: Response) => {
+        let query = `
+            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
+            usuario.fotografia, pais.nombre AS pais, (COUNT(*) * 15) mount FROM membresia
+            INNER JOIN usuario ON usuario.usuarioID = membresia.usuarioID
+            INNER JOIN pais ON pais.paisID = usuario.paisID
+            GROUP BY usuario.usuarioID
+            ORDER BY mount DESC
+            LIMIT 10;
+        `;
+
+        const data = await db.query(query, {
+            type: QueryTypes.SELECT
+        })
+
+        let reporte = data.map((res: any) => {
+            return {
+                id: res.usuarioID,
+                name: res.nombre,
+                lastname: res.apellido,
+                email: res.correo,
+                photo: res.fotografia,
+                nationality: res.pais,
+                mount: res.mount,
+            }
+        })
+
+        res.json({
+            status: 200,
+            msg: "Usuarios con mas membresías obtenidos con éxito.",
+            data: reporte
+        });
+    }
+
 }
