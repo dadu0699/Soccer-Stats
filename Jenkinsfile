@@ -376,7 +376,7 @@ pipeline {
             
             export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
 
-            export TF_VAR_google_access_token=$(gcloud auth print-access-token)
+            export TF_VAR_google_access_token="$(gcloud auth print-access-token)"
             echo $TF_VAR_google_access_token
             export TF_VAR_gcr_id=${GCR_ID}
             export TF_VAR_testing_ip=${TESTING_IP}
