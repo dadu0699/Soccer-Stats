@@ -248,5 +248,51 @@ export default class ReporteController {
         });
     }
 
+    /**
+     * OBTENER USUARIOS POR GENERO
+     */
+    reporte6 = async (req: Request, res: Response) => {
+        const { gender } = req.query;
+
+        if (!gender) {
+            return res.status(400).json({
+                status: 400,
+                msg: "Error al obtener usuarios de x genero.",
+                data: []
+            });
+        }
+
+        let query = `
+            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, 
+            usuario.correo, usuario.fotografia, pais.nombre AS pais FROM usuario
+            INNER JOIN pais ON pais.paisID = usuario.paisID
+            WHERE usuario.genero = :gender;
+        `;
+
+        const data = await db.query(query, {
+            replacements: {
+                gender: gender
+            },
+            type: QueryTypes.SELECT
+        })
+
+        let reporte = data.map((res: any) => {
+            return {
+                id: res.usuarioID,
+                name: res.nombre,
+                lastname: res.apellido,
+                email: res.correo,
+                photo: res.fotografia,
+                nationality: res.pais,
+            }
+        })
+
+        return res.json({
+            status: 200,
+            msg: "Usuarios de x genero obtenidos con éxito.",
+            data: reporte
+        });
+    }
+
 
 }

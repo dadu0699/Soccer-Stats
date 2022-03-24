@@ -24,5 +24,9 @@ reporte.get('/report/5', [
     ValidarJWT,
     ValidarRol(),
 ], ReporteController.getInstance().reporte5);
+reporte.get('/report/6', [
+    ValidarJWT,
+    ValidarRol(),
+], ReporteController.getInstance().reporte6);
 
 export default reporte;
