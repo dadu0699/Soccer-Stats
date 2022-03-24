@@ -45,4 +45,20 @@ describe('APIs Test Reportes', () => {
         // COMPARAR RESPONSE
         expect(res.body).toEqual(expected);
     });
+
+    test('GET ALL Reporte 2 - Obtener reporte 2 sin parametro.', async () => {
+        const expected = {
+            status: 400,
+            msg: "Error al obtener usuarios con o sin membresía.",
+            data: []
+        }
+
+        const res = await request(server.app)
+            .get('/api/report/2')
+            .set(headers);
+
+        // COMPARAR RESPONSE
+        expect(res.body).toEqual(expected);
+    });
+
 });
