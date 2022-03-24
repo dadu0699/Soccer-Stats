@@ -1,0 +1,8 @@
+.sidenav-container {
+  height: 90%;
+}
+
+.sidenav {
+  width: 200px;
+  background: inherit;
+}

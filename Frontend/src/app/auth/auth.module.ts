@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthRoutingModule } from './auth-routing.module';
 
+import { SharedModule } from '../shared/shared.module';
+
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 
@@ -18,6 +20,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     HttpClientModule,
     AuthRoutingModule,
+    SharedModule,
   ],
 })
 export class AuthModule {}
