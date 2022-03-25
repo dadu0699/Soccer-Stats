@@ -18,7 +18,7 @@ data "template_file" "init" {
   template = file("./Scripts/startup_script.sh")
 
   vars = {
-    google_access_token = var.google_access_token
+    google_application_credentials = var.google_application_credentials
     gcr_id = var.gcr_id
   }
 }

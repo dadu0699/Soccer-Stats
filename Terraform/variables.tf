@@ -1,4 +1,4 @@
-variable "google_access_token" {
+variable "google_application_credentials" {
     type        = string
     description = "Path to the Google Cloud credentials file"
 }
