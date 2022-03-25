@@ -13,7 +13,7 @@
             required />
         </mat-form-field>
 
-        <app-country-field (selectCountry)="selectCountry($event)" class="country-field"></app-country-field>
+        <app-country-field [country]="team.id_country" (selectCountry)="selectCountry($event)" class="country-field"></app-country-field>
       </div>
 
 

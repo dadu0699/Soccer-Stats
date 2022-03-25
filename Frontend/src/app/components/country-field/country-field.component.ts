@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Country } from 'src/app/models/country.model';
 
 @Component({
@@ -8,6 +8,8 @@ import { Country } from 'src/app/models/country.model';
 })
 export class CountryFieldComponent implements OnInit {
 
+
+  @Input('country') commingCountry!: number;
   @Output('selectCountry') selectCountry: EventEmitter<number>;
 
   public countries: Country[];
