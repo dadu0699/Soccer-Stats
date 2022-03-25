@@ -5,6 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserViewComponent } from './user-view/user-view.component';
 import { TeamViewComponent } from './team-view/team-view.component';
 import { CompetitionViewComponent } from './competition-view/competition-view.component';
+import { GameViewComponent } from './game-view/game-view.component';
+import { StadiumViewComponent } from './stadium-view/stadium-view.component';
+import { PlayerViewComponent } from './player-view/player-view.component';
+import { TechnicalDirectorViewComponent } from './technical-director-view/technical-director-view.component';
 
 import { ViewTableComponent } from './view-table/view-table.component';
 import { ManagementOptionsComponent } from './management-options/management-options.component';
@@ -33,11 +37,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 
 
+
 @NgModule({
   declarations: [
     UserViewComponent,
     TeamViewComponent,
     CompetitionViewComponent,
+    GameViewComponent,
+    StadiumViewComponent,
+    PlayerViewComponent,
+    TechnicalDirectorViewComponent,
     CountryFieldComponent,
     TeamFieldComponent,
     ImageFieldComponent,
@@ -50,6 +59,10 @@ import { MatIconModule } from '@angular/material/icon';
     UserViewComponent,
     TeamViewComponent,
     CompetitionViewComponent,
+    GameViewComponent,
+    StadiumViewComponent,
+    PlayerViewComponent,
+    TechnicalDirectorViewComponent,
     CountryFieldComponent,
     ImageFieldComponent,
     StatusFieldComponent,

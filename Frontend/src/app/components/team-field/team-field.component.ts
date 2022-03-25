@@ -27,7 +27,7 @@ export class TeamFieldComponent implements OnInit {
    }
 
    async ngOnInit(): Promise<void> {
-    await this.getTeams();
+    //await this.getTeams();
   }
 
   async getTeams(): Promise<void> {

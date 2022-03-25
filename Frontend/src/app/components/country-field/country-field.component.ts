@@ -24,7 +24,7 @@ export class CountryFieldComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.getCountries();
+    //await this.getCountries();
   }
 
   async getCountries(): Promise<void> {
