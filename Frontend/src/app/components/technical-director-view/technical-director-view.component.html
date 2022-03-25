@@ -40,9 +40,15 @@
         </div>
       </div>
 
-      <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
-        {{allowEditing ? 'Save Changes' : 'Done'}}
-      </button>
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
+          {{allowEditing ? 'Save Changes' : 'Done'}}
+        </button>
+        <section class="spacer"></section>
+        <button mat-stroked-button color="accent" (click)="transferTechnicalDirector()" [disabled]="!readonly">
+          Transfer technical director
+        </button>
+      </div>
 
       <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
       </app-management-options>
@@ -61,3 +67,4 @@
   </mat-grid-tile>
 
 </mat-grid-list>
+

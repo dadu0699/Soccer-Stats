@@ -120,6 +120,10 @@ export class GameViewComponent implements OnInit {
     this.game = game;
   }
 
+  public addIncidence() {
+    console.log('Add incidence', this.game.id);
+  }
+
   public create() {
     this.game = new Game();
     this.readonly = false;

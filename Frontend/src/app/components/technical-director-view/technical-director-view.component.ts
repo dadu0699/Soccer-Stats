@@ -107,6 +107,10 @@ export class TechnicalDirectorViewComponent implements OnInit {
     this.technicalDirector = technicalDirector;
   }
 
+  public transferTechnicalDirector(){
+    console.log('Transfer Technical Director', this.technicalDirector.id);
+  }
+
   public create() {
     this.technicalDirector = new TechnicalDirector();
     this.readonly = false;

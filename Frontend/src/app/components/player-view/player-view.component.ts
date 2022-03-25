@@ -120,6 +120,10 @@ export class PlayerViewComponent implements OnInit {
     this.player = player;
   }
 
+  public transferPlayer(){
+    console.log('Transfer player', this.player.id);
+  }
+
   public create() {
     this.player = new Player();
     this.readonly = false;

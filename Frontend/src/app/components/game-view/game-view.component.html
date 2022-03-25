@@ -52,9 +52,15 @@
         <app-status-field [option]="game.status" [options]="status" (selectOption)="selectStatus($event)">
         </app-status-field>
         <section class="spacer"></section>
-        <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
-          {{allowEditing ? 'Save Changes' : 'Done'}}
-        </button>
+        <div fxLayout="column" fxLayoutAlign="space-evenly center">
+          <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
+            {{allowEditing ? 'Save Changes' : 'Done'}}
+          </button>
+          <section class="spaceUD"></section>
+          <button mat-stroked-button color="accent" (click)="addIncidence()" [disabled]="!readonly">
+            Add incidence
+          </button>
+        </div>
       </div>
 
 
