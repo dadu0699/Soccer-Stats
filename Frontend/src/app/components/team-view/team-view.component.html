@@ -3,7 +3,7 @@
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
 
       <h3>Teams Management</h3>
-      <app-image-field (selectPicture)="selectPicture($event)"></app-image-field>
+      <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="team.photo"></app-image-field>
 
 
       <div fxLayout="row" fxLayoutAlign="space-evenly center">

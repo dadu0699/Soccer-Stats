@@ -3,10 +3,10 @@
 
   <div fxLayout="row" fxLayoutAlign="start center">
 
-    <app-image-field (selectPicture)="selectPicture($event)"></app-image-field>
+    <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="user.photo"></app-image-field>
     <span class="firstSpace"></span>
     <div>
-      <app-status-field [options]="genders" (selectOption)="selectGender($event)" ></app-status-field>
+      <app-status-field [options]="genders" (selectOption)="selectGender($event)"></app-status-field>
     </div>
     <span class="secondSpace"></span>
   </div>

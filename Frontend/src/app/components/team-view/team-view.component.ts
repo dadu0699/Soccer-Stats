@@ -26,7 +26,7 @@ export class TeamViewComponent implements OnInit {
 
     this.team = new Team();
     this.allTeams = [
-      { id: 1, name: 'Equipo 1', foundation_date: '21/01/2021', photo: 'NA', id_country: 1, country: 'Country 1' },
+      { id: 1, name: 'Equipo 1', foundation_date: '21/01/2021', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg', id_country: 1, country: 'Country 1' },
       { id: 2, name: 'Equipo 2', foundation_date: '22/02/2022', photo: 'NA', id_country: 2, country: 'Country 2' }
     ]
 

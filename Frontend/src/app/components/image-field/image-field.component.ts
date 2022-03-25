@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./image-field.component.css']
 })
 export class ImageFieldComponent implements OnInit {
+
+  @Input('existingPhoto') existingPhoto!: string;
 
   @Output('selectPicture') selectPicture: EventEmitter<string>;
 
