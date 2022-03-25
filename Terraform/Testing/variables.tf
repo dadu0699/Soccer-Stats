@@ -12,3 +12,8 @@ variable "testing_ip" {
     type        = string
     description = "IP address for the testing VM"
 }
+
+variable "frontend_image" {
+    type        = string
+    description = "Frontend image"
+}

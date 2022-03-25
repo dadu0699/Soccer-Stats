@@ -368,15 +368,26 @@ pipeline {
       }
     }
 
+    stage('Build Frontend') {
+      steps {
+        sh '''
+          cd Frontend
+          docker build -t ${GCR_ID}/frontend-test:${image_tag} .
+          docker push ${GCR_ID}/frontend-test:${image_tag}
+        '''
+      }
+    }
+
     stage('Testing Infrastructure') {
       steps {
-        script{
+        script {
           sh '''
             export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
 
             export TF_VAR_google_access="$(cat ${GOOGLE_APPLICATION_CREDENTIALS})"
             export TF_VAR_gcr_id=${GCR_ID}
             export TF_VAR_testing_ip=${TESTING_IP}
+            export TF_VAR_frontend_image="frontend-test"
 
             cd Terraform/Testing
 
