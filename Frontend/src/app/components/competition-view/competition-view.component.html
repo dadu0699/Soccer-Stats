@@ -4,7 +4,8 @@
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
       <h3>Competition Management</h3>
 
-      <app-status-field [option]="competition.type" [options]="types" (selectOption)="selectType($event)"></app-status-field>
+      <app-status-field [option]="competition.type" [options]="types" (selectOption)="selectType($event)">
+      </app-status-field>
 
       <span fxFlexAlign="start" *ngIf="allowEditing">Editing enabled!</span>
       <div fxLayout="row" fxLayoutAlign="space-evenly center">
@@ -42,9 +43,13 @@
   </mat-grid-tile>
 
   <mat-grid-tile colspan="6" rowspan="5">
-    <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
-      (selectObject)="selectCompetition($event)">
-    </app-view-table>
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Competition List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectCompetition($event)">
+      </app-view-table>
+    </div>
   </mat-grid-tile>
 
 

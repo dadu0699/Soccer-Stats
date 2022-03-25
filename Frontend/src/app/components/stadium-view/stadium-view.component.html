@@ -50,6 +50,8 @@
 
   <mat-grid-tile colspan="6" rowspan="5">
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Stadium List</h3>
+
       <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
         (selectObject)="selectStadium($event)">
       </app-view-table>

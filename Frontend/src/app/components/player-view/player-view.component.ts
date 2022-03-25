@@ -37,7 +37,7 @@ export class PlayerViewComponent implements OnInit {
       { id: 1, name: 'Jugador 1', lastname: 'J1', birth_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg',
       id_nationality: 1, nationality: 'Country 1', position: 1, status: 1, id_team : 1, name_team: 'Equipo 1' },
       { id: 2, name: 'Jugador 2', lastname: 'J2', birth_date: '2022-01-25', photo: 'NA',
-      id_nationality: 2, nationality: 'Country 2', position: 2, status: 3, id_team : 2, name_team: 'Equipo 2' }
+      id_nationality: 2, nationality: 'Country 2', position: 2, status: 3, id_team : 2, name_team: 'Equipo 2' },
     ]
 
     this.positions = [

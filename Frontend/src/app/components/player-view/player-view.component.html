@@ -53,10 +53,14 @@
 
   </mat-grid-tile>
 
-  <mat-grid-tile colspan="12" rowspan="2">
-    <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
-      (selectObject)="selectPlayer($event)">
-    </app-view-table>
+  <mat-grid-tile colspan="12" rowspan="4">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Player List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectPlayer($event)">
+      </app-view-table>
+    </div>
   </mat-grid-tile>
 
 

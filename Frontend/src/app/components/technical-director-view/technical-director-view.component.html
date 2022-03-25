@@ -6,7 +6,8 @@
       <span fxFlexAlign="start" *ngIf="allowEditing">Editing enabled!</span>
 
       <div fxLayout="row" fxLayoutAlign="space-evenly center">
-        <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="technicalDirector.photo"></app-image-field>
+        <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="technicalDirector.photo">
+        </app-image-field>
         <section class="spacer"></section>
 
         <app-status-field [option]="technicalDirector.status" [options]="status" (selectOption)="selectStatus($event)">
@@ -16,8 +17,8 @@
         <div fxLayout="column" fxLayoutAlign="space-evenly center">
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput [readonly]="readonly" [(ngModel)]="technicalDirector.name" name="nameField" #nameField="ngModel"
-              required />
+            <input matInput [readonly]="readonly" [(ngModel)]="technicalDirector.name" name="nameField"
+              #nameField="ngModel" required />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -49,10 +50,14 @@
 
   </mat-grid-tile>
 
-  <mat-grid-tile colspan="12" rowspan="2">
-    <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
-      (selectObject)="selectTechnicalDirector($event)">
-    </app-view-table>
+  <mat-grid-tile colspan="12" rowspan="4">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Technical Director List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectTechnicalDirector($event)">
+      </app-view-table>
+    </div>
   </mat-grid-tile>
 
 </mat-grid-list>

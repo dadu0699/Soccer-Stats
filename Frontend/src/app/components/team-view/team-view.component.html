@@ -17,7 +17,8 @@
         </app-country-field>
       </div>
 
-      <app-date-field [readonly]="readonly" [date]="team.foundation_date" [description]="'Foundation '" (setDate)=setDate($event)>
+      <app-date-field [readonly]="readonly" [date]="team.foundation_date" [description]="'Foundation '"
+        (setDate)=setDate($event)>
       </app-date-field>
 
       <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
@@ -31,8 +32,13 @@
   </mat-grid-tile>
 
   <mat-grid-tile colspan="6" rowspan="5">
-    <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource" (selectObject)="selectTeam($event)">
-    </app-view-table>
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Team List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectTeam($event)">
+      </app-view-table>
+    </div>
   </mat-grid-tile>
 
 
