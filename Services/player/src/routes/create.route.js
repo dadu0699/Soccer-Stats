@@ -9,7 +9,7 @@ const {saveBinnacle} = require("../utils/binnacle");
 
 router.post('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
 
-    const {name, lastname, birth_date, nationality, position, status, photo} = req.body;
+    const {name, lastname, birth_date, id_nationality, position, status, photo} = req.body;
 
     try {
         
@@ -21,7 +21,7 @@ router.post('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
 
         await saveFile(photo,nombre,ext,(res)=>{console.log(res)});
 
-        pool.query(sql, [name,lastname,birth_date,status,url,position,nationality], async function(err,result){
+        pool.query(sql, [name,lastname,birth_date,status,url,position,id_nationality], async function(err,result){
             if(err){
                 res.status(400).json({status:400, msg: "Error al crear jugador.", data: [err]});
             }else{

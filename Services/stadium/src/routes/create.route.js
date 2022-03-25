@@ -9,7 +9,7 @@ const {saveBinnacle} = require("../utils/binnacle");
 
 router.post('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
 
-    const {name, foundation_date, capacity, id_country, address, state, photo} = req.body;
+    const {name, foundation_date, capacity, id_country, address, status, photo} = req.body;
 
     try {
         
@@ -21,7 +21,7 @@ router.post('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
 
         await saveFile(photo,nombre,ext,(res)=>{console.log(res)});
 
-        pool.query(sql, [name,foundation_date,capacity,address,state,url,id_country], async function(err,result){
+        pool.query(sql, [name,foundation_date,capacity,address,status,url,id_country], async function(err,result){
             if(err){
                 res.status(400).json({status:400, msg: "Error al crear estadio.", data: [err]});
             }else{

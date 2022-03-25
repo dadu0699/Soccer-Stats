@@ -9,7 +9,7 @@ const {saveBinnacle} = require("../utils/binnacle");
 
 router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
     
-    const { id, name, foundation_date, capacity, id_country, address, state } = req.body;
+    const { id, name, foundation_date, capacity, id_country, address, status } = req.body;
     let { photo } = req.body; 
 
     try {
@@ -24,7 +24,7 @@ router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
         }
 
         let sql = "UPDATE Estadio SET nombre=?,fechaFundacion=?,capacidad=?,direccion=?,estado=?,paisID=?";
-        const values = [name, foundation_date, capacity, address, state, id_country];
+        const values = [name, foundation_date, capacity, address, status, id_country];
 
         if (photo != '') {
             sql += ",foto=?";

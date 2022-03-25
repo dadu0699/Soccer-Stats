@@ -5,7 +5,7 @@ const pool = require('../db_connection');
 router.get('/', (req, res) => {
 
     var sql = `SELECT Estadio.EstadioID as "id", Estadio.nombre as "name", Estadio.fechaFundacion as "foundation_date", Estadio.capacidad as "capacity", 
-    Estadio.paisID as "id_country", Pais.nombre as "country ", Estadio.direccion as "address", Estadio.estado as "state", Estadio.foto as "photo" 
+    Estadio.paisID as "id_country", Pais.nombre as "country ", Estadio.direccion as "address", Estadio.estado as "status", Estadio.foto as "photo" 
     FROM Estadio JOIN Pais ON Pais.PaisID = Estadio.PaisID`
 
     if (req.query.id != null) {
