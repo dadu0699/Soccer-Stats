@@ -26,6 +26,10 @@ export class UserViewComponent implements OnInit {
     console.log(this.user);
   }
 
+  public setDate(date: any) {
+    this.user.birth_date = date;
+  }
+
   public selectCountry(id_country: any) {
     this.user.id_country = id_country;
   }

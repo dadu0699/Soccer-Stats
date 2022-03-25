@@ -2,6 +2,7 @@
   <mat-grid-tile colspan="6" rowspan="5">
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
 
+
       <h3>Teams Management</h3>
       <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="team.photo"></app-image-field>
 
@@ -13,17 +14,12 @@
             required />
         </mat-form-field>
 
-        <app-country-field [country]="team.id_country" (selectCountry)="selectCountry($event)" class="country-field"></app-country-field>
+        <app-country-field [country]="team.id_country" (selectCountry)="selectCountry($event)" class="country-field">
+        </app-country-field>
       </div>
 
-
-      <mat-form-field appearance="outline" class="dateField">
-        <mat-label>Foundation Date</mat-label>
-        <input matInput [matDatepicker]="picker" [readonly]="readonly" [(ngModel)]="team.foundation_date" name="foundationDateField"
-          #foundationDateField="ngModel" required>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+      <app-date-field [date]="team.foundation_date" [description]="'Foundation '" (setDate)=setDate($event)>
+      </app-date-field>
 
       <button mat-stroked-button color="warn" (click)="done()">
         {{allowEditing ? 'Save Changes' : 'Done'}}

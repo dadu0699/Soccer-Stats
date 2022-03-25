@@ -5,7 +5,7 @@
   align-items: flex-start;
 }
 
-.mat-form-field + .mat-form-field, .country-field {
+.mat-form-field + .mat-form-field, .extra-field {
   margin-left: 8px;
 }
 
@@ -17,6 +17,3 @@
   margin: 15px;
 }
 
-.dateField{
-  width: 200px;
-}

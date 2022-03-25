@@ -9,6 +9,9 @@ import { ViewTableComponent } from './view-table/view-table.component';
 import { ManagementOptionsComponent } from './management-options/management-options.component';
 
 import { StatusFieldComponent } from './status-field/status-field.component';
+import { DateFieldComponent } from './date-field/date-field.component';
+import { ImageFieldComponent } from './image-field/image-field.component';
+import { CountryFieldComponent } from './country-field/country-field.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -24,8 +27,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
-import { CountryFieldComponent } from './country-field/country-field.component';
-import { ImageFieldComponent } from './image-field/image-field.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -36,6 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
     ImageFieldComponent,
     StatusFieldComponent,
     TeamViewComponent,
+    DateFieldComponent,
     UserViewComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
@@ -44,6 +46,7 @@ import { MatIconModule } from '@angular/material/icon';
     CountryFieldComponent,
     ImageFieldComponent,
     StatusFieldComponent,
+    DateFieldComponent,
     UserViewComponent,
     TeamViewComponent,
     ManagementOptionsComponent,

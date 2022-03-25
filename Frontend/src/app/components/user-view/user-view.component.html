@@ -43,13 +43,8 @@
       <input matInput [(ngModel)]="user.phone" name="phoneField" #phoneField="ngModel" required />
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="dateField">
-      <mat-label>Birth Date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="user.birth_date" name="birthDateField"
-        #birthDateField="ngModel" required>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <app-date-field [date]="user.birth_date" [description]="'Birth '" (setDate)=setDate($event) class="extra-field">
+    </app-date-field>
 
   </section>
 
@@ -59,7 +54,7 @@
       <input matInput [(ngModel)]="user.address" name="addressField" #addressField="ngModel" required />
     </mat-form-field>
 
-    <app-country-field (selectCountry)="selectCountry($event)" class="country-field"></app-country-field>
+    <app-country-field (selectCountry)="selectCountry($event)" class="extra-field"></app-country-field>
   </section>
 
   <button mat-stroked-button color="warn" type="submit">

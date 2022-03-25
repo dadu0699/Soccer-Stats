@@ -58,6 +58,10 @@ export class TeamViewComponent implements OnInit {
 
   }
 
+  public setDate(date: any) {
+    this.team.foundation_date = date;
+  }
+
   public selectCountry(id_country: any) {
     this.team.id_country = id_country;
   }
