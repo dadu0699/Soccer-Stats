@@ -368,7 +368,7 @@ pipeline {
       }
     }
 
-    stage('Build Frontend') {
+    stage('Build Frontend Test-Image') {
       steps {
         sh '''
           cd Frontend
@@ -390,6 +390,44 @@ pipeline {
             export TF_VAR_frontend_image="frontend-test"
 
             cd Terraform/Testing
+
+            terraform init -reconfigure
+            terraform validate
+            terraform apply -destroy -auto-approve
+            terraform apply -auto-approve
+          '''
+        }
+      }
+    }
+
+    stage('Testing Frontend') {
+      steps {
+        sh 'echo "Testing Frontend"'
+      }
+    }
+
+    stage('Build Frontend Image') {
+      steps {
+        sh '''
+          cd Frontend
+          docker build -t ${GCR_ID}/frontend:${image_tag} .
+          docker push ${GCR_ID}/frontend:${image_tag}
+        '''
+      }
+    }
+
+    stage('Production Infrastructure') {
+      steps {
+        script {
+          sh '''
+            export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+
+            export TF_VAR_google_access="$(cat ${GOOGLE_APPLICATION_CREDENTIALS})"
+            export TF_VAR_gcr_id=${GCR_ID}
+            export TF_VAR_production_ip=${PRODUCTION_IP}
+            export TF_VAR_frontend_image="frontend"
+
+            cd Terraform/Production
 
             terraform init -reconfigure
             terraform validate
