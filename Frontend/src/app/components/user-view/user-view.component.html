@@ -15,11 +15,11 @@
     <div class="fullSize field-row">
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="new_user.name" name="nameField" #nameField="ngModel" required />
+        <input matInput [(ngModel)]="user.name" name="nameField" #nameField="ngModel" required />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Lastname</mat-label>
-        <input matInput [(ngModel)]="new_user.lastname" name="lastnameField" #lastnameField="ngModel" required />
+        <input matInput [(ngModel)]="user.lastname" name="lastnameField" #lastnameField="ngModel" required />
       </mat-form-field>
     </div>
   </section>
@@ -27,12 +27,12 @@
   <section>
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]="new_user.email" name="emailField" #emailField="ngModel" required />
+      <input matInput [(ngModel)]="user.email" name="emailField" #emailField="ngModel" required />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput type="password" [(ngModel)]="new_user.password" name="passwordField" #passwordField="ngModel"
+      <input matInput type="password" [(ngModel)]="user.password" name="passwordField" #passwordField="ngModel"
         required />
     </mat-form-field>
   </section>
@@ -40,12 +40,12 @@
   <section>
     <mat-form-field appearance="outline">
       <mat-label>Phone</mat-label>
-      <input matInput [(ngModel)]="new_user.phone" name="phoneField" #phoneField="ngModel" required />
+      <input matInput [(ngModel)]="user.phone" name="phoneField" #phoneField="ngModel" required />
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="dateField">
       <mat-label>Birth Date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="new_user.birth_date" name="birthDateField"
+      <input matInput [matDatepicker]="picker" [(ngModel)]="user.birth_date" name="birthDateField"
         #birthDateField="ngModel" required>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -56,13 +56,13 @@
   <section>
     <mat-form-field appearance="outline">
       <mat-label>Address</mat-label>
-      <input matInput [(ngModel)]="new_user.address" name="addressField" #addressField="ngModel" required />
+      <input matInput [(ngModel)]="user.address" name="addressField" #addressField="ngModel" required />
     </mat-form-field>
 
     <app-country-field (selectCountry)="selectCountry($event)" class="country-field"></app-country-field>
   </section>
 
-  <button mat-stroked-button color="accent" type="submit">
+  <button mat-stroked-button color="warn" type="submit">
     Sign me up!
   </button>
 

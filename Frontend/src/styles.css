@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 html, body {
   height: 100%;
-  background: #fff ;
+  background: #fafafa ;
  }
 
 body {
@@ -14,21 +15,8 @@ body {
   font-family: "Quicksand", sans-serif !important;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #e0f2f1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #80cbc4;
+.icon {
+  font-family: "Material Icons" !important;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-start,
@@ -36,6 +24,25 @@ body {
 .mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-gap {
     border-width: 2px !important;
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b2dfdb;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #82ada9;
+}
+
+
 
 
 

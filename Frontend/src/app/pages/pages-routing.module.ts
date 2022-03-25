@@ -5,6 +5,7 @@ import { AuthGuard } from '../guards/auth.guard';
 
 import { PagesComponent } from './pages.component';
 import { FeedComponent } from './feed/feed.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'feed', component: FeedComponent },
+      { path: 'employee', component: EmployeeComponent },
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
     ],
   }

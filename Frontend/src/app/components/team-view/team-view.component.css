@@ -1,0 +1,7 @@
+.fullSize{
+width: 100%;
+}
+
+.mat-form-field + .mat-form-field, .country-field {
+  margin-left: 8px;
+}

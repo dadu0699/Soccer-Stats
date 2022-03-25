@@ -4,17 +4,17 @@ import { Option } from 'src/app/models/option.model';
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'app-register-form',
-  templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.css']
+  selector: 'app-user-view',
+  templateUrl: './user-view.component.html',
+  styleUrls: ['./user-view.component.css']
 })
-export class RegisterFormComponent implements OnInit {
-  public new_user: User;
+export class UserViewComponent implements OnInit {
+  public user: User;
   public genders: Option[];
 
 
   constructor() {
-    this.new_user = new User();
+    this.user = new User();
     this.genders = [
       { id: 1, description: 'Male' },
       { id: 2, description: 'Female' },
@@ -23,19 +23,19 @@ export class RegisterFormComponent implements OnInit {
   }
 
   public async signup(): Promise<void> {
-    console.log(this.new_user);
+    console.log(this.user);
   }
 
   public selectCountry(id_country: any) {
-    this.new_user.id_country = id_country;
+    this.user.id_country = id_country;
   }
 
   public selectPicture(base64: any) {
-    this.new_user.photo = base64;
+    this.user.photo = base64;
   }
 
   public selectGender(id_gender: any) {
-    this.new_user.gender = id_gender;
+    this.user.gender = id_gender;
   }
 
   ngOnInit(): void {

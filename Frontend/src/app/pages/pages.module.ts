@@ -7,21 +7,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { PagesRoutingModule } from './pages-routing.module';
 
 import { SharedModule } from '../shared/shared.module';
+import { ComponentsModule } from '../components/components.module';
 
 import { PagesComponent } from './pages.component';
 import { FeedComponent } from './feed/feed.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTabsModule } from '@angular/material/tabs';
+import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
     PagesComponent,
     FeedComponent,
+    EmployeeComponent,
   ],
   imports: [
     CommonModule,
@@ -30,11 +34,13 @@ import { MatListModule } from '@angular/material/list';
     HttpClientModule,
     PagesRoutingModule,
     SharedModule,
+    ComponentsModule,
     MatToolbarModule,
-    MatButtonModule,
-    LayoutModule,
     MatSidenavModule,
+    LayoutModule,
+    MatTabsModule,
     MatListModule,
+    MatButtonModule,
   ]
 })
 export class PagesModule { }

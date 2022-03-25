@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public async signin(): Promise<void> {
-
+    console.log(this.email, this.password)
   }
 
 

@@ -1,0 +1,36 @@
+<mat-grid-list cols="12" rowHeight="100px">
+  <mat-grid-tile colspan="6" rowspan="5">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+
+      <app-image-field (selectPicture)="selectPicture($event)"></app-image-field>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="team.name" name="nameField" #nameField="ngModel" required />
+        </mat-form-field>
+
+        <app-country-field (selectCountry)="selectCountry($event)" class="country-field"></app-country-field>
+      </div>
+
+
+      <mat-form-field appearance="outline" class="dateField">
+        <mat-label>Foundation Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="team.foundation_date" name="foundationDateField"
+          #foundationDateField="ngModel" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+      <button mat-stroked-button color="warn" (click)="done()">Done</button>
+
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="6" rowspan="5">
+          <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource" (selectObject)="selectTeam($event)" ></app-view-table>
+  </mat-grid-tile>
+
+
+</mat-grid-list>
