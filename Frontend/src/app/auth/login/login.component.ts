@@ -1,4 +1,6 @@
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
 import * as Feather from 'feather-icons';
 
 @Component({
@@ -10,7 +12,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public email: string;
   public password: string;
 
-  constructor() {
+  constructor(
+    private _router: Router,
+  ) {
     this.email = '';
     this.password = '';
 
@@ -21,6 +25,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   public async signin(): Promise<void> {
     console.log(this.email, this.password)
+    this._router.navigate(['/soccer-stats']);
   }
 
 
