@@ -5,7 +5,7 @@ export class Stadium {
   public capacity: number;
   public id_country: number;
   public address: string;
-  public state: number;
+  public status: number;
   public photo: string;
 
   public country!: string;
@@ -16,7 +16,7 @@ export class Stadium {
     this.capacity = 0;
     this.id_country = 0;
     this.address = "";
-    this.state = 0;
+    this.status = 0;
     this.photo = "";
   }
 }
