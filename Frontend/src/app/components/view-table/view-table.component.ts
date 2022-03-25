@@ -24,7 +24,7 @@ export class ViewTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
-    this.pageSize = 10;
+    this.pageSize = 5;
     this.dataSource = new MatTableDataSource<any>();
 
     this.title = '';

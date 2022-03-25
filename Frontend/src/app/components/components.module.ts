@@ -6,6 +6,7 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { TeamViewComponent } from './team-view/team-view.component';
 
 import { ViewTableComponent } from './view-table/view-table.component';
+import { ManagementOptionsComponent } from './management-options/management-options.component';
 
 import { StatusFieldComponent } from './status-field/status-field.component';
 
@@ -37,6 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
     TeamViewComponent,
     UserViewComponent,
     ViewTableComponent,
+    ManagementOptionsComponent,
   ],
   exports: [
     CountryFieldComponent,
@@ -44,6 +46,7 @@ import { MatIconModule } from '@angular/material/icon';
     StatusFieldComponent,
     UserViewComponent,
     TeamViewComponent,
+    ManagementOptionsComponent,
   ],
   imports: [
     CommonModule,
