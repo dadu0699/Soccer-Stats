@@ -52,20 +52,6 @@ export class CompetitionViewComponent implements OnInit {
     this.fillTable();
   }
 
-  public done() {
-    if (this.allowEditing) {
-      this.updateExisting();
-    }else{
-      console.log(this.competition, 'Create new');
-    }
-  }
-
-  public updateExisting() {
-    console.log('Update', this.competition);
-    this.readonly = true;
-    this.allowEditing = false;
-  }
-
   private fillTable() {
     this.allCompetitions.forEach((element: Competition) => {
       this.dataTable.push({
@@ -80,6 +66,20 @@ export class CompetitionViewComponent implements OnInit {
       this.labels.push('actions')
       this.dataSource.data = this.dataTable;
     });
+  }
+
+  public done() {
+    if (this.allowEditing) {
+      this.updateExisting();
+    }else{
+      console.log(this.competition, 'Create new');
+    }
+  }
+
+  public updateExisting() {
+    console.log('Update', this.competition);
+    this.readonly = true;
+    this.allowEditing = false;
   }
 
   public selectType(id: any) {

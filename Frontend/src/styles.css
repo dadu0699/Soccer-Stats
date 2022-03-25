@@ -21,7 +21,7 @@ body {
 
 .fullSize{
   width: 100%;
-  }
+}
 
 .mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-start,
 .mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-outline-end,
@@ -35,6 +35,7 @@ body {
 
 ::-webkit-scrollbar-track {
   border-radius: 2px;
+  background: #ff00;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -46,6 +47,9 @@ body {
   background: #82ada9;
 }
 
+::-webkit-scrollbar-corner{
+  background: #ff00;
+}
 
 
 

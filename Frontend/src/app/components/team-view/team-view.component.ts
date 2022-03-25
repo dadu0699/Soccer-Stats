@@ -42,20 +42,6 @@ export class TeamViewComponent implements OnInit {
     this.fillTable();
   }
 
-  public done() {
-    if (this.allowEditing) {
-      this.updateExisting();
-    }else{
-      console.log(this.team, 'Create new');
-    }
-  }
-
-  public updateExisting() {
-    console.log('Update', this.team);
-    this.readonly = true;
-    this.allowEditing = false;
-  }
-
   private fillTable() {
     this.allTeams.forEach((element: Team) => {
       this.dataTable.push({
@@ -68,6 +54,20 @@ export class TeamViewComponent implements OnInit {
       this.labels.push('actions')
       this.dataSource.data = this.dataTable;
     });
+  }
+
+  public done() {
+    if (this.allowEditing) {
+      this.updateExisting();
+    }else{
+      console.log(this.team, 'Create new');
+    }
+  }
+
+  public updateExisting() {
+    console.log('Update', this.team);
+    this.readonly = true;
+    this.allowEditing = false;
   }
 
   public setDate(date: any) {

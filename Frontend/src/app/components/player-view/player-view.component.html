@@ -1,1 +1,63 @@
-<p>player-view works!</p>
+<mat-grid-list cols="12" rowHeight="100px" class="fullSize">
+  <mat-grid-tile colspan="12" rowspan="4">
+
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Players Management</h3>
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing enabled!</span>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="player.photo"></app-image-field>
+        <section class="spacer"></section>
+
+        <app-status-field [option]="player.position" [options]="positions" (selectOption)="selectPosition($event)">
+        </app-status-field>
+        <section class="spacer"></section>
+
+        <app-status-field [option]="player.status" [options]="status" (selectOption)="selectStatus($event)">
+        </app-status-field>
+        <section class="spacer"></section>
+
+        <div fxLayout="column" fxLayoutAlign="space-evenly center">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [readonly]="readonly" [(ngModel)]="player.name" name="nameField" #nameField="ngModel"
+              required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Lastname</mat-label>
+            <input matInput [readonly]="readonly" [(ngModel)]="player.lastname" name="lastnameField"
+              #lastnameField="ngModel" required />
+          </mat-form-field>
+        </div>
+
+
+        <div fxLayout="column" fxLayoutAlign="space-evenly center">
+          <app-country-field [country]="player.id_nationality" (selectCountry)="selectCountry($event)"
+            class="extra-field">
+          </app-country-field>
+
+          <app-date-field [readonly]="readonly" [date]="player.birth_date" [description]="'Birth '"
+            (setDate)=setDate($event) class="extra-field">
+          </app-date-field>
+        </div>
+      </div>
+
+      <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
+        {{allowEditing ? 'Save Changes' : 'Done'}}
+      </button>
+
+      <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
+      </app-management-options>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="12" rowspan="2">
+    <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+      (selectObject)="selectPlayer($event)">
+    </app-view-table>
+  </mat-grid-tile>
+
+
+</mat-grid-list>
