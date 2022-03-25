@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Player } from 'src/app/models/player.model';
 import { Option } from 'src/app/models/option.model';
 
