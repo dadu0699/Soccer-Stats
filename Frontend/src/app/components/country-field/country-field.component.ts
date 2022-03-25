@@ -11,7 +11,6 @@ import { CountryService } from 'src/app/services/country.service';
 })
 export class CountryFieldComponent implements OnInit {
 
-
   @Input('country') commingCountry!: number;
   @Output('selectCountry') selectCountry: EventEmitter<number>;
 

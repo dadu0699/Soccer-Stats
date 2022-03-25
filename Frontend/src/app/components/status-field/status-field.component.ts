@@ -9,6 +9,8 @@ import { Option } from 'src/app/models/option.model';
 export class StatusFieldComponent implements OnInit {
 
   @Input('options') options!: Option[];
+  @Input('option') commingOption!: number;
+
   @Output('selectOption') selectOption: EventEmitter<number>;
 
   constructor() {

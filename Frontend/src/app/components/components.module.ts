@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserViewComponent } from './user-view/user-view.component';
 import { TeamViewComponent } from './team-view/team-view.component';
+import { CompetitionViewComponent } from './competition-view/competition-view.component';
 
 import { ViewTableComponent } from './view-table/view-table.component';
 import { ManagementOptionsComponent } from './management-options/management-options.component';
@@ -12,6 +13,7 @@ import { StatusFieldComponent } from './status-field/status-field.component';
 import { DateFieldComponent } from './date-field/date-field.component';
 import { ImageFieldComponent } from './image-field/image-field.component';
 import { CountryFieldComponent } from './country-field/country-field.component';
+import { TeamFieldComponent } from './team-field/team-field.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -33,22 +35,27 @@ import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
+    UserViewComponent,
+    TeamViewComponent,
+    CompetitionViewComponent,
     CountryFieldComponent,
+    TeamFieldComponent,
     ImageFieldComponent,
     StatusFieldComponent,
-    TeamViewComponent,
     DateFieldComponent,
-    UserViewComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
   ],
   exports: [
+    UserViewComponent,
+    TeamViewComponent,
+    CompetitionViewComponent,
     CountryFieldComponent,
     ImageFieldComponent,
     StatusFieldComponent,
+    TeamFieldComponent,
     DateFieldComponent,
-    UserViewComponent,
-    TeamViewComponent,
+    ViewTableComponent,
     ManagementOptionsComponent,
   ],
   imports: [

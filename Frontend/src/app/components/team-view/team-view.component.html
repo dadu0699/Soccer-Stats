@@ -17,10 +17,10 @@
         </app-country-field>
       </div>
 
-      <app-date-field [date]="team.foundation_date" [description]="'Foundation '" (setDate)=setDate($event)>
+      <app-date-field [readonly]="readonly" [date]="team.foundation_date" [description]="'Foundation '" (setDate)=setDate($event)>
       </app-date-field>
 
-      <button mat-stroked-button color="warn" (click)="done()">
+      <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
         {{allowEditing ? 'Save Changes' : 'Done'}}
       </button>
 

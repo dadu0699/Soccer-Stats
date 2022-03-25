@@ -39,11 +39,21 @@ export class TeamViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fillTable();
   }
 
   public done() {
-    console.log(this.team);
-    this.fillTable();
+    if (this.allowEditing) {
+      this.updateExisting();
+    }else{
+      console.log(this.team, 'Create new');
+    }
+  }
+
+  public updateExisting() {
+    console.log('Update', this.team);
+    this.readonly = true;
+    this.allowEditing = false;
   }
 
   private fillTable() {
@@ -58,7 +68,6 @@ export class TeamViewComponent implements OnInit {
       this.labels.push('actions')
       this.dataSource.data = this.dataTable;
     });
-
   }
 
   public setDate(date: any) {

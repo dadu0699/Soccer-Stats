@@ -1,5 +1,5 @@
 <label>Choose an option:</label>
-<mat-radio-group class="radio-group" (change)="selectedOption($event.value)">
+<mat-radio-group class="radio-group" (change)="selectedOption($event.value)" [ngModel]="commingOption">
   <mat-radio-button *ngFor="let option of options" [value]="option.id">
     {{option.description}}
   </mat-radio-button>

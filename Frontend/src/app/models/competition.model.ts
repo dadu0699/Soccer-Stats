@@ -14,5 +14,6 @@ export class Competition {
     this.type = 0;
     this.year = 0;
     this.id_country = 0;
+    this.id_champion_team =0;
   }
 }
