@@ -17,7 +17,6 @@ export class User {
     this.password = "";
     this.email = "";
     this.phone = "";
-    this.photo = "";
     this.gender = "";
     this.birth_date = "";
     this.address = "";
