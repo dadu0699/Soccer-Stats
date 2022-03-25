@@ -18,6 +18,7 @@ export class TeamViewComponent implements OnInit {
   public allTeams: Team[];
 
   public readonly: boolean;
+  public allowEditing: boolean;
 
   constructor() {
     this.labels = ['no.', 'name', 'foundation date', 'country', 'actions'];
@@ -26,11 +27,12 @@ export class TeamViewComponent implements OnInit {
 
     this.team = new Team();
     this.allTeams = [
-      { id: 1, name: 'Equipo 1', foundation_date: '21/01/2021', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg', id_country: 1, country: 'Country 1' },
-      { id: 2, name: 'Equipo 2', foundation_date: '22/02/2022', photo: 'NA', id_country: 2, country: 'Country 2' }
+      { id: 1, name: 'Equipo 1', foundation_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg', id_country: 1, country: 'Country 1' },
+      { id: 2, name: 'Equipo 2', foundation_date: '2022-01-25', photo: 'NA', id_country: 2, country: 'Country 2' }
     ]
 
     this.readonly = false;
+    this.allowEditing = false;
   }
 
   ngOnInit(): void {
@@ -66,6 +68,7 @@ export class TeamViewComponent implements OnInit {
 
   public selectTeam(id_team: any) {
     this.readonly = true;
+    this.allowEditing = false;
     let team: Team = this.allTeams.find(el => el.id === id_team) || new Team();
     this.team = team;
   }
@@ -73,11 +76,13 @@ export class TeamViewComponent implements OnInit {
   public create() {
     this.team = new Team();
     this.readonly = false;
+    this.allowEditing = false;
     console.log('Creando');
   }
 
   public edit() {
     this.readonly = false;
+    this.allowEditing = true;
     console.log('Editando');
   }
 

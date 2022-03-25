@@ -5,7 +5,7 @@
       <h3>Teams Management</h3>
       <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="team.photo"></app-image-field>
 
-
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing enabled!</span>
       <div fxLayout="row" fxLayoutAlign="space-evenly center">
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
@@ -25,7 +25,9 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <button mat-stroked-button color="warn" (click)="done()">Done</button>
+      <button mat-stroked-button color="warn" (click)="done()">
+        {{allowEditing ? 'Save Changes' : 'Done'}}
+      </button>
 
       <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
       </app-management-options>
