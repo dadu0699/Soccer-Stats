@@ -15,7 +15,7 @@ provider "google" {
 }
 
 data "template_file" "init" {
-  template = file("./Scripts/startup_script.sh")
+  template = file("../Scripts/startup_script.sh")
 
   vars = {
     google_access = var.google_access
