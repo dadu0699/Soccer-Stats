@@ -26,7 +26,7 @@ export class TeamFieldComponent implements OnInit {
     this.selectTeam = new EventEmitter<number>();
    }
 
-   async ngOnInit(): Promise<void> {
+  async ngOnInit(): Promise<void> {
     //await this.getTeams();
   }
 

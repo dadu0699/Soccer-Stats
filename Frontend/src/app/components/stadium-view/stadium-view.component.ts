@@ -42,7 +42,7 @@ export class StadiumViewComponent implements OnInit {
         id: 2, name: 'Estadio 2', foundation_date: '2022-01-25', capacity: 200, photo: 'NA',
         id_country: 2, country: 'Country 2', address: 'Dirección 2', status: 2,
       },
-    ]
+    ];
 
     this.status = [
       { id: 1, description: 'Disponible' },

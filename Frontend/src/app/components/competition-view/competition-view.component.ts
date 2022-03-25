@@ -34,7 +34,7 @@ export class CompetitionViewComponent implements OnInit {
     this.allCompetitions = [
       { id: 1, name: 'Equipo 1', year: 2021, id_country: 1, country: 'Country 1', type: 3, id_champion_team: 1, champion_team: 'Equipo ganador 1' },
       { id: 2, name: 'Equipo 2', year: 2022, id_country: 2, country: 'Country 2', type: 5, id_champion_team: 1, champion_team: 'Equipo ganador 1' }
-    ]
+    ];
     this.types = [
       { id: 1, description: 'Liga' },
       { id: 2, description: 'Eliminatoria' },
@@ -42,7 +42,7 @@ export class CompetitionViewComponent implements OnInit {
       { id: 4, description: 'SuperCopa' },
       { id: 5, description: 'Cuadrangular' },
       { id: 6, description: 'Triangular' },
-    ]
+    ];
 
     this.readonly = false;
     this.allowEditing = false;
@@ -92,7 +92,6 @@ export class CompetitionViewComponent implements OnInit {
 
   public selectTeam(id_team: any) {
     this.competition.id_champion_team = id_team;
-    console.log(this.competition.id_champion_team);
   }
 
   public selectCompetition(id_competition: any) {
@@ -100,7 +99,6 @@ export class CompetitionViewComponent implements OnInit {
     this.allowEditing = false;
     let competition: Competition = this.allCompetitions.find(el => el.id === id_competition) || new Competition();
     this.competition = competition;
-    console.log(this.competition)
   }
 
   public create() {

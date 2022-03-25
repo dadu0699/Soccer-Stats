@@ -1,1 +1,79 @@
-<p>game-view works!</p>
+<mat-grid-list cols="12" rowHeight="105px">
+  <mat-grid-tile colspan="6" rowspan="5">
+
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Game Management</h3>
+
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing enabled!</span>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Local team result</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="game.result_local" name="resultLocalField"
+            #resultLocalField="ngModel" required />
+        </mat-form-field>
+
+        <app-team-field [team]="game.id_team_local" (selectTeam)="selectLocalTeam($event)" class="extra-field">
+        </app-team-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Visiting team result</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="game.result_visiting" name="resultVisitingField"
+            #resultVisitingField="ngModel" required />
+        </mat-form-field>
+
+        <app-team-field [team]="game.id_team_visiting" (selectTeam)="selectVisitingTeam($event)" class="extra-field">
+        </app-team-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <app-date-field [readonly]="readonly" [date]="game.game_date" [description]="'Game '" (setDate)=setDate($event)>
+        </app-date-field>
+
+        <app-competition-field [competition]="game.id_competition" (selectCompetition)="selectCompetition($event)" class="extra-field">
+        </app-competition-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Atendees</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="game.attendees" name="attendeesField"
+            #attendeesField="ngModel" required />
+        </mat-form-field>
+
+        <app-stadium-field [stadium]="game.id_stadium" (selectStadium)="selectStadium($event)" class="extra-field">
+        </app-stadium-field>
+      </div>
+
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <app-status-field [option]="game.status" [options]="status" (selectOption)="selectStatus($event)">
+        </app-status-field>
+        <section class="spacer"></section>
+        <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
+          {{allowEditing ? 'Save Changes' : 'Done'}}
+        </button>
+      </div>
+
+
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="6" rowspan="5">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Game List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectGame($event)">
+      </app-view-table>
+
+      <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
+      </app-management-options>
+    </div>
+  </mat-grid-tile>
+
+
+</mat-grid-list>

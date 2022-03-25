@@ -1,0 +1,6 @@
+<mat-form-field appearance="outline">
+  <mat-label>Competition</mat-label>
+  <mat-select (selectionChange)="select($event.value)" [ngModel]="commingCompetition">
+    <mat-option *ngFor="let competition of competitions" [value]="competition.id">{{competition.id}}</mat-option>
+  </mat-select>
+</mat-form-field>

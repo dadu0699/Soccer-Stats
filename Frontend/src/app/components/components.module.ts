@@ -18,7 +18,8 @@ import { DateFieldComponent } from './date-field/date-field.component';
 import { ImageFieldComponent } from './image-field/image-field.component';
 import { CountryFieldComponent } from './country-field/country-field.component';
 import { TeamFieldComponent } from './team-field/team-field.component';
-
+import { StadiumFieldComponent } from './stadium-field/stadium-field.component';
+import { CompetitionFieldComponent } from './competition-field/competition-field.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -52,6 +53,8 @@ import { MatIconModule } from '@angular/material/icon';
     ImageFieldComponent,
     StatusFieldComponent,
     DateFieldComponent,
+    StadiumFieldComponent,
+    CompetitionFieldComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
   ],
@@ -68,6 +71,8 @@ import { MatIconModule } from '@angular/material/icon';
     StatusFieldComponent,
     TeamFieldComponent,
     DateFieldComponent,
+    StadiumFieldComponent,
+    CompetitionFieldComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
   ],
