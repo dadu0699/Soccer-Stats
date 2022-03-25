@@ -9,7 +9,7 @@ pipeline {
     PRODUCTION_IP = credentials('PRODUCTION_IP')
     
     GCR_ID = credentials('PROJECT_ID')
-    // Credenciales (.json) con los permisos de: 'Administrador de Acceso a VPC sin servidores', 'Administrador de Compute', 'Agente de servicios de recursos de nube' 
+    // Credenciales (.json) con los permisos de: 'Administrador de Acceso a VPC sin servidores', 'Administrador de Compute', 'Agente de servicios de recursos de nube', 'Visualizador de objetos de Storage' 
     GOOGLE_APPLICATION_CREDENTIALS = credentials('GOOGLE_APPLICATION_CREDENTIALS')
   }
 
