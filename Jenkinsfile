@@ -374,7 +374,7 @@ pipeline {
           sh '''
             export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
 
-            export TF_VAR_google_application_credentials=$(cat ${GOOGLE_APPLICATION_CREDENTIALS})
+            export TF_VAR_google_access=$(cat ${GOOGLE_APPLICATION_CREDENTIALS})
             export TF_VAR_gcr_id=${GCR_ID}
             export TF_VAR_testing_ip=${TESTING_IP}
 
