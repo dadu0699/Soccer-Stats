@@ -13,6 +13,9 @@ router.put('/', [verificarToken,isAdminOrEmployee], async (req, res) => {
     let { photo } = req.body; 
 
     try {
+        if (id == undefined) {
+            throw new Error('El id es requerido');
+        }
 
         photo = photo != undefined ? photo : '';
         let url = ''
