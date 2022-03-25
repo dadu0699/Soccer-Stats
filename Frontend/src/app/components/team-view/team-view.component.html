@@ -1,8 +1,7 @@
 <mat-grid-list cols="12" rowHeight="100px">
   <mat-grid-tile colspan="6" rowspan="5">
+
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
-
-
       <h3>Teams Management</h3>
       <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="team.photo"></app-image-field>
 
@@ -27,8 +26,8 @@
 
       <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
       </app-management-options>
-
     </div>
+
   </mat-grid-tile>
 
   <mat-grid-tile colspan="6" rowspan="5">

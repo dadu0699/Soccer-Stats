@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Option } from 'src/app/models/option.model';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { User } from '../../models/user.model';
+import { Option } from 'src/app/models/option.model';
 
 @Component({
   selector: 'app-user-view',
@@ -13,7 +15,9 @@ export class UserViewComponent implements OnInit {
   public genders: Option[];
 
 
-  constructor() {
+  constructor(
+    private _snackBar: MatSnackBar,
+  ) {
     this.user = new User();
     this.genders = [
       { id: 1, description: 'Male' },
@@ -22,7 +26,10 @@ export class UserViewComponent implements OnInit {
     ];
   }
 
-  public async signup(): Promise<void> {
+  ngOnInit(): void {
+  }
+
+  public async done(): Promise<void> {
     console.log(this.user);
   }
 
@@ -42,7 +49,7 @@ export class UserViewComponent implements OnInit {
     this.user.gender = id_gender;
   }
 
-  ngOnInit(): void {
+  showSnackbar(message: string = 'Something went wrong :c') {
+    this._snackBar.open(message, 'CLOSE', { duration: 5000 });
   }
-
 }

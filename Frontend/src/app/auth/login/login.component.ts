@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import * as Feather from 'feather-icons';
 
 @Component({
@@ -14,6 +16,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _router: Router,
+    private _snackBar: MatSnackBar,
   ) {
     this.email = '';
     this.password = '';
@@ -28,9 +31,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this._router.navigate(['/soccer-stats']);
   }
 
-
   ngAfterViewInit() {
     Feather.replace();
+  }
+
+  showSnackbar(message: string = 'Something went wrong :c') {
+    this._snackBar.open(message, 'CLOSE', { duration: 5000 });
   }
 
 }

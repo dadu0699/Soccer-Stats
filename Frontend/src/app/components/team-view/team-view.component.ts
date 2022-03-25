@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Team } from 'src/app/models/team.model';
 
@@ -20,7 +21,9 @@ export class TeamViewComponent implements OnInit {
   public readonly: boolean;
   public allowEditing: boolean;
 
-  constructor() {
+  constructor(
+    private _snackBar: MatSnackBar,
+  ) {
     this.labels = ['no.', 'name', 'foundation date', 'country', 'actions'];
     this.dataTable = [];
     this.dataSource = new MatTableDataSource<any>();
@@ -81,16 +84,17 @@ export class TeamViewComponent implements OnInit {
     this.team = new Team();
     this.readonly = false;
     this.allowEditing = false;
-    console.log('Creando');
   }
 
   public edit() {
     this.readonly = false;
     this.allowEditing = true;
-    console.log('Editando');
   }
 
   public delete() {
-    console.log('Eliminando');
+  }
+
+  showSnackbar(message: string = 'Something went wrong :c') {
+    this._snackBar.open(message, 'CLOSE', { duration: 5000 });
   }
 }
