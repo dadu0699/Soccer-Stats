@@ -47,7 +47,7 @@ export class UserViewComponent implements OnInit {
         address: 'Direccion 2', id_country: 2, id_gender: 2, gender: 'Female',
         id_rol: 2, photo: 'https://mn2s-content.s3.eu-west-2.amazonaws.com/wp-content/uploads/2021/03/19174550/Chris-Wood.png', id_status: 2, age: 222,
       },
-    ];
+    ]; //TODO Delete info
 
     this.genders = [
       { id: 1, description: 'Male' },
@@ -70,7 +70,7 @@ export class UserViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable();
+    this.fillTable(); //TODO Read
   }
 
   private fillTable() {
@@ -95,12 +95,12 @@ export class UserViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.user, 'Create new');
+      console.log(this.user); //TODO Create
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.user);
+    console.log(this.user); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -112,7 +112,7 @@ export class UserViewComponent implements OnInit {
   public manageAccount(info: any) {
     this.manage = false;
     console.log(info)
-    this.showSnackbar('Status Updated');
+    this.showSnackbar('Status Updated'); //TODO Update account status
   }
 
   public selectUser(id: any) {
@@ -135,6 +135,7 @@ export class UserViewComponent implements OnInit {
   }
 
   public delete() {
+    console.log(this.user.id_user); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

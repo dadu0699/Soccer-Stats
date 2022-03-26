@@ -29,19 +29,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   public async signin(): Promise<void> {
-    console.log(this.email, this.password)
-    this._router.navigate(['/soccer-stats']);
+    console.log(this.email, this.password) //TODO signin
+    this._router.navigate(['/soccer-stats/']);
   }
 
   public async signup(new_user: any): Promise<void> {
-    console.log(new_user);
+    console.log(new_user); // TODO Register customer user
   }
 
   public recoverPassword(){
     const dialogRef = this.dialog.open(ForgotPasswordDialogComponent, {});
 
     dialogRef.afterClosed().subscribe( async (email) =>{
-      console.log(email);
+      console.log(email); //TODO recover password
     });
   }
 
