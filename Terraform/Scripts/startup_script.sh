@@ -17,7 +17,7 @@ sudo docker run -d -p 5005:5005 --restart always --name technical-service ${gcr_
 sudo docker run -d -p 5006:5006 --restart always --name player-service ${gcr_id}/player-service:latest
 sudo docker run -d -p 5007:5007 --restart always --name post-service ${gcr_id}/post-service:latest
 sudo docker run -d -p 5010:5010 --restart always --name auth-service ${gcr_id}/auth-service:latest
-# sudo docker run -d -p 5011:5011 --restart always --name administrator-service ${gcr_id}/administrator-service:latest
+sudo docker run -d -p 5011:5011 --restart always --name administrator-service ${gcr_id}/administrator-service:latest
 sudo docker run -d -p 5012:5012 --restart always --name employee-service ${gcr_id}/employee-service:latest
 sudo docker run -d -p 5013:5013 --restart always --name country-service ${gcr_id}/country-service:latest
 

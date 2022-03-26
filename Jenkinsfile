@@ -162,8 +162,8 @@ pipeline {
               rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
-              # npm install
-              # npm run test
+              npm install
+              npm run test
             '''
           }
         }
