@@ -27,10 +27,11 @@ export default class ReporteController {
         }
 
         let query = `
-            SELECT usuario.nombre, usuario.apellido, usuario.correo, usuario.fotografia, pais.nombre AS pais FROM favorito
-            INNER JOIN usuario ON usuario.usuarioID = favorito.usuarioID
-            INNER JOIN pais ON pais.paisID = usuario.paisID
-            WHERE favorito.equipoID = :id_team;
+            SELECT Usuario.nombre, Usuario.apellido, Usuario.correo, Usuario.fotografia, 
+                Pais.nombre AS pais FROM Favorito
+            INNER JOIN Usuario ON Usuario.usuarioID = Favorito.usuarioID
+            INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+            WHERE Favorito.equipoID = :id_team;
         `;
 
         const data = await db.query(query, {
@@ -65,10 +66,10 @@ export default class ReporteController {
 
         if (membership == '0') {
             let query = `
-                SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
-                usuario.fotografia, pais.nombre AS pais FROM usuario
-                INNER JOIN pais ON pais.paisID = usuario.paisID
-                wHERE usuarioID NOT IN (SELECT usuarioID FROM membresia);
+                SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
+                Usuario.fotografia, Pais.nombre AS pais FROM Usuario
+                INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+                WHERE usuarioID NOT IN (SELECT usuarioID FROM Membresia);
             `;
 
             const data = await db.query(query, {
@@ -93,10 +94,10 @@ export default class ReporteController {
             });
         } else if (membership == '1') {
             let query = `
-                SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
-                usuario.fotografia, pais.nombre AS pais FROM usuario
-                INNER JOIN pais ON pais.paisID = usuario.paisID
-                wHERE usuarioID IN (SELECT usuarioID FROM membresia);
+                SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
+                Usuario.fotografia, Pais.nombre AS pais FROM Usuario
+                INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+                WHERE usuarioID IN (SELECT usuarioID FROM Membresia);
             `;
 
             const data = await db.query(query, {
@@ -133,11 +134,11 @@ export default class ReporteController {
      */
     reporte3 = async (req: Request, res: Response) => {
         let query = `
-            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
-            usuario.fotografia, pais.nombre AS pais, COUNT(*) count FROM membresia
-            INNER JOIN usuario ON usuario.usuarioID = membresia.usuarioID
-            INNER JOIN pais ON pais.paisID = usuario.paisID
-            GROUP BY usuario.usuarioID
+            SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
+            Usuario.fotografia, Pais.nombre AS pais, COUNT(*) count FROM Membresia
+            INNER JOIN Usuario ON Usuario.usuarioID = Membresia.usuarioID
+            INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+            GROUP BY Usuario.usuarioID
             ORDER BY count DESC
             LIMIT 10;
         `;
@@ -170,11 +171,11 @@ export default class ReporteController {
      */
     reporte4 = async (req: Request, res: Response) => {
         let query = `
-            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
-            usuario.fotografia, pais.nombre AS pais, (COUNT(*) * 15) mount FROM membresia
-            INNER JOIN usuario ON usuario.usuarioID = membresia.usuarioID
-            INNER JOIN pais ON pais.paisID = usuario.paisID
-            GROUP BY usuario.usuarioID
+            SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
+            Usuario.fotografia, Pais.nombre AS pais, (COUNT(*) * 15) mount FROM Membresia
+            INNER JOIN Usuario ON Usuario.usuarioID = Membresia.usuarioID
+            INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+            GROUP BY Usuario.usuarioID
             ORDER BY mount DESC
             LIMIT 10;
         `;
@@ -217,10 +218,10 @@ export default class ReporteController {
         }
 
         let query = `
-            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, 
-            usuario.correo, usuario.fotografia, pais.nombre AS pais FROM usuario
-            INNER JOIN pais ON pais.paisID = usuario.paisID
-            WHERE usuario.paisID = :id_country;
+            SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, 
+            Usuario.correo, Usuario.fotografia, Pais.nombre AS pais FROM Usuario
+            INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+            WHERE Usuario.paisID = :id_country;
         `;
 
         const data = await db.query(query, {
@@ -263,10 +264,10 @@ export default class ReporteController {
         }
 
         let query = `
-            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, 
-            usuario.correo, usuario.fotografia, pais.nombre AS pais FROM usuario
-            INNER JOIN pais ON pais.paisID = usuario.paisID
-            WHERE usuario.genero = :gender;
+            SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, 
+            Usuario.correo, Usuario.fotografia, Pais.nombre AS pais FROM Usuario
+            INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+            WHERE Usuario.genero = :gender;
         `;
 
         const data = await db.query(query, {
@@ -309,12 +310,12 @@ export default class ReporteController {
         }
 
         let query = `
-            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, 
-            usuario.correo, usuario.fotografia, pais.nombre AS pais,
-            floor(datediff (now(), usuario.fechaNacimiento)/365) AS age
-            FROM usuario
-            INNER JOIN pais ON pais.paisID = usuario.paisID
-            WHERE floor(datediff (now(), usuario.fechaNacimiento)/365) <= :age;
+            SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, 
+            Usuario.correo, Usuario.fotografia, Pais.nombre AS pais,
+            floor(datediff (now(), Usuario.fechaNacimiento)/365) AS age
+            FROM Usuario
+            INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+            WHERE floor(datediff (now(), Usuario.fechaNacimiento)/365) >= :age;
         `;
 
         const data = await db.query(query, {
@@ -358,11 +359,11 @@ export default class ReporteController {
         }
 
         let query = `
-            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
-            usuario.fotografia, pais.nombre AS pais, COUNT(*) count FROM noticia
-            INNER JOIN usuario ON usuario.usuarioID = noticia.usuarioID
-            INNER JOIN pais ON pais.paisID = usuario.paisID
-            GROUP BY usuario.usuarioID
+            SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
+            Usuario.fotografia, Pais.nombre AS pais, COUNT(*) count FROM Noticia
+            INNER JOIN Usuario ON Usuario.usuarioID = Noticia.usuarioID
+            INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+            GROUP BY Usuario.usuarioID
         `;
 
         if (order == '0') {
@@ -417,12 +418,12 @@ export default class ReporteController {
         }
 
         let query = `
-            SELECT usuario.usuarioID, usuario.nombre, usuario.apellido, usuario.correo,
-            usuario.fotografia, pais.nombre AS pais, COUNT(*) count FROM noticia
-            INNER JOIN usuario ON usuario.usuarioID = noticia.usuarioID
-            INNER JOIN pais ON pais.paisID = usuario.paisID
-            WHERE noticia.equipoID = :id_team
-            GROUP BY usuario.usuarioID
+            SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
+            Usuario.fotografia, Pais.nombre AS pais, COUNT(*) count FROM Noticia
+            INNER JOIN Usuario ON Usuario.usuarioID = Noticia.usuarioID
+            INNER JOIN Pais ON Pais.paisID = Usuario.paisID
+            WHERE Noticia.equipoID = :id_team
+            GROUP BY Usuario.usuarioID
         `;
 
         if (order == '0') {
@@ -462,9 +463,10 @@ export default class ReporteController {
      */
     reporte10 = async (req: Request, res: Response) => {
         let query = `
-            SELECT bitacora.bitacoraID, usuario.nombre, usuario.apellido, usuario.correo,
-            usuario.fotografia, accion, nombreTabla, registro, fecha, usuario.rol  FROM bitacora
-            INNER JOIN usuario ON usuario.usuarioID = bitacora.usuarioID;
+            SELECT Bitacora.bitacoraID, Usuario.nombre, Usuario.apellido, Usuario.correo,
+            Usuario.fotografia, accion, nombreTabla, registro, fecha, Usuario.rol  FROM Bitacora
+            INNER JOIN Usuario ON Usuario.usuarioID = Bitacora.usuarioID
+            ORDER BY fecha DESC;
         `;
 
         const data = await db.query(query, {
