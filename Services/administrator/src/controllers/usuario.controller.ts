@@ -217,8 +217,9 @@ export default class UsuarioController {
                     await UploadFile(base64, extension).then((data) => url = data);
 
                     if (url == null) {
-                        return res.status(409).json({
-                            status: false
+                        return res.status(400).json({
+                            status: 400,
+                            data: []
                         })
                     }
 
