@@ -302,3 +302,16 @@ INNER JOIN Equipo ON Equipo.equipoID = ContratoDT.equipoDestinoID
 INNER JOIN DirectorTecnico ON DirectorTecnico.directorTecnicoID = ContratoDT.directorTecnicoID
 INNER JOIN Pais ON Pais.paisID = DirectorTecnico.paisID
 WHERE FLOOR(DATEDIFF (NOW(), DirectorTecnico.fechaNacimiento)/365) < 18;
+
+-- EQUIPOS QUE PARTICIPARON EN X PARTICIPACION
+SELECT CompetenciaEquipo.competenciaID AS id_competition, Equipo.nombre team, Equipo.equipoID AS id_team,
+Equipo.fotoLogo AS photo
+FROM CompetenciaEquipo
+INNER JOIN Equipo ON Equipo.equipoID = CompetenciaEquipo.equipoID
+WHERE CompetenciaEquipo.competenciaID = 1;
+
+-- EQUIPOS DE X PAIS
+SELECT Equipo.equipoID AS id_team, Equipo.nombre AS team,
+Equipo.fotoLogo AS photo, Equipo.paisID AS id_country, Pais.nombre AS country FROM Equipo
+INNER JOIN Pais ON Pais.paisID = Equipo.paisID
+WHERE Pais.paisID = 1;
