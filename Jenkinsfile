@@ -24,376 +24,344 @@ pipeline {
       }
     }
 
-    stage('Run Tests Phase 1') {
-      parallel {
-        stage('Test On Customer Service') {
-          when { changeset "Services/customer/*"}
-          steps {
-            sh '''
-              cd Services/customer
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
+    stage('Test On Customer Service') {
+      when { changeset "Services/customer/**"}
+      steps {
+        sh '''
+          cd Services/customer
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              npm install
-              npm run test
-            '''
-          }
-        }
-
-        stage('Test On Team Service') {
-          when { changeset "Services/team/*"}
-          steps {
-            sh '''
-              cd Services/team
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
-
-              npm install
-              npm run test
-            '''
-          }
-        }
-
-        stage('Test On Match Service') {
-          when { changeset "Services/match/*"}
-          steps {
-            sh '''
-              cd Services/match
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
-
-              npm install
-              npm run test
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
       }
     }
 
-    stage('Run Tests Phase 2') {
-      parallel {
-        stage('Test On Competition Service') {
-          when { changeset "Services/competition/*"}
-          steps {
-            sh '''
-              cd Services/competition
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
+    stage('Test On Team Service') {
+      when { changeset "Services/team/**"}
+      steps {
+        sh '''
+          cd Services/team
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              npm install
-              npm run test
-            '''
-          }
-        }
-
-        stage('Test On Stadium Service') {
-          when { changeset "Services/stadium/*"}
-          steps {
-            sh '''
-              cd Services/stadium
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
-
-              npm install
-              npm run test
-            '''
-          }
-        }
-
-        stage('Test On Teachnical Director Service') {
-          when { changeset "Services/technical_director/*"}
-          steps {
-            sh '''
-              cd Services/technical_director
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
-
-              npm install
-              npm run test
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
       }
     }
 
-    stage('Run Tests Phase 3') {
-      parallel {
-        stage('Test On Player Service') {
-          when { changeset "Services/player/*"}
-          steps {
-            sh '''
-              cd Services/player
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
+    stage('Test On Match Service') {
+      when { changeset "Services/match/**"}
+      steps {
+        sh '''
+          cd Services/match
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              npm install
-              npm run test
-            '''
-          }
-        }
-
-        stage('Test On Post Service') {
-          when { changeset "Services/post/*"}
-          steps {
-            sh '''
-              cd Services/post
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
-
-              npm install
-              npm run test
-            '''
-          }
-        }
-
-        stage('Test On Auth Service') {
-          when { changeset "Services/auth/*"}
-          steps {
-            sh '''
-              cd Services/auth
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
-
-              npm install
-              npm run test
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
       }
     }
 
-    stage('Run Tests Phase 4') {
-      parallel {
-        stage('Test On Administrator Service') {
-          when { changeset "Services/administrator/*"}
-          steps {
-            sh '''
-              cd Services/administrator
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
+    stage('Test On Competition Service') {
+      when { changeset "Services/competition/**"}
+      steps {
+        sh '''
+          cd Services/competition
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              npm install
-              npm run test
-            '''
-          }
-        }
-
-        stage('Test On Employee Service') {
-          when { changeset "Services/employee/*"}
-          steps {
-            sh '''
-              cd Services/employee
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
-
-              npm install
-              npm run test
-            '''
-          }
-        }
-
-        stage('Test On Country Service') {
-          when { changeset "Services/country/*"}
-          steps {
-            sh '''
-              cd Services/country
-              rm -rf .env.test
-              cp ${ENV_TEST} .env.test
-
-              npm install
-              npm run test
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
       }
     }
 
-    stage('Build Images Phase 1') {
-      parallel {
-        stage('Build Customer Image') {
-          when { changeset "Services/customer/*"}
-          steps {
-            sh '''
-              cd Services/customer
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
+    stage('Test On Stadium Service') {
+      when { changeset "Services/stadium/**"}
+      steps {
+        sh '''
+          cd Services/stadium
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              docker build -t ${GCR_ID}/customer-service:${image_tag} .
-              docker push ${GCR_ID}/customer-service:${image_tag}
-            '''
-          }
-        }
-
-        stage('Build Team Image') {
-          when { changeset "Services/team/*"}
-          steps {
-            sh '''
-              cd Services/team
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
-
-              docker build -t ${GCR_ID}/team-service:${image_tag} .
-              docker push ${GCR_ID}/team-service:${image_tag}
-            '''
-          }
-        }
-
-        stage('Build Match Image') {
-          when { changeset "Services/match/*"}
-          steps {
-            sh '''
-              cd Services/match
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
-
-              docker build -t ${GCR_ID}/match-service:${image_tag} .
-              docker push ${GCR_ID}/match-service:${image_tag}
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
       }
     }
 
-    stage('Build Images Phase 2') {
-      parallel {
-        stage('Build Competition Image') {
-          when { changeset "Services/competition/*"}
-          steps {
-            sh '''
-              cd Services/competition
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
+    stage('Test On Teachnical Director Service') {
+      when { changeset "Services/technical_director/**"}
+      steps {
+        sh '''
+          cd Services/technical_director
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              docker build -t ${GCR_ID}/competition-service:${image_tag} .
-              docker push ${GCR_ID}/competition-service:${image_tag}
-            '''
-          }
-        }
-
-        stage('Build Stadium Image') {
-          when { changeset "Services/stadium/*"}
-          steps {
-            sh '''
-              cd Services/stadium
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
-
-              docker build -t ${GCR_ID}/stadium-service:${image_tag} .
-              docker push ${GCR_ID}/stadium-service:${image_tag}
-            '''
-          }
-        }
-
-        stage('Build Technical Director Image') {
-          when { changeset "Services/technical_director/*"}
-          steps {
-            sh '''
-              cd Services/technical_director
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
-
-              docker build -t ${GCR_ID}/technical-director-service:${image_tag} .
-              docker push ${GCR_ID}/technical-director-service:${image_tag}
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
       }
     }
 
-    stage('Build Images Phase 3') {
-      parallel {
-        stage('Build Player Image') {
-          when { changeset "Services/player/*"}
-          steps {
-            sh '''
-              cd Services/player
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
+    stage('Test On Player Service') {
+      when { changeset "Services/player/**"}
+      steps {
+        sh '''
+          cd Services/player
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              docker build -t ${GCR_ID}/player-service:${image_tag} .
-              docker push ${GCR_ID}/player-service:${image_tag}
-            '''
-          }
-        }
-
-        stage('Build Post Image') {
-          when { changeset "Services/post/*"}
-          steps {
-            sh '''
-              cd Services/post
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
-
-              docker build -t ${GCR_ID}/post-service:${image_tag} .
-              docker push ${GCR_ID}/post-service:${image_tag}
-            '''
-          }
-        }
-
-        stage('Build Auth Image') {
-          when { changeset "Services/auth/*"}
-          steps {
-            sh '''
-              cd Services/auth
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
-
-              docker build -t ${GCR_ID}/auth-service:${image_tag} .
-              docker push ${GCR_ID}/auth-service:${image_tag}
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
       }
     }
 
-    stage('Build Images Phase 4') {
-      parallel {
-        stage('Build Administrator Image') {
-          when { changeset "Services/administrator/*"}
-          steps {
-            sh '''
-              cd Services/administrator
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
+    stage('Test On Post Service') {
+      when { changeset "Services/post/**"}
+      steps {
+        sh '''
+          cd Services/post
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              docker build -t ${GCR_ID}/administrator-service:${image_tag} .
-              docker push ${GCR_ID}/administrator-service:${image_tag}
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
+      }
+    }
 
-        stage('Build Employee Image') {
-          when { changeset "Services/employee/*"}
-          steps {
-            sh '''
-              cd Services/employee
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
+    stage('Test On Auth Service') {
+      when { changeset "Services/auth/**"}
+      steps {
+        sh '''
+          cd Services/auth
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              docker build -t ${GCR_ID}/employee-service:${image_tag} .
-              docker push ${GCR_ID}/employee-service:${image_tag}
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
+      }
+    }
 
-        stage('Build Country Image') {
-          when { changeset "Services/country/*"}
-          steps {
-            sh '''
-              cd Services/country
-              rm -rf .env.production
-              cp ${ENV_PRODUCTION} .env.production
+    stage('Test On Administrator Service') {
+      when { changeset "Services/administrator/**"}
+      steps {
+        sh '''
+          cd Services/administrator
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
 
-              docker build -t ${GCR_ID}/country-service:${image_tag} .
-              docker push ${GCR_ID}/country-service:${image_tag}
-            '''
-          }
-        }
+          npm install
+          npm run test
+        '''
+      }
+    }
+
+    stage('Test On Employee Service') {
+      when { changeset "Services/employee/**"}
+      steps {
+        sh '''
+          cd Services/employee
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+      }
+    }
+
+    stage('Test On Country Service') {
+      when { changeset "Services/country/**"}
+      steps {
+        sh '''
+          cd Services/country
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+      }
+    }
+
+    stage('Build Customer Image') {
+      when { changeset "Services/customer/**"}
+      steps {
+        sh '''
+          cd Services/customer
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/customer-service:${image_tag} .
+          docker push ${GCR_ID}/customer-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Team Image') {
+      when { changeset "Services/team/**"}
+      steps {
+        sh '''
+          cd Services/team
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/team-service:${image_tag} .
+          docker push ${GCR_ID}/team-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Match Image') {
+      when { changeset "Services/match/**"}
+      steps {
+        sh '''
+          cd Services/match
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/match-service:${image_tag} .
+          docker push ${GCR_ID}/match-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Competition Image') {
+      when { changeset "Services/competition/**"}
+      steps {
+        sh '''
+          cd Services/competition
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/competition-service:${image_tag} .
+          docker push ${GCR_ID}/competition-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Stadium Image') {
+      when { changeset "Services/stadium/**"}
+      steps {
+        sh '''
+          cd Services/stadium
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/stadium-service:${image_tag} .
+          docker push ${GCR_ID}/stadium-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Technical Director Image') {
+      when { changeset "Services/technical_director/**"}
+      steps {
+        sh '''
+          cd Services/technical_director
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/technical-director-service:${image_tag} .
+          docker push ${GCR_ID}/technical-director-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Player Image') {
+      when { changeset "Services/player/**"}
+      steps {
+        sh '''
+          cd Services/player
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/player-service:${image_tag} .
+          docker push ${GCR_ID}/player-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Post Image') {
+      when { changeset "Services/post/**"}
+      steps {
+        sh '''
+          cd Services/post
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/post-service:${image_tag} .
+          docker push ${GCR_ID}/post-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Auth Image') {
+      when { changeset "Services/auth/**"}
+      steps {
+        sh '''
+          cd Services/auth
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/auth-service:${image_tag} .
+          docker push ${GCR_ID}/auth-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Administrator Image') {
+      when { changeset "Services/administrator/**"}
+      steps {
+        sh '''
+          cd Services/administrator
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/administrator-service:${image_tag} .
+          docker push ${GCR_ID}/administrator-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Employee Image') {
+      when { changeset "Services/employee/**"}
+      steps {
+        sh '''
+          cd Services/employee
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/employee-service:${image_tag} .
+          docker push ${GCR_ID}/employee-service:${image_tag}
+        '''
+      }
+    }
+
+    stage('Build Country Image') {
+      when { changeset "Services/country/**"}
+      steps {
+        sh '''
+          cd Services/country
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/country-service:${image_tag} .
+          docker push ${GCR_ID}/country-service:${image_tag}
+        '''
       }
     }
 
     stage('Build Frontend Test-Image') {
-      when { changeset "Frontend/*"}
+      when { changeset "Frontend/**"}
       steps {
         sh '''
           cd Frontend
@@ -426,13 +394,14 @@ pipeline {
     }
 
     stage('Testing Frontend') {
+      when { changeset "Frontend/**"}
       steps {
         sh 'echo "Testing Frontend"'
       }
     }
 
     stage('Build Frontend Image') {
-      when { changeset "Frontend/*"}
+      when { changeset "Frontend/**"}
       steps {
         sh '''
           cd Frontend
