@@ -248,8 +248,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              # docker build -t ${GCR_ID}/competition-service:${image_tag} .
-              # docker push ${GCR_ID}/competition-service:${image_tag}
+              docker build -t ${GCR_ID}/competition-service:${image_tag} .
+              docker push ${GCR_ID}/competition-service:${image_tag}
             '''
           }
         }
@@ -291,8 +291,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              # docker build -t ${GCR_ID}/player-service:${image_tag} .
-              # docker push ${GCR_ID}/player-service:${image_tag}
+              docker build -t ${GCR_ID}/player-service:${image_tag} .
+              docker push ${GCR_ID}/player-service:${image_tag}
             '''
           }
         }
@@ -334,8 +334,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              # docker build -t ${GCR_ID}/administrator-service:${image_tag} .
-              # docker push ${GCR_ID}/administrator-service:${image_tag}
+              docker build -t ${GCR_ID}/administrator-service:${image_tag} .
+              docker push ${GCR_ID}/administrator-service:${image_tag}
             '''
           }
         }
