@@ -21,6 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ViewTableComponent } from './view-table/view-table.component';
 import { ManagementOptionsComponent } from './management-options/management-options.component';
+import { AccountManagementComponent } from './account-management/account-management.component';
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -58,6 +59,7 @@ import { MatIconModule } from '@angular/material/icon';
     CompetitionFieldComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
+    AccountManagementComponent,
     UserRegisterFormComponent,
   ],
   exports: [
@@ -77,6 +79,7 @@ import { MatIconModule } from '@angular/material/icon';
     CompetitionFieldComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
+    AccountManagementComponent,
     UserRegisterFormComponent,
   ],
   imports: [

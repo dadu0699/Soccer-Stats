@@ -1,0 +1,21 @@
+<div class="space-top">
+  <div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <div>
+      <app-status-field [option]="currentStatus" [options]="status" (selectOption)="manageStatus($event)">
+      </app-status-field>
+
+      <button mat-stroked-button color="warn" (click)="sendNewStatus()">
+        Save Changes
+      </button>
+    </div>
+
+    <span class="space-between"></span>
+
+    <div>
+      <p> Description: </p>
+      <mat-form-field appearance="outline">
+        <textarea matInput rows="2" [(ngModel)]="description" name="descriptionField" #ndescriptionField="ngModel"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

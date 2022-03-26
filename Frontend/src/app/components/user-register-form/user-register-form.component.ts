@@ -19,6 +19,8 @@ export class UserRegisterFormComponent implements OnInit {
   @Input('user') user: User;
   @Output('sendUser') sendUser: EventEmitter<User>;
 
+  @Output('manageAccount') manage: EventEmitter<any>;
+
   public genders: Option[];
   public roles: Option[];
 
@@ -38,8 +40,12 @@ export class UserRegisterFormComponent implements OnInit {
 
     this.readonly = false;
     this.allowEditing = false;
+
     this.customer_side = true;
     this.sendUser = new EventEmitter<User>();
+
+    this.manage = new EventEmitter<User>();
+
   }
 
   ngOnInit(): void {
@@ -67,6 +73,10 @@ export class UserRegisterFormComponent implements OnInit {
 
   public selectRol(id_rol: any) {
     this.user.id_rol = id_rol;
+  }
+
+  public manageAccount() {
+    this.manage.emit();
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

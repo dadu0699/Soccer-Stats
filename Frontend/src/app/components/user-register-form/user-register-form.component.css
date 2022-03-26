@@ -13,4 +13,6 @@
   margin: 20px;
 }
 
-
+.mat-button-base {
+  margin: 8px 8px 8px 0;
+}

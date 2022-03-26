@@ -24,6 +24,7 @@ export class UserViewComponent implements OnInit {
 
   public readonly: boolean;
   public allowEditing: boolean;
+  public manage: boolean;
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -44,7 +45,7 @@ export class UserViewComponent implements OnInit {
         id_user: 2, name: 'nombre 2', lastname: 'apellido 2', email: 'mail 2',
         password: 'contraseña 2', phone: 'telefono 2', birth_date: '2022-02-22',
         address: 'Direccion 2', id_country: 2, id_gender: 2, gender: 'Female',
-        id_rol: 2, photo: 'NA 2', id_status: 2, age: 222,
+        id_rol: 2, photo: 'https://mn2s-content.s3.eu-west-2.amazonaws.com/wp-content/uploads/2021/03/19174550/Chris-Wood.png', id_status: 2, age: 222,
       },
     ];
 
@@ -65,6 +66,7 @@ export class UserViewComponent implements OnInit {
 
     this.readonly = false;
     this.allowEditing = false;
+    this.manage = false;
   }
 
   ngOnInit(): void {
@@ -79,7 +81,7 @@ export class UserViewComponent implements OnInit {
         lastname: element.lastname,
         email: element.email,
         age: element.age,
-        rol: this.roles[element.id_rol-1].description,
+        rol: this.roles[element.id_rol - 1].description,
         status: this.status[element.id_status - 1].description,
       });
       this.labels = Object.keys(this.dataTable[0]);
@@ -101,6 +103,16 @@ export class UserViewComponent implements OnInit {
     console.log('Update', this.user);
     this.readonly = true;
     this.allowEditing = false;
+  }
+
+  public allowAccountManagement() {
+    this.manage = true;
+  }
+
+  public manageAccount(info: any) {
+    this.manage = false;
+    console.log(info)
+    this.showSnackbar('Status Updated');
   }
 
   public selectUser(id_team: any) {
