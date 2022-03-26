@@ -40,20 +40,20 @@ export class TechnicalDirectorViewComponent implements OnInit {
       id_country: 1, country: 'Country 1', status: 1, id_team : 1, name_team: 'Equipo 1' },
       { id: 2, name: 'Director Técnico 2', lastname: 'DT2', birth_date: '2022-01-25', photo: 'NA',
       id_country: 2, country: 'Country 2', status: 3, id_team : 2, name_team: 'Equipo 2' },
-    ]
+    ]; //TODO Delete info
 
     this.status = [
       {id:1, description:'Activo'},
       {id:2, description:'Retirado'},
       {id:3, description:'Lesionado'},
-    ]
+    ];
 
     this.readonly = false;
     this.allowEditing = false;
   }
 
   ngOnInit(): void {
-    this.fillTable();
+    this.fillTable(); //TODO Read
   }
 
   private fillTable() {
@@ -77,12 +77,12 @@ export class TechnicalDirectorViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     }else{
-      console.log(this.technicalDirector, 'Create new');
+      console.log(this.technicalDirector); //TODO Create
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.technicalDirector);
+    console.log(this.technicalDirector); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -117,7 +117,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
     const dialogRef = this.dialog.open(TransferDialogComponent, {});
 
     dialogRef.afterClosed().subscribe( async (transference) =>{
-      console.log(transference);
+      console.log(transference); //TODO Transfer technical director
     });
   }
 
@@ -133,6 +133,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
   }
 
   public delete() {
+    console.log(this.technicalDirector.id); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

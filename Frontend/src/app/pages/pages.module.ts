@@ -10,20 +10,12 @@ import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 
 import { PagesComponent } from './pages.component';
-import { FeedComponent } from './feed/feed.component';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTabsModule } from '@angular/material/tabs';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
   declarations: [
     PagesComponent,
-    FeedComponent,
   ],
   imports: [
     CommonModule,
@@ -33,12 +25,6 @@ import { MatButtonModule } from '@angular/material/button';
     PagesRoutingModule,
     SharedModule,
     ComponentsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    LayoutModule,
-    MatTabsModule,
-    MatListModule,
-    MatButtonModule,
   ]
 })
 export class PagesModule { }

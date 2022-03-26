@@ -45,7 +45,8 @@ export class GameViewComponent implements OnInit {
         id_team_visiting: 1, team_visiting: 'Equipo 1', result_visiting: 0,
         game_date: '2022-06-15', id_stadium: 2, stadium: 'Estadio 1', status: 4, attendees: 1, id_competition: 2, competition: 'Competencia 2'
       }
-    ]
+    ]; //TODO Delete info
+
     this.status = [
       { id: 1, description: 'Sin Iniciar' },
       { id: 2, description: 'Iniciado' },
@@ -58,7 +59,7 @@ export class GameViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable();
+    this.fillTable(); //TODO Read
   }
 
   private fillTable() {
@@ -81,12 +82,12 @@ export class GameViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.game, 'Create new');
+      console.log(this.game); //TODO Create
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.game);
+    console.log('Update', this.game); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -128,7 +129,7 @@ export class GameViewComponent implements OnInit {
     const dialogRef = this.dialog.open(IncidenceDialogComponent, {});
 
     dialogRef.afterClosed().subscribe( async (newIncidence) =>{
-      console.log(newIncidence);
+      console.log(newIncidence); //TODO Add Incidence
     });
   }
 
@@ -144,6 +145,7 @@ export class GameViewComponent implements OnInit {
   }
 
   public delete() {
+    console.log(this.game.id); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

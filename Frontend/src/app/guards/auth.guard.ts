@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     /*if (!localStorage.getItem('user')) {
       this._router.navigateByUrl('/auth');
       return true;
-    }*/
+    }*/ //TODO Validar JWT
 
     return true;
   }

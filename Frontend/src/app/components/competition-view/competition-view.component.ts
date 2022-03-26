@@ -34,7 +34,8 @@ export class CompetitionViewComponent implements OnInit {
     this.allCompetitions = [
       { id: 1, name: 'Equipo 1', year: 2021, id_country: 1, country: 'Country 1', type: 3, id_champion_team: 1, champion_team: 'Equipo ganador 1' },
       { id: 2, name: 'Equipo 2', year: 2022, id_country: 2, country: 'Country 2', type: 5, id_champion_team: 1, champion_team: 'Equipo ganador 1' }
-    ];
+    ]; //TODO Delete info
+
     this.types = [
       { id: 1, description: 'Liga' },
       { id: 2, description: 'Eliminatoria' },
@@ -49,7 +50,7 @@ export class CompetitionViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable();
+    this.fillTable(); //TODO Read
   }
 
   private fillTable() {
@@ -72,12 +73,12 @@ export class CompetitionViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     }else{
-      console.log(this.competition, 'Create new');
+      console.log(this.competition);  //TODO Create
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.competition);
+    console.log(this.competition); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -113,6 +114,7 @@ export class CompetitionViewComponent implements OnInit {
   }
 
   public delete() {
+    console.log(this.competition.id); // TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

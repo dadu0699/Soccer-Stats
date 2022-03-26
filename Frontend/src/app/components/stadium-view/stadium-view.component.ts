@@ -42,19 +42,19 @@ export class StadiumViewComponent implements OnInit {
         id: 2, name: 'Estadio 2', foundation_date: '2022-01-25', capacity: 200, photo: 'NA',
         id_country: 2, country: 'Country 2', address: 'Dirección 2', status: 2,
       },
-    ];
+    ]; //TODO Delete info
 
     this.status = [
       { id: 1, description: 'Disponible' },
       { id: 2, description: 'Remodelación' },
-    ]
+    ];
 
     this.readonly = false;
     this.allowEditing = false;
   }
 
   ngOnInit(): void {
-    this.fillTable();
+    this.fillTable(); //TODO Read
   }
 
   private fillTable() {
@@ -78,12 +78,12 @@ export class StadiumViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.stadium, 'Create new');
+      console.log(this.stadium); //TODO Create
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.stadium);
+    console.log(this.stadium); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -123,6 +123,7 @@ export class StadiumViewComponent implements OnInit {
   }
 
   public delete() {
+    console.log(this.stadium.id); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

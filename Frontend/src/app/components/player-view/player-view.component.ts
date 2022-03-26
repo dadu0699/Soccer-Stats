@@ -45,27 +45,26 @@ export class PlayerViewComponent implements OnInit {
         id: 2, name: 'Jugador 2', lastname: 'J2', birth_date: '2022-01-25', photo: 'NA',
         id_nationality: 2, nationality: 'Country 2', position: 2, status: 3, id_team: 2, name_team: 'Equipo 2'
       },
-    ];
+    ]; //TODO Delete Info
 
     this.positions = [
       { id: 1, description: 'Potero' },
       { id: 2, description: 'Defensa' },
       { id: 3, description: 'Medio' },
       { id: 4, description: 'Delantero' },
-    ]
-
+    ];
     this.status = [
       { id: 1, description: 'Activo' },
       { id: 2, description: 'Retirado' },
       { id: 3, description: 'Lesionado' },
-    ]
+    ];
 
     this.readonly = false;
     this.allowEditing = false;
   }
 
   ngOnInit(): void {
-    this.fillTable();
+    this.fillTable(); //TODO Read
   }
 
   private fillTable() {
@@ -90,12 +89,12 @@ export class PlayerViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.player, 'Create new');
+      console.log(this.player); //TODO Create
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.player);
+    console.log(this.player); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -128,11 +127,11 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public transferPlayer() {
-    console.log('Transfer player', this.player.id, this.player.id_team);
+    console.log( this.player.id, this.player.id_team);
     const dialogRef = this.dialog.open(TransferDialogComponent, {});
 
     dialogRef.afterClosed().subscribe(async (transference) => {
-      console.log(transference);
+      console.log(transference); //TODO Transfer player
     });
   }
 
@@ -148,6 +147,7 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public delete() {
+    console.log(this.player.id); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

@@ -32,14 +32,14 @@ export class TeamViewComponent implements OnInit {
     this.allTeams = [
       { id: 1, name: 'Equipo 1', foundation_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg', id_country: 1, country: 'Country 1' },
       { id: 2, name: 'Equipo 2', foundation_date: '2022-01-25', photo: 'NA', id_country: 2, country: 'Country 2' }
-    ]
+    ]; //TODO Delete Info
 
     this.readonly = false;
     this.allowEditing = false;
   }
 
   ngOnInit(): void {
-    this.fillTable();
+    this.fillTable(); //TODO Read
   }
 
   private fillTable() {
@@ -60,12 +60,12 @@ export class TeamViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     }else{
-      console.log(this.team, 'Create new');
+      console.log(this.team, 'Create new'); //TODO Create
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.team);
+    console.log('Update', this.team); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -101,6 +101,7 @@ export class TeamViewComponent implements OnInit {
   }
 
   public delete() {
+    console.log(this.team.id); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

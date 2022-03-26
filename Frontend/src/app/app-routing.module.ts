@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'soccer-stats',
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule),
   },
-  { path: '', redirectTo: 'soccer-stats', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth/home', pathMatch: 'full' },
   { path: 'access-denied', component: AccessDeniedComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
