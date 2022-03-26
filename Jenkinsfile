@@ -393,7 +393,7 @@ pipeline {
     }
 
     stage('Build Frontend Test-Image') {
-      when { changeset "frontend/*"}
+      when { changeset "Frontend/*"}
       steps {
         sh '''
           cd Frontend
@@ -432,7 +432,7 @@ pipeline {
     }
 
     stage('Build Frontend Image') {
-      when { changeset "frontend/*"}
+      when { changeset "Frontend/*"}
       steps {
         sh '''
           cd Frontend
