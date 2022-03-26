@@ -77,7 +77,7 @@ CREATE TABLE Usuario(
     correo VARCHAR(100) NOT NULL,
     telefono VARCHAR(100) NOT NULL,
     fotografia VARCHAR(255) NOT NULL,
-    genero BOOLEAN NOT NULL,
+    genero VARCHAR(1) NOT NULL,
     fechaNacimiento DATE NOT NULL,
     fechaRegistro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     direccion VARCHAR(255) NOT NULL,

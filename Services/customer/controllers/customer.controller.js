@@ -12,7 +12,7 @@ const crearUsuario = async (req, res) => {
     const { key } = await s3.itemUpload(req.body['photo']);
 
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key;
-    req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
+    // req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
     req.body['password'] = CryptoJS.AES.encrypt(
       req.body['password'],
       keyCrypto,
@@ -66,7 +66,7 @@ const actualizarPerfil = async (req, res) => {
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key;
   }
 
-  req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
+  // req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
 
   customerModel.update(req.body, (err, results) => {
     if (err)
