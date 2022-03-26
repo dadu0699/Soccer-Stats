@@ -76,8 +76,8 @@ pipeline {
               rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
-              # npm install
-              # npm run test
+              npm install
+              npm run test
             '''
           }
         }
@@ -119,8 +119,8 @@ pipeline {
               rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
-              # npm install
-              # npm run test
+              npm install
+              npm run test
             '''
           }
         }
@@ -162,8 +162,8 @@ pipeline {
               rm -rf .env.test
               cp ${ENV_TEST} .env.test
 
-              # npm install
-              # npm run test
+              npm install
+              npm run test
             '''
           }
         }
@@ -248,8 +248,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              # docker build -t ${GCR_ID}/competition-service:${image_tag} .
-              # docker push ${GCR_ID}/competition-service:${image_tag}
+              docker build -t ${GCR_ID}/competition-service:${image_tag} .
+              docker push ${GCR_ID}/competition-service:${image_tag}
             '''
           }
         }
@@ -291,8 +291,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              # docker build -t ${GCR_ID}/player-service:${image_tag} .
-              # docker push ${GCR_ID}/player-service:${image_tag}
+              docker build -t ${GCR_ID}/player-service:${image_tag} .
+              docker push ${GCR_ID}/player-service:${image_tag}
             '''
           }
         }
@@ -334,8 +334,8 @@ pipeline {
               rm -rf .env.production
               cp ${ENV_PRODUCTION} .env.production
 
-              # docker build -t ${GCR_ID}/administrator-service:${image_tag} .
-              # docker push ${GCR_ID}/administrator-service:${image_tag}
+              docker build -t ${GCR_ID}/administrator-service:${image_tag} .
+              docker push ${GCR_ID}/administrator-service:${image_tag}
             '''
           }
         }
@@ -372,7 +372,7 @@ pipeline {
       steps {
         sh '''
           cd Frontend
-          docker build -t ${GCR_ID}/frontend-test:${image_tag} .
+          docker build -t ${GCR_ID}/frontend-test:${image_tag} --file Dockerfile-Testing .
           docker push ${GCR_ID}/frontend-test:${image_tag}
         '''
       }

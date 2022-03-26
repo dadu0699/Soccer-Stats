@@ -177,7 +177,7 @@ Con el expect, se hacen validacion como:
 - Verificar que un campo este definido dentro del json que retorna el servidor.
 
 ```javascript
-expect(response.body.msj).toBeDefined();
+expect(response.body.msg).toBeDefined();
 ```
 
 - Verificar un estado de codigo.

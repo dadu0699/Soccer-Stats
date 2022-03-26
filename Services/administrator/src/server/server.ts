@@ -50,7 +50,7 @@ export default class Server {
      * RUTAS
      */
     routes() {
-        const api: string = "/"
+        const api: string = "/administrator"
         this.app.use(api, usuario);
         this.app.use(api, reporte);
     }
