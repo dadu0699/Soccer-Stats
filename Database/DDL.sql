@@ -279,3 +279,26 @@ INNER JOIN Equipo ON Equipo.equipoID = ContratoDT.equipoDestinoID
 INNER JOIN DirectorTecnico ON DirectorTecnico.directorTecnicoID = ContratoDT.directorTecnicoID
 INNER JOIN Pais ON Pais.paisID = DirectorTecnico.paisID
 WHERE FLOOR(DATEDIFF (NOW(), DirectorTecnico.fechaNacimiento)/365) > 18;
+
+-- JUGADORES MENORES DE X AÑOS
+SELECT Equipo.nombre AS team, Jugador.jugadorID AS id, Jugador.nombre AS name, 
+Jugador.foto AS photo, Jugador.apellido AS lastname,
+Pais.nombre AS nacionality, PosicionJugador.nombre AS position,
+FLOOR(DATEDIFF (NOW(), Jugador.fechaNacimiento)/365) AS age
+FROM ContratoJugador
+INNER JOIN Equipo ON Equipo.equipoID = ContratoJugador.equipoDestinoID
+INNER JOIN Jugador ON Jugador.jugadorID = ContratoJugador.jugadorID
+INNER JOIN Pais ON Pais.paisID = Jugador.paisID
+INNER JOIN PosicionJugador ON PosicionJugador.posicionJugadorID = Jugador.posicionJugadorID
+WHERE FLOOR(DATEDIFF (NOW(), Jugador.fechaNacimiento)/365) < 18;
+
+-- DIRECTORES MENORES DE X AÑOS
+SELECT Equipo.nombre AS team, DirectorTecnico.directorTecnicoID AS id, DirectorTecnico.nombre AS name, 
+DirectorTecnico.foto AS photo, DirectorTecnico.apellido AS lastname,
+Pais.nombre AS nacionality, NULL AS position,
+FLOOR(DATEDIFF (NOW(), DirectorTecnico.fechaNacimiento)/365) AS age
+FROM ContratoDT
+INNER JOIN Equipo ON Equipo.equipoID = ContratoDT.equipoDestinoID
+INNER JOIN DirectorTecnico ON DirectorTecnico.directorTecnicoID = ContratoDT.directorTecnicoID
+INNER JOIN Pais ON Pais.paisID = DirectorTecnico.paisID
+WHERE FLOOR(DATEDIFF (NOW(), DirectorTecnico.fechaNacimiento)/365) < 18;
