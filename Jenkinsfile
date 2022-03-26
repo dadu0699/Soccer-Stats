@@ -27,6 +27,7 @@ pipeline {
     stage('Run Tests Phase 1') {
       parallel {
         stage('Test On Customer Service') {
+          when { changeset "Services/customer/*"}
           steps {
             sh '''
               cd Services/customer
@@ -40,6 +41,7 @@ pipeline {
         }
 
         stage('Test On Team Service') {
+          when { changeset "Services/team/*"}
           steps {
             sh '''
               cd Services/team
@@ -53,6 +55,7 @@ pipeline {
         }
 
         stage('Test On Match Service') {
+          when { changeset "Services/match/*"}
           steps {
             sh '''
               cd Services/match
@@ -70,6 +73,7 @@ pipeline {
     stage('Run Tests Phase 2') {
       parallel {
         stage('Test On Competition Service') {
+          when { changeset "Services/competition/*"}
           steps {
             sh '''
               cd Services/competition
@@ -83,6 +87,7 @@ pipeline {
         }
 
         stage('Test On Stadium Service') {
+          when { changeset "Services/stadium/*"}
           steps {
             sh '''
               cd Services/stadium
@@ -96,6 +101,7 @@ pipeline {
         }
 
         stage('Test On Teachnical Director Service') {
+          when { changeset "Services/technical_director/*"}
           steps {
             sh '''
               cd Services/technical_director
@@ -113,6 +119,7 @@ pipeline {
     stage('Run Tests Phase 3') {
       parallel {
         stage('Test On Player Service') {
+          when { changeset "Services/player/*"}
           steps {
             sh '''
               cd Services/player
@@ -126,6 +133,7 @@ pipeline {
         }
 
         stage('Test On Post Service') {
+          when { changeset "Services/post/*"}
           steps {
             sh '''
               cd Services/post
@@ -139,6 +147,7 @@ pipeline {
         }
 
         stage('Test On Auth Service') {
+          when { changeset "Services/auth/*"}
           steps {
             sh '''
               cd Services/auth
@@ -156,6 +165,7 @@ pipeline {
     stage('Run Tests Phase 4') {
       parallel {
         stage('Test On Administrator Service') {
+          when { changeset "Services/administrator/*"}
           steps {
             sh '''
               cd Services/administrator
@@ -169,6 +179,7 @@ pipeline {
         }
 
         stage('Test On Employee Service') {
+          when { changeset "Services/employee/*"}
           steps {
             sh '''
               cd Services/employee
@@ -182,6 +193,7 @@ pipeline {
         }
 
         stage('Test On Country Service') {
+          when { changeset "Services/country/*"}
           steps {
             sh '''
               cd Services/country
@@ -199,6 +211,7 @@ pipeline {
     stage('Build Images Phase 1') {
       parallel {
         stage('Build Customer Image') {
+          when { changeset "Services/customer/*"}
           steps {
             sh '''
               cd Services/customer
@@ -212,6 +225,7 @@ pipeline {
         }
 
         stage('Build Team Image') {
+          when { changeset "Services/team/*"}
           steps {
             sh '''
               cd Services/team
@@ -225,6 +239,7 @@ pipeline {
         }
 
         stage('Build Match Image') {
+          when { changeset "Services/match/*"}
           steps {
             sh '''
               cd Services/match
@@ -242,6 +257,7 @@ pipeline {
     stage('Build Images Phase 2') {
       parallel {
         stage('Build Competition Image') {
+          when { changeset "Services/competition/*"}
           steps {
             sh '''
               cd Services/competition
@@ -255,6 +271,7 @@ pipeline {
         }
 
         stage('Build Stadium Image') {
+          when { changeset "Services/stadium/*"}
           steps {
             sh '''
               cd Services/stadium
@@ -268,6 +285,7 @@ pipeline {
         }
 
         stage('Build Technical Director Image') {
+          when { changeset "Services/technical_director/*"}
           steps {
             sh '''
               cd Services/technical_director
@@ -285,6 +303,7 @@ pipeline {
     stage('Build Images Phase 3') {
       parallel {
         stage('Build Player Image') {
+          when { changeset "Services/player/*"}
           steps {
             sh '''
               cd Services/player
@@ -298,6 +317,7 @@ pipeline {
         }
 
         stage('Build Post Image') {
+          when { changeset "Services/post/*"}
           steps {
             sh '''
               cd Services/post
@@ -311,6 +331,7 @@ pipeline {
         }
 
         stage('Build Auth Image') {
+          when { changeset "Services/auth/*"}
           steps {
             sh '''
               cd Services/auth
@@ -328,6 +349,7 @@ pipeline {
     stage('Build Images Phase 4') {
       parallel {
         stage('Build Administrator Image') {
+          when { changeset "Services/administrator/*"}
           steps {
             sh '''
               cd Services/administrator
@@ -341,6 +363,7 @@ pipeline {
         }
 
         stage('Build Employee Image') {
+          when { changeset "Services/employee/*"}
           steps {
             sh '''
               cd Services/employee
@@ -354,6 +377,7 @@ pipeline {
         }
 
         stage('Build Country Image') {
+          when { changeset "Services/country/*"}
           steps {
             sh '''
               cd Services/country
@@ -369,6 +393,7 @@ pipeline {
     }
 
     stage('Build Frontend Test-Image') {
+      when { changeset "frontend/*"}
       steps {
         sh '''
           cd Frontend
@@ -407,6 +432,7 @@ pipeline {
     }
 
     stage('Build Frontend Image') {
+      when { changeset "frontend/*"}
       steps {
         sh '''
           cd Frontend
