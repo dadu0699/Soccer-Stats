@@ -237,7 +237,7 @@ m-342 -339 c-8 -87 -1 -112 42 -147 l25 -20 -35 4 c-31 3 -37 9 -47 42 -14 46
       </mat-tab>
 
       <mat-tab label="Sign up">
-        <app-user-view></app-user-view>
+        <app-user-register-form [customer_side]="true" (sendUser)="signup($event)" ></app-user-register-form>
       </mat-tab>
 
     </mat-tab-group>

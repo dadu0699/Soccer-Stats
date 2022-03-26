@@ -19,6 +19,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
     PagesComponent,
     FeedComponent,
     EmployeeComponent,
+    AdminComponent,
   ],
   imports: [
     CommonModule,

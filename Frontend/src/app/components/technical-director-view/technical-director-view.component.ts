@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Option } from 'src/app/models/option.model';
 import { TechnicalDirector } from 'src/app/models/technical-director.model';
+import { Option } from 'src/app/models/option.model';
 
 @Component({
   selector: 'app-technical-director-view',

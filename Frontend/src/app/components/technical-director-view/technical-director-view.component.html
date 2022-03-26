@@ -3,7 +3,7 @@
 
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
       <h3>Technical Director Management</h3>
-      <span fxFlexAlign="start" *ngIf="allowEditing">Editing enabled!</span>
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
 
       <div fxLayout="row" fxLayoutAlign="space-evenly center">
         <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="technicalDirector.photo">
@@ -65,6 +65,5 @@
       </app-view-table>
     </div>
   </mat-grid-tile>
-
 </mat-grid-list>
 

@@ -10,9 +10,6 @@ import { StadiumViewComponent } from './stadium-view/stadium-view.component';
 import { PlayerViewComponent } from './player-view/player-view.component';
 import { TechnicalDirectorViewComponent } from './technical-director-view/technical-director-view.component';
 
-import { ViewTableComponent } from './view-table/view-table.component';
-import { ManagementOptionsComponent } from './management-options/management-options.component';
-
 import { StatusFieldComponent } from './status-field/status-field.component';
 import { DateFieldComponent } from './date-field/date-field.component';
 import { ImageFieldComponent } from './image-field/image-field.component';
@@ -21,6 +18,10 @@ import { TeamFieldComponent } from './team-field/team-field.component';
 import { StadiumFieldComponent } from './stadium-field/stadium-field.component';
 import { CompetitionFieldComponent } from './competition-field/competition-field.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { ViewTableComponent } from './view-table/view-table.component';
+import { ManagementOptionsComponent } from './management-options/management-options.component';
+import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
@@ -57,6 +58,7 @@ import { MatIconModule } from '@angular/material/icon';
     CompetitionFieldComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
+    UserRegisterFormComponent,
   ],
   exports: [
     UserViewComponent,
@@ -75,6 +77,7 @@ import { MatIconModule } from '@angular/material/icon';
     CompetitionFieldComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
+    UserRegisterFormComponent,
   ],
   imports: [
     CommonModule,

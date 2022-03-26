@@ -1,0 +1,16 @@
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.mat-form-field + .mat-form-field, .extra-field {
+  margin-left: 8px;
+}
+
+.space{
+  margin: 20px;
+}
+
+

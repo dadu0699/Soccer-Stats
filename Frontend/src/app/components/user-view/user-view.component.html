@@ -1,64 +1,22 @@
-<form fxLayout="column" autocomplete="off" #formSignup="ngForm" (ngSubmit)="done()" fxLayout="column"
-  fxLayoutAlign="space-evenly center">
+<mat-grid-list cols="12" rowHeight="88px" class="fullSize">
+  <mat-grid-tile colspan="6" rowspan="6">
 
-  <div fxLayout="row" fxLayoutAlign="start center">
-
-    <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="user.photo"></app-image-field>
-    <span class="firstSpace"></span>
-    <div>
-      <app-status-field [options]="genders" (selectOption)="selectGender($event)"></app-status-field>
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+        <app-user-register-form [user]="user" [allowEditing]="allowEditing" [readonly]="readonly" [customer_side]="false" (sendUser)="done($event)" ></app-user-register-form>
     </div>
-    <span class="secondSpace"></span>
-  </div>
 
-  <section>
-    <div class="fullSize field-row">
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="user.name" name="nameField" #nameField="ngModel" required />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Lastname</mat-label>
-        <input matInput [(ngModel)]="user.lastname" name="lastnameField" #lastnameField="ngModel" required />
-      </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="6" rowspan="5">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>User Management</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectUser($event)">
+      </app-view-table>
+
+      <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
+      </app-management-options>
     </div>
-  </section>
-
-  <section>
-    <mat-form-field appearance="outline">
-      <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]="user.email" name="emailField" #emailField="ngModel" required />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" [(ngModel)]="user.password" name="passwordField" #passwordField="ngModel"
-        required />
-    </mat-form-field>
-  </section>
-
-  <section>
-    <mat-form-field appearance="outline">
-      <mat-label>Phone</mat-label>
-      <input matInput [(ngModel)]="user.phone" name="phoneField" #phoneField="ngModel" required />
-    </mat-form-field>
-
-    <app-date-field [date]="user.birth_date" [description]="'Birth '" (setDate)=setDate($event) class="extra-field">
-    </app-date-field>
-
-  </section>
-
-  <section>
-    <mat-form-field appearance="outline">
-      <mat-label>Address</mat-label>
-      <input matInput [(ngModel)]="user.address" name="addressField" #addressField="ngModel" required />
-    </mat-form-field>
-
-    <app-country-field (selectCountry)="selectCountry($event)" class="extra-field"></app-country-field>
-  </section>
-
-  <button mat-stroked-button color="warn" type="submit">
-    Sign me up!
-  </button>
-
-</form>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ) {
     this.email = '';
     this.password = '';
-
   }
 
   ngOnInit(): void {
@@ -29,6 +28,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public async signin(): Promise<void> {
     console.log(this.email, this.password)
     this._router.navigate(['/soccer-stats']);
+  }
+
+  public async signup(new_user: any): Promise<void> {
+    console.log(new_user);
   }
 
   ngAfterViewInit() {

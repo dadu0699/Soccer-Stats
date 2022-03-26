@@ -5,7 +5,7 @@
       <h3>Team Management</h3>
       <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="team.photo"></app-image-field>
 
-      <span fxFlexAlign="start" *ngIf="allowEditing">Editing enabled!</span>
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
       <div fxLayout="row" fxLayoutAlign="space-evenly center">
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
