@@ -4,6 +4,8 @@ import CryptoJS = require("crypto-js");
 import UploadFile from '../utils/aws-s3.util';
 import BitacoraController from './bitacora.controller';
 
+const dispatchEmail = require('../middlewares/email');
+
 export default class UsuarioController {
     private static _instance: UsuarioController;
 
@@ -147,7 +149,13 @@ export default class UsuarioController {
             objUsuario.fotografia = url.Key;
 
             // ENCRIPTAR CONTRASENA
-            objUsuario.claveAcceso = CryptoJS.AES.encrypt(objUsuario.claveAcceso, String(process.env.CRYPTO_KEY)).toString();
+            const keyCrypto = CryptoJS.enc.Hex.parse(String(process.env.CRYPTO_KEY));
+            const iv = CryptoJS.enc.Hex.parse(String(process.env.CRYPTO_IV));
+            objUsuario.claveAcceso = CryptoJS.AES.encrypt(objUsuario.claveAcceso, keyCrypto, { iv }).toString();
+
+            await dispatchEmail(objUsuario.correo, 'Welcome!', 'mail', {
+                url: process.env.FRONTEND,
+            });
 
             const data: any = Usuario.build(objUsuario);
             await data.save();
@@ -179,8 +187,7 @@ export default class UsuarioController {
             return res.status(400).json({
                 status: 400,
                 msg: "Error al guardar el usuario.",
-                data: [],
-                error
+                data: [error],  
             })
         }
     }
@@ -208,6 +215,7 @@ export default class UsuarioController {
 
             if (data) {
 
+                body.photo = body.photo != undefined ? body.photo : '';
                 if (body.photo != '') {
                     let url: any;
 
@@ -227,9 +235,12 @@ export default class UsuarioController {
                     objUsuario.fotografia = 'https://grupof.s3.us-east-2.amazonaws.com/' + url.Key;
                 }
 
+                body.password = body.password != undefined ? body.password : '';
                 if (body.password != '') {
                     //INCRUSTAR CONTRASEÑA
-                    objUsuario.claveAcceso = CryptoJS.AES.encrypt(objUsuario.claveAcceso, String(process.env.CRYPTO_KEY)).toString();
+                    const keyCrypto = CryptoJS.enc.Hex.parse(String(process.env.CRYPTO_KEY));
+                    const iv = CryptoJS.enc.Hex.parse(String(process.env.CRYPTO_IV));
+                    objUsuario.claveAcceso = CryptoJS.AES.encrypt(objUsuario.claveAcceso, keyCrypto, { iv }).toString();
                 }
 
                 await data.update(objUsuario);
