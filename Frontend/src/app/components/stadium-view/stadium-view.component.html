@@ -1,0 +1,65 @@
+<mat-grid-list cols="12" rowHeight="100px">
+  <mat-grid-tile colspan="6" rowspan="5">
+
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Stadium Management</h3>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="stadium.photo"></app-image-field>
+        <section class="spacer"></section>
+        <app-status-field [option]="stadium.status" [options]="status" (selectOption)="selectStatus($event)">
+        </app-status-field>
+      </div>
+
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="stadium.name" name="nameField" #nameField="ngModel"
+            required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Capacity</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="stadium.capacity" name="capacityField"
+            #capacityField="ngModel" required />
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="stadium.address" name="addressField"
+            #addressField="ngModel" required />
+        </mat-form-field>
+
+        <app-country-field [country]="stadium.id_country" (selectCountry)="selectCountry($event)" class="extra-field">
+        </app-country-field>
+      </div>
+
+      <app-date-field [readonly]="readonly" [date]="stadium.foundation_date" [description]="'Foundation '"
+        (setDate)=setDate($event)>
+      </app-date-field>
+
+      <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
+        {{allowEditing ? 'Save Changes' : 'Done'}}
+      </button>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="6" rowspan="5">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Stadium List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectStadium($event)">
+      </app-view-table>
+
+      <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
+      </app-management-options>
+    </div>
+  </mat-grid-tile>
+
+
+</mat-grid-list>

@@ -1,0 +1,6 @@
+<mat-form-field appearance="outline">
+  <mat-label>Stadium</mat-label>
+  <mat-select (selectionChange)="select($event.value)" [ngModel]="commingStadium">
+    <mat-option *ngFor="let stadium of stadiums" [value]="stadium.id">{{stadium.name}}</mat-option>
+  </mat-select>
+</mat-form-field>

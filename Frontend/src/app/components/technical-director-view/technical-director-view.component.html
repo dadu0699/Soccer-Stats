@@ -1,0 +1,69 @@
+<mat-grid-list cols="12" rowHeight="100px" class="fullSize">
+  <mat-grid-tile colspan="12" rowspan="4">
+
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Technical Director Management</h3>
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="technicalDirector.photo">
+        </app-image-field>
+        <section class="spacer"></section>
+
+        <app-status-field [option]="technicalDirector.status" [options]="status" (selectOption)="selectStatus($event)">
+        </app-status-field>
+        <section class="spacer"></section>
+
+        <div fxLayout="column" fxLayoutAlign="space-evenly center">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [readonly]="readonly" [(ngModel)]="technicalDirector.name" name="nameField"
+              #nameField="ngModel" required />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Lastname</mat-label>
+            <input matInput [readonly]="readonly" [(ngModel)]="technicalDirector.lastname" name="lastnameField"
+              #lastnameField="ngModel" required />
+          </mat-form-field>
+        </div>
+
+
+        <div fxLayout="column" fxLayoutAlign="space-evenly center">
+          <app-country-field [country]="technicalDirector.id_country" (selectCountry)="selectCountry($event)"
+            class="extra-field">
+          </app-country-field>
+
+          <app-date-field [readonly]="readonly" [date]="technicalDirector.birth_date" [description]="'Birth '"
+            (setDate)=setDate($event) class="extra-field">
+          </app-date-field>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
+          {{allowEditing ? 'Save Changes' : 'Done'}}
+        </button>
+        <section class="spacer"></section>
+        <button mat-stroked-button color="accent" (click)="transferTechnicalDirector()" [disabled]="!readonly">
+          Transfer technical director
+        </button>
+      </div>
+
+      <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
+      </app-management-options>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="12" rowspan="4">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Technical Director List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectTechnicalDirector($event)">
+      </app-view-table>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+

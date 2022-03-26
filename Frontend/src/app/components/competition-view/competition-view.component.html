@@ -1,0 +1,56 @@
+<mat-grid-list cols="12" rowHeight="105px">
+  <mat-grid-tile colspan="6" rowspan="5">
+
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Competition Management</h3>
+
+      <app-status-field [option]="competition.type" [options]="types" (selectOption)="selectType($event)">
+      </app-status-field>
+
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="competition.name" name="nameField" #nameField="ngModel"
+            required />
+        </mat-form-field>
+
+        <app-country-field [country]="competition.id_country" (selectCountry)="selectCountry($event)"
+          class="extra-field">
+        </app-country-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Year</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="competition.year" name="yearField" #yearField="ngModel"
+            required />
+        </mat-form-field>
+
+        <app-team-field [team]="competition.id_champion_team" (selectTeam)="selectTeam($event)" class="extra-field"
+          *ngIf="readonly || allowEditing">
+        </app-team-field>
+      </div>
+
+      <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
+        {{allowEditing ? 'Save Changes' : 'Done'}}
+      </button>
+
+      <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
+      </app-management-options>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="6" rowspan="5">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Competition List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectCompetition($event)">
+      </app-view-table>
+    </div>
+  </mat-grid-tile>
+
+
+</mat-grid-list>

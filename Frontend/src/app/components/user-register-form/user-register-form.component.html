@@ -1,0 +1,77 @@
+<form fxLayout="column" autocomplete="off" #formSignup="ngForm" (ngSubmit)="done()" fxLayout="column"
+  fxLayoutAlign="space-evenly center">
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="user.photo"></app-image-field>
+    <span class="space"></span>
+    <app-status-field [option]="user.id_gender" [options]="genders" (selectOption)="selectGender($event)">
+    </app-status-field>
+    <span class="space"></span>
+    <app-status-field [option]="user.id_rol" [options]="roles" (selectOption)="selectRol($event)"
+      *ngIf="!customer_side"></app-status-field>
+  </div>
+
+  <section>
+    <div class="fullSize field-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [readonly]="readonly" [(ngModel)]="user.name" name="nameField" #nameField="ngModel" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Lastname</mat-label>
+        <input matInput [readonly]="readonly" [(ngModel)]="user.lastname" name="lastnameField" #lastnameField="ngModel"
+          required />
+      </mat-form-field>
+    </div>
+  </section>
+
+  <section>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput [readonly]="readonly" [(ngModel)]="user.email" name="emailField" #emailField="ngModel" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput [readonly]="readonly" type="password" [(ngModel)]="user.password" name="passwordField"
+        #passwordField="ngModel" required />
+    </mat-form-field>
+  </section>
+
+  <section>
+    <mat-form-field appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input matInput [readonly]="readonly" [(ngModel)]="user.phone" name="phoneField" #phoneField="ngModel" required />
+    </mat-form-field>
+
+    <app-date-field [readonly]="readonly" [date]="user.birth_date" [description]="'Birth '" (setDate)=setDate($event)
+      class="extra-field">
+    </app-date-field>
+
+  </section>
+
+  <section>
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input matInput [readonly]="readonly" [(ngModel)]="user.address" name="addressField" #addressField="ngModel"
+        required />
+    </mat-form-field>
+
+    <app-country-field [country]="user.id_country" (selectCountry)="selectCountry($event)" class="extra-field">
+    </app-country-field>
+  </section>
+
+
+
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <button mat-stroked-button color="warn" type="submit">
+      {{allowEditing ? 'Save Changes' : 'Create'}}
+    </button>
+
+    <button mat-stroked-button color="accent" type="button" [disabled]="!readonly" (click)="manageAccount()"
+      *ngIf="!customer_side">
+      Manage Account
+    </button>
+  </div>
+</form>

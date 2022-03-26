@@ -1,0 +1,13 @@
+.header-image {
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+}
+
+.file-input {
+  display: none;
+}
+
+.mat-card {
+  background: #fafafa;
+}

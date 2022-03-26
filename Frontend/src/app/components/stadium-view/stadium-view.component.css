@@ -1,0 +1,7 @@
+.mat-form-field + .mat-form-field, .extra-field {
+  margin-left: 8px;
+}
+
+.spacer {
+  margin-left: 50px;
+}

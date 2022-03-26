@@ -1,0 +1,25 @@
+<mat-grid-list cols="12" rowHeight="88px" class="fullSize">
+  <mat-grid-tile colspan="6" rowspan="6">
+
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+        <app-user-register-form [user]="user" [allowEditing]="allowEditing" [readonly]="readonly" [customer_side]="false"
+        (sendUser)="done($event)" (manageAccount)="allowAccountManagement()"></app-user-register-form>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="6" rowspan="6">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>User Management</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectUser($event)">
+      </app-view-table>
+
+      <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
+      </app-management-options>
+
+      <app-account-management *ngIf="manage" [currentStatus]="user.id_status" (setNewStatus)="manageAccount($event)"></app-account-management>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,45 @@
+<mat-grid-list cols="12" rowHeight="100px">
+  <mat-grid-tile colspan="6" rowspan="5">
+
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Team Management</h3>
+      <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="team.photo"></app-image-field>
+
+      <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
+      <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput [readonly]="readonly" [(ngModel)]="team.name" name="nameField" #nameField="ngModel"
+            required />
+        </mat-form-field>
+
+        <app-country-field [country]="team.id_country" (selectCountry)="selectCountry($event)" class="extra-field">
+        </app-country-field>
+      </div>
+
+      <app-date-field [readonly]="readonly" [date]="team.foundation_date" [description]="'Foundation '"
+        (setDate)=setDate($event)>
+      </app-date-field>
+
+      <button mat-stroked-button color="warn" (click)="done()" [disabled]="readonly">
+        {{allowEditing ? 'Save Changes' : 'Done'}}
+      </button>
+
+      <app-management-options class="fullSize" (create)="create()" (edit)="edit()" (delete)="delete()">
+      </app-management-options>
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="6" rowspan="5">
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <h3>Team List</h3>
+
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+        (selectObject)="selectTeam($event)">
+      </app-view-table>
+    </div>
+  </mat-grid-tile>
+
+
+</mat-grid-list>
