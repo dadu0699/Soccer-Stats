@@ -115,16 +115,17 @@ export class UserViewComponent implements OnInit {
     this.showSnackbar('Status Updated');
   }
 
-  public selectUser(id_team: any) {
+  public selectUser(id: any) {
     this.readonly = true;
     this.allowEditing = false;
-    let user: User = this.allUsers.find(el => el.id_user === id_team) || new User();
+    let user: User = this.allUsers.find(el => el.id_user === id) || new User();
     this.user = user;
   }
 
   public create() {
     this.user = new User();
     this.readonly = false;
+    this.manage = false;
     this.allowEditing = false;
   }
 

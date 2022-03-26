@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { TechnicalDirector } from 'src/app/models/technical-director.model';
 import { Option } from 'src/app/models/option.model';
+import { TransferDialogComponent } from '../transfer-dialog/transfer-dialog.component';
 
 @Component({
   selector: 'app-technical-director-view',
@@ -25,6 +27,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {
     this.labels = ['no.', 'name', 'lastname',
       'birth date', 'nationality', 'status', 'team', 'actions'];
@@ -100,15 +103,22 @@ export class TechnicalDirectorViewComponent implements OnInit {
     this.technicalDirector.photo = base64;
   }
 
-  public selectTechnicalDirector(id_team: any) {
+  public selectTechnicalDirector(id: any) {
     this.readonly = true;
     this.allowEditing = false;
-    let technicalDirector: TechnicalDirector = this.allTechs.find(el => el.id === id_team) || new TechnicalDirector();
+    let technicalDirector: TechnicalDirector = this.allTechs.find(el => el.id === id) || new TechnicalDirector();
     this.technicalDirector = technicalDirector;
   }
 
   public transferTechnicalDirector(){
-    console.log('Transfer Technical Director', this.technicalDirector.id);
+    console.log('Transfer Technical Director',
+    this.technicalDirector.id, this.technicalDirector.id_team);
+
+    const dialogRef = this.dialog.open(TransferDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe( async (transference) =>{
+      console.log(transference);
+    });
   }
 
   public create() {

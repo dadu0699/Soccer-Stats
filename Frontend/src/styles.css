@@ -29,6 +29,12 @@ body {
     border-width: 2px !important;
 }
 
+.mat-dialog-container {
+  background: #21212150;
+  color: #ffebee;
+  backdrop-filter: blur(5px);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

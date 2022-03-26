@@ -82,10 +82,10 @@ export class TeamViewComponent implements OnInit {
     this.team.photo = base64;
   }
 
-  public selectTeam(id_team: any) {
+  public selectTeam(id: any) {
     this.readonly = true;
     this.allowEditing = false;
-    let team: Team = this.allTeams.find(el => el.id === id_team) || new Team();
+    let team: Team = this.allTeams.find(el => el.id === id) || new Team();
     this.team = team;
   }
 

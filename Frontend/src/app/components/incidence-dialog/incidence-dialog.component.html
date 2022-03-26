@@ -1,0 +1,26 @@
+<h1 mat-dialog-title><b>New Incidence</b></h1>
+<div mat-dialog-content>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <app-status-field [options]="types" (selectOption)="selectType($event)">
+    </app-status-field>
+    <span class="space-between"></span>
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <mat-form-field appearance="outline">
+        <mat-label>Minute</mat-label>
+        <input matInput [(ngModel)]="incidence.minute" name="minuteField" #minuteField="ngModel" />
+      </mat-form-field>
+
+      <app-player-field (selectPlayer)="selectPlayer($event)">
+      </app-player-field>
+    </div>
+  </div>
+  <p> Description: </p>
+  <mat-form-field appearance="outline" class="description-field">
+    <textarea matInput rows="2" [(ngModel)]="incidence.description" name="descriptionField"
+      #ndescriptionField="ngModel"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+  <button mat-button (click)="onNoClick()">Go back</button>
+  <button mat-button [mat-dialog-close]="incidence" cdkFocusInitial>Save</button>
+</div>

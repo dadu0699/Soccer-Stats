@@ -104,10 +104,10 @@ export class StadiumViewComponent implements OnInit {
     this.stadium.photo = base64;
   }
 
-  public selectStadium(id_stadium: any) {
+  public selectStadium(id: any) {
     this.readonly = true;
     this.allowEditing = false;
-    let stadium: Stadium = this.allStadiums.find(el => el.id === id_stadium) || new Stadium();
+    let stadium: Stadium = this.allStadiums.find(el => el.id === id) || new Stadium();
     this.stadium = stadium;
   }
 

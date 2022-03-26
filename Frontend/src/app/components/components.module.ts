@@ -24,6 +24,11 @@ import { ManagementOptionsComponent } from './management-options/management-opti
 import { AccountManagementComponent } from './account-management/account-management.component';
 import { UserRegisterFormComponent } from './user-register-form/user-register-form.component';
 
+import { IncidenceDialogComponent } from './incidence-dialog/incidence-dialog.component';
+import { TransferDialogComponent } from './transfer-dialog/transfer-dialog.component';
+import { ForgotPasswordDialogComponent } from './forgot-password-dialog/forgot-password-dialog.component';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -38,6 +43,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PlayerFieldComponent } from './player-field/player-field.component';
 
 
 
@@ -61,6 +68,15 @@ import { MatIconModule } from '@angular/material/icon';
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,
+    IncidenceDialogComponent,
+    TransferDialogComponent,
+    ForgotPasswordDialogComponent,
+    PlayerFieldComponent,
+  ],
+  entryComponents: [
+    IncidenceDialogComponent,
+    TransferDialogComponent,
+    ForgotPasswordDialogComponent,
   ],
   exports: [
     UserViewComponent,
@@ -87,6 +103,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    MatToolbarModule,
     MatGridListModule,
     MatTableModule,
     MatPaginatorModule,
@@ -101,6 +118,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatRadioModule,
     MatSnackBarModule,
     MatIconModule,
+    MatDialogModule,
   ]
 })
 export class ComponentsModule { }

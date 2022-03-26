@@ -1,9 +1,11 @@
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import * as Feather from 'feather-icons';
+import { ForgotPasswordDialogComponent } from 'src/app/components/forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(
     private _router: Router,
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {
     this.email = '';
     this.password = '';
@@ -32,6 +35,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   public async signup(new_user: any): Promise<void> {
     console.log(new_user);
+  }
+
+  public recoverPassword(){
+    const dialogRef = this.dialog.open(ForgotPasswordDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe( async (email) =>{
+      console.log(email);
+    });
   }
 
   ngAfterViewInit() {

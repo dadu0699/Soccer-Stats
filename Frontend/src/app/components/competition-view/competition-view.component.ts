@@ -94,10 +94,10 @@ export class CompetitionViewComponent implements OnInit {
     this.competition.id_champion_team = id_team;
   }
 
-  public selectCompetition(id_competition: any) {
+  public selectCompetition(id: any) {
     this.readonly = true;
     this.allowEditing = false;
-    let competition: Competition = this.allCompetitions.find(el => el.id === id_competition) || new Competition();
+    let competition: Competition = this.allCompetitions.find(el => el.id === id) || new Competition();
     this.competition = competition;
   }
 

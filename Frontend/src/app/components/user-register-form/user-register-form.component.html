@@ -69,7 +69,8 @@
       {{allowEditing ? 'Save Changes' : 'Create'}}
     </button>
 
-    <button mat-stroked-button color="accent" type="button" [disabled]="!readonly" (click)="manageAccount()">
+    <button mat-stroked-button color="accent" type="button" [disabled]="!readonly" (click)="manageAccount()"
+      *ngIf="!customer_side">
       Manage Account
     </button>
   </div>

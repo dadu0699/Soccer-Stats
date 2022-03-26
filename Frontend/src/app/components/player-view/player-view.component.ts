@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Player } from 'src/app/models/player.model';
 import { Option } from 'src/app/models/option.model';
+import { TransferDialogComponent } from '../transfer-dialog/transfer-dialog.component';
 
 @Component({
   selector: 'app-player-view',
@@ -26,6 +28,7 @@ export class PlayerViewComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {
     this.labels = ['no.', 'name', 'lastname',
       'birth date', 'nationality', 'position', 'status', 'team', 'actions'];
@@ -34,23 +37,27 @@ export class PlayerViewComponent implements OnInit {
 
     this.player = new Player();
     this.allPlayers = [
-      { id: 1, name: 'Jugador 1', lastname: 'J1', birth_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg',
-      id_nationality: 1, nationality: 'Country 1', position: 1, status: 1, id_team : 1, name_team: 'Equipo 1' },
-      { id: 2, name: 'Jugador 2', lastname: 'J2', birth_date: '2022-01-25', photo: 'NA',
-      id_nationality: 2, nationality: 'Country 2', position: 2, status: 3, id_team : 2, name_team: 'Equipo 2' },
-    ]
+      {
+        id: 1, name: 'Jugador 1', lastname: 'J1', birth_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg',
+        id_nationality: 1, nationality: 'Country 1', position: 1, status: 1, id_team: 1, name_team: 'Equipo 1'
+      },
+      {
+        id: 2, name: 'Jugador 2', lastname: 'J2', birth_date: '2022-01-25', photo: 'NA',
+        id_nationality: 2, nationality: 'Country 2', position: 2, status: 3, id_team: 2, name_team: 'Equipo 2'
+      },
+    ];
 
     this.positions = [
-      {id:1, description:'Potero'},
-      {id:2, description:'Defensa'},
-      {id:3, description:'Medio'},
-      {id:4, description:'Delantero'},
+      { id: 1, description: 'Potero' },
+      { id: 2, description: 'Defensa' },
+      { id: 3, description: 'Medio' },
+      { id: 4, description: 'Delantero' },
     ]
 
     this.status = [
-      {id:1, description:'Activo'},
-      {id:2, description:'Retirado'},
-      {id:3, description:'Lesionado'},
+      { id: 1, description: 'Activo' },
+      { id: 2, description: 'Retirado' },
+      { id: 3, description: 'Lesionado' },
     ]
 
     this.readonly = false;
@@ -69,8 +76,8 @@ export class PlayerViewComponent implements OnInit {
         lastname: element.lastname,
         birthDate: element.birth_date,
         nationality: element.nationality,
-        position: this.positions[element.position-1].description,
-        status: this.status[element.status-1].description,
+        position: this.positions[element.position - 1].description,
+        status: this.status[element.status - 1].description,
         team: element.name_team,
       });
       this.labels = Object.keys(this.dataTable[0]);
@@ -82,7 +89,7 @@ export class PlayerViewComponent implements OnInit {
   public done() {
     if (this.allowEditing) {
       this.updateExisting();
-    }else{
+    } else {
       console.log(this.player, 'Create new');
     }
   }
@@ -113,15 +120,20 @@ export class PlayerViewComponent implements OnInit {
     this.player.photo = base64;
   }
 
-  public selectPlayer(id_team: any) {
+  public selectPlayer(id: any) {
     this.readonly = true;
     this.allowEditing = false;
-    let player: Player = this.allPlayers.find(el => el.id === id_team) || new Player();
+    let player: Player = this.allPlayers.find(el => el.id === id) || new Player();
     this.player = player;
   }
 
-  public transferPlayer(){
-    console.log('Transfer player', this.player.id);
+  public transferPlayer() {
+    console.log('Transfer player', this.player.id, this.player.id_team);
+    const dialogRef = this.dialog.open(TransferDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe(async (transference) => {
+      console.log(transference);
+    });
   }
 
   public create() {

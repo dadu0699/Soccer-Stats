@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Option } from 'src/app/models/option.model';
 import { Game } from 'src/app/models/game.model';
+import { IncidenceDialogComponent } from '../incidence-dialog/incidence-dialog.component';
 
 @Component({
   selector: 'app-game-view',
@@ -25,6 +27,7 @@ export class GameViewComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {
     this.labels = ['no.', 'local team', 'visiting team', 'date', 'stadium', 'status', 'actions'];
     this.dataTable = [];
@@ -113,15 +116,20 @@ export class GameViewComponent implements OnInit {
     this.game.game_date = date;
   }
 
-  public selectGame(id_game: any) {
+  public selectGame(id: any) {
     this.readonly = true;
     this.allowEditing = false;
-    let game: Game = this.allGames.find(el => el.id === id_game) || new Game();
+    let game: Game = this.allGames.find(el => el.id === id) || new Game();
     this.game = game;
   }
 
   public addIncidence() {
     console.log('Add incidence', this.game.id);
+    const dialogRef = this.dialog.open(IncidenceDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe( async (newIncidence) =>{
+      console.log(newIncidence);
+    });
   }
 
   public create() {
