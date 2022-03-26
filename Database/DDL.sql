@@ -315,3 +315,17 @@ SELECT Equipo.equipoID AS id_team, Equipo.nombre AS team,
 Equipo.fotoLogo AS photo, Equipo.paisID AS id_country, Pais.nombre AS country FROM Equipo
 INNER JOIN Pais ON Pais.paisID = Equipo.paisID
 WHERE Pais.paisID = 1;
+
+-- EQUIPOS CON X AÑOS DE ANTIGUEDAD
+SELECT Equipo.equipoID AS id_team, Equipo.nombre AS team,
+Equipo.fotoLogo AS photo, Equipo.paisID AS id_country, Pais.nombre AS country,
+FLOOR(DATEDIFF (NOW(), Equipo.fechaFundacion)/365) AS foundation_date
+FROM Equipo
+INNER JOIN Pais ON Pais.paisID = Equipo.paisID
+WHERE FLOOR(DATEDIFF (NOW(), Equipo.fechaFundacion)/365) <= 15;
+
+-- ESTADIOS EN X PAIS
+SELECT Estadio.estadioID AS id_stadium, Estadio.nombre AS stadium,
+Estadio.foto AS photo, Estadio.paisID AS id_country, Pais.nombre AS country FROM Estadio
+INNER JOIN Pais ON Pais.paisID = Estadio.paisID
+WHERE Estadio.paisID = 1;
