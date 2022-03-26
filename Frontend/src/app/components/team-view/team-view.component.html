@@ -3,7 +3,7 @@
 
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
       <h3>Team Management</h3>
-      <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="team.photo"></app-image-field>
+      <app-image-field (selectPicture)="selectPicture($event)" [uploadedPhoto]="team.photo" [existingPhoto]="team.photo"></app-image-field>
 
       <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
       <div fxLayout="row" fxLayoutAlign="space-evenly center">

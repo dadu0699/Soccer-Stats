@@ -6,7 +6,7 @@
       <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
 
       <div fxLayout="row" fxLayoutAlign="space-evenly center">
-        <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="player.photo"></app-image-field>
+        <app-image-field (selectPicture)="selectPicture($event)" [uploadedPhoto]="player.photo" [existingPhoto]="player.photo"></app-image-field>
         <section class="spacer"></section>
 
         <app-status-field [option]="player.position" [options]="positions" (selectOption)="selectPosition($event)">

@@ -6,7 +6,7 @@
       <span fxFlexAlign="start" *ngIf="allowEditing">Editing mode enabled!</span>
 
       <div fxLayout="row" fxLayoutAlign="space-evenly center">
-        <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="technicalDirector.photo">
+        <app-image-field (selectPicture)="selectPicture($event)" [uploadedPhoto]="technicalDirector.photo" [existingPhoto]="technicalDirector.photo">
         </app-image-field>
         <section class="spacer"></section>
 

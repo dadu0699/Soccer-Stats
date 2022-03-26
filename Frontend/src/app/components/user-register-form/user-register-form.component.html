@@ -2,7 +2,7 @@
   fxLayoutAlign="space-evenly center">
 
   <div fxLayout="row" fxLayoutAlign="start center">
-    <app-image-field (selectPicture)="selectPicture($event)" [existingPhoto]="user.photo"></app-image-field>
+    <app-image-field (selectPicture)="selectPicture($event)" [uploadedPhoto]="user.photo" [existingPhoto]="user.photo" ></app-image-field>
     <span class="space"></span>
     <app-status-field [option]="user.id_gender" [options]="genders" (selectOption)="selectGender($event)">
     </app-status-field>

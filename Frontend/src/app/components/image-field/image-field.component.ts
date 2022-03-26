@@ -10,12 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ImageFieldComponent implements OnInit {
 
+  @Input('uploadedPhoto') uploadedPhoto: string;
   @Input('existingPhoto') existingPhoto!: string;
 
   @Output('selectPicture') selectPicture: EventEmitter<string>;
 
   public myForm: FormGroup;
-  public uploadedPhoto: string;
 
   constructor(
     public fb: FormBuilder,
