@@ -372,7 +372,7 @@ pipeline {
       steps {
         sh '''
           cd Frontend
-          docker build -t ${GCR_ID}/frontend-test:${image_tag} .
+          docker build -t ${GCR_ID}/frontend-test:${image_tag} --file Dockerfile-Testing .
           docker push ${GCR_ID}/frontend-test:${image_tag}
         '''
       }
