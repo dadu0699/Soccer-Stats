@@ -4,41 +4,43 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { PagesRoutingModule } from './pages-routing.module';
+import { AdminRoutingModule } from './admin-routing.module';
 
-import { SharedModule } from '../shared/shared.module';
-import { ComponentsModule } from '../components/components.module';
+import { SharedModule } from '../../shared/shared.module';
+import { ComponentsModule } from '../../components/components.module';
 
-import { PagesComponent } from './pages.component';
-import { FeedComponent } from './feed/feed.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { MainComponent } from './main/main.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
-import { LayoutModule } from '@angular/cdk/layout';
 import { MatListModule } from '@angular/material/list';
+import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [
-    PagesComponent,
-    FeedComponent,
+    MainComponent,
+    UserManagementComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
     HttpClientModule,
-    PagesRoutingModule,
+    AdminRoutingModule,
     SharedModule,
     ComponentsModule,
     MatToolbarModule,
     MatSidenavModule,
-    LayoutModule,
     MatTabsModule,
     MatListModule,
+    LayoutModule,
     MatButtonModule,
+    MatIconModule,
   ]
 })
-export class PagesModule { }
+export class AdminModule { }

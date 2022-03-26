@@ -5,8 +5,6 @@ import { AuthGuard } from '../guards/auth.guard';
 
 import { PagesComponent } from './pages.component';
 import { FeedComponent } from './feed/feed.component';
-import { EmployeeComponent } from './employee/employee.component';
-import { AdminComponent } from './admin/admin.component';
 
 
 const routes: Routes = [
@@ -16,11 +14,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'feed', component: FeedComponent },
-      { path: 'employee', component: EmployeeComponent },
-      { path: 'admin', component: AdminComponent },
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
     ],
-  }
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+  },
+  {
+    path: 'employee',
+    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
+  },
+
 ];
 
 @NgModule({
