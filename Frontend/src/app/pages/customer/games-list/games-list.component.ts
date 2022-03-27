@@ -25,6 +25,7 @@ export class GamesListComponent implements OnInit {
       { id: 2, description: 'Iniciado' },
       { id: 3, description: 'Finalizado' },
       { id: 4, description: 'Suspendido' },
+      { id: 5, description: 'Todos' },
     ];
   }
 
@@ -38,7 +39,7 @@ export class GamesListComponent implements OnInit {
         this.games = []
         const tempGames = response['data'];
         tempGames.forEach((game: Game) => {
-          if (game.status == status)
+          if (game.status == status || status == 5)
             this.games.push(game)
         });
       }
