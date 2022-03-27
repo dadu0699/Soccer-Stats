@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Team } from 'src/app/models/team.model';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-team-view',
@@ -23,23 +24,34 @@ export class TeamViewComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private teamService: TeamService
   ) {
     this.labels = ['no.', 'name', 'foundation date', 'country', 'actions'];
     this.dataTable = [];
     this.dataSource = new MatTableDataSource<any>();
 
     this.team = new Team();
-    this.allTeams = [
-      { id: 1, name: 'Equipo 1', foundation_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg', id_country: 1, country: 'Country 1' },
-      { id: 2, name: 'Equipo 2', foundation_date: '2022-01-25', photo: 'NA', id_country: 2, country: 'Country 2' }
-    ]; //TODO Delete Info
+    this.allTeams = []
 
     this.readonly = false;
     this.allowEditing = false;
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
+  }
+
+  /**
+   * Obtener todos los equipos
+   */
+  getAll = () => {
+    this.teamService.get()
+      .then((response) => {
+        this.allTeams = [];
+        this.dataTable = [];
+        this.allTeams = response.data;
+        this.fillTable();
+      });
   }
 
   private fillTable() {
@@ -59,13 +71,12 @@ export class TeamViewComponent implements OnInit {
   public done() {
     if (this.allowEditing) {
       this.updateExisting();
-    }else{
-      console.log(this.team, 'Create new'); //TODO Create
+    } else {
+      console.log(this.team, 'Create new');
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.team); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -83,25 +94,52 @@ export class TeamViewComponent implements OnInit {
   }
 
   public selectTeam(id: any) {
-    this.readonly = true;
+    this.readonly = false;
     this.allowEditing = false;
     let team: Team = this.allTeams.find(el => el.id === id) || new Team();
     this.team = team;
   }
 
   public create() {
+    this.teamService.create(this.team)
+      .then((response) => {
+        this.showSnackbar('Team created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.team = new Team();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
+    this.teamService.update(this.team)
+      .then((response) => {
+        this.showSnackbar('Team updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.team = new Team();
     this.readonly = false;
     this.allowEditing = true;
   }
 
   public delete() {
-    console.log(this.team.id); //TODO Delete
+    this.teamService.delete(this.team)
+      .then((response) => {
+        this.showSnackbar('Team deleted successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.team = new Team();
+    this.readonly = false;
+    this.allowEditing = true;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
