@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { User } from 'src/app/models/user.model';
 import { Option } from 'src/app/models/option.model';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-user-view',
@@ -28,6 +29,7 @@ export class UserViewComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private _adminService: AdminService,
   ) {
     this.labels = ['no.', 'name', 'lastname', 'email', 'age', 'rol', 'status', 'actions'];
     this.dataTable = [];
@@ -57,6 +59,7 @@ export class UserViewComponent implements OnInit {
     this.roles = [
       { id: 1, description: 'Admin' },
       { id: 2, description: 'Employee' },
+      { id: 3, description: 'Customer' },
     ];
     this.status = [
       { id: 1, description: 'Activa' },
@@ -70,10 +73,26 @@ export class UserViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
+  }
+
+  public async getAll():Promise<void> {
+    try {
+      const response = await this._adminService.getUsers();
+      if (response['status'] === 200) {
+        this.allUsers = response['data']
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private fillTable() {
+    this.dataSource = new MatTableDataSource<any>();
+    this.dataTable = [];
+
     this.allUsers.forEach((element: User) => {
       this.dataTable.push({
         no: element.id,
@@ -109,10 +128,15 @@ export class UserViewComponent implements OnInit {
     this.manage = true;
   }
 
-  public manageAccount(info: any) {
+  public async manageAccount(info: any): Promise<void> {
     this.manage = false;
-    console.log(info)
-    this.showSnackbar('Status Updated'); //TODO Update account status
+    try {
+      const response = await this._adminService.manageAccount(this.user.id, info.id, info.description);
+      this.showSnackbar(response['msg']);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public selectUser(id: any) {
@@ -135,7 +159,6 @@ export class UserViewComponent implements OnInit {
   }
 
   public delete() {
-    console.log(this.user.id); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

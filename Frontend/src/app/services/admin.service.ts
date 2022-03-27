@@ -10,7 +10,7 @@ export class AdminService {
   private url: string;
   private httpOptions = {
     headers: new HttpHeaders({
-      'Authorization': 'bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxLCJpZF9yb2wiOjF9.TO1PkVlWFbrGJbUIJvagkTF_jCUIelGrs9-NID5PySs', //localStorage.getItem('token'),
+      'Authorization': 'bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxLCJpZF9yb2wiOjF9.TO1PkVlWFbrGJbUIJvagkTF_jCUIelGrs9-NID5PySs', //localStorage.getItem('token'), //TODO eliminar token quemado
       'Content-Type': 'application/json'
     })
   };
@@ -73,5 +73,16 @@ export class AdminService {
     return await this._httpClient.get(`${this.url}/report/10/`, this.httpOptions).toPromise();
   }
 
+  public async getUsers(): Promise<any> {
+    return await this._httpClient.get(`${this.url}/user/`, this.httpOptions).toPromise();
+  }
+
+  public async manageAccount(id: number, id_status: number, description: string): Promise<any> {
+    const body = JSON.stringify({ id, id_status, description });
+
+    return await this._httpClient
+      .put(`${this.url}/user/status`, body, {headers: this.httpOptions.headers })
+      .toPromise();
+  }
 
 }

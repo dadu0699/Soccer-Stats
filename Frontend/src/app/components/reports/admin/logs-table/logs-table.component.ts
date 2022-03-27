@@ -44,8 +44,8 @@ export class LogsTableComponent implements OnInit {
       if (response['status'] === 200) {
         this.logs = response['data']
         this.fillTable();
-        this.showSnackbar(response['msg']);
       }
+      this.showSnackbar(response['msg']);
     } catch (error) {
       console.log(error);
     }
