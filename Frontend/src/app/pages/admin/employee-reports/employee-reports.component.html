@@ -1,1 +1,14 @@
-<p>employee-reports works!</p>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="News Posted">
+    <div class="holder">
+      <mat-grid-list cols="12" rowHeight="95px">
+        <mat-grid-tile colspan="6" rowspan="6">
+          <app-employees-per-parameter class="size"></app-employees-per-parameter>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="6" rowspan="6">
+          <app-employees-per-parameter [perTeam]="true" class="size"></app-employees-per-parameter>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-tab>
+</mat-tab-group>
