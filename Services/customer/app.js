@@ -22,6 +22,7 @@ const apiURL = '/customer';
 app.use('/', require('./routes/index.route.js'));
 app.use(apiURL, require('./routes/customer.route'));
 app.use(`${apiURL}/membership`, require('./routes/membership.route'));
+app.use(`${apiURL}/follow`, require('./routes/favorite.route'));
 
 // Port assignment
 const server = app.listen(PORT, () => {
