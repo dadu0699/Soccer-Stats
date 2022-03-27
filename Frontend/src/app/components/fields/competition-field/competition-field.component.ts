@@ -18,21 +18,18 @@ export class CompetitionFieldComponent implements OnInit {
   constructor(
     private _competitionService: CompetitionService
   ) {
-    this.competitions = [
-      { id: 1, name: 'Equipo 1', year: 2021, id_country: 1, country: 'Country 1', type: 3, id_champion_team: 1, champion_team: 'Equipo ganador 1' },
-      { id: 2, name: 'Equipo 2', year: 2022, id_country: 2, country: 'Country 2', type: 5, id_champion_team: 1, champion_team: 'Equipo ganador 1' }
-    ];
+    this.competitions = [];
     this.selectCompetition = new EventEmitter<number>();
   }
 
   async ngOnInit(): Promise<void> {
-    //await this.getCompetitions();
+    await this.getCompetitions();
   }
 
   async getCompetitions(): Promise<void> {
     try {
       const response = await this._competitionService.get();
-      if (response['status'] === 200){
+      if (response['status'] === 200) {
         this.competitions = response['data']
       }
     } catch (error) {
