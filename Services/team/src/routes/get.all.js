@@ -5,8 +5,11 @@ const pool = require('../db_connection');
 
 router.get('/', (req, res) => {
 
-    var sql = `SELECT Equipo.equipoID as "id", Equipo.nombre as "name", Equipo.fechaFundacion as "foundation_date ", Equipo.paisID as "id_country", Equipo.fotoLogo as "photo"
-            FROM Equipo`;
+    var sql = `
+    SELECT Equipo.equipoID as "id", Equipo.nombre as "name", Equipo.fechaFundacion as "foundation_date", 
+        Equipo.paisID as "id_country", Pais.nombre as "country", Equipo.fotoLogo as "photo"
+    FROM Equipo
+    INNER JOIN Pais ON Equipo.paisID = Pais.paisID`;
     
     if (req.query.id != null) {
         sql += ` WHERE Equipo.equipoID = ${req.query.id};`;
