@@ -19,21 +19,18 @@ export class TeamFieldComponent implements OnInit {
   constructor(
     private _teamService: TeamService
   ) {
-    this.teams = [
-      { id: 1, name: 'Equipo 1', foundation_date: '2021-05-23', photo: 'NA', id_country: 1, country: 'Country 1' },
-      { id: 2, name: 'Equipo 2', foundation_date: '2022-01-25', photo: 'NA', id_country: 2, country: 'Country 2' }
-    ]
+    this.teams = [];
     this.selectTeam = new EventEmitter<number>();
-   }
+  }
 
   async ngOnInit(): Promise<void> {
-    //await this.getTeams();
+    await this.getTeams();
   }
 
   async getTeams(): Promise<void> {
     try {
       const response = await this._teamService.get();
-      if (response['status'] === 200){
+      if (response['status'] === 200) {
         this.teams = response['data']
       }
     } catch (error) {

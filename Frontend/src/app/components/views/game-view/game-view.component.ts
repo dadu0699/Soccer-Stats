@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Option } from 'src/app/models/option.model';
 import { Game } from 'src/app/models/game.model';
 import { IncidenceDialogComponent } from '../../dialogs/incidence-dialog/incidence-dialog.component';
+import { MatchService } from 'src/app/services/match.service';
 
 @Component({
   selector: 'app-game-view',
@@ -28,24 +29,14 @@ export class GameViewComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private matchService: MatchService
   ) {
     this.labels = ['no.', 'local team', 'visiting team', 'date', 'stadium', 'status', 'actions'];
     this.dataTable = [];
     this.dataSource = new MatTableDataSource<any>();
 
     this.game = new Game();
-    this.allGames = [
-      {
-        id: 1, id_team_local: 1, team_local: 'Equipo 1', result_local: 0,
-        id_team_visiting: 2, team_visiting: 'Equipo 2', result_visiting: 2,
-        game_date: '2022-06-15', id_stadium: 1, stadium: 'Estadio 1', status: 1, attendees: 100, id_competition: 1, competition: 'Competencia 1'
-      },
-      {
-        id: 2, id_team_local: 2, team_local: 'Equipo 2', result_local: 2,
-        id_team_visiting: 1, team_visiting: 'Equipo 1', result_visiting: 0,
-        game_date: '2022-06-15', id_stadium: 2, stadium: 'Estadio 1', status: 4, attendees: 1, id_competition: 2, competition: 'Competencia 2'
-      }
-    ]; //TODO Delete info
+    this.allGames = []
 
     this.status = [
       { id: 1, description: 'Sin Iniciar' },
@@ -59,7 +50,20 @@ export class GameViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
+  }
+
+  /**
+   * Obtener todos los partidos
+   */
+  getAll = () => {
+    this.matchService.get()
+      .then((response) => {
+        this.allGames = [];
+        this.dataTable = [];
+        this.allGames = response.data;
+        this.fillTable();
+      });
   }
 
   private fillTable() {
@@ -82,12 +86,11 @@ export class GameViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.game); //TODO Create
+      console.log(this.game);
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.game); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -128,24 +131,51 @@ export class GameViewComponent implements OnInit {
     console.log('Add incidence', this.game.id);
     const dialogRef = this.dialog.open(IncidenceDialogComponent, {});
 
-    dialogRef.afterClosed().subscribe( async (newIncidence) =>{
+    dialogRef.afterClosed().subscribe(async (newIncidence) => {
       console.log(newIncidence); //TODO Add Incidence
     });
   }
 
   public create() {
+    this.matchService.create(this.game)
+      .then((response) => {
+        this.showSnackbar('Game created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.game = new Game();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
+    this.matchService.update(this.game)
+      .then((response) => {
+        this.showSnackbar('Game updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.game = new Game();
     this.readonly = false;
-    this.allowEditing = true;
+    this.allowEditing = false;
   }
 
   public delete() {
-    console.log(this.game.id); //TODO Delete
+    this.matchService.delete(this.game)
+      .then((response) => {
+        this.showSnackbar('Game deleted successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.game = new Game();
+    this.readonly = false;
+    this.allowEditing = false;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

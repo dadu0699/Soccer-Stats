@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { Player } from '../models/player.model';
+import { Game } from '../models/game.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlayerService {
+export class MatchService {
   private url: string;
   private httpOptions = {
     headers: new HttpHeaders({
@@ -17,7 +17,7 @@ export class PlayerService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5006/player`;
+    this.url = `${environment.url}:5002/match`;
   }
 
   public async get(): Promise<any> {
@@ -25,21 +25,21 @@ export class PlayerService {
       get(this.url).toPromise();
   }
 
-  public async create(player: Player): Promise<any> {
+  public async create(match: Game): Promise<any> {
     return await this._httpClient.
-      post(this.url, player, this.httpOptions).toPromise();
+      post(this.url, match, this.httpOptions).toPromise();
   }
 
-  public async update(player: Player): Promise<any> {
+  public async update(match: Game): Promise<any> {
     return await this._httpClient.
-      put(this.url, player, this.httpOptions).toPromise();
+      put(this.url, match, this.httpOptions).toPromise();
   }
 
-  public async delete(player: Player): Promise<any> {
+  public async delete(match: Game): Promise<any> {
     return await this._httpClient.
       delete(this.url, {
         headers: this.httpOptions.headers,
-        body: player
+        body: match
       }).toPromise();
   }
 }
