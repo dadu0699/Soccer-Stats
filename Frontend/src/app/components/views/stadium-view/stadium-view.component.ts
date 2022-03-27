@@ -67,6 +67,7 @@ export class StadiumViewComponent implements OnInit {
   getAll = () => {
     this.stadiumService.get()
       .then((response) => {
+        console.log(response)
         this.allStadiums = [];
         this.dataTable = [];
         this.allStadiums = response.data;
@@ -83,7 +84,7 @@ export class StadiumViewComponent implements OnInit {
         capacity: element.capacity,
         country: element.country,
         address: element.address,
-        status: this.status[element.status - 1].description
+        status: this.status.find((el) => el.id === element.status)?.description,
       });
       this.labels = Object.keys(this.dataTable[0]);
       this.labels.push('actions')
@@ -122,7 +123,7 @@ export class StadiumViewComponent implements OnInit {
   }
 
   public selectStadium(id: any) {
-    this.readonly = true;
+    this.readonly = false;
     this.allowEditing = false;
     let stadium: Stadium = this.allStadiums.find(el => el.id === id) || new Stadium();
     this.stadium = stadium;
@@ -151,6 +152,7 @@ export class StadiumViewComponent implements OnInit {
       .catch((error) => {
         this.showSnackbar(error.error.message);
       });
+    this.stadium = new Stadium();
     this.readonly = false;
     this.allowEditing = true;
   }
@@ -164,6 +166,7 @@ export class StadiumViewComponent implements OnInit {
       .catch((error) => {
         this.showSnackbar(error.error.message);
       });
+    this.stadium = new Stadium();
     this.readonly = false;
     this.allowEditing = true;
   }
