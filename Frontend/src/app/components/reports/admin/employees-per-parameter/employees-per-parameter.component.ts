@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user.model';
 import { Option } from 'src/app/models/option.model';
 
+import { AdminService } from 'src/app/services/admin.service';
+
 @Component({
   selector: 'app-employees-per-parameter',
   templateUrl: './employees-per-parameter.component.html',
@@ -24,7 +26,10 @@ export class EmployeesPerParameterComponent implements OnInit {
   public dataSource: MatTableDataSource<any>;
 
 
-  constructor() {
+  constructor(
+    private _snackBar: MatSnackBar,
+    private _adminService: AdminService
+  ) {
     this.perTeam = false;
 
     this.labels = ['no.', 'photo', 'name', 'lastname', 'nationality', 'birth date', 'quantity', 'age'];
@@ -32,22 +37,6 @@ export class EmployeesPerParameterComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>();
 
     this.users = [];
-    this.users = [
-      {
-        id: 1, name: 'nombre 1', lastname: 'apellido 1', email: 'mail 1',
-        password: 'contraseña 1', phone: 'telefono 1', birth_date: '1998-11-11',
-        address: 'Direccion 1', id_country: 1, id_gender: 1, gender: 'Male',
-        id_rol: 1, photo: 'https://www.latercera.com/resizer/Bh3lioSDt8GrjOEVcLSjSbYfRok=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/6DKKPSIWJJFZNGNYFBVRLKIT6E.jpg',
-        id_status: 1, age: 111, nationality: 'Pais 1', count: 8,
-      },
-      {
-        id: 2, name: 'nombre 2', lastname: 'apellido 2', email: 'mail 2',
-        password: 'contraseña 2', phone: 'telefono 2', birth_date: '2022-02-22',
-        address: 'Direccion 2', id_country: 2, id_gender: 2, gender: 'Female',
-        id_rol: 2, photo: 'https://mn2s-content.s3.eu-west-2.amazonaws.com/wp-content/uploads/2021/03/19174550/Chris-Wood.png',
-        id_status: 2, age: 222, nationality: 'Pais 2', amount: 12,
-      },
-    ]; //TODO Delete info
 
     this.options = [
       { id: 0, description: 'Most' },
@@ -60,7 +49,8 @@ export class EmployeesPerParameterComponent implements OnInit {
   }
 
   private fillTable() {
-    this.dataTable = []; //TODO clean other tables
+    this.dataSource = new MatTableDataSource<any>();
+    this.dataTable = [];
     this.users.forEach((element: User) => {
 
       this.dataTable.push({
@@ -77,17 +67,36 @@ export class EmployeesPerParameterComponent implements OnInit {
     });
   }
 
-  public selectOption(id_option: any) {
-    this.currentOption = id_option //TODO get all employees more/less news posted
-    console.log(id_option);
-    //TODO This.users = new info
-    this.fillTable();
+  public async selectOption(id_option: any):Promise<void> {
+    if(!this.perTeam){
+      this.currentOption = id_option
+      try {
+        const response = await this._adminService.report8(id_option);
+        if (response['status'] === 200) {
+          this.users = response['data']
+          this.fillTable();
+          this.showSnackbar(response['msg']);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
-  public selectTeam(id_team: any) {
-    console.log(id_team, this.currentOption)//TODO get all employees more/less news posted per team
-    //TODO This.users = new info
-    this.fillTable();
+  public async selectTeam(id_team: any): Promise<void> {
+    try {
+      const response = await this._adminService.report9(this.currentOption, id_team);
+      if (response['status'] === 200) {
+        this.users = response['data']
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
+  private showSnackbar(message: string = 'Something went wrong :c') {
+    this._snackBar.open(message, 'CLOSE', { duration: 5000 });
+  }
 }
