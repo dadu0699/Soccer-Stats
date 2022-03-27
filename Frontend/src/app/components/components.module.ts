@@ -21,14 +21,18 @@ import { StadiumFieldComponent } from './fields/stadium-field/stadium-field.comp
 import { CompetitionFieldComponent } from './fields/competition-field/competition-field.component';
 import { PlayerFieldComponent } from './fields/player-field/player-field.component';
 
+import { IncidenceDialogComponent } from './dialogs/incidence-dialog/incidence-dialog.component';
+import { TransferDialogComponent } from './dialogs/transfer-dialog/transfer-dialog.component';
+import { ForgotPasswordDialogComponent } from './dialogs/forgot-password-dialog/forgot-password-dialog.component';
+
+import { UsersPerParameterComponent } from './reports/admin/users-per-parameter/users-per-parameter.component';
+import { EmployeesPerParameterComponent } from './reports/admin/employees-per-parameter/employees-per-parameter.component';
+import { LogsTableComponent } from './reports/admin/logs-table/logs-table.component';
+
 import { ViewTableComponent } from './others/view-table/view-table.component';
 import { ManagementOptionsComponent } from './others/management-options/management-options.component';
 import { AccountManagementComponent } from './others/account-management/account-management.component';
 import { UserRegisterFormComponent } from './others/user-register-form/user-register-form.component';
-
-import { IncidenceDialogComponent } from './dialogs/incidence-dialog/incidence-dialog.component';
-import { TransferDialogComponent } from './dialogs/transfer-dialog/transfer-dialog.component';
-import { ForgotPasswordDialogComponent } from './dialogs/forgot-password-dialog/forgot-password-dialog.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -48,7 +52,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 
 
-
 @NgModule({
   declarations: [
     UserViewComponent,
@@ -65,14 +68,17 @@ import { MatDialogModule } from '@angular/material/dialog';
     DateFieldComponent,
     StadiumFieldComponent,
     CompetitionFieldComponent,
-    ViewTableComponent,
-    ManagementOptionsComponent,
-    AccountManagementComponent,
-    UserRegisterFormComponent,
     IncidenceDialogComponent,
     TransferDialogComponent,
     ForgotPasswordDialogComponent,
     PlayerFieldComponent,
+    UsersPerParameterComponent,
+    EmployeesPerParameterComponent,
+    LogsTableComponent,
+    ViewTableComponent,
+    ManagementOptionsComponent,
+    AccountManagementComponent,
+    UserRegisterFormComponent,
   ],
   entryComponents: [
     IncidenceDialogComponent,
@@ -94,10 +100,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     DateFieldComponent,
     StadiumFieldComponent,
     CompetitionFieldComponent,
+    UsersPerParameterComponent,
+    EmployeesPerParameterComponent,
+    LogsTableComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,
+
   ],
   imports: [
     CommonModule,

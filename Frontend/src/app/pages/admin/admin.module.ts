@@ -11,20 +11,28 @@ import { ComponentsModule } from '../../components/components.module';
 
 import { UserManagementComponent } from './user-management/user-management.component';
 import { MainComponent } from './main/main.component';
+import { LogsComponent } from './logs/logs.component';
+import { UserReportsComponent } from './user-reports/user-reports.component';
+import { EmployeeReportsComponent } from './employee-reports/employee-reports.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 
+
 @NgModule({
   declarations: [
     MainComponent,
     UserManagementComponent,
+    LogsComponent,
+    UserReportsComponent,
+    EmployeeReportsComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +45,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatSidenavModule,
     MatTabsModule,
+    MatGridListModule,
     MatListModule,
     LayoutModule,
     MatButtonModule,

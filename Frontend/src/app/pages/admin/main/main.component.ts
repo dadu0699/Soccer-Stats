@@ -17,9 +17,9 @@ export class MainComponent implements OnInit {
     this.showReports = false;
 
     this.reports = [
-      {id: 1, description: 'Report 1'},
-      {id: 2, description: 'Report 2'},
-      {id: 2, description: 'Report 3'},
+      {id: 1, description: 'User', link: 'user-reports'},
+      {id: 2, description: 'Employee', link: 'employee-reports'},
+      {id: 2, description: 'Logs', link: 'logs'},
     ]
   }
 

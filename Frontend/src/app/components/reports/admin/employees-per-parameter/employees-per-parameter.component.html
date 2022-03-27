@@ -1,0 +1,9 @@
+<div fxLayout="row" fxLayoutAlign="space-evenly center">
+  <app-status-field [option]="currentOption" [options]="options" (selectOption)="selectOption($event)">
+  </app-status-field>
+  <app-team-field (selectTeam)="selectTeam($event)" *ngIf="perTeam">
+  </app-team-field>
+</div>
+
+<app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
+</app-view-table>

@@ -1,0 +1,42 @@
+<div *ngIf="perCountry" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <h3> Users per Country</h3>
+  <app-country-field (selectCountry)="selectCountry($event)" class="extra-field">
+  </app-country-field>
+</div>
+
+<div *ngIf="perGender" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <h3> Users per Gender</h3>
+  <app-status-field [options]="genders" (selectOption)="selectGender($event)">
+  </app-status-field>
+</div>
+
+<div *ngIf="perAge" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <h3> Users per Age</h3>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <mat-form-field appearance="outline">
+      <mat-label>Age</mat-label>
+      <input matInput [(ngModel)]="age" name="ageField" #ageField="ngModel" />
+    </mat-form-field>
+    <button mat-icon-button color="accent" class="space-bottom" (click)="selectAge()">
+      <mat-icon class="icon">search</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="perTeam" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <h3> Users per Team</h3>
+  <app-team-field (selectTeam)="selectTeam($event)">
+  </app-team-field>
+</div>
+
+<div *ngIf="perMembershipStatus" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <h3> Users per Membership Status</h3>
+  <app-status-field [options]="membershipStatus" (selectOption)="selectMembershipStatus($event)">
+  </app-status-field>
+</div>
+
+<h3 *ngIf="perMembershipCount"> Users per Membership Amount</h3>
+<h3 *ngIf="perMoneySpent"> Users per Money Spent</h3>
+
+<app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
+</app-view-table>

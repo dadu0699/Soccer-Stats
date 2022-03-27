@@ -14,7 +14,7 @@
     </mat-action-list>
 
     <mat-nav-list *ngIf="showReports">
-      <a mat-list-item *ngFor="let report of reports" href="/soccer-stats/admin/report{{report.id}}">
+      <a mat-list-item *ngFor="let report of reports" href="/soccer-stats/admin/{{report.link}}">
         &nbsp;
         &nbsp;
         <mat-icon class="icon">bubble_chart</mat-icon>

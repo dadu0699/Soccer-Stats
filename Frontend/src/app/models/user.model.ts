@@ -1,5 +1,5 @@
 export class User {
-  public id_user!: number;
+  public id!: number;
   public name: string;
   public lastname: string;
   public password?: string;
@@ -15,6 +15,9 @@ export class User {
   public id_rol: number;
   public id_status: number;
   public age: number;
+  public nationality?: string;
+  public count?: number;
+  public amount?: number
 
   constructor() {
     this.name = "";
