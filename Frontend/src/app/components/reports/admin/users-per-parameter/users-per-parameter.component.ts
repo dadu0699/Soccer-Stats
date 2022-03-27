@@ -17,6 +17,8 @@ export class UsersPerParameterComponent implements OnInit {
   @Input('perGender') perGender: boolean;
   @Input('perAge') perAge: boolean;
 
+  @Input('perTeam') perTeam:boolean;
+
   public dataTable: any;
   public labels: Array<string>;
   public dataSource: MatTableDataSource<any>;
@@ -31,6 +33,7 @@ export class UsersPerParameterComponent implements OnInit {
     this.perCountry = false;
     this.perGender = false;
     this.perAge = false;
+    this.perTeam = false;
 
     this.labels = ['no.', 'photo', 'name', 'lastname', 'nationality', 'bith date', 'age'];
     this.dataTable = [];
@@ -74,20 +77,20 @@ export class UsersPerParameterComponent implements OnInit {
         name: element.name,
         lastname: element.name,
       });
-      if (this.perGender)
+      if (this.perGender || this.perTeam)
       this.dataTable.push({
         no: element.id,
+        photo: element.photo,
         name: element.name,
         lastname: element.lastname,
-        photo: element.photo,
         nationality: element.nationality,
       });
       if (this.perAge)
       this.dataTable.push({
         no: element.id,
+        photo: element.photo,
         name: element.name,
         lastname: element.name,
-        photo: element.photo,
         nationality: element.nationality,
         birth_date: element.birth_date,
         age: element.age
@@ -112,6 +115,12 @@ export class UsersPerParameterComponent implements OnInit {
 
   public selectAge() {
     console.log(this.age) //TODO get all users at least x age
+    //TODO This.users = new info
+    this.fillTable();
+  }
+
+  public selectTeam(id_team: any) {
+    console.log(id_team) //TODO get all users following x team
     //TODO This.users = new info
     this.fillTable();
   }

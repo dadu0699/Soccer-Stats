@@ -23,5 +23,11 @@
   </div>
 </div>
 
+<div *ngIf="perTeam" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <h3> Users per Team</h3>
+  <app-team-field (selectTeam)="selectTeam($event)">
+  </app-team-field>
+</div>
+
 <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
 </app-view-table>
