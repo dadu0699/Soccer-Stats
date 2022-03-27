@@ -29,5 +29,14 @@
   </app-team-field>
 </div>
 
+<div *ngIf="perMembershipStatus" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <h3> Users per Membership Status</h3>
+  <app-status-field [options]="membershipStatus" (selectOption)="selectMembershipStatus($event)">
+  </app-status-field>
+</div>
+
+<h3 *ngIf="perMembershipCount"> Users per Membership Amount</h3>
+<h3 *ngIf="perMoneySpent"> Users per Money Spent</h3>
+
 <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
 </app-view-table>

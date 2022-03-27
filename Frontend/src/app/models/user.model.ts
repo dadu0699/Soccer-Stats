@@ -16,6 +16,8 @@ export class User {
   public id_status: number;
   public age: number;
   public nationality?: string;
+  public count?: number;
+  public amount?: number
 
   constructor() {
     this.name = "";
