@@ -1,4 +1,4 @@
-<mat-grid-list cols="4" rowHeight="85px">
+<mat-grid-list cols="8" rowHeight="85px">
   <mat-grid-tile colspan="4" rowspan="7">
     <div fxLayout="column" fxLayoutAlign="space-between center" class="fullSize">
       <div fxLayout="row" fxLayoutAlign="space-between center" class="half-width">
@@ -12,9 +12,20 @@
         </button>
       </div>
     </div>
-
+    <div fxLayout="row" fxLayoutAlign="space-around center" class="membership-width" >
+      <button mat-stroked-button color="warn" (click)="getMembership()">
+        <mat-icon class="icon">money</mat-icon>
+        Get Membership!
+      </button>
+      <button mat-stroked-button color="accent"  (click)="cancelMembership()">
+        <mat-icon class="icon">cancel</mat-icon>
+        Cancel Membership
+      </button>
+    </div>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="4" rowspan="7">
       <app-user-register-form [user]="user" [allowEditing]="true" [readonly]="readonly" [customer_side]="true"
         (sendUser)="editUser($event)" [showButton]="edit"></app-user-register-form>
-    </div>
   </mat-grid-tile>
 </mat-grid-list>

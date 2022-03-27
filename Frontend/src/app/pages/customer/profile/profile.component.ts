@@ -45,4 +45,12 @@ export class ProfileComponent implements OnInit {
     console.log(this.user.id) //TODO delete account
   }
 
+  public getMembership() {
+    console.log(this.user.id) //TODO get Membership
+  }
+
+  public cancelMembership() {
+    console.log(this.user.id) //TODO cancel Membership
+  }
+
 }

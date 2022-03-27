@@ -3,5 +3,9 @@
   margin-bottom: 15px;
 }
 .half-width{
-  width: 30%;
+  width: 50%;
+}
+
+.membership-width{
+  width: 60%;
 }
