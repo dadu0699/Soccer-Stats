@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Player } from 'src/app/models/player.model';
 import { Option } from 'src/app/models/option.model';
 import { TransferDialogComponent } from '../../dialogs/transfer-dialog/transfer-dialog.component';
+import { PlayerService } from 'src/app/services/player.service';
+import { DateFormatService } from 'src/app/services/date-format.service';
 
 @Component({
   selector: 'app-player-view',
@@ -29,6 +31,8 @@ export class PlayerViewComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private playerService: PlayerService,
+    private dateFormatService: DateFormatService
   ) {
     this.labels = ['no.', 'name', 'lastname',
       'birth date', 'nationality', 'position', 'status', 'team', 'actions'];
@@ -48,7 +52,7 @@ export class PlayerViewComponent implements OnInit {
     ]; //TODO Delete Info
 
     this.positions = [
-      { id: 1, description: 'Potero' },
+      { id: 1, description: 'Portero' },
       { id: 2, description: 'Defensa' },
       { id: 3, description: 'Medio' },
       { id: 4, description: 'Delantero' },
@@ -64,7 +68,22 @@ export class PlayerViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
+  }
+
+  /**
+   * Obtener todos los directores tecnicos
+   */
+  getAll = () => {
+    this.playerService.get()
+      .then((response) => {
+        console.log(response)
+        this.allPlayers = [];
+        this.dataTable = [];
+        this.allPlayers = response.data;
+        this.fillTable();
+      })
+      .catch((error) => { console.log(error) });
   }
 
   private fillTable() {
@@ -73,7 +92,7 @@ export class PlayerViewComponent implements OnInit {
         no: element.id,
         name: element.name,
         lastname: element.lastname,
-        birthDate: element.birth_date,
+        birthDate: this.dateFormatService.formatoFecha(element.birth_date),
         nationality: element.nationality,
         position: this.positions[element.position - 1].description,
         status: this.status[element.status - 1].description,
@@ -94,7 +113,6 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public updateExisting() {
-    console.log(this.player); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -120,14 +138,14 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public selectPlayer(id: any) {
-    this.readonly = true;
+    this.readonly = false;
     this.allowEditing = false;
     let player: Player = this.allPlayers.find(el => el.id === id) || new Player();
     this.player = player;
   }
 
   public transferPlayer() {
-    console.log( this.player.id, this.player.id_team);
+    console.log(this.player.id, this.player.id_team);
     const dialogRef = this.dialog.open(TransferDialogComponent, {});
 
     dialogRef.afterClosed().subscribe(async (transference) => {
@@ -136,18 +154,46 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public create() {
+    this.playerService.create(this.player)
+      .then((response) => {
+        console.log(response)
+        this.showSnackbar('Player created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.player = new Player();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
+    this.playerService.update(this.player)
+      .then((response) => {
+        this.showSnackbar('Player created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.player = new Player();
     this.readonly = false;
-    this.allowEditing = true;
+    this.allowEditing = false;
   }
 
   public delete() {
-    console.log(this.player.id); //TODO Delete
+    this.playerService.delete(this.player)
+      .then((response) => {
+        this.showSnackbar('Player created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.player = new Player();
+    this.readonly = false;
+    this.allowEditing = false;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
