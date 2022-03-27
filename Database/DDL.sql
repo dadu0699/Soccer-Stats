@@ -387,3 +387,42 @@ INNER JOIN Equipo AS E2 ON E2.equipoID = Partido.equipoLocalID
 INNER JOIN Estadio ON Estadio.estadioID = Partido.estadioID
 INNER JOIN Competencia ON Competencia.competenciaID = Partido.competenciaID
 WHERE (Partido.resultadoLocal + Partido.resultadoVisitante) <= 3;
+
+-- JUGADORES CON MAS INCIDENCIAS X INCIDENCIA Y COMPETICION
+SELECT COUNT(*) AS count,
+Jugador.jugadorID AS id, Jugador.nombre AS name, 
+Jugador.foto AS photo, Jugador.apellido AS lastname,
+Pais.nombre AS nacionality, PosicionJugador.nombre AS position,
+Equipo.nombre AS team
+FROM Incidencia
+INNER JOIN Jugador ON Jugador.jugadorID = Incidencia.jugadorID
+INNER JOIN Pais ON Pais.paisID = Jugador.paisID
+INNER JOIN PosicionJugador ON PosicionJugador.posicionJugadorID = Jugador.posicionJugadorID
+RIGHT JOIN ContratoJugador ON ContratoJugador.jugadorID = Jugador.jugadorID
+INNER JOIN Equipo ON Equipo.equipoID = ContratoJugador.equipoOrigenID
+WHERE Incidencia.jugadorID = 1 AND Incidencia.tipo = 1
+ORDER BY count DESC;
+
+-- JUGADORES CON MAS INCIDENCIAS X INCIDENCIA Y COMPETICION Z AÑO
+SELECT COUNT(*) AS count,
+Jugador.jugadorID AS id, Jugador.nombre AS name, 
+Jugador.foto AS photo, Jugador.apellido AS lastname,
+Pais.nombre AS nacionality, PosicionJugador.nombre AS position,
+Equipo.nombre AS team, Competencia.anio AS year
+FROM Incidencia
+INNER JOIN Jugador ON Jugador.jugadorID = Incidencia.jugadorID
+INNER JOIN Pais ON Pais.paisID = Jugador.paisID
+INNER JOIN PosicionJugador ON PosicionJugador.posicionJugadorID = Jugador.posicionJugadorID
+INNER JOIN ContratoJugador ON ContratoJugador.jugadorID = Jugador.jugadorID
+RIGHT JOIN Equipo ON Equipo.equipoID = ContratoJugador.equipoOrigenID
+INNER JOIN CompetenciaEquipo ON CompetenciaEquipo.equipoID = Equipo.equipoID
+INNER JOIN Competencia ON Competencia.competenciaID = CompetenciaEquipo.competenciaID
+WHERE Incidencia.jugadorID = 1 AND Incidencia.tipo = 1 AND Competencia.anio = 2022
+ORDER BY count DESC;
+
+-- COMPETENCIAS GANADAS POR Y EQUIPO
+SELECT COUNT(*) AS count, Equipo.equipoID AS id_team, Equipo.nombre AS team, Equipo.fotoLogo AS photo,
+Competencia.tipo AS type FROM Competencia
+INNER JOIN Equipo ON Equipo.equipoID = Competencia.equipoCampeonID
+WHERE Competencia.tipo IN (1, 2)
+GROUP BY Equipo.equipoID;
