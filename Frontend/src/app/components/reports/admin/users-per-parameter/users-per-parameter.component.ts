@@ -43,7 +43,7 @@ export class UsersPerParameterComponent implements OnInit {
     this.perMembershipCount = false;
     this.perMoneySpent = false;
 
-    this.labels = ['no.', 'photo', 'name', 'lastname', 'nationality', 'bith date', 'quantity', 'age'];
+    this.labels = ['no.', 'photo', 'name', 'lastname', 'nationality', 'birth date', 'quantity', 'age'];
     this.dataTable = [];
     this.dataSource = new MatTableDataSource<any>();
 
@@ -99,7 +99,7 @@ export class UsersPerParameterComponent implements OnInit {
           no: element.id,
           photo: element.photo,
           name: element.name,
-          lastname: element.name,
+          lastname: element.lastname,
         });
       if (this.perGender || this.perTeam || this.perMembershipStatus)
         this.dataTable.push({
@@ -123,7 +123,7 @@ export class UsersPerParameterComponent implements OnInit {
           no: element.id,
           photo: element.photo,
           name: element.name,
-          lastname: element.name,
+          lastname: element.lastname,
           nationality: element.nationality,
           birth_date: element.birth_date,
           age: element.age

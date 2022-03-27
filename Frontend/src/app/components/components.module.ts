@@ -26,6 +26,7 @@ import { TransferDialogComponent } from './dialogs/transfer-dialog/transfer-dial
 import { ForgotPasswordDialogComponent } from './dialogs/forgot-password-dialog/forgot-password-dialog.component';
 
 import { UsersPerParameterComponent } from './reports/admin/users-per-parameter/users-per-parameter.component';
+import { LogsTableComponent } from './reports/admin/logs-table/logs-table.component';
 
 import { ViewTableComponent } from './others/view-table/view-table.component';
 import { ManagementOptionsComponent } from './others/management-options/management-options.component';
@@ -73,6 +74,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ForgotPasswordDialogComponent,
     PlayerFieldComponent,
     UsersPerParameterComponent,
+    LogsTableComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
@@ -99,6 +101,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     StadiumFieldComponent,
     CompetitionFieldComponent,
     UsersPerParameterComponent,
+    LogsTableComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
