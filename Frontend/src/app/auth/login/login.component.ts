@@ -5,12 +5,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import * as Feather from 'feather-icons';
-import { ForgotPasswordDialogComponent } from 'src/app/components/dialogs/forgot-password-dialog/forgot-password-dialog.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { ForgotPasswordDialogComponent } from '../../components/dialogs/forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   public email: string;
@@ -20,28 +21,71 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private _router: Router,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private _authService: AuthService
   ) {
+    if (localStorage.getItem('token') !== null) {
+      this._router.navigate(['/soccer-stats/']);
+    }
+
     this.email = '';
     this.password = '';
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public async signin(): Promise<void> {
-    console.log(this.email, this.password) //TODO signin
-    this._router.navigate(['/soccer-stats/']);
+    try {
+      const response = await this._authService.signIn(
+        this.email,
+        this.password
+      );
+
+      if (response['status'] == 200) {
+        const data = response['data'];
+
+        if (data['id_status'] == 1) {
+          localStorage.setItem('token', JSON.stringify(data['token']));
+
+          localStorage.setItem('id_rol', JSON.stringify(data['id_rol']));
+          if (data['id_rol'] == 1) {
+            this._router.navigate(['/soccer-stats/admin']);
+          } else if (data['id_rol'] == 2) {
+            this._router.navigate(['/soccer-stats/employee']);
+          } else {
+            this._router.navigate(['/soccer-stats']);
+          }
+        } else if (data['id_status'] == 2) {
+          this.showSnackbar('Tu cuenta está desactivada');
+        } else {
+          this.showSnackbar('Tu cuenta esta pendiente de verificación');
+        }
+      }
+    } catch (error: any) {
+      this.showSnackbar();
+    }
   }
 
   public async signup(new_user: any): Promise<void> {
-    console.log(new_user); // TODO Register customer user
+    try {
+      const response = await this._authService.signUp(new_user);
+
+      if (response['status'] == 200) {
+        this.showSnackbar(
+          'Te hemos enviado un correo para que verificar tu cuenta'
+        );
+      }
+
+      this._router.navigate(['/auth/login']);
+    } catch (error: any) {
+      this.showSnackbar();
+    }
   }
 
-  public recoverPassword(){
+  public recoverPassword() {
     const dialogRef = this.dialog.open(ForgotPasswordDialogComponent, {});
 
-    dialogRef.afterClosed().subscribe( async (email) =>{
-      console.log(email); //TODO recover password
+    dialogRef.afterClosed().subscribe(async (email) => {
+      await this._authService.recoverPassword(email);
     });
   }
 
@@ -52,5 +96,4 @@ export class LoginComponent implements OnInit, AfterViewInit {
   showSnackbar(message: string = 'Something went wrong :c') {
     this._snackBar.open(message, 'CLOSE', { duration: 5000 });
   }
-
 }

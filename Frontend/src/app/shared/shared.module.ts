@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -23,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     FlexLayoutModule,
     MatToolbarModule,

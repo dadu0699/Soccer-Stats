@@ -9,12 +9,12 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(private _router: Router) {}
 
   canActivate(_next: ActivatedRouteSnapshot, _state: RouterStateSnapshot) {
-    if (localStorage.getItem('token') == null) {
-      this._router.navigateByUrl('/auth');
+    if (localStorage.getItem('id_rol') != '1') {
+      this._router.navigateByUrl('/access-denied');
       return false;
     }
     return true;
