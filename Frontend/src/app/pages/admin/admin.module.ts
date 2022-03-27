@@ -24,8 +24,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-
-
 @NgModule({
   declarations: [
     MainComponent,
@@ -50,6 +48,6 @@ import { MatIconModule } from '@angular/material/icon';
     LayoutModule,
     MatButtonModule,
     MatIconModule,
-  ]
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

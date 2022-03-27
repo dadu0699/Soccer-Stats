@@ -9,8 +9,6 @@ import { MainComponent } from './main/main.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserReportsComponent } from './user-reports/user-reports.component';
 
-
-
 const routes: Routes = [
   {
     path: '',
@@ -23,11 +21,11 @@ const routes: Routes = [
       { path: 'logs', component: LogsComponent },
       { path: '', redirectTo: 'user-management', pathMatch: 'full' },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

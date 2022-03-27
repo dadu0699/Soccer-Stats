@@ -23,6 +23,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     private _authService: AuthService
   ) {
+    if (localStorage.getItem('token') !== null) {
+      this._router.navigate(['/soccer-stats/']);
+    }
+
     this.email = '';
     this.password = '';
   }
@@ -37,8 +41,24 @@ export class LoginComponent implements OnInit, AfterViewInit {
       );
 
       if (response['status'] == 200) {
-        localStorage.setItem('user', JSON.stringify(response['data']));
-        this._router.navigate(['/soccer-stats/']);
+        const data = response['data'];
+
+        if (data['id_status'] == 1) {
+          localStorage.setItem('token', JSON.stringify(data['token']));
+
+          localStorage.setItem('id_rol', JSON.stringify(data['id_rol']));
+          if (data['id_rol'] == 1) {
+            this._router.navigate(['/soccer-stats/admin']);
+          } else if (data['id_rol'] == 2) {
+            this._router.navigate(['/soccer-stats/employee']);
+          } else {
+            this._router.navigate(['/soccer-stats']);
+          }
+        } else if (data['id_status'] == 2) {
+          this.showSnackbar('Tu cuenta está desactivada');
+        } else {
+          this.showSnackbar('Tu cuenta esta pendiente de verificación');
+        }
       }
     } catch (error: any) {
       this.showSnackbar();

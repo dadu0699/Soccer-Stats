@@ -1,10 +1,19 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar
+  color="primary"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
   <button mat-icon-button *ngIf="whichPage == 2" (click)="toggleMenu()">
     <i data-feather="menu"></i>
   </button>
-  <a href="/auth/home">Soccer Stats</a>
-  <button mat-button color="secondary" *ngIf="whichPage != 1 " (click)="logOut()">
-    {{whichPage == 0 ? 'Sign in' : 'Sign out'}}
+  <a [routerLink]="['/auth/home']">Soccer Stats</a>
+  <button
+    mat-button
+    color="secondary"
+    *ngIf="whichPage != 1"
+    (click)="logOut()"
+  >
+    {{ whichPage == 0 ? "Sign in" : "Sign out" }}
     <i data-feather="log-in"></i>
   </button>
 </mat-toolbar>

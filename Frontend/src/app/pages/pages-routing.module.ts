@@ -1,25 +1,33 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from '../guards/admin.guard';
+import { CustomerGuard } from '../guards/customer.guard';
+import { EmployeeGuard } from '../guards/employee.guard';
 
 const routes: Routes = [
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AdminGuard],
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'employee',
-    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
+    canActivate: [EmployeeGuard],
+    loadChildren: () =>
+      import('./employee/employee.module').then((m) => m.EmployeeModule),
   },
   {
     path: 'customer',
-    loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule),
+    canActivate: [CustomerGuard],
+    loadChildren: () =>
+      import('./customer/customer.module').then((m) => m.CustomerModule),
   },
   { path: '', redirectTo: 'customer', pathMatch: 'full' },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class PagesRoutingModule { }
+export class PagesRoutingModule {}

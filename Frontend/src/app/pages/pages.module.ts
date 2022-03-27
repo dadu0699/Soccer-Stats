@@ -11,12 +11,8 @@ import { ComponentsModule } from '../components/components.module';
 
 import { PagesComponent } from './pages.component';
 
-
-
 @NgModule({
-  declarations: [
-    PagesComponent,
-  ],
+  declarations: [PagesComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -25,6 +21,6 @@ import { PagesComponent } from './pages.component';
     PagesRoutingModule,
     SharedModule,
     ComponentsModule,
-  ]
+  ],
 })
-export class PagesModule { }
+export class PagesModule {}
