@@ -11,7 +11,7 @@ export class AdminService {
   private url: string;
   private httpOptions = {
     headers: new HttpHeaders({
-      'Authorization': 'bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxLCJpZF9yb2wiOjF9.TO1PkVlWFbrGJbUIJvagkTF_jCUIelGrs9-NID5PySs', //localStorage.getItem('token'), //TODO eliminar token quemado
+      'Authorization': 'bearer ' + localStorage.getItem('token'),
       'Content-Type': 'application/json'
     })
   };
@@ -65,7 +65,7 @@ export class AdminService {
   }
 
   public async report9(order: number, id_team: number): Promise<any> {
-    let params = new HttpParams().set('order', order).append('id_team',id_team);
+    let params = new HttpParams().set('order', order).append('id_team', id_team);
 
     return await this._httpClient.get(`${this.url}/report/9/`, { headers: this.httpOptions.headers, params }).toPromise();
   }
@@ -82,7 +82,7 @@ export class AdminService {
     const body = JSON.stringify({ id, id_status, description });
 
     return await this._httpClient
-      .put(`${this.url}/user/status`, body, {headers: this.httpOptions.headers })
+      .put(`${this.url}/user/status`, body, { headers: this.httpOptions.headers })
       .toPromise();
   }
 
@@ -90,7 +90,7 @@ export class AdminService {
     const body = JSON.stringify(user);
 
     return await this._httpClient
-      .post(`${this.url}/user/`, body, {headers: this.httpOptions.headers })
+      .post(`${this.url}/user/`, body, { headers: this.httpOptions.headers })
       .toPromise();
   }
 
@@ -98,7 +98,7 @@ export class AdminService {
     const body = JSON.stringify(user);
 
     return await this._httpClient
-      .put(`${this.url}/user/`, body, {headers: this.httpOptions.headers })
+      .put(`${this.url}/user/`, body, { headers: this.httpOptions.headers })
       .toPromise();
   }
 
