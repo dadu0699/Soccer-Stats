@@ -251,10 +251,9 @@ INSERT INTO Pais (paisID, nombre) VALUES
     (239, 'Zimbabwe');
 
 INSERT INTO Usuario (usuarioID, nombre, apellido, claveAcceso, correo, telefono, fotografia, genero, fechaNacimiento, fechaRegistro, direccion, rol, estado, paisID) VALUES 
-    ('1', 'admin', 'admin', '35gbg6VnNVPizK8I3ajWhg==', 'nullpointers2021@gmail.com', '12345678', 'https://grupof.s3.us-east-2.amazonaws.com/usuarios/01c2f149-79c3-459d-bff2-f39906aff4a0.png', 'F', '1989-02-16', '2022-01-01', 'Los Ángeles, California', 1, 1, 226),
-    ('2', 'empleado', 'empleado', '35gbg6VnNVPizK8I3ajWhg==', 'aydrive.g8@gmail.com', '12345678', 'https://grupof.s3.us-east-2.amazonaws.com/usuarios/01c2f149-79c3-459d-bff2-f39906aff4a0.png', 'F', '1989-02-16', '2022-01-01', 'Los Ángeles, California', 2, 1, 226),
-    ('3', 'customer', 'customer', '35gbg6VnNVPizK8I3ajWhg==', 'jaguarsoft2018@gmail.com', '12345678', 'https://grupof.s3.us-east-2.amazonaws.com/usuarios/01c2f149-79c3-459d-bff2-f39906aff4a0.png', 'F', '1989-02-16', '2022-01-01', 'Los Ángeles, California', 3, 1, 226);
-
+    ('1', 'admin', 'admin', '35gbg6VnNVPizK8I3ajWhg==', 'admin@gmail.com', '12345678', 'https://grupof.s3.us-east-2.amazonaws.com/usuarios/01c2f149-79c3-459d-bff2-f39906aff4a0.png', 'F', '1989-02-16', '2022-01-01', 'Los Ángeles, California', 1, 1, 226),
+    ('2', 'employee', 'employee', '35gbg6VnNVPizK8I3ajWhg==', 'employee@gmail.com', '12345678', 'https://grupof.s3.us-east-2.amazonaws.com/usuarios/01c2f149-79c3-459d-bff2-f39906aff4a0.png', 'F', '1989-02-16', '2022-01-01', 'Los Ángeles, California', 2, 1, 226),
+    ('3', 'customer', 'customer', '35gbg6VnNVPizK8I3ajWhg==', 'customer@gmail.com', '12345678', 'https://grupof.s3.us-east-2.amazonaws.com/usuarios/01c2f149-79c3-459d-bff2-f39906aff4a0.png', 'F', '1989-02-16', '2022-01-01', 'Los Ángeles, California', 3, 1, 226);
 
 INSERT INTO Jugador (nombre, apellido, fechaNacimiento, estado, foto, posicionJugadorID, paisID) VALUES
     ('Marc-André', 'ter Stegen', '1992-04-30', 1, 'https://s.hs-data.com/bilder/spieler/gross/150720.jpg', 1, 80),
