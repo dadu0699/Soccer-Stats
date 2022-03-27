@@ -147,7 +147,11 @@ export class GameViewComponent implements OnInit {
     const dialogRef = this.dialog.open(IncidenceDialogComponent, {});
 
     dialogRef.afterClosed().subscribe(async (newIncidence) => {
-      console.log(newIncidence); //TODO Add Incidence
+      if(this.game.status != 2 ){
+        this.showSnackbar("Can't add incidences, game not started");
+      }else{
+        console.log(newIncidence); //TODO Add Incidence
+      }
     });
   }
 
