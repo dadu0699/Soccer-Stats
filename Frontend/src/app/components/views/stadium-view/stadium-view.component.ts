@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Stadium } from 'src/app/models/stadium.model';
 import { Option } from 'src/app/models/option.model';
+import { StadiumService } from 'src/app/services/stadium.service';
+import { DateFormatService } from 'src/app/services/date-format.service';
 
 @Component({
   selector: 'app-stadium-view',
@@ -25,6 +27,8 @@ export class StadiumViewComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private stadiumService: StadiumService,
+    private dateFormatService: DateFormatService
   ) {
     this.labels = ['no.', 'name', 'foundation date', 'capacity',
       'country', 'address', 'status', 'actions'];
@@ -54,7 +58,20 @@ export class StadiumViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
+  }
+
+  /**
+   * Obtener todos los equipos
+   */
+  getAll = () => {
+    this.stadiumService.get()
+      .then((response) => {
+        this.allStadiums = [];
+        this.dataTable = [];
+        this.allStadiums = response.data;
+        this.fillTable();
+      });
   }
 
   private fillTable() {
@@ -62,7 +79,7 @@ export class StadiumViewComponent implements OnInit {
       this.dataTable.push({
         no: element.id,
         name: element.name,
-        foundationDate: element.foundation_date,
+        foundationDate: this.dateFormatService.formatoFecha(element.foundation_date.toString()),
         capacity: element.capacity,
         country: element.country,
         address: element.address,
@@ -112,18 +129,43 @@ export class StadiumViewComponent implements OnInit {
   }
 
   public create() {
+    this.stadiumService.create(this.stadium)
+      .then((response) => {
+        this.showSnackbar('Stadium created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.stadium = new Stadium();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
+    this.stadiumService.update(this.stadium)
+      .then((response) => {
+        this.showSnackbar('Stadium updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.readonly = false;
     this.allowEditing = true;
   }
 
   public delete() {
-    console.log(this.stadium.id); //TODO Delete
+    this.stadiumService.delete(this.stadium)
+      .then((response) => {
+        this.showSnackbar('Stadium deleted successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.readonly = false;
+    this.allowEditing = true;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

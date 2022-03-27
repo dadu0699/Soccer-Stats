@@ -24,13 +24,13 @@ export class CountryFieldComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    //await this.getCountries();
+    await this.getCountries();
   }
 
   async getCountries(): Promise<void> {
     try {
       const response = await this._countryService.get();
-      if (response['status'] === 200){
+      if (response['status'] === 200) {
         this.countries = response['data']
       }
     } catch (error) {
