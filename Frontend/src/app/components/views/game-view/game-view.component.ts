@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Option } from 'src/app/models/option.model';
 import { Game } from 'src/app/models/game.model';
 import { IncidenceDialogComponent } from '../../dialogs/incidence-dialog/incidence-dialog.component';
+import { MatchService } from 'src/app/services/match.service';
 
 @Component({
   selector: 'app-game-view',
@@ -28,6 +29,7 @@ export class GameViewComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private matchService: MatchService
   ) {
     this.labels = ['no.', 'local team', 'visiting team', 'date', 'stadium', 'status', 'actions'];
     this.dataTable = [];
@@ -59,7 +61,22 @@ export class GameViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
+  }
+
+  /**
+   * Obtener todos los partidos
+   */
+  getAll = () => {
+    this.matchService.get()
+      .then((response) => {
+        console.log(response)
+        this.allGames = [];
+        this.dataTable = [];
+        this.allGames = response.data;
+        this.fillTable();
+      })
+      .catch((error) => { console.log(error) });
   }
 
   private fillTable() {
@@ -105,10 +122,13 @@ export class GameViewComponent implements OnInit {
   }
 
   public selectCompetition(id_competition: any) {
+    console.log(id_competition)
+
     this.game.id_competition = id_competition;
   }
 
   public selectStadium(id_stadium: any) {
+    console.log(id_stadium)
     this.game.id_stadium = id_stadium;
   }
 
@@ -128,24 +148,56 @@ export class GameViewComponent implements OnInit {
     console.log('Add incidence', this.game.id);
     const dialogRef = this.dialog.open(IncidenceDialogComponent, {});
 
-    dialogRef.afterClosed().subscribe( async (newIncidence) =>{
+    dialogRef.afterClosed().subscribe(async (newIncidence) => {
       console.log(newIncidence); //TODO Add Incidence
     });
   }
 
   public create() {
+    this.game.game_date = new Date().toISOString();
+    console.log(this.game)
+    this.matchService.create(this.game)
+      .then((response) => {
+        console.log(response)
+        this.showSnackbar('Game created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.game = new Game();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
+    this.matchService.update(this.game)
+      .then((response) => {
+        console.log(response)
+        this.showSnackbar('Game updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.game = new Game();
     this.readonly = false;
-    this.allowEditing = true;
+    this.allowEditing = false;
   }
 
   public delete() {
-    console.log(this.game.id); //TODO Delete
+    this.matchService.delete(this.game)
+      .then((response) => {
+        console.log(response)
+        this.showSnackbar('Game deleted successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.game = new Game();
+    this.readonly = false;
+    this.allowEditing = false;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
