@@ -8,8 +8,8 @@
   <mat-grid-list cols="12" rowHeight="100px">
     <mat-grid-tile colspan="3" rowspan="2" *ngFor = 'let game of games'>
       <div class="container">
-        <div fxLayout="row">
-          <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="40">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="30">
             <h1><strong>{{game.result_local}}</strong></h1>
             <p> {{game.team_local}} </p>
           </div>
@@ -31,7 +31,7 @@
             </mat-chip-list>
             <span>{{game.game_date}}</span>
           </div>
-          <div div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="40">
+          <div div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="30">
             <h1><strong>{{game.result_visiting}}</strong></h1>
             <p> {{game.team_visiting}} </p>
           </div>
