@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest -c src/tests/jest.unit.json --forceExit",
+    "test": "cross-env NODE_ENV=test jest -c src/tests/jest.unit.json --forceExit",
     "test:coverage": "jest --coverage -c src/tests/jest.unit.json ",
     "html": "copyfiles --up 1 src/public/*.html dist",
     "build": "tsc && npm run html",
-    "dev": "nodemon dist/index",
-    "start": "node dist/index"
+    "dev": "cross-env NODE_ENV=development nodemon dist/index",
+    "start": "cross-env NODE_ENV=production node dist/index"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "babel-jest": "^27.0.6",
     "body-parser": "^1.19.0",
     "copyfiles": "^2.4.1",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
