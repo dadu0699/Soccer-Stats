@@ -21,8 +21,9 @@ export class TechnicalDirectorService {
   }
 
   public async get(): Promise<any> {
+    console.log(this.httpOptions.headers)
     return await this._httpClient.
-      get(this.url).toPromise();
+      get(this.url, this.httpOptions).toPromise();
   }
 
   public async create(technical: TechnicalDirector): Promise<any> {
