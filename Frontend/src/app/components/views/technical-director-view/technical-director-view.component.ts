@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TechnicalDirector } from 'src/app/models/technical-director.model';
 import { Option } from 'src/app/models/option.model';
 import { TransferDialogComponent } from '../../dialogs/transfer-dialog/transfer-dialog.component';
+import { TechnicalDirectorService } from 'src/app/services/technical-director.service';
 
 @Component({
   selector: 'app-technical-director-view',
@@ -28,6 +29,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private technicalDirectorService: TechnicalDirectorService,
   ) {
     this.labels = ['no.', 'name', 'lastname',
       'birth date', 'nationality', 'status', 'team', 'actions'];
@@ -36,16 +38,20 @@ export class TechnicalDirectorViewComponent implements OnInit {
 
     this.technicalDirector = new TechnicalDirector();
     this.allTechs = [
-      { id: 1, name: 'Director Técnico 1', lastname: 'DT1', birth_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg',
-      id_country: 1, country: 'Country 1', status: 1, id_team : 1, name_team: 'Equipo 1' },
-      { id: 2, name: 'Director Técnico 2', lastname: 'DT2', birth_date: '2022-01-25', photo: 'NA',
-      id_country: 2, country: 'Country 2', status: 3, id_team : 2, name_team: 'Equipo 2' },
+      {
+        id: 1, name: 'Director Técnico 1', lastname: 'DT1', birth_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg',
+        id_country: 1, country: 'Country 1', status: 1, id_team: 1, name_team: 'Equipo 1'
+      },
+      {
+        id: 2, name: 'Director Técnico 2', lastname: 'DT2', birth_date: '2022-01-25', photo: 'NA',
+        id_country: 2, country: 'Country 2', status: 3, id_team: 2, name_team: 'Equipo 2'
+      },
     ]; //TODO Delete info
 
     this.status = [
-      {id:1, description:'Activo'},
-      {id:2, description:'Retirado'},
-      {id:3, description:'Lesionado'},
+      { id: 1, description: 'Activo' },
+      { id: 2, description: 'Retirado' },
+      { id: 3, description: 'Lesionado' },
     ];
 
     this.readonly = false;
@@ -53,7 +59,20 @@ export class TechnicalDirectorViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
+  }
+
+  /**
+   * Obtener todos los directores tecnicos
+   */
+  getAll = () => {
+    this.technicalDirectorService.get()
+      .then((response) => {
+        this.allTechs = [];
+        this.dataTable = [];
+        this.allTechs = response.data;
+        this.fillTable();
+      });
   }
 
   private fillTable() {
@@ -64,7 +83,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
         lastname: element.lastname,
         birthDate: element.birth_date,
         nationality: element.country,
-        status: this.status[element.status-1].description,
+        status: this.status[element.status - 1].description,
         team: element.name_team,
       });
       this.labels = Object.keys(this.dataTable[0]);
@@ -76,7 +95,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
   public done() {
     if (this.allowEditing) {
       this.updateExisting();
-    }else{
+    } else {
       console.log(this.technicalDirector); //TODO Create
     }
   }
@@ -110,30 +129,57 @@ export class TechnicalDirectorViewComponent implements OnInit {
     this.technicalDirector = technicalDirector;
   }
 
-  public transferTechnicalDirector(){
+  public transferTechnicalDirector() {
     console.log('Transfer Technical Director',
-    this.technicalDirector.id, this.technicalDirector.id_team);
+      this.technicalDirector.id, this.technicalDirector.id_team);
 
     const dialogRef = this.dialog.open(TransferDialogComponent, {});
 
-    dialogRef.afterClosed().subscribe( async (transference) =>{
+    dialogRef.afterClosed().subscribe(async (transference) => {
       console.log(transference); //TODO Transfer technical director
     });
   }
 
   public create() {
+    this.technicalDirectorService.create(this.technicalDirector)
+      .then((response) => {
+        this.showSnackbar('Technical director created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.technicalDirector = new TechnicalDirector();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
+    this.technicalDirectorService.update(this.technicalDirector)
+      .then((response) => {
+        this.showSnackbar('Technical director updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.technicalDirector = new TechnicalDirector();
     this.readonly = false;
     this.allowEditing = true;
   }
 
   public delete() {
-    console.log(this.technicalDirector.id); //TODO Delete
+    this.technicalDirectorService.delete(this.technicalDirector)
+      .then((response) => {
+        this.showSnackbar('Technical director deleted successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
+    this.technicalDirector = new TechnicalDirector();
+    this.readonly = false;
+    this.allowEditing = true;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
