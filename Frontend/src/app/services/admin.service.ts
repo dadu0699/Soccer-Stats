@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AdminService {
   private url: string;
   private httpOptions = {
     headers: new HttpHeaders({
-      'Authorization': 'bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxLCJpZF9yb2wiOjF9.TO1PkVlWFbrGJbUIJvagkTF_jCUIelGrs9-NID5PySs', //localStorage.getItem('token'),
+      'Authorization': 'bearer ' + localStorage.getItem('token'),
       'Content-Type': 'application/json'
     })
   };
@@ -64,7 +65,7 @@ export class AdminService {
   }
 
   public async report9(order: number, id_team: number): Promise<any> {
-    let params = new HttpParams().set('order', order).append('id_team',id_team);
+    let params = new HttpParams().set('order', order).append('id_team', id_team);
 
     return await this._httpClient.get(`${this.url}/report/9/`, { headers: this.httpOptions.headers, params }).toPromise();
   }
@@ -73,5 +74,32 @@ export class AdminService {
     return await this._httpClient.get(`${this.url}/report/10/`, this.httpOptions).toPromise();
   }
 
+  public async getUsers(): Promise<any> {
+    return await this._httpClient.get(`${this.url}/user/`, this.httpOptions).toPromise();
+  }
+
+  public async manageAccount(id: number, id_status: number, description: string): Promise<any> {
+    const body = JSON.stringify({ id, id_status, description });
+
+    return await this._httpClient
+      .put(`${this.url}/user/status`, body, { headers: this.httpOptions.headers })
+      .toPromise();
+  }
+
+  public async createUser(user: User): Promise<any> {
+    const body = JSON.stringify(user);
+
+    return await this._httpClient
+      .post(`${this.url}/user/`, body, { headers: this.httpOptions.headers })
+      .toPromise();
+  }
+
+  public async updateUser(user: User): Promise<any> {
+    const body = JSON.stringify(user);
+
+    return await this._httpClient
+      .put(`${this.url}/user/`, body, { headers: this.httpOptions.headers })
+      .toPromise();
+  }
 
 }

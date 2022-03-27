@@ -146,15 +146,17 @@ export default class UsuarioController {
             }
 
             //INCRUSTAR IMAGEN
-            objUsuario.fotografia = url.Key;
+            objUsuario.fotografia = 'https://grupof.s3.us-east-2.amazonaws.com/' + url.Key;
 
             // ENCRIPTAR CONTRASENA
+            const credentials = objUsuario.claveAcceso;
             const keyCrypto = CryptoJS.enc.Hex.parse(String(process.env.CRYPTO_KEY));
             const iv = CryptoJS.enc.Hex.parse(String(process.env.CRYPTO_IV));
             objUsuario.claveAcceso = CryptoJS.AES.encrypt(objUsuario.claveAcceso, keyCrypto, { iv }).toString();
 
             await dispatchEmail(objUsuario.correo, 'Welcome!', 'mail', {
                 url: process.env.FRONTEND,
+                password: credentials
             });
 
             const data: any = Usuario.build(objUsuario);

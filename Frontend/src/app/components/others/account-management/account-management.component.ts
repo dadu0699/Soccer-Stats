@@ -17,8 +17,9 @@ export class AccountManagementComponent implements OnInit {
 
   constructor() {
     this.status = [
-      { id: 1, description: 'Activa' },
-      { id: 2, description: 'Congelada' },
+      { id: 1, description: 'Activa.' },
+      { id: 2, description: 'Congelada.' },
+      { id: 3, description: 'Baja.' },
     ];
 
     this.sendStatus = new EventEmitter<Option>();

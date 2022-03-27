@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { User } from 'src/app/models/user.model';
 import { Option } from 'src/app/models/option.model';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-user-view',
@@ -28,35 +29,24 @@ export class UserViewComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private _adminService: AdminService,
   ) {
     this.labels = ['no.', 'name', 'lastname', 'email', 'age', 'rol', 'status', 'actions'];
     this.dataTable = [];
     this.dataSource = new MatTableDataSource<any>();
 
     this.user = new User();
-    this.allUsers = [
-      {
-        id: 1, name: 'nombre 1', lastname: 'apellido 1', email: 'mail 1',
-        password: 'contraseña 1', phone: 'telefono 1', birth_date: '1998-11-11',
-        address: 'Direccion 1', id_country: 1, id_gender: 1, gender: 'Male',
-        id_rol: 1, photo: 'NA 1', id_status: 1, age: 111,
-      },
-      {
-        id: 2, name: 'nombre 2', lastname: 'apellido 2', email: 'mail 2',
-        password: 'contraseña 2', phone: 'telefono 2', birth_date: '2022-02-22',
-        address: 'Direccion 2', id_country: 2, id_gender: 2, gender: 'Female',
-        id_rol: 2, photo: 'https://mn2s-content.s3.eu-west-2.amazonaws.com/wp-content/uploads/2021/03/19174550/Chris-Wood.png', id_status: 2, age: 222,
-      },
-    ]; //TODO Delete info
+    this.allUsers = [];
 
     this.genders = [
-      { id: 1, description: 'Male' },
-      { id: 2, description: 'Female' },
-      { id: 3, description: 'Other' },
+      { id: 1, description: 'Male', char: 'M' },
+      { id: 2, description: 'Female', char: 'F' },
+      { id: 3, description: 'Other', char: 'U' },
     ];
     this.roles = [
       { id: 1, description: 'Admin' },
       { id: 2, description: 'Employee' },
+      { id: 3, description: 'Customer' },
     ];
     this.status = [
       { id: 1, description: 'Activa' },
@@ -70,10 +60,29 @@ export class UserViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
+  }
+
+  public async getAll(): Promise<void> {
+    try {
+      const response = await this._adminService.getUsers();
+      if (response['status'] === 200) {
+        this.allUsers = response['data']
+        this.allUsers.forEach(us => {
+          us.id_gender = this.genders.find(el => el.char == us.gender)?.id || 2
+        });
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private fillTable() {
+    this.dataSource = new MatTableDataSource<any>();
+    this.dataTable = [];
+
     this.allUsers.forEach((element: User) => {
       this.dataTable.push({
         no: element.id,
@@ -90,17 +99,32 @@ export class UserViewComponent implements OnInit {
     });
   }
 
-  public done(user: any) {
+  public async done(user: any): Promise<void> {
     this.user = user;
+    this.user.gender = this.genders[Number(this.user.gender) - 1].char || 'U';
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.user); //TODO Create
+      try {
+        const response = await this._adminService.createUser(this.user);
+        if (response['status'] === 200) {
+        }
+        this.showSnackbar(response['msg']);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
-  public updateExisting() {
-    console.log(this.user); //TODO Update
+  public async updateExisting(): Promise<void> {
+    try {
+      const response = await this._adminService.updateUser(this.user);
+      if (response['status'] === 200) {
+      }
+      this.showSnackbar(response['msg']);
+    } catch (error) {
+      console.log(error);
+    }
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -109,10 +133,15 @@ export class UserViewComponent implements OnInit {
     this.manage = true;
   }
 
-  public manageAccount(info: any) {
+  public async manageAccount(info: any): Promise<void> {
     this.manage = false;
-    console.log(info)
-    this.showSnackbar('Status Updated'); //TODO Update account status
+    try {
+      const response = await this._adminService.manageAccount(this.user.id, info.id, info.description);
+      this.showSnackbar(response['msg']);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public selectUser(id: any) {
@@ -135,7 +164,6 @@ export class UserViewComponent implements OnInit {
   }
 
   public delete() {
-    console.log(this.user.id); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
