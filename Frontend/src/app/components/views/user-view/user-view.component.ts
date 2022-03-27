@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { User } from '../../models/user.model';
+import { User } from 'src/app/models/user.model';
 import { Option } from 'src/app/models/option.model';
 
 @Component({

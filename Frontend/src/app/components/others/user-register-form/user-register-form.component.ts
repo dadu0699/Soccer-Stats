@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { User } from '../../models/user.model';
+import { User } from '../../../models/user.model';
 import { Option } from 'src/app/models/option.model';
 
 @Component({
