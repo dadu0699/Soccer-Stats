@@ -3,7 +3,7 @@
   fxLayout="row"
   fxLayoutAlign="space-between center"
 >
-  <button mat-icon-button *ngIf="whichPage == 2" (click)="toggleMenu()">
+  <button mat-icon-button *ngIf="menuIsVisible()" (click)="toggleMenu()">
     <i data-feather="menu"></i>
   </button>
   <a [routerLink]="['/auth/home']">Soccer Stats</a>

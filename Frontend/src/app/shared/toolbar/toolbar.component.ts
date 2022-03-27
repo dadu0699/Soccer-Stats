@@ -33,6 +33,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     Feather.replace();
   }
 
+  public menuIsVisible(): boolean {
+    if (this.whichPage != 2) return false;
+
+    if (localStorage.getItem('id_rol') == '2') return false;
+
+    return true;
+  }
+
   public logOut() {
     if (this.whichPage != 0) {
       localStorage.clear();
