@@ -31,7 +31,7 @@ const obtenerPartidos = (params, callback) => {
   const id = params.id;
 
   let query = `
-    SELECT partidoID id, asistencia attendees, fechaHora game_date,
+    SELECT partidoID id, asistencia attendees, DATE_FORMAT(fechaHora, "%Y-%m-%d") game_date,
       Partido.equipoVisitaID id_team_visiting, EquipoVisita.nombre team_visiting,
       Partido.equipoLocalID id_team_local, EquipoLocal.nombre team_local,
       resultadoLocal result_local, resultadoVisitante result_visiting,

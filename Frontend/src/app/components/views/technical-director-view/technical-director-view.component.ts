@@ -87,12 +87,26 @@ export class TechnicalDirectorViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.technicalDirector); //TODO Create
+      this.technicalDirectorService.create(this.technicalDirector)
+        .then((response) => {
+          this.showSnackbar('Technical director created successfully');
+          this.getAll();
+        })
+        .catch((error) => {
+          this.showSnackbar(error.error.message);
+        });
     }
   }
 
   public updateExisting() {
-    console.log(this.technicalDirector); //TODO Update
+    this.technicalDirectorService.update(this.technicalDirector)
+      .then((response) => {
+        this.showSnackbar('Technical director updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -132,28 +146,12 @@ export class TechnicalDirectorViewComponent implements OnInit {
   }
 
   public create() {
-    this.technicalDirectorService.create(this.technicalDirector)
-      .then((response) => {
-        this.showSnackbar('Technical director created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.technicalDirector = new TechnicalDirector();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
-    this.technicalDirectorService.update(this.technicalDirector)
-      .then((response) => {
-        this.showSnackbar('Technical director updated successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.technicalDirector = new TechnicalDirector();
     this.readonly = false;
     this.allowEditing = true;

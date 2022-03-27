@@ -14,6 +14,7 @@ import { ComponentsModule } from '../../components/components.module';
 import { MainComponent } from './main/main.component';
 import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
+import { GamesListComponent } from './games-list/games-list.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -21,15 +22,17 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-
 
 @NgModule({
   declarations: [
     MainComponent,
     FeedComponent,
     ProfileComponent,
+    GamesListComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatGridListModule,
     MatListModule,
     LayoutModule,
+    MatCardModule,
     MatButtonModule,
+    MatChipsModule,
     MatIconModule,
   ]
 })

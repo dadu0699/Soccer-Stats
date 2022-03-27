@@ -72,11 +72,26 @@ export class TeamViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.team, 'Create new');
+      this.teamService.create(this.team)
+        .then((response) => {
+          this.showSnackbar('Team created successfully');
+          this.getAll();
+        })
+        .catch((error) => {
+          this.showSnackbar(error.error.message);
+        });
     }
   }
 
   public updateExisting() {
+    this.teamService.update(this.team)
+      .then((response) => {
+        this.showSnackbar('Team updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -101,28 +116,12 @@ export class TeamViewComponent implements OnInit {
   }
 
   public create() {
-    this.teamService.create(this.team)
-      .then((response) => {
-        this.showSnackbar('Team created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.team = new Team();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
-    this.teamService.update(this.team)
-      .then((response) => {
-        this.showSnackbar('Team updated successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.team = new Team();
     this.readonly = false;
     this.allowEditing = true;

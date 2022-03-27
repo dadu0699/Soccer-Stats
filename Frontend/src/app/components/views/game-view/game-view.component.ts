@@ -86,11 +86,26 @@ export class GameViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.game);
+      this.matchService.create(this.game)
+      .then((response) => {
+        this.showSnackbar('Game created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     }
   }
 
   public updateExisting() {
+    this.matchService.update(this.game)
+    .then((response) => {
+      this.showSnackbar('Game updated successfully');
+      this.getAll();
+    })
+    .catch((error) => {
+      this.showSnackbar(error.error.message);
+    });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -137,28 +152,12 @@ export class GameViewComponent implements OnInit {
   }
 
   public create() {
-    this.matchService.create(this.game)
-      .then((response) => {
-        this.showSnackbar('Game created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.game = new Game();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
-    this.matchService.update(this.game)
-      .then((response) => {
-        this.showSnackbar('Game updated successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.game = new Game();
     this.readonly = false;
     this.allowEditing = false;

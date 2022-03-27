@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
 
     let sql =   `/*COMPTENCIAS QUE NO TIENEN EQUIPO CAMPEON*/
                 SELECT Competencia.competenciaID as "id", Competencia.nombre as "name", Competencia.tipo as "type", 
-                Competencia.anio as "year", Competencia.equipoCampeonID as "id_champion_team ", null as "champion_team", Competencia.paisID as "id_country ", Pais.nombre as "country" 
+                Competencia.anio as "year", Competencia.equipoCampeonID as "id_champion_team", null as "champion_team", Competencia.paisID as "id_country", Pais.nombre as "country" 
                 FROM Competencia 
                 JOIN Pais ON Pais.paisID = Competencia.paisID
                 WHERE Competencia.competenciaID NOT IN

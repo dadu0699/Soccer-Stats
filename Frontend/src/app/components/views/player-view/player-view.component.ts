@@ -99,11 +99,27 @@ export class PlayerViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.player); //TODO Create
+      this.playerService.create(this.player)
+        .then((response) => {
+          console.log(response)
+          this.showSnackbar('Player created successfully');
+          this.getAll();
+        })
+        .catch((error) => {
+          this.showSnackbar(error.error.message);
+        });
     }
   }
 
   public updateExisting() {
+    this.playerService.update(this.player)
+      .then((response) => {
+        this.showSnackbar('Player updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -145,29 +161,12 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public create() {
-    this.playerService.create(this.player)
-      .then((response) => {
-        console.log(response)
-        this.showSnackbar('Player created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.player = new Player();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
-    this.playerService.update(this.player)
-      .then((response) => {
-        this.showSnackbar('Player updated successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.player = new Player();
     this.readonly = false;
     this.allowEditing = false;

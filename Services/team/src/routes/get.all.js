@@ -5,7 +5,7 @@ const pool = require('../db_connection');
 
 router.get('/', (req, res) => {
 
-    var sql = `SELECT Equipo.equipoID as "id", Equipo.nombre as "name", Equipo.fechaFundacion as "foundation_date ", Equipo.paisID as "id_country", Equipo.fotoLogo as "photo"
+    var sql = `SELECT Equipo.equipoID as "id", Equipo.nombre as "name", DATE_FORMAT(Equipo.fechaFundacion, "%Y-%m-%d") as "foundation_date", Equipo.paisID as "id_country", Equipo.fotoLogo as "photo"
             FROM Equipo`;
     
     if (req.query.id != null) {

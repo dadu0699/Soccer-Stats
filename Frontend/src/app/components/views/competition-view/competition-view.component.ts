@@ -85,11 +85,26 @@ export class CompetitionViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.competition);
+      this.competitionService.create(this.competition)
+        .then((response) => {
+          this.showSnackbar('Competition created successfully');
+          this.getAll();
+        })
+        .catch((error) => {
+          this.showSnackbar(error.error.message);
+        });
     }
   }
 
   public updateExisting() {
+    this.competitionService.update(this.competition)
+      .then((response) => {
+        this.showSnackbar('Competition updated successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -114,28 +129,12 @@ export class CompetitionViewComponent implements OnInit {
   }
 
   public create() {
-    this.competitionService.create(this.competition)
-      .then((response) => {
-        this.showSnackbar('Competition created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.competition = new Competition();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
-    this.competitionService.update(this.competition)
-      .then((response) => {
-        this.showSnackbar('Competition updated successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.competition = new Competition();
     this.readonly = false;
     this.allowEditing = true;

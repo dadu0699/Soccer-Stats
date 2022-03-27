@@ -1,0 +1,18 @@
+.container{
+  width: 90%;
+  height: 50%;
+  padding-top: 15px;
+  border-width: thin;
+  border-radius: 5px;
+  border-color: #212121;
+  border-style: solid;
+  text-align: center;
+}
+
+.holder{
+  margin-top: 10px;
+  padding: 0;
+  overflow: scroll;
+  height: 550px;
+}
+

@@ -57,7 +57,6 @@ export class StadiumViewComponent implements OnInit {
   getAll = () => {
     this.stadiumService.get()
       .then((response) => {
-        console.log(response)
         this.allStadiums = [];
         this.dataTable = [];
         this.allStadiums = response.data;
@@ -86,12 +85,26 @@ export class StadiumViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.stadium); //TODO Create
+      this.stadiumService.create(this.stadium)
+      .then((response) => {
+        this.showSnackbar('Stadium created successfully');
+        this.getAll();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     }
   }
 
   public updateExisting() {
-    console.log(this.stadium); //TODO Update
+    this.stadiumService.update(this.stadium)
+    .then((response) => {
+      this.showSnackbar('Stadium updated successfully');
+      this.getAll();
+    })
+    .catch((error) => {
+      this.showSnackbar(error.error.message);
+    });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -120,28 +133,12 @@ export class StadiumViewComponent implements OnInit {
   }
 
   public create() {
-    this.stadiumService.create(this.stadium)
-      .then((response) => {
-        this.showSnackbar('Stadium created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.stadium = new Stadium();
     this.readonly = false;
     this.allowEditing = false;
   }
 
   public edit() {
-    this.stadiumService.update(this.stadium)
-      .then((response) => {
-        this.showSnackbar('Stadium updated successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
     this.stadium = new Stadium();
     this.readonly = false;
     this.allowEditing = true;
