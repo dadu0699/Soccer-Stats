@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { User } from 'src/app/models/user.model';
 import { Option } from 'src/app/models/option.model';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-users-per-parameter',
@@ -34,6 +35,7 @@ export class UsersPerParameterComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private _adminService: AdminService
   ) {
     this.perCountry = false;
     this.perGender = false;
@@ -48,27 +50,11 @@ export class UsersPerParameterComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>();
 
     this.users = [];
-    this.users = [
-      {
-        id: 1, name: 'nombre 1', lastname: 'apellido 1', email: 'mail 1',
-        password: 'contraseña 1', phone: 'telefono 1', birth_date: '1998-11-11',
-        address: 'Direccion 1', id_country: 1, id_gender: 1, gender: 'Male',
-        id_rol: 1, photo: 'https://www.latercera.com/resizer/Bh3lioSDt8GrjOEVcLSjSbYfRok=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/6DKKPSIWJJFZNGNYFBVRLKIT6E.jpg',
-        id_status: 1, age: 111, nationality: 'Pais 1', count: 8,
-      },
-      {
-        id: 2, name: 'nombre 2', lastname: 'apellido 2', email: 'mail 2',
-        password: 'contraseña 2', phone: 'telefono 2', birth_date: '2022-02-22',
-        address: 'Direccion 2', id_country: 2, id_gender: 2, gender: 'Female',
-        id_rol: 2, photo: 'https://mn2s-content.s3.eu-west-2.amazonaws.com/wp-content/uploads/2021/03/19174550/Chris-Wood.png',
-        id_status: 2, age: 222, nationality: 'Pais 2',  amount: 12,
-      },
-    ]; //TODO Delete info
 
     this.genders = [
-      { id: 1, description: 'Male' },
-      { id: 2, description: 'Female' },
-      { id: 3, description: 'Other' },
+      { id: 1, description: 'Male', char: 'M' },
+      { id: 2, description: 'Female', char: 'F' },
+      { id: 3, description: 'Other', char: 'U' },
     ];
 
     this.membershipStatus = [
@@ -77,23 +63,39 @@ export class UsersPerParameterComponent implements OnInit {
     ];
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (this.perMembershipCount) {
-      //TODO get users with the most membership subs
-      //TODO This.users = new info
+      try {
+        const response = await this._adminService.report3();
+        if (response['status'] === 200) {
+          this.users = response['data']
+          this.fillTable();
+          this.showSnackbar(response['msg']);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
     if (this.perMoneySpent) {
-      //TODO get Users with most money spent
-      //TODO This.users = new info
+      try {
+        const response = await this._adminService.report4();
+        if (response['status'] === 200) {
+          this.users = response['data']
+          this.fillTable();
+          this.showSnackbar(response['msg']);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     this.fillTable();
   }
 
   private fillTable() {
-    this.dataTable = []; //TODO clean other tables
+      this.dataSource = new MatTableDataSource<any>();
+      this.dataTable = [];
     this.users.forEach((element: User) => {
-
       if (this.perCountry)
         this.dataTable.push({
           no: element.id,
@@ -128,40 +130,74 @@ export class UsersPerParameterComponent implements OnInit {
           birth_date: element.birth_date,
           age: element.age
         });
-
       this.labels = Object.keys(this.dataTable[0]);
       this.dataSource.data = this.dataTable;
     });
   }
 
-  public selectCountry(id_country: any) {
-    console.log(id_country)// TODO get users of x country
-    //TODO This.users = new info
-    this.fillTable();
+  public async selectCountry(id_country: any): Promise<void> {
+    try {
+      const response = await this._adminService.report1(id_country);
+      if (response['status'] === 200) {
+        this.users = response['data'];
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public selectGender(id_gender: any) {
-    console.log(id_gender) //TODO get all users of x gender
-    //TODO This.users = new info
-    this.fillTable();
+  public async selectGender(id_gender: any): Promise<void>{
+    try {
+      const response = await this._adminService.report6(this.genders[id_gender-1].char || 'M');
+      if (response['status'] === 200) {
+        this.users = response['data']
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public selectAge() {
-    console.log(this.age) //TODO get all users at least x age
-    //TODO This.users = new info
-    this.fillTable();
+  public async selectAge(): Promise<void> {
+    try {
+      const response = await this._adminService.report7(this.age);
+      if (response['status'] === 200) {
+        this.users = response['data']
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public selectTeam(id_team: any) {
-    console.log(id_team) //TODO get all users following x team
-    //TODO This.users = new info
-    this.fillTable();
+  public async selectTeam(id_team: any): Promise<void> {
+    try {
+      const response = await this._adminService.report1(id_team);
+      if (response['status'] === 200) {
+        this.users = response['data']
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public selectMembershipStatus(id_status: any) {
-    console.log(id_status) //TODO get all users with active/none membership
-    //TODO This.users = new info
-    this.fillTable();
+  public async selectMembershipStatus(id_status: any): Promise<void> {
+    try {
+      const response = await this._adminService.report2(id_status);
+      if (response['status'] === 200) {
+        this.users = response['data']
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
