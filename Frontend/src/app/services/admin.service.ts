@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +83,22 @@ export class AdminService {
 
     return await this._httpClient
       .put(`${this.url}/user/status`, body, {headers: this.httpOptions.headers })
+      .toPromise();
+  }
+
+  public async createUser(user: User): Promise<any> {
+    const body = JSON.stringify(user);
+
+    return await this._httpClient
+      .post(`${this.url}/user/`, body, {headers: this.httpOptions.headers })
+      .toPromise();
+  }
+
+  public async updateUser(user: User): Promise<any> {
+    const body = JSON.stringify(user);
+
+    return await this._httpClient
+      .put(`${this.url}/user/`, body, {headers: this.httpOptions.headers })
       .toPromise();
   }
 
