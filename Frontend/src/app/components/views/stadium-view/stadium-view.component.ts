@@ -36,17 +36,7 @@ export class StadiumViewComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>();
 
     this.stadium = new Stadium();
-    this.allStadiums = [
-      {
-        id: 1, name: 'Estadio 1', foundation_date: '2021-05-23', capacity: 100,
-        photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg',
-        id_country: 1, country: 'Country 1', address: 'Dirección 1', status: 1,
-      },
-      {
-        id: 2, name: 'Estadio 2', foundation_date: '2022-01-25', capacity: 200, photo: 'NA',
-        id_country: 2, country: 'Country 2', address: 'Dirección 2', status: 2,
-      },
-    ]; //TODO Delete info
+    this.allStadiums = [];
 
     this.status = [
       { id: 1, description: 'Disponible' },

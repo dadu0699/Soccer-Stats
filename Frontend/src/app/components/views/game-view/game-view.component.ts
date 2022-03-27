@@ -36,18 +36,7 @@ export class GameViewComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>();
 
     this.game = new Game();
-    this.allGames = [
-      {
-        id: 1, id_team_local: 1, team_local: 'Equipo 1', result_local: 0,
-        id_team_visiting: 2, team_visiting: 'Equipo 2', result_visiting: 2,
-        game_date: '2022-06-15', id_stadium: 1, stadium: 'Estadio 1', status: 1, attendees: 100, id_competition: 1, competition: 'Competencia 1'
-      },
-      {
-        id: 2, id_team_local: 2, team_local: 'Equipo 2', result_local: 2,
-        id_team_visiting: 1, team_visiting: 'Equipo 1', result_visiting: 0,
-        game_date: '2022-06-15', id_stadium: 2, stadium: 'Estadio 1', status: 4, attendees: 1, id_competition: 2, competition: 'Competencia 2'
-      }
-    ]; //TODO Delete info
+    this.allGames = []
 
     this.status = [
       { id: 1, description: 'Sin Iniciar' },
@@ -70,13 +59,11 @@ export class GameViewComponent implements OnInit {
   getAll = () => {
     this.matchService.get()
       .then((response) => {
-        console.log(response)
         this.allGames = [];
         this.dataTable = [];
         this.allGames = response.data;
         this.fillTable();
-      })
-      .catch((error) => { console.log(error) });
+      });
   }
 
   private fillTable() {
@@ -99,12 +86,11 @@ export class GameViewComponent implements OnInit {
     if (this.allowEditing) {
       this.updateExisting();
     } else {
-      console.log(this.game); //TODO Create
+      console.log(this.game);
     }
   }
 
   public updateExisting() {
-    console.log('Update', this.game); //TODO Update
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -122,13 +108,10 @@ export class GameViewComponent implements OnInit {
   }
 
   public selectCompetition(id_competition: any) {
-    console.log(id_competition)
-
     this.game.id_competition = id_competition;
   }
 
   public selectStadium(id_stadium: any) {
-    console.log(id_stadium)
     this.game.id_stadium = id_stadium;
   }
 
@@ -154,11 +137,8 @@ export class GameViewComponent implements OnInit {
   }
 
   public create() {
-    this.game.game_date = new Date().toISOString();
-    console.log(this.game)
     this.matchService.create(this.game)
       .then((response) => {
-        console.log(response)
         this.showSnackbar('Game created successfully');
         this.getAll();
       })
@@ -173,7 +153,6 @@ export class GameViewComponent implements OnInit {
   public edit() {
     this.matchService.update(this.game)
       .then((response) => {
-        console.log(response)
         this.showSnackbar('Game updated successfully');
         this.getAll();
       })
@@ -188,7 +167,6 @@ export class GameViewComponent implements OnInit {
   public delete() {
     this.matchService.delete(this.game)
       .then((response) => {
-        console.log(response)
         this.showSnackbar('Game deleted successfully');
         this.getAll();
       })

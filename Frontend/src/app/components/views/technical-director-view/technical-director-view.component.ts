@@ -37,16 +37,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>();
 
     this.technicalDirector = new TechnicalDirector();
-    this.allTechs = [
-      {
-        id: 1, name: 'Director Técnico 1', lastname: 'DT1', birth_date: '2021-05-23', photo: 'https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg',
-        id_country: 1, country: 'Country 1', status: 1, id_team: 1, name_team: 'Equipo 1'
-      },
-      {
-        id: 2, name: 'Director Técnico 2', lastname: 'DT2', birth_date: '2022-01-25', photo: 'NA',
-        id_country: 2, country: 'Country 2', status: 3, id_team: 2, name_team: 'Equipo 2'
-      },
-    ]; //TODO Delete info
+    this.allTechs = []
 
     this.status = [
       { id: 1, description: 'Activo' },

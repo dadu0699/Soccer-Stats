@@ -33,10 +33,7 @@ export class CompetitionViewComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>();
 
     this.competition = new Competition();
-    this.allCompetitions = [
-      { id: 1, name: 'Equipo 1', year: 2021, id_country: 1, country: 'Country 1', type: 3, id_champion_team: 1, champion_team: 'Equipo ganador 1' },
-      { id: 2, name: 'Equipo 2', year: 2022, id_country: 2, country: 'Country 2', type: 5, id_champion_team: 1, champion_team: 'Equipo ganador 1' }
-    ]; //TODO Delete info
+    this.allCompetitions = [];
 
     this.types = [
       { id: 1, description: 'Liga' },
@@ -52,7 +49,7 @@ export class CompetitionViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fillTable(); //TODO Read
+    this.getAll();
   }
 
   /**
