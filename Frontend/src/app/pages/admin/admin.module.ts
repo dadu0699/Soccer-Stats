@@ -11,6 +11,9 @@ import { ComponentsModule } from '../../components/components.module';
 
 import { UserManagementComponent } from './user-management/user-management.component';
 import { MainComponent } from './main/main.component';
+import { LogsComponent } from './logs/logs.component';
+import { UserReportsComponent } from './user-reports/user-reports.component';
+import { EmployeeReportsComponent } from './employee-reports/employee-reports.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -21,10 +24,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 
+
 @NgModule({
   declarations: [
     MainComponent,
     UserManagementComponent,
+    LogsComponent,
+    UserReportsComponent,
+    EmployeeReportsComponent,
   ],
   imports: [
     CommonModule,
