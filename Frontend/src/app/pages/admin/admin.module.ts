@@ -18,6 +18,7 @@ import { EmployeeReportsComponent } from './employee-reports/employee-reports.co
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -44,6 +45,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatSidenavModule,
     MatTabsModule,
+    MatGridListModule,
     MatListModule,
     LayoutModule,
     MatButtonModule,

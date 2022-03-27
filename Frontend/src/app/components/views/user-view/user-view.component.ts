@@ -36,13 +36,13 @@ export class UserViewComponent implements OnInit {
     this.user = new User();
     this.allUsers = [
       {
-        id_user: 1, name: 'nombre 1', lastname: 'apellido 1', email: 'mail 1',
+        id: 1, name: 'nombre 1', lastname: 'apellido 1', email: 'mail 1',
         password: 'contraseña 1', phone: 'telefono 1', birth_date: '1998-11-11',
         address: 'Direccion 1', id_country: 1, id_gender: 1, gender: 'Male',
         id_rol: 1, photo: 'NA 1', id_status: 1, age: 111,
       },
       {
-        id_user: 2, name: 'nombre 2', lastname: 'apellido 2', email: 'mail 2',
+        id: 2, name: 'nombre 2', lastname: 'apellido 2', email: 'mail 2',
         password: 'contraseña 2', phone: 'telefono 2', birth_date: '2022-02-22',
         address: 'Direccion 2', id_country: 2, id_gender: 2, gender: 'Female',
         id_rol: 2, photo: 'https://mn2s-content.s3.eu-west-2.amazonaws.com/wp-content/uploads/2021/03/19174550/Chris-Wood.png', id_status: 2, age: 222,
@@ -76,7 +76,7 @@ export class UserViewComponent implements OnInit {
   private fillTable() {
     this.allUsers.forEach((element: User) => {
       this.dataTable.push({
-        no: element.id_user,
+        no: element.id,
         name: element.name,
         lastname: element.lastname,
         email: element.email,
@@ -118,7 +118,7 @@ export class UserViewComponent implements OnInit {
   public selectUser(id: any) {
     this.readonly = true;
     this.allowEditing = false;
-    let user: User = this.allUsers.find(el => el.id_user === id) || new User();
+    let user: User = this.allUsers.find(el => el.id === id) || new User();
     this.user = user;
   }
 
@@ -135,7 +135,7 @@ export class UserViewComponent implements OnInit {
   }
 
   public delete() {
-    console.log(this.user.id_user); //TODO Delete
+    console.log(this.user.id); //TODO Delete
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
