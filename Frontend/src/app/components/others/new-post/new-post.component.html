@@ -1,0 +1,29 @@
+<mat-grid-list cols="4" rowHeight="100px">
+  <mat-grid-tile colspan="4" rowspan="5">
+    <div fxLayout="column" fxLayoutAlign="space-evenly start">
+      <h2 fxFlexAlign="center"> Create New Post </h2>
+      <mat-form-field appearance="outline" class="fullSize">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="post.title" name="titleField" #titleField="ngModel" required />
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayoutAlign="space-evenly center" >
+        <app-date-field [date]="post.date" [description]="'Post '" (setDate)=setDate($event)>
+        </app-date-field>
+
+        <app-team-field (selectTeam)="selectTeam($event)" class="extra-field">
+        </app-team-field>
+      </div>
+
+      <p> Description: </p>
+      <mat-form-field appearance="outline" class="fullSize">
+        <textarea matInput rows="2" [(ngModel)]="post.description" name="descriptionField"
+          #ndescriptionField="ngModel"></textarea>
+      </mat-form-field>
+
+      <button mat-stroked-button color="warn" (click)="create()" fxFlexAlign="center">
+        Create
+      </button>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
