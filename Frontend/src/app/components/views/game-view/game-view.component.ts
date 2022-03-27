@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Option } from 'src/app/models/option.model';
 import { Game } from 'src/app/models/game.model';
-import { IncidenceDialogComponent } from '../incidence-dialog/incidence-dialog.component';
+import { IncidenceDialogComponent } from '../../dialogs/incidence-dialog/incidence-dialog.component';
 
 @Component({
   selector: 'app-game-view',

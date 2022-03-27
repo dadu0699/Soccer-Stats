@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { TechnicalDirector } from 'src/app/models/technical-director.model';
 import { Option } from 'src/app/models/option.model';
-import { TransferDialogComponent } from '../transfer-dialog/transfer-dialog.component';
+import { TransferDialogComponent } from '../../dialogs/transfer-dialog/transfer-dialog.component';
 
 @Component({
   selector: 'app-technical-director-view',

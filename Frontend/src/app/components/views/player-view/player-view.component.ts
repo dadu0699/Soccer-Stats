@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Player } from 'src/app/models/player.model';
 import { Option } from 'src/app/models/option.model';
-import { TransferDialogComponent } from '../transfer-dialog/transfer-dialog.component';
+import { TransferDialogComponent } from '../../dialogs/transfer-dialog/transfer-dialog.component';
 
 @Component({
   selector: 'app-player-view',

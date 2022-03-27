@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import * as Feather from 'feather-icons';
-import { ForgotPasswordDialogComponent } from 'src/app/components/forgot-password-dialog/forgot-password-dialog.component';
+import { ForgotPasswordDialogComponent } from 'src/app/components/dialogs/forgot-password-dialog/forgot-password-dialog.component';
 
 @Component({
   selector: 'app-login',
