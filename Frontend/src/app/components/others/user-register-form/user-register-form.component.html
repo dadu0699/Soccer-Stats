@@ -64,7 +64,7 @@
 
 
 
-  <div fxLayout="row" fxLayoutAlign="start center">
+  <div fxLayout="row" fxLayoutAlign="start center" *ngIf="showButton">
     <button mat-stroked-button color="warn" type="submit">
       {{allowEditing ? 'Save Changes' : 'Create'}}
     </button>

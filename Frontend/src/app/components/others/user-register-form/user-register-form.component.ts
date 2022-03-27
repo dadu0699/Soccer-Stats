@@ -15,6 +15,7 @@ export class UserRegisterFormComponent implements OnInit {
   @Input('readonly') readonly: boolean;
   @Input('allowEditing') allowEditing: boolean;
   @Input('customer_side') customer_side: boolean;
+  @Input('showButton') showButton: boolean;
 
   @Input('user') user: User;
   @Output('sendUser') sendUser: EventEmitter<User>;
@@ -40,6 +41,7 @@ export class UserRegisterFormComponent implements OnInit {
 
     this.readonly = false;
     this.allowEditing = false;
+    this.showButton = true;
 
     this.customer_side = true;
     this.sendUser = new EventEmitter<User>();

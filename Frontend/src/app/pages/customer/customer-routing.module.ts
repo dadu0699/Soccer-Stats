@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../../guards/auth.guard';
+
 import { FeedComponent } from './feed/feed.component';
 import { MainComponent } from './main/main.component';
-
-
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -14,6 +14,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'feed', component: FeedComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
     ],
   }
