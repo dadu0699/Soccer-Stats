@@ -28,6 +28,7 @@ const reporte1 = (req, res) => {
   });
 };
 
+// Jugadores o Técnicos mayores a X años
 const reporte2 = (req, res) => {
   let reportOBJ;
 
@@ -55,6 +56,7 @@ const reporte2 = (req, res) => {
   });
 };
 
+// Jugadores o Técnicos menores a X años
 const reporte3 = (req, res) => {
   let reportOBJ;
 
@@ -82,6 +84,7 @@ const reporte3 = (req, res) => {
   });
 };
 
+// Equipos que participaron en X competición
 const reporte4 = (req, res) => {
   reportModel.reporte4(req.query, (err, results) => {
     if (err)
@@ -101,6 +104,7 @@ const reporte4 = (req, res) => {
   });
 };
 
+// Equipos de X país
 const reporte5 = (req, res) => {
   reportModel.reporte5(req.query, (err, results) => {
     if (err)
@@ -117,6 +121,7 @@ const reporte5 = (req, res) => {
   });
 };
 
+// Equipos con X años de antigüedad
 const reporte6 = (req, res) => {
   reportModel.reporte6(req.query, (err, results) => {
     if (err)
@@ -136,6 +141,7 @@ const reporte6 = (req, res) => {
   });
 };
 
+// Estadios en X país
 const reporte7 = (req, res) => {
   reportModel.reporte7(req.query, (err, results) => {
     if (err)
@@ -152,6 +158,7 @@ const reporte7 = (req, res) => {
   });
 };
 
+// Estadios con capacidad menor o igual a X
 const reporte8 = (req, res) => {
   reportModel.reporte8(req.query, (err, results) => {
     if (err)
@@ -171,6 +178,7 @@ const reporte8 = (req, res) => {
   });
 };
 
+// Histórico de partidos de X equipo
 const reporte9 = (req, res) => {
   reportModel.reporte9(req.query, (err, results) => {
     if (err)
@@ -190,6 +198,7 @@ const reporte9 = (req, res) => {
   });
 };
 
+// Equipos en los que ha estado o dirigido X técnico o jugador.
 const reporte10 = (req, res) => {
   let reportOBJ;
 
@@ -217,20 +226,21 @@ const reporte10 = (req, res) => {
   });
 };
 
+// Partidos donde hubo al menos X goles
 const reporte11 = (req, res) => {
   reportModel.reporte11(req.query, (err, results) => {
     if (err)
       return response(
         res,
         400,
-        'Error al obtener el histórico de partidos del equipo x.',
+        'Error al obtener los partidos donde hubo x cantidad de goles.',
         [err]
       );
 
     return response(
       res,
       200,
-      'Histórico de partidos del equipo x obtenidos con éxito.',
+      'Partidos donde hubo x cantidad de goles obtenidos con éxito.',
       results
     );
   });
