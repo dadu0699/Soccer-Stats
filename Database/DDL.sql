@@ -125,7 +125,7 @@ CREATE TABLE DirectorTecnico(
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
     fechaNacimiento DATE NOT NULL,
-    estado VARCHAR(100) NOT NULL, /*duda con el tipo*/
+    estado INTEGER NOT NULL, /*duda con el tipo*/
     foto VARCHAR(255) NOT NULL,
     paisID INT NOT NULL,
     PRIMARY KEY (directorTecnicoID),
@@ -426,3 +426,50 @@ Competencia.tipo AS type FROM Competencia
 INNER JOIN Equipo ON Equipo.equipoID = Competencia.equipoCampeonID
 WHERE Competencia.tipo IN (1, 2)
 GROUP BY Equipo.equipoID;
+
+-- LISTADO DE PARTIDOS EN X AÑOS
+SELECT 
+Partido.partidoID AS id, Partido.fechaHora AS game_date, Partido.asistencia AS attendees,
+Partido.resultadoLocal AS result_local, Partido.resultadoVisitante AS result_visiting, 
+Partido.estado AS status, Partido.estadioID AS id_stadium, Estadio.nombre AS stadium,
+Partido.equipoLocalID AS id_team_local, E1.nombre AS team_local, E1.fotoLogo AS photo_local,
+Partido.equipoVisitaID AS id_team_visiting, E2.nombre AS team_visiting, E2.fotoLogo AS photo_visiting,
+Partido.competenciaID AS id_competition, Competencia.nombre AS competition
+FROM Partido
+INNER JOIN Equipo AS E1 ON E1.equipoID = Partido.equipoVisitaID
+INNER JOIN Equipo AS E2 ON E2.equipoID = Partido.equipoLocalID
+INNER JOIN Estadio ON Estadio.estadioID = Partido.estadioID
+INNER JOIN Competencia ON Competencia.competenciaID = Partido.competenciaID
+WHERE Competencia.anio = 2022;
+
+-- PARTIDOS DE EQUIPO VS EQUIPO
+SELECT 
+Partido.partidoID AS id, Partido.fechaHora AS game_date, Partido.asistencia AS attendees,
+Partido.resultadoLocal AS result_local, Partido.resultadoVisitante AS result_visiting, 
+Partido.estado AS status, Partido.estadioID AS id_stadium, Estadio.nombre AS stadium,
+Partido.equipoLocalID AS id_team_local, E1.nombre AS team_local, E1.fotoLogo AS photo_local,
+Partido.equipoVisitaID AS id_team_visiting, E2.nombre AS team_visiting, E2.fotoLogo AS photo_visiting,
+Partido.competenciaID AS id_competition, Competencia.nombre AS competition
+FROM Partido
+INNER JOIN Equipo AS E1 ON E1.equipoID = Partido.equipoVisitaID
+INNER JOIN Equipo AS E2 ON E2.equipoID = Partido.equipoLocalID
+INNER JOIN Estadio ON Estadio.estadioID = Partido.estadioID
+INNER JOIN Competencia ON Competencia.competenciaID = Partido.competenciaID
+WHERE (Partido.equipoVisitaID = 3 AND Partido.equipoLocalID = 1)
+OR (Partido.equipoVisitaID = 1 AND Partido.equipoLocalID = 3);
+
+-- LISTADO DE PARTIDOS DE X EQUIPOS
+SELECT 
+Partido.partidoID AS id, Partido.fechaHora AS game_date, Partido.asistencia AS attendees,
+Partido.resultadoLocal AS result_local, Partido.resultadoVisitante AS result_visiting, 
+Partido.estado AS status, Partido.estadioID AS id_stadium, Estadio.nombre AS stadium,
+Partido.equipoLocalID AS id_team_local, E1.nombre AS team_local, E1.fotoLogo AS photo_local,
+Partido.equipoVisitaID AS id_team_visiting, E2.nombre AS team_visiting, E2.fotoLogo AS photo_visiting,
+Partido.competenciaID AS id_competition, Competencia.nombre AS competition
+FROM Partido
+INNER JOIN Equipo AS E1 ON E1.equipoID = Partido.equipoVisitaID
+INNER JOIN Equipo AS E2 ON E2.equipoID = Partido.equipoLocalID
+INNER JOIN Estadio ON Estadio.estadioID = Partido.estadioID
+INNER JOIN Competencia ON Competencia.competenciaID = Partido.competenciaID
+WHERE Partido.equipoVisitaID = 3 OR Partido.equipoLocalID = 3;
+
