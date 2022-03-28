@@ -35,7 +35,8 @@ const validarCuenta = (req, res) => {
   authModel.validate(req.query, (err, _results) => {
     if (err) return response(res, 400, 'Error al verificar correo.', [err]);
 
-    response(res, 200, 'Correo verificado con éxito.', []);
+    // response(res, 200, 'Correo verificado con éxito.', []);
+    res.status(301).redirect(`${process.env.FRONTEND}/auth/login`);
   });
 };
 
@@ -59,7 +60,7 @@ const temporalPassword = (req, res) => {
 
     dispatchEmail(req.body['email'], 'Reset password', 'temporal-password', {
       code: password,
-      url: process.env.FRONTEND,
+      url: `${process.env.FRONTEND}/`,
     });
 
     response(

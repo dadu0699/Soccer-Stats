@@ -29,7 +29,7 @@ async function dispatchEmail(to, subject, id) {
     subject,
     template: 'validate-mail',
     context: {
-      url: `${process.env.FRONTEND}/validate-mail?id=${id}`,
+      url: `${process.env.FRONTEND}:5010/auth/?id=${id}`,
     },
   };
 

@@ -155,7 +155,7 @@ export default class UsuarioController {
             objUsuario.claveAcceso = CryptoJS.AES.encrypt(objUsuario.claveAcceso, keyCrypto, { iv }).toString();
 
             await dispatchEmail(objUsuario.correo, 'Welcome!', 'mail', {
-                url: process.env.FRONTEND,
+                url: `${process.env.FRONTEND}/auth/login`,
                 password: credentials
             });
 
