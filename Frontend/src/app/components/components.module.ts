@@ -24,6 +24,7 @@ import { PlayerFieldComponent } from './fields/player-field/player-field.compone
 import { IncidenceDialogComponent } from './dialogs/incidence-dialog/incidence-dialog.component';
 import { TransferDialogComponent } from './dialogs/transfer-dialog/transfer-dialog.component';
 import { ForgotPasswordDialogComponent } from './dialogs/forgot-password-dialog/forgot-password-dialog.component';
+import { TransferDialogTechnicalDirectorComponent } from './dialogs/transfer-dialog-technical-director/transfer-dialog-technical-director.component';
 
 import { UsersPerParameterComponent } from './reports/admin/users-per-parameter/users-per-parameter.component';
 import { EmployeesPerParameterComponent } from './reports/admin/employees-per-parameter/employees-per-parameter.component';
@@ -56,7 +57,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewViewComponent } from './views/new-view/new-view.component';
-import { TransferDialogTechnicalDirectorComponent } from './dialogs/transfer-dialog-technical-director/transfer-dialog-technical-director.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 
@@ -150,6 +151,7 @@ import { TransferDialogTechnicalDirectorComponent } from './dialogs/transfer-dia
     MatSnackBarModule,
     MatIconModule,
     MatDialogModule,
+    MatChipsModule,
   ]
 })
 export class ComponentsModule { }

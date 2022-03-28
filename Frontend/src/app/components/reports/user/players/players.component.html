@@ -1,1 +1,56 @@
-<p>players works!</p>
+<div *ngIf="report12" fxLayout="column" fxLayoutAlign="space-evenly center">
+  <h3> Top players per incidences in a competition </h3>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <app-status-field [options]="incidenceType" (selectOption)="setIncidence($event)">
+    </app-status-field>
+    &nbsp;&nbsp;&nbsp;
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <app-competition-field (selectCompetition)="pushCompetitionType($event)">
+      </app-competition-field>
+      <button mat-stroked-button color="accent" (click)="getReport12()">
+        Find
+        <mat-icon class="icon">search</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="report13" fxLayout="column" fxLayoutAlign="space-evenly center">
+  <h3 fxFlexAlign="start"> Top players per incidences in a competition in a year </h3>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <app-status-field [options]="incidenceType" (selectOption)="setIncidence($event)">
+    </app-status-field>
+    &nbsp;&nbsp;&nbsp;
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <mat-form-field appearance="outline">
+        <mat-label>Year</mat-label>
+        <input matInput [(ngModel)]="year" name="yearField" #yearField="ngModel" />
+      </mat-form-field>
+      <app-competition-field [sendType]="true" (selectCompetition)="pushCompetitionType($event)">
+      </app-competition-field>
+      <button mat-stroked-button color="accent" (click)="getReport13()">
+        Find
+        <mat-icon class="icon">search</mat-icon>
+      </button>
+    </div>
+  </div>
+  <p></p>
+  <mat-chip-list #chipList class="size">
+    <mat-chip *ngFor="let competition of competitionType" (removed)="popCompetitionType(competition)">
+      <section [ngSwitch]="competition">
+        <span *ngSwitchCase="1"> Liga </span>
+        <span *ngSwitchCase="2"> Eliminatoria </span>
+        <span *ngSwitchCase="3"> copa </span>
+        <span *ngSwitchCase="4"> Super Copa </span>
+        <span *ngSwitchCase="5"> Cuadrangular </span>
+        <span *ngSwitchCase="6"> Triangular </span>
+      </section>
+      <button matChipRemove>
+        <mat-icon class="icon">cancel</mat-icon>
+      </button>
+    </mat-chip>
+  </mat-chip-list>
+</div>
+
+<app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
+</app-view-table>

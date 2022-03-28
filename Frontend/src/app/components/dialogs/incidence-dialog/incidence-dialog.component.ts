@@ -38,12 +38,12 @@ export class IncidenceDialogComponent implements OnInit {
     this.incidence.id_game = this.data.id;
 
     this.types = [
-      { id: 1, description: 'Gol' },
-      { id: 2, description: 'Autogol' },
-      { id: 3, description: 'Tarjeta Amarilla' },
-      { id: 4, description: 'Tarjeta Roja' },
-    ]
-  }
+      { id: 1, description : 'Gol'},
+      { id: 2, description : 'Autogol'},
+      { id: 3, description : 'Tarjeta Amarilla'},
+      { id: 4, description : 'Tarjeta Roja'},
+    ];
+   }
 
   ngOnInit(): void {
     this.getIncidences()
