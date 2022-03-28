@@ -51,6 +51,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NewViewComponent } from './views/new-view/new-view.component';
+import { TransferDialogTechnicalDirectorComponent } from './dialogs/transfer-dialog-technical-director/transfer-dialog-technical-director.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { NewViewComponent } from './views/new-view/new-view.component';
     AccountManagementComponent,
     UserRegisterFormComponent,
     NewViewComponent,
+    TransferDialogTechnicalDirectorComponent,
   ],
   entryComponents: [
     IncidenceDialogComponent,

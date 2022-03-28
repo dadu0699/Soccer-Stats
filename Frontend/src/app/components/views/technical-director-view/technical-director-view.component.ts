@@ -8,6 +8,7 @@ import { TechnicalDirector } from 'src/app/models/technical-director.model';
 import { Option } from 'src/app/models/option.model';
 import { TransferDialogComponent } from '../../dialogs/transfer-dialog/transfer-dialog.component';
 import { TechnicalDirectorService } from 'src/app/services/technical-director.service';
+import { TransferDialogTechnicalDirectorComponent } from '../../dialogs/transfer-dialog-technical-director/transfer-dialog-technical-director.component';
 
 @Component({
   selector: 'app-technical-director-view',
@@ -59,6 +60,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
   getAll = () => {
     this.technicalDirectorService.get()
       .then((response) => {
+        console.log(response);
         this.allTechs = [];
         this.dataTable = [];
         this.allTechs = response.data;
@@ -75,7 +77,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
         birthDate: element.birth_date,
         nationality: element.country,
         status: this.status[element.status - 1].description,
-        team: element.name_team,
+        team: element.team,
       });
       this.labels = Object.keys(this.dataTable[0]);
       this.labels.push('actions')
@@ -138,13 +140,14 @@ export class TechnicalDirectorViewComponent implements OnInit {
   }
 
   public transferTechnicalDirector() {
-    console.log('Transfer Technical Director',
-      this.technicalDirector.id, this.technicalDirector.id_team);
+    console.log(this.technicalDirector);
 
-    const dialogRef = this.dialog.open(TransferDialogComponent, {});
+    const dialogRef = this.dialog.open(TransferDialogTechnicalDirectorComponent, {
+      data: this.technicalDirector
+    });
 
     dialogRef.afterClosed().subscribe(async (transference) => {
-      console.log(transference); //TODO Transfer technical director
+      this.getAll();
     });
   }
 
