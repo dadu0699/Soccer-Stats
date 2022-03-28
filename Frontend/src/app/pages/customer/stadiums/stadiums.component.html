@@ -3,30 +3,11 @@
     <div class="holder">
       <mat-grid-list cols="12" rowHeight="95px">
         <mat-grid-tile colspan="6" rowspan="6">
-          <div fxLayout="column" fxLayoutAlign="space-evenly center">
-            <h3 fxFlexAlign="start">Stadiums per country</h3>
-            <app-country-field (selectCountry)="selectCountry($event)" fxFlexAlign="end">
-            </app-country-field>
-            <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
-            </app-view-table>
-          </div>
+          <app-stadiums-list [perCountry]="true"></app-stadiums-list>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="6">
-          <div fxLayout="column" fxLayoutAlign="space-evenly center">
-            <h3 fxFlexAlign="start">Stadiums per capacity</h3>
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlexAlign="end">
-              <mat-form-field appearance="outline">
-                <mat-label>Capacity</mat-label>
-                <input matInput [(ngModel)]="capacity" name="capacityField" #capacityField="ngModel" />
-              </mat-form-field>
-              <button mat-icon-button color="accent" class="space-bottom" (click)="selectCapacity()">
-                <mat-icon class="icon">search</mat-icon>
-              </button>
-            </div>
-            <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
-            </app-view-table>
-          </div>
+          <app-stadiums-list [perCountry]="false"></app-stadiums-list>
         </mat-grid-tile>
       </mat-grid-list>
     </div>

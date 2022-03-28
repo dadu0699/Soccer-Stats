@@ -172,11 +172,11 @@ export default class ReporteController {
     reporte4 = async (req: Request, res: Response) => {
         let query = `
             SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
-            Usuario.fotografia, Pais.nombre AS pais, (COUNT(*) * 15) mount FROM Membresia
+            Usuario.fotografia, Pais.nombre AS pais, (COUNT(*) * 15) amount FROM Membresia
             INNER JOIN Usuario ON Usuario.usuarioID = Membresia.usuarioID
             INNER JOIN Pais ON Pais.paisID = Usuario.paisID
             GROUP BY Usuario.usuarioID
-            ORDER BY mount DESC
+            ORDER BY amount DESC
             LIMIT 10;
         `;
 
@@ -192,13 +192,13 @@ export default class ReporteController {
                 email: res.correo,
                 photo: res.fotografia,
                 nationality: res.pais,
-                mount: res.mount,
+                amount: res.amount,
             }
         })
 
         res.json({
             status: 200,
-            msg: "Usuarios con mas membresías obtenidos con éxito.",
+            msg: "Usuarios que más dimero han gastado obtenidos con éxito.",
             data: reporte
         });
     }

@@ -16,7 +16,7 @@ export class AdminService {
 
     this.httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'bearer ' + localStorage.getItem('token'),
+        'Authorization': 'bearer ' +  localStorage.getItem('token')?.replace(/[ '"]+/g, ''),
         'Content-Type': 'application/json'
       })
     };
