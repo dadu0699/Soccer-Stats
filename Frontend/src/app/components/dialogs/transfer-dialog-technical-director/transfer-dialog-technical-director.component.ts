@@ -95,7 +95,7 @@ export class TransferDialogTechnicalDirectorComponent implements OnInit {
     }
     this.technicalDirectorService.createTransfer(this.transference)
       .then((response) => {
-        this.showSnackbar('Player created successfully');
+        this.showSnackbar('Technical director transfered successfully');
         this.getTransferences();
       })
       .catch((error) => {

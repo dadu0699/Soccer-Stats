@@ -93,7 +93,7 @@ export class TransferDialogComponent implements OnInit {
     }
     this.playerService.createTransfer(this.transference)
       .then((response) => {
-        this.showSnackbar('Player created successfully');
+        this.showSnackbar('Player transfered successfully');
         this.getTransferences();
       })
       .catch((error) => {
