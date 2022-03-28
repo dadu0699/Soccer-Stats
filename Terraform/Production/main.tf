@@ -20,6 +20,7 @@ data "template_file" "init" {
   vars = {
     google_access = var.google_access
     gcr_id = var.gcr_id
+    database = var.database
     frontend_image = var.frontend_image
   }
 }
