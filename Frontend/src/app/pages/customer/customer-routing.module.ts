@@ -7,6 +7,9 @@ import { FeedComponent } from './feed/feed.component';
 import { MainComponent } from './main/main.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GamesListComponent } from './games-list/games-list.component';
+import { PlayersTeamsComponent } from './players-teams/players-teams.component';
+import { GamesCompetitionsComponent } from './games-competitions/games-competitions.component';
+import { StadiumsComponent } from './stadiums/stadiums.component';
 
 const routes: Routes = [
   {
@@ -17,6 +20,9 @@ const routes: Routes = [
       { path: 'feed', component: FeedComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'games', component: GamesListComponent },
+      { path: 'players-teams', component: PlayersTeamsComponent },
+      { path: 'games-competitions', component: GamesCompetitionsComponent },
+      { path: 'stadiums', component: StadiumsComponent },
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
     ],
   }
