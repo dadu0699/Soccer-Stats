@@ -84,8 +84,8 @@ export class PlayerViewComponent implements OnInit {
         lastname: element.lastname,
         birthDate: this.dateFormatService.formatoFecha(element.birth_date),
         nationality: element.nationality,
-        position: this.positions[element.position - 1].description,
-        status: this.status[element.status - 1].description,
+        position: this.positions.find((el) => el.id === element.position)?.description,
+        status: this.status.find((el) => el.id === element.status)?.description,
         team: element.name_team,
       });
       this.labels = Object.keys(this.dataTable[0]);
@@ -100,7 +100,6 @@ export class PlayerViewComponent implements OnInit {
     } else {
       this.playerService.create(this.player)
         .then((response) => {
-          console.log(response)
           this.showSnackbar('Player created successfully');
           this.getAll();
           this.create();
@@ -155,10 +154,12 @@ export class PlayerViewComponent implements OnInit {
 
   public transferPlayer() {
     console.log(this.player.id, this.player.id_team);
-    const dialogRef = this.dialog.open(TransferDialogComponent, {});
+    const dialogRef = this.dialog.open(TransferDialogComponent, {
+      data: this.player
+    });
 
     dialogRef.afterClosed().subscribe(async (transference) => {
-      console.log(transference); //TODO Transfer player
+      this.getAll();
     });
   }
 
