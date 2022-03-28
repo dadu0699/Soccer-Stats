@@ -76,6 +76,7 @@ export class TeamViewComponent implements OnInit {
         .then((response) => {
           this.showSnackbar('Team created successfully');
           this.getAll();
+          this.create();
         })
         .catch((error) => {
           this.showSnackbar(error.error.message);
@@ -84,10 +85,12 @@ export class TeamViewComponent implements OnInit {
   }
 
   public updateExisting() {
+    this.team.photo = this.returnImage(this.team.photo);
     this.teamService.update(this.team)
       .then((response) => {
         this.showSnackbar('Team updated successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
@@ -109,7 +112,7 @@ export class TeamViewComponent implements OnInit {
   }
 
   public selectTeam(id: any) {
-    this.readonly = false;
+    this.readonly = true;
     this.allowEditing = false;
     let team: Team = this.allTeams.find(el => el.id === id) || new Team();
     this.team = team;
@@ -122,7 +125,6 @@ export class TeamViewComponent implements OnInit {
   }
 
   public edit() {
-    this.team = new Team();
     this.readonly = false;
     this.allowEditing = true;
   }
@@ -132,16 +134,21 @@ export class TeamViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Team deleted successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
       });
-    this.team = new Team();
-    this.readonly = false;
-    this.allowEditing = true;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
     this._snackBar.open(message, 'CLOSE', { duration: 5000 });
+  }
+
+  returnImage(image: string) {
+    if (image.includes('https')) {
+      return ''
+    }
+    return image;
   }
 }

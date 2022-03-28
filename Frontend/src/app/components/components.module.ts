@@ -33,7 +33,6 @@ import { ViewTableComponent } from './others/view-table/view-table.component';
 import { ManagementOptionsComponent } from './others/management-options/management-options.component';
 import { AccountManagementComponent } from './others/account-management/account-management.component';
 import { UserRegisterFormComponent } from './others/user-register-form/user-register-form.component';
-import { NewPostComponent } from './others/new-post/new-post.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -81,7 +80,6 @@ import { NewViewComponent } from './views/new-view/new-view.component';
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,
-    NewPostComponent,
     NewViewComponent,
   ],
   entryComponents: [
@@ -111,7 +109,6 @@ import { NewViewComponent } from './views/new-view/new-view.component';
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,
-    NewPostComponent,
     NewViewComponent,
   ],
   imports: [
