@@ -27,6 +27,7 @@ const iniciarSesion = (req, res) => {
       token,
       id_status: results[0]['id_status'],
       id_rol: results[0]['id_rol'],
+      id_user: results[0]['id_usuario'],
     });
   });
 };

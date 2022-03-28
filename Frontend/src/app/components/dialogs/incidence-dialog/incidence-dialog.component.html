@@ -19,8 +19,14 @@
     <textarea matInput rows="2" [(ngModel)]="incidence.description" name="descriptionField"
       #ndescriptionField="ngModel"></textarea>
   </mat-form-field>
+
+  <button mat-stroked-button (click)="create()" fxFlexAlign="center">
+    Save
+  </button>
+
+  <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
+  </app-view-table>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
   <button mat-button (click)="onNoClick()">Go back</button>
-  <button mat-button [mat-dialog-close]="incidence" cdkFocusInitial>Save</button>
 </div>

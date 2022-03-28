@@ -87,25 +87,27 @@ export class GameViewComponent implements OnInit {
       this.updateExisting();
     } else {
       this.matchService.create(this.game)
-      .then((response) => {
-        this.showSnackbar('Game created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
+        .then((response) => {
+          this.showSnackbar('Game created successfully');
+          this.getAll();
+          this.create();
+        })
+        .catch((error) => {
+          this.showSnackbar(error.error.message);
+        });
     }
   }
 
   public updateExisting() {
     this.matchService.update(this.game)
-    .then((response) => {
-      this.showSnackbar('Game updated successfully');
-      this.getAll();
-    })
-    .catch((error) => {
-      this.showSnackbar(error.error.message);
-    });
+      .then((response) => {
+        this.showSnackbar('Game updated successfully');
+        this.getAll();
+        this.create();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -143,16 +145,17 @@ export class GameViewComponent implements OnInit {
   }
 
   public addIncidence() {
-    console.log('Add incidence', this.game.id);
-    const dialogRef = this.dialog.open(IncidenceDialogComponent, {});
+    if (this.game.status != 2) {
+      this.showSnackbar("Can't add incidences, game not started");
+    } else {
+      console.log('Add incidence', this.game.id);
+      const dialogRef = this.dialog.open(IncidenceDialogComponent, {
+        data: this.game
+      });
 
-    dialogRef.afterClosed().subscribe(async (newIncidence) => {
-      if(this.game.status != 2 ){
-        this.showSnackbar("Can't add incidences, game not started");
-      }else{
-        console.log(newIncidence); //TODO Add Incidence
-      }
-    });
+      dialogRef.afterClosed().subscribe(async (newIncidence) => {
+      });
+    }
   }
 
   public create() {
@@ -162,9 +165,8 @@ export class GameViewComponent implements OnInit {
   }
 
   public edit() {
-    this.game = new Game();
     this.readonly = false;
-    this.allowEditing = false;
+    this.allowEditing = true;
   }
 
   public delete() {
@@ -172,6 +174,7 @@ export class GameViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Game deleted successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);

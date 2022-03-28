@@ -68,7 +68,6 @@ export class PlayerViewComponent implements OnInit {
   getAll = () => {
     this.playerService.get()
       .then((response) => {
-        console.log(response)
         this.allPlayers = [];
         this.dataTable = [];
         this.allPlayers = response.data;
@@ -85,8 +84,8 @@ export class PlayerViewComponent implements OnInit {
         lastname: element.lastname,
         birthDate: this.dateFormatService.formatoFecha(element.birth_date),
         nationality: element.nationality,
-        position: this.positions[element.position - 1].description,
-        status: this.status[element.status - 1].description,
+        position: this.positions.find((el) => el.id === element.position)?.description,
+        status: this.status.find((el) => el.id === element.status)?.description,
         team: element.name_team,
       });
       this.labels = Object.keys(this.dataTable[0]);
@@ -101,9 +100,9 @@ export class PlayerViewComponent implements OnInit {
     } else {
       this.playerService.create(this.player)
         .then((response) => {
-          console.log(response)
           this.showSnackbar('Player created successfully');
           this.getAll();
+          this.create();
         })
         .catch((error) => {
           this.showSnackbar(error.error.message);
@@ -112,10 +111,12 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public updateExisting() {
+    this.player.photo = this.returnImage(this.player.photo);
     this.playerService.update(this.player)
       .then((response) => {
         this.showSnackbar('Player updated successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
@@ -145,18 +146,19 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public selectPlayer(id: any) {
-    this.readonly = false;
+    this.readonly = true;
     this.allowEditing = false;
     let player: Player = this.allPlayers.find(el => el.id === id) || new Player();
     this.player = player;
   }
 
   public transferPlayer() {
-    console.log(this.player.id, this.player.id_team);
-    const dialogRef = this.dialog.open(TransferDialogComponent, {});
+    const dialogRef = this.dialog.open(TransferDialogComponent, {
+      data: this.player
+    });
 
     dialogRef.afterClosed().subscribe(async (transference) => {
-      console.log(transference); //TODO Transfer player
+      this.getAll();
     });
   }
 
@@ -167,9 +169,8 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public edit() {
-    this.player = new Player();
     this.readonly = false;
-    this.allowEditing = false;
+    this.allowEditing = true;
   }
 
   public delete() {
@@ -177,16 +178,21 @@ export class PlayerViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Player deleted successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
       });
-    this.player = new Player();
-    this.readonly = false;
-    this.allowEditing = false;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
     this._snackBar.open(message, 'CLOSE', { duration: 5000 });
+  }
+
+  returnImage(image: string) {
+    if (image.includes('https')) {
+      return ''
+    }
+    return image;
   }
 }

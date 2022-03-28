@@ -3,12 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { Game } from '../models/game.model';
+import { Incidence } from '../models/incidence.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatchService {
   private url: string;
+  private urlEmployee: string;
   private httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'bearer ' + localStorage.getItem('token'),
@@ -18,6 +20,7 @@ export class MatchService {
 
   constructor(private _httpClient: HttpClient) {
     this.url = `${environment.url}:5002/match`;
+    this.urlEmployee = `${environment.url}:5012/employee`;
   }
 
   public async get(): Promise<any> {
@@ -41,5 +44,17 @@ export class MatchService {
         headers: this.httpOptions.headers,
         body: match
       }).toPromise();
+  }
+
+  public async getIncidences(id: number): Promise<any> {
+    return await this._httpClient.
+      get(this.urlEmployee + '/technical-director-transfer?id=' + id)
+      .toPromise();
+  }
+
+  public async createTransfer(incidence: Incidence): Promise<any> {
+    return await this._httpClient.
+      post(this.urlEmployee + '/incidence', incidence, this.httpOptions)
+      .toPromise();
   }
 }

@@ -9,7 +9,7 @@ export class TechnicalDirector {
 
   public country!: string;
   public id_team!: number;
-  public name_team!: string;
+  public team!: string;
 
   constructor() {
     this.name = "";

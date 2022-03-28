@@ -38,7 +38,6 @@ import { ViewTableComponent } from './others/view-table/view-table.component';
 import { ManagementOptionsComponent } from './others/management-options/management-options.component';
 import { AccountManagementComponent } from './others/account-management/account-management.component';
 import { UserRegisterFormComponent } from './others/user-register-form/user-register-form.component';
-import { NewPostComponent } from './others/new-post/new-post.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -56,6 +55,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NewViewComponent } from './views/new-view/new-view.component';
+import { TransferDialogTechnicalDirectorComponent } from './dialogs/transfer-dialog-technical-director/transfer-dialog-technical-director.component';
 
 
 
@@ -91,7 +92,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,
-    NewPostComponent,
+    NewViewComponent,
+    TransferDialogTechnicalDirectorComponent,
   ],
   entryComponents: [
     IncidenceDialogComponent,
@@ -125,7 +127,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,
-    NewPostComponent,
+    NewViewComponent,
   ],
   imports: [
     CommonModule,

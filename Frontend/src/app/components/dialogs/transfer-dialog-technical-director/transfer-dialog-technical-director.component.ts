@@ -8,13 +8,15 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TechnicalDirector } from 'src/app/models/technical-director.model';
+import { TechnicalDirectorService } from 'src/app/services/technical-director.service';
 
 @Component({
-  selector: 'app-transfer-dialog',
-  templateUrl: './transfer-dialog.component.html',
-  styleUrls: ['./transfer-dialog.component.css']
+  selector: 'app-transfer-dialog-technical-director',
+  templateUrl: './transfer-dialog-technical-director.component.html',
+  styleUrls: ['./transfer-dialog-technical-director.component.css']
 })
-export class TransferDialogComponent implements OnInit {
+export class TransferDialogTechnicalDirectorComponent implements OnInit {
   public transference: Transference;
   public allTransference: any[] = [];
   public dataTable: any[] = [];
@@ -22,9 +24,9 @@ export class TransferDialogComponent implements OnInit {
   public dataSource: MatTableDataSource<any>;
 
   constructor(
-    public dialogRef: MatDialogRef<TransferDialogComponent>,
-    private playerService: PlayerService,
-    @Inject(MAT_DIALOG_DATA) public data: Player,
+    public dialogRef: MatDialogRef<TransferDialogTechnicalDirectorComponent>,
+    private technicalDirectorService: TechnicalDirectorService,
+    @Inject(MAT_DIALOG_DATA) public data: TechnicalDirector,
     private _snackBar: MatSnackBar,
   ) {
     this.labels = ['no.', 'origin', 'destination',
@@ -32,7 +34,7 @@ export class TransferDialogComponent implements OnInit {
     this.dataTable = [];
     this.dataSource = new MatTableDataSource<any>();
     this.transference = new Transference();
-    this.transference.id_player = this.data.id;
+    this.transference.id_coach = this.data.id;
   }
 
   ngOnInit(): void {
@@ -43,10 +45,10 @@ export class TransferDialogComponent implements OnInit {
    * Obtener las transferencias de un usuario
    */
   public getTransferences() {
-    this.playerService.getLog(this.data.id)
+    this.technicalDirectorService.getLog(this.data.id)
       .then((response: any) => {
-        this.allTransference = [];
         this.dataTable = [];
+        this.allTransference = [];
         this.allTransference = response.data;
         this.fillTable();
       });
@@ -91,7 +93,7 @@ export class TransferDialogComponent implements OnInit {
     if (this.allTransference.length > 0) {
       this.transference.id_team_origin = this.allTransference[this.allTransference.length - 1].id_team_destination;
     }
-    this.playerService.createTransfer(this.transference)
+    this.technicalDirectorService.createTransfer(this.transference)
       .then((response) => {
         this.showSnackbar('Player created successfully');
         this.getTransferences();
@@ -107,3 +109,4 @@ export class TransferDialogComponent implements OnInit {
 
 
 }
+
