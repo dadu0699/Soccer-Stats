@@ -8,14 +8,14 @@ const get = (params, callback) => {
   const id = params.id;
   let query = `
     SELECT noticiaID id, e.equipoID id_team, nombre team, usuarioID id_user,
-    titulo tittle, descripcion description, DATE_FORMAT(fecha, "%Y-%m-%d") date
+    titulo title, descripcion description, DATE_FORMAT(fecha, "%Y-%m-%d") date
     FROM Noticia n, Equipo e
     WHERE n.equipoID = e.equipoID`;
 
   if (id)
     query += ` AND noticiaID = ?;`;
 
-    return execute(query, id, callback);
+  return execute(query, id, callback);
 };
 
 const post = (params, callback) => {
