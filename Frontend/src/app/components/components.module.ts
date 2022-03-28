@@ -32,6 +32,7 @@ import { PlayersComponent } from './reports/user/players/players.component';
 import { TeamsComponent } from './reports/user/teams/teams.component';
 import { GamesComponent } from './reports/user/games/games.component';
 import { CompetitionsComponent } from './reports/user/competitions/competitions.component';
+import { StadiumsListComponent } from './reports/user/stadiums-list/stadiums-list.component';
 
 import { ViewTableComponent } from './others/view-table/view-table.component';
 import { ManagementOptionsComponent } from './others/management-options/management-options.component';
@@ -85,6 +86,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     TeamsComponent,
     GamesComponent,
     CompetitionsComponent,
+    StadiumsListComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
@@ -118,6 +120,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     TeamsComponent,
     GamesComponent,
     CompetitionsComponent,
+    StadiumsListComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
