@@ -35,7 +35,7 @@
     </div>
   </div>
   <p></p>
-  <mat-chip-list #chipList>
+  <mat-chip-list #chipList class="size">
     <mat-chip *ngFor="let competition of competitionType" (removed)="popCompetitionType(competition)">
       <section [ngSwitch]="competition">
         <span *ngSwitchCase="1"> Liga </span>
