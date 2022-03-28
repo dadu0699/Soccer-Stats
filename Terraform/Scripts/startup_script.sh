@@ -19,7 +19,7 @@ sudo docker run --env DATABASE_DB=${database} -d -p 5007:5007 --restart always -
 sudo docker run --env DATABASE_DB=${database} -d -p 5010:5010 --restart always --name auth-service ${gcr_id}/auth-service:latest
 sudo docker run --env DATABASE_DB=${database} -d -p 5011:5011 --restart always --name administrator-service ${gcr_id}/administrator-service:latest
 sudo docker run --env DATABASE_DB=${database} -d -p 5012:5012 --restart always --name employee-service ${gcr_id}/employee-service:latest
-sudo docker run --env DATABASE_DB=${database} -d -p 5013:5013 --restart always --name country-service ${gcr_id}/country-service:late--env DATABASE_DB=
+sudo docker run --env DATABASE_DB=${database} -d -p 5013:5013 --restart always --name country-service ${gcr_id}/country-service:latest
 
 # Frontend
 sudo docker run -d -p 80:80 --restart always --name frontend ${gcr_id}/${frontend_image}:latest
