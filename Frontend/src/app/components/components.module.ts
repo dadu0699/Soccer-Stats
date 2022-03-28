@@ -51,6 +51,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NewViewComponent } from './views/new-view/new-view.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AccountManagementComponent,
     UserRegisterFormComponent,
     NewPostComponent,
+    NewViewComponent,
   ],
   entryComponents: [
     IncidenceDialogComponent,
@@ -110,6 +112,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AccountManagementComponent,
     UserRegisterFormComponent,
     NewPostComponent,
+    NewViewComponent,
   ],
   imports: [
     CommonModule,

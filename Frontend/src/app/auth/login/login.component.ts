@@ -44,8 +44,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         const data = response['data'];
 
         if (data['id_status'] == 1) {
+          console.log(data)
           localStorage.setItem('token', String(data['token']));
-
+          localStorage.setItem('id_user', String(data['id_user']));
           localStorage.setItem('id_rol', String(data['id_rol']));
           if (data['id_rol'] == 1) {
             this._router.navigate(['/soccer-stats/admin']);
