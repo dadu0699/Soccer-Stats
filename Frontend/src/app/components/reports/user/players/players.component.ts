@@ -77,12 +77,14 @@ export class PlayersComponent implements OnInit {
   }
 
   public pushCompetitionType(id_competition: number) {
-    if (this.report13) this.competitionType.push(id_competition);
+    const index = this.competitionType.indexOf(id_competition);
+    if (this.report13 || !index) this.competitionType.push(id_competition);
     this.competition = id_competition;
   }
 
-  public popCompetitionType(id_competition: number) {
-    const index = this.competitionType.find(id => id === id_competition);
+  public popCompetitionType(competition: any) {
+    console.log(competition);
+    const index = this.competitionType.indexOf(competition);
     if (index) this.competitionType.splice(index, 1);
   }
 

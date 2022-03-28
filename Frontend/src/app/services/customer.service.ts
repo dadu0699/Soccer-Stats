@@ -93,8 +93,8 @@ export class CustomerService {
 
   public async report13(incidence: number , year: number, competitions: any[]): Promise<any> {
     const params = new HttpParams().set('incidence', incidence).append('year', year);
-    const body = JSON.stringify(competitions);
-
+    const body = JSON.stringify({competitions});
+    console.log(body)
     return await this._httpClient.post(`${this.url}/report/13/`, body, { headers: this.httpOptions.headers, params }).toPromise();
   }
 
