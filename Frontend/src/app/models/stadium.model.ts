@@ -9,6 +9,8 @@ export class Stadium {
   public photo: string;
 
   public country!: string;
+  public stadium?: string;
+  public id_stadium?: number;
 
   constructor() {
     this.name = "";

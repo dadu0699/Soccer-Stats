@@ -15,6 +15,9 @@ import { MainComponent } from './main/main.component';
 import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GamesListComponent } from './games-list/games-list.component';
+import { PlayersTeamsComponent } from './players-teams/players-teams.component';
+import { GamesCompetitionsComponent } from './games-competitions/games-competitions.component';
+import { StadiumsComponent } from './stadiums/stadiums.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -23,12 +26,12 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { PlayersTeamsComponent } from './players-teams/players-teams.component';
-import { GamesCompetitionsComponent } from './games-competitions/games-competitions.component';
-import { StadiumsComponent } from './stadiums/stadiums.component';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +59,8 @@ import { StadiumsComponent } from './stadiums/stadiums.component';
     MatListModule,
     LayoutModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
     MatChipsModule,
     MatIconModule,
