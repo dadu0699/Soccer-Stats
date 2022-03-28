@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Stadium } from 'src/app/models/stadium.model';
+import { CustomerService } from 'src/app/services/customer.service';
 
 
 
@@ -24,6 +25,7 @@ export class StadiumsComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private _customerService: CustomerService
   ) {
 
     this.labels = ['no.', 'photo', 'name', 'country', 'capacity'];
@@ -52,14 +54,35 @@ export class StadiumsComponent implements OnInit {
     });
   }
 
-  public selectCountry(id_country: any) {
-    //TODO get
-    console.log(id_country)
+  public async selectCountry(id_country: any): Promise<void> {
+    try {
+      const response = await this._customerService.report7(id_country);
+      if (response['status'] === 200) {
+        this.stadiums = response['data']
+        console.log(response);
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public selectCapacity() {
-    //TODO get
-    console.log(this.capacity)
+  public async selectCapacity(): Promise<void> {
+    try {
+      const response = await this._customerService.report8(this.capacity);
+      if (response['status'] === 200) {
+        this.stadiums = response['data']
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  private showSnackbar(message: string = 'Something went wrong :c') {
+    this._snackBar.open(message, 'CLOSE', { duration: 5000 });
   }
 
 }

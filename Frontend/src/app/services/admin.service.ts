@@ -9,15 +9,17 @@ import { User } from '../models/user.model';
 })
 export class AdminService {
   private url: string;
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': 'bearer ' + localStorage.getItem('token'),
-      'Content-Type': 'application/json'
-    })
-  };
+  private httpOptions: any
 
   constructor(private _httpClient: HttpClient) {
     this.url = `${environment.url}:5011/administrator`;
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      })
+    };
   }
 
   public async report1(id_team: number): Promise<any> {
