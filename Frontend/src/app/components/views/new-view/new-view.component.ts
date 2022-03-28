@@ -60,7 +60,6 @@ export class NewViewComponent implements OnInit {
 
   private fillTable() {
     this.allNews.forEach((element: Post) => {
-      console.log(element)
       this.dataTable.push({
         no: element.id,
         title: element.title,
@@ -92,18 +91,16 @@ export class NewViewComponent implements OnInit {
     this.post.id_user = Number(localStorage.getItem('id_user'));
     this.newService.create(this.post)
       .then((response) => {
-        console.log(response)
-
         this.showSnackbar('New created successfully');
         this.getAll();
+        this.post = new Post();
+        this.readonly = false;
+        this.allowEditing = false;
       })
       .catch((error) => {
-        console.log(error)
         this.showSnackbar(error.error.message);
       });
-    this.post = new Post();
-    this.readonly = false;
-    this.allowEditing = false;
+
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

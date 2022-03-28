@@ -68,7 +68,6 @@ export class PlayerViewComponent implements OnInit {
   getAll = () => {
     this.playerService.get()
       .then((response) => {
-        console.log(response)
         this.allPlayers = [];
         this.dataTable = [];
         this.allPlayers = response.data;
@@ -104,6 +103,7 @@ export class PlayerViewComponent implements OnInit {
           console.log(response)
           this.showSnackbar('Player created successfully');
           this.getAll();
+          this.create();
         })
         .catch((error) => {
           this.showSnackbar(error.error.message);
@@ -112,10 +112,12 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public updateExisting() {
+    this.player.photo = this.returnImage(this.player.photo);
     this.playerService.update(this.player)
       .then((response) => {
         this.showSnackbar('Player updated successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
@@ -145,7 +147,7 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public selectPlayer(id: any) {
-    this.readonly = false;
+    this.readonly = true;
     this.allowEditing = false;
     let player: Player = this.allPlayers.find(el => el.id === id) || new Player();
     this.player = player;
@@ -167,9 +169,8 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public edit() {
-    this.player = new Player();
     this.readonly = false;
-    this.allowEditing = false;
+    this.allowEditing = true;
   }
 
   public delete() {
@@ -177,16 +178,21 @@ export class PlayerViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Player deleted successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
       });
-    this.player = new Player();
-    this.readonly = false;
-    this.allowEditing = false;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {
     this._snackBar.open(message, 'CLOSE', { duration: 5000 });
+  }
+
+  returnImage(image: string) {
+    if (image.includes('https')) {
+      return ''
+    }
+    return image;
   }
 }

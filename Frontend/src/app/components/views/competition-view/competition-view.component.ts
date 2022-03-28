@@ -89,6 +89,7 @@ export class CompetitionViewComponent implements OnInit {
         .then((response) => {
           this.showSnackbar('Competition created successfully');
           this.getAll();
+          this.create()
         })
         .catch((error) => {
           this.showSnackbar(error.error.message);
@@ -101,6 +102,7 @@ export class CompetitionViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Competition updated successfully');
         this.getAll();
+        this.create()
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
@@ -122,7 +124,7 @@ export class CompetitionViewComponent implements OnInit {
   }
 
   public selectCompetition(id: any) {
-    this.readonly = false;
+    this.readonly = true;
     this.allowEditing = false;
     let competition: Competition = this.allCompetitions.find(el => el.id === id) || new Competition();
     this.competition = competition;
@@ -135,7 +137,6 @@ export class CompetitionViewComponent implements OnInit {
   }
 
   public edit() {
-    this.competition = new Competition();
     this.readonly = false;
     this.allowEditing = true;
   }
@@ -145,13 +146,11 @@ export class CompetitionViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Competition deleted successfully');
         this.getAll();
+        this.create()
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
       });
-    this.competition = new Competition();
-    this.readonly = false;
-    this.allowEditing = true;
   }
 
   showSnackbar(message: string = 'Something went wrong :c') {

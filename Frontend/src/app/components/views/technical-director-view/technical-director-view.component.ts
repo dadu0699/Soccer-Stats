@@ -91,6 +91,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
         .then((response) => {
           this.showSnackbar('Technical director created successfully');
           this.getAll();
+          this.create();
         })
         .catch((error) => {
           this.showSnackbar(error.error.message);
@@ -99,10 +100,12 @@ export class TechnicalDirectorViewComponent implements OnInit {
   }
 
   public updateExisting() {
+    this.technicalDirector.photo = this.returnImage(this.technicalDirector.photo);
     this.technicalDirectorService.update(this.technicalDirector)
       .then((response) => {
         this.showSnackbar('Technical director updated successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
@@ -152,7 +155,6 @@ export class TechnicalDirectorViewComponent implements OnInit {
   }
 
   public edit() {
-    this.technicalDirector = new TechnicalDirector();
     this.readonly = false;
     this.allowEditing = true;
   }
@@ -162,6 +164,7 @@ export class TechnicalDirectorViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Technical director deleted successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
@@ -175,5 +178,11 @@ export class TechnicalDirectorViewComponent implements OnInit {
     this._snackBar.open(message, 'CLOSE', { duration: 5000 });
   }
 
+  returnImage(image: string) {
+    if (image.includes('https')) {
+      return ''
+    }
+    return image;
+  }
 
 }

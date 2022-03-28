@@ -86,25 +86,28 @@ export class StadiumViewComponent implements OnInit {
       this.updateExisting();
     } else {
       this.stadiumService.create(this.stadium)
-      .then((response) => {
-        this.showSnackbar('Stadium created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
+        .then((response) => {
+          this.showSnackbar('Stadium created successfully');
+          this.getAll();
+          this.create();
+        })
+        .catch((error) => {
+          this.showSnackbar(error.error.message);
+        });
     }
   }
 
   public updateExisting() {
+    this.stadium.photo = this.returnImage(this.stadium.photo);
     this.stadiumService.update(this.stadium)
-    .then((response) => {
-      this.showSnackbar('Stadium updated successfully');
-      this.getAll();
-    })
-    .catch((error) => {
-      this.showSnackbar(error.error.message);
-    });
+      .then((response) => {
+        this.showSnackbar('Stadium updated successfully');
+        this.getAll();
+        this.create();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -126,7 +129,7 @@ export class StadiumViewComponent implements OnInit {
   }
 
   public selectStadium(id: any) {
-    this.readonly = false;
+    this.readonly = true;
     this.allowEditing = false;
     let stadium: Stadium = this.allStadiums.find(el => el.id === id) || new Stadium();
     this.stadium = stadium;
@@ -139,7 +142,6 @@ export class StadiumViewComponent implements OnInit {
   }
 
   public edit() {
-    this.stadium = new Stadium();
     this.readonly = false;
     this.allowEditing = true;
   }
@@ -149,6 +151,7 @@ export class StadiumViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Stadium deleted successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
@@ -160,6 +163,13 @@ export class StadiumViewComponent implements OnInit {
 
   showSnackbar(message: string = 'Something went wrong :c') {
     this._snackBar.open(message, 'CLOSE', { duration: 5000 });
+  }
+
+  returnImage(image: string) {
+    if (image.includes('https')) {
+      return ''
+    }
+    return image;
   }
 
 }

@@ -87,25 +87,27 @@ export class GameViewComponent implements OnInit {
       this.updateExisting();
     } else {
       this.matchService.create(this.game)
-      .then((response) => {
-        this.showSnackbar('Game created successfully');
-        this.getAll();
-      })
-      .catch((error) => {
-        this.showSnackbar(error.error.message);
-      });
+        .then((response) => {
+          this.showSnackbar('Game created successfully');
+          this.getAll();
+          this.create();
+        })
+        .catch((error) => {
+          this.showSnackbar(error.error.message);
+        });
     }
   }
 
   public updateExisting() {
     this.matchService.update(this.game)
-    .then((response) => {
-      this.showSnackbar('Game updated successfully');
-      this.getAll();
-    })
-    .catch((error) => {
-      this.showSnackbar(error.error.message);
-    });
+      .then((response) => {
+        this.showSnackbar('Game updated successfully');
+        this.getAll();
+        this.create();
+      })
+      .catch((error) => {
+        this.showSnackbar(error.error.message);
+      });
     this.readonly = true;
     this.allowEditing = false;
   }
@@ -147,9 +149,9 @@ export class GameViewComponent implements OnInit {
     const dialogRef = this.dialog.open(IncidenceDialogComponent, {});
 
     dialogRef.afterClosed().subscribe(async (newIncidence) => {
-      if(this.game.status != 2 ){
+      if (this.game.status != 2) {
         this.showSnackbar("Can't add incidences, game not started");
-      }else{
+      } else {
         console.log(newIncidence); //TODO Add Incidence
       }
     });
@@ -162,9 +164,8 @@ export class GameViewComponent implements OnInit {
   }
 
   public edit() {
-    this.game = new Game();
     this.readonly = false;
-    this.allowEditing = false;
+    this.allowEditing = true;
   }
 
   public delete() {
@@ -172,6 +173,7 @@ export class GameViewComponent implements OnInit {
       .then((response) => {
         this.showSnackbar('Game deleted successfully');
         this.getAll();
+        this.create();
       })
       .catch((error) => {
         this.showSnackbar(error.error.message);
