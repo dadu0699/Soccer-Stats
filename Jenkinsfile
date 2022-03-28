@@ -7,6 +7,9 @@ pipeline {
 
     TESTING_IP = credentials('TESTING_IP')
     PRODUCTION_IP = credentials('PRODUCTION_IP')
+
+    TESTING_DATABASE = credentials('TESTING_DATABASE')
+    PRODUCTION_DATABASE = credentials('PRODUCTION_DATABASE')
     
     GCR_ID = credentials('PROJECT_ID')
     // Credenciales (.json) con los permisos de: 'Administrador de Acceso a VPC sin servidores', 'Administrador de Compute', 'Agente de servicios de recursos de nube', 'Visualizador de objetos de Storage' 
@@ -380,6 +383,7 @@ pipeline {
             export TF_VAR_google_access="$(cat ${GOOGLE_APPLICATION_CREDENTIALS})"
             export TF_VAR_gcr_id=${GCR_ID}
             export TF_VAR_testing_ip=${TESTING_IP}
+            export TF_VAR_database=${TESTING_DATABASE}
             export TF_VAR_frontend_image="frontend-test"
 
             cd Terraform/Testing
@@ -420,6 +424,7 @@ pipeline {
             export TF_VAR_google_access="$(cat ${GOOGLE_APPLICATION_CREDENTIALS})"
             export TF_VAR_gcr_id=${GCR_ID}
             export TF_VAR_production_ip=${PRODUCTION_IP}
+            export TF_VAR_database=${PRODUCTION_DATABASE}
             export TF_VAR_frontend_image="frontend"
 
             cd Terraform/Production

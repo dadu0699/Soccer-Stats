@@ -17,3 +17,8 @@ variable "frontend_image" {
     type        = string
     description = "Frontend image"
 }
+
+variable "database" {
+    type        = string
+    description = "Database name"
+}
