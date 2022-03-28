@@ -2,7 +2,7 @@
 CREATE OR REPLACE VIEW vistaJugadores AS
 SELECT * FROM ((
 	SELECT Jugador.*, Pais.nombre pais, PosicionJugador.nombre posicion,
-		EquipoDestino.equipoID equipoID, EquipoDestino.nombre equipo
+		EquipoOrigen.equipoID equipoID, EquipoOrigen.nombre equipo
 	FROM Jugador
 	INNER JOIN Pais ON (Pais.paisID = Jugador.paisID)
 	INNER JOIN PosicionJugador ON (PosicionJugador.posicionJugadorID = Jugador.posicionJugadorID)
@@ -58,7 +58,7 @@ ORDER BY jg.jugadorID;
 CREATE OR REPLACE VIEW vistaDirectores AS
 SELECT * FROM ((
 	SELECT DirectorTecnico.*, Pais.nombre pais,
-		EquipoDestino.equipoID equipoID, EquipoDestino.nombre equipo
+		EquipoOrigen.equipoID equipoID, EquipoOrigen.nombre equipo
 	FROM DirectorTecnico
 	INNER JOIN Pais ON (Pais.paisID = DirectorTecnico.paisID)
 	INNER JOIN ContratoDT ON (ContratoDT.directorTecnicoID = DirectorTecnico.directorTecnicoID)
