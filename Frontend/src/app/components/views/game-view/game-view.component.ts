@@ -145,16 +145,17 @@ export class GameViewComponent implements OnInit {
   }
 
   public addIncidence() {
-    console.log('Add incidence', this.game.id);
-    const dialogRef = this.dialog.open(IncidenceDialogComponent, {});
+    if (this.game.status != 2) {
+      this.showSnackbar("Can't add incidences, game not started");
+    } else {
+      console.log('Add incidence', this.game.id);
+      const dialogRef = this.dialog.open(IncidenceDialogComponent, {
+        data: this.game
+      });
 
-    dialogRef.afterClosed().subscribe(async (newIncidence) => {
-      if (this.game.status != 2) {
-        this.showSnackbar("Can't add incidences, game not started");
-      } else {
-        console.log(newIncidence); //TODO Add Incidence
-      }
-    });
+      dialogRef.afterClosed().subscribe(async (newIncidence) => {
+      });
+    }
   }
 
   public create() {

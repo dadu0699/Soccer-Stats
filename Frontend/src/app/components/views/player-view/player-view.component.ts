@@ -153,7 +153,6 @@ export class PlayerViewComponent implements OnInit {
   }
 
   public transferPlayer() {
-    console.log(this.player.id, this.player.id_team);
     const dialogRef = this.dialog.open(TransferDialogComponent, {
       data: this.player
     });

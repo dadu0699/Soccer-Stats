@@ -47,7 +47,7 @@ export class TransferDialogTechnicalDirectorComponent implements OnInit {
   public getTransferences() {
     this.technicalDirectorService.getLog(this.data.id)
       .then((response: any) => {
-        console.log(response)
+        this.dataTable = [];
         this.allTransference = [];
         this.allTransference = response.data;
         this.fillTable();
@@ -64,7 +64,6 @@ export class TransferDialogTechnicalDirectorComponent implements OnInit {
         end_date: element.end_date,
       });
       this.labels = Object.keys(this.dataTable[0]);
-      this.labels.push('actions')
       this.dataSource.data = this.dataTable;
     });
   }
@@ -94,7 +93,6 @@ export class TransferDialogTechnicalDirectorComponent implements OnInit {
     if (this.allTransference.length > 0) {
       this.transference.id_team_origin = this.allTransference[this.allTransference.length - 1].id_team_destination;
     }
-    console.log(this.transference)
     this.technicalDirectorService.createTransfer(this.transference)
       .then((response) => {
         this.showSnackbar('Player created successfully');

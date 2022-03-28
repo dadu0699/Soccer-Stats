@@ -140,8 +140,6 @@ export class TechnicalDirectorViewComponent implements OnInit {
   }
 
   public transferTechnicalDirector() {
-    console.log(this.technicalDirector);
-
     const dialogRef = this.dialog.open(TransferDialogTechnicalDirectorComponent, {
       data: this.technicalDirector
     });
