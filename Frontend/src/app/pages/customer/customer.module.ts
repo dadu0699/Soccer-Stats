@@ -26,6 +26,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { PlayersTeamsComponent } from './players-teams/players-teams.component';
+import { GamesCompetitionsComponent } from './games-competitions/games-competitions.component';
+import { StadiumsComponent } from './stadiums/stadiums.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { MatIconModule } from '@angular/material/icon';
     FeedComponent,
     ProfileComponent,
     GamesListComponent,
+    PlayersTeamsComponent,
+    GamesCompetitionsComponent,
+    StadiumsComponent,
   ],
   imports: [
     CommonModule,

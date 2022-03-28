@@ -28,6 +28,10 @@ import { ForgotPasswordDialogComponent } from './dialogs/forgot-password-dialog/
 import { UsersPerParameterComponent } from './reports/admin/users-per-parameter/users-per-parameter.component';
 import { EmployeesPerParameterComponent } from './reports/admin/employees-per-parameter/employees-per-parameter.component';
 import { LogsTableComponent } from './reports/admin/logs-table/logs-table.component';
+import { PlayersComponent } from './reports/user/players/players.component';
+import { TeamsComponent } from './reports/user/teams/teams.component';
+import { GamesComponent } from './reports/user/games/games.component';
+import { CompetitionsComponent } from './reports/user/competitions/competitions.component';
 
 import { ViewTableComponent } from './others/view-table/view-table.component';
 import { ManagementOptionsComponent } from './others/management-options/management-options.component';
@@ -53,6 +57,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 
 
+
 @NgModule({
   declarations: [
     UserViewComponent,
@@ -76,6 +81,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     UsersPerParameterComponent,
     EmployeesPerParameterComponent,
     LogsTableComponent,
+    PlayersComponent,
+    TeamsComponent,
+    GamesComponent,
+    CompetitionsComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
@@ -105,6 +114,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     UsersPerParameterComponent,
     EmployeesPerParameterComponent,
     LogsTableComponent,
+    PlayersComponent,
+    TeamsComponent,
+    GamesComponent,
+    CompetitionsComponent,
     ViewTableComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
