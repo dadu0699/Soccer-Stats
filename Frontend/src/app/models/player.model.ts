@@ -11,6 +11,8 @@ export class Player {
   public nationality!: string;
   public id_team!: number;
   public name_team!: string;
+  public competition?: string;
+  public count?: number;
 
   constructor() {
     this.name = "";

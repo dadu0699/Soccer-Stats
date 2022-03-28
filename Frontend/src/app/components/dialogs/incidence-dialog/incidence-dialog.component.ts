@@ -24,7 +24,7 @@ export class IncidenceDialogComponent implements OnInit {
       { id: 2, description : 'Autogol'},
       { id: 3, description : 'Tarjeta Amarilla'},
       { id: 4, description : 'Tarjeta Roja'},
-    ]
+    ];
    }
 
   ngOnInit(): void {

@@ -1,1 +1,25 @@
-<p>players works!</p>
+<div *ngIf="report12" fxLayout="column" fxLayoutAlign="space-evenly center">
+  <h3> Top players per incidences in a competition </h3>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <app-status-field [options]="incidenceType" (selectOption)="setIncidence($event)">
+    </app-status-field>
+    &nbsp;&nbsp;&nbsp;
+  <div fxLayout="column" fxLayoutAlign="space-evenly center">
+    <app-competition-field (selectCompetition)="pushCompetitionType($event)" >
+    </app-competition-field>
+    <button mat-stroked-button color="accent" (click)="getReport12()">
+      Find
+      <mat-icon class="icon">search</mat-icon>
+    </button>
+  </div>
+  </div>
+
+</div>
+
+<div *ngIf="report13" fxLayout="column" fxLayoutAlign="space-evenly center">
+  <h3 fxFlexAlign="start"> Top players per incidences in a competition in a year </h3>
+
+</div>
+
+<app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
+</app-view-table>
