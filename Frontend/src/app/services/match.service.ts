@@ -46,9 +46,9 @@ export class MatchService {
       }).toPromise();
   }
 
-  public async getIncidences(id: number): Promise<any> {
+  public async getIncidences(): Promise<any> {
     return await this._httpClient.
-      get(this.urlEmployee + '/technical-director-transfer?id=' + id)
+      get(this.urlEmployee + '/incidence')
       .toPromise();
   }
 
