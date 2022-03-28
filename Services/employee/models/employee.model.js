@@ -16,7 +16,7 @@ const playerTransfer = (params, callback) => {
   return execute(query, player, callback);
 };
 
-logPlayerTransfer = (params, callback) => {
+const logPlayerTransfer = (params, callback) => {
   const id = params.id
 
   let query = `
@@ -46,7 +46,7 @@ const technicalDirectorTransfer = (params, callback) => {
   return execute(query, player, callback);
 };
 
-logTechnicalDirectorTransfer = (params, callback) => {
+const logTechnicalDirectorTransfer = (params, callback) => {
   const id = params.id
 
   let query = `
@@ -76,4 +76,29 @@ const createIncidence = (params, callback) => {
   return execute(query, player, callback);
 };
 
-module.exports = { playerTransfer, logPlayerTransfer, technicalDirectorTransfer, logTechnicalDirectorTransfer, createIncidence };
+const verIncidencias = (params, callback) => {
+  const id = [params.id];
+
+  let query = `
+    SELECT Incidencia.incidenciaID id, Incidencia.minuto,
+      Incidencia.descripcion, Incidencia.tipo,
+      Jugador.nombre name, Jugador.apellido lastname,
+        Partido.partidoID
+    FROM Incidencia
+    INNER JOIN Jugador ON Jugador.jugadorID = Incidencia.jugadorID
+    INNER JOIN Partido ON Partido.partidoID = Incidencia.partidoID
+  `;
+
+  if (params.id) query += ` WHERE Incidencia.incidenciaID = ?;`;
+
+  return execute(query, id, callback);
+};
+
+module.exports = {
+  playerTransfer,
+  logPlayerTransfer,
+  technicalDirectorTransfer,
+  logTechnicalDirectorTransfer,
+  createIncidence,
+  verIncidencias,
+};

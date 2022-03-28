@@ -64,11 +64,19 @@ const agregarIncidencia = (req, res) => {
   });
 }
 
+const verIncidencias = (req, res) => {
+  employeeModel.verIncidencias(req.query, (err, results) => {
+    if (err) return response(res, 400, 'Error al obtener las incidencias.', [err]);
+
+    response(res, 200, 'Incidencias obtenidas con éxito.', results);
+  });
+};
+
 const response = (res, code, msg, data) => {
   res.status(code).send({ status: code, msg, data });
 };
 
 module.exports = {
   transferirJugador, logTransferenciaJugador, transferirDirectorTecnico,
-  logTransferenciaDirectorTecnico, agregarIncidencia
+  logTransferenciaDirectorTecnico, agregarIncidencia, verIncidencias
 };

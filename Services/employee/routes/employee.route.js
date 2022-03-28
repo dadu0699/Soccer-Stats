@@ -7,6 +7,7 @@ const {
   transferirDirectorTecnico,
   logTransferenciaDirectorTecnico,
   agregarIncidencia,
+  verIncidencias,
 } = require('../controllers/employee.controller');
 const validateToken = require('../middlewares/validateToken');
 const validateRol = require('../middlewares/validateRol');
@@ -21,6 +22,9 @@ router
   .get(logTransferenciaDirectorTecnico)
   .post(validateToken, validateRol, transferirDirectorTecnico);
 
-router.route('/incidence').post(validateToken, validateRol, agregarIncidencia);
+router
+  .route('/incidence')
+  .get(verIncidencias)
+  .post(validateToken, validateRol, agregarIncidencia);
 
 module.exports = router;
