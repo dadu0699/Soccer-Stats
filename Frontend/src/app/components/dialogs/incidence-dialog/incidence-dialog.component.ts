@@ -46,31 +46,40 @@ export class IncidenceDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getIncidences()
   }
 
   /**
  * Obtener las transferencias de un usuario
  */
   public getIncidences() {
-    // this.matchService.getIncidences(this.data.id)
-    //   .then((response: any) => {
-    //     this.allTransference = [];
-    //     this.dataTable = [];
-    //     this.allTransference = response.data;
-    //     this.fillTable();
-    //   });
+    this.matchService.getIncidences()
+      .then((response: any) => {
+        console.log(response)
+        this.allTransference = [];
+        this.dataTable = [];
+        this.allTransference = response.data.map((element: any) => {
+          if (element.partidoID == this.data.id) {
+            return element;
+          }
+        });
+        this.fillTable();
+      });
   }
 
   private fillTable() {
-    this.allTransference.forEach((element: Incidence) => {
-      this.dataTable.push({
-        description: element.description,
-        minute: element.minute,
-        id_player: element.id_player,
-        id_type: element.type,
-      });
-      this.labels = Object.keys(this.dataTable[0]);
-      this.dataSource.data = this.dataTable;
+    this.allTransference.forEach((element: any) => {
+      if (element?.partidoID == this.data.id) {
+
+        this.dataTable.push({
+          description: element?.descripcion,
+          minute: element?.minuto,
+          player: element?.name + ' ' + element?.lastname,
+          type: this.types.find(x => x.id == element?.tipo)?.description,
+        });
+        this.labels = Object.keys(this.dataTable[0]);
+        this.dataSource.data = this.dataTable;
+      }
     });
   }
 
