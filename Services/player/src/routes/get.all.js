@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     var sql = `
         SELECT jugadorID id, nombre name, apellido lastname, 
             DATE_FORMAT(fechaNacimiento, "%Y-%m-%d") birth_date,
-            paisID id_nationality, pais nationality, posicion position,
+            paisID id_nationality, pais nationality, posicionJugadorID position,
             estado status, equipoID id_team, equipo name_team, foto photo
         FROM vistaJugadores
     `;

@@ -6,10 +6,7 @@ import ValidarJWT from "../middlewares/validar-jwt.middleware";
 const { check } = require('express-validator');
 const director_tecnico = Router();
 
-director_tecnico.get('/technical-director', [
-    ValidarJWT,
-    ValidarRol(),
-], DirectorTecnicoController.getInstance().getAll);
+director_tecnico.get('/technical-director', DirectorTecnicoController.getInstance().getAll);
 director_tecnico.post('/technical-director', [
     ValidarJWT,
     ValidarRol(),
