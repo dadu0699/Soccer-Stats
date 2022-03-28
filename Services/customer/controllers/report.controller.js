@@ -246,6 +246,126 @@ const reporte11 = (req, res) => {
   });
 };
 
+// Jugadores con más X incidencias en Y competición
+const reporte12 = (req, res) => {
+  reportModel.reporte12(req.query, (err, results) => {
+    if (err)
+      return response(
+        res,
+        400,
+        'Error al obtener los jugadores con x incidencias en y competición.',
+        [err]
+      );
+
+    return response(
+      res,
+      200,
+      'Jugadores con x incidencias en y competición obtenidos con éxito.',
+      results
+    );
+  });
+};
+
+// Jugadores con más X incidencias y Y competiciones de Z año
+const reporte13 = (req, res) => {
+  reportModel.reporte13({ ...req.query, ...req.body }, (err, results) => {
+    if (err)
+      return response(
+        res,
+        400,
+        'Error al obtener los jugadores con x incidencias en y competiciones de z año.',
+        [err]
+      );
+
+    return response(
+      res,
+      200,
+      'Jugadores con x incidencias en y competiciones de z año obtenidos con éxito.',
+      results
+    );
+  });
+};
+
+// Cantidad de X competiciones que ha ganado Y equipo
+const reporte14 = (req, res) => {
+  reportModel.reporte14({ ...req.query, ...req.body }, (err, results) => {
+    if (err)
+      return response(
+        res,
+        400,
+        'Error al obtener las competiciones que ha ganado x equipo.',
+        [err]
+      );
+
+    return response(
+      res,
+      200,
+      'Competencias que ha ganado x equipo obtenidas con éxito.',
+      results
+    );
+  });
+};
+
+// Listado de partidos en X año
+const reporte15 = (req, res) => {
+  reportModel.reporte15(req.query, (err, results) => {
+    if (err)
+      return response(
+        res,
+        400,
+        'Error al obtener el listado de partidos de un año especifico.',
+        [err]
+      );
+
+    return response(
+      res,
+      200,
+      'Listado de partidos de un año especifico obtenidos con éxito.',
+      results
+    );
+  });
+};
+
+// Listado de partidos entre X equipo contra Y equipo
+const reporte16 = (req, res) => {
+  reportModel.reporte16(req.query, (err, results) => {
+    if (err)
+      return response(
+        res,
+        400,
+        'Error al obtener el listado de partidos entre x equipo y y equipo.',
+        [err]
+      );
+
+    return response(
+      res,
+      200,
+      'Listado de partidos entre x equipo y y equipo obtenidos con éxito.',
+      results
+    );
+  });
+};
+
+// Listado de partidos de X equipo
+const reporte17 = (req, res) => {
+  reportModel.reporte17(req.query, (err, results) => {
+    if (err)
+      return response(
+        res,
+        400,
+        'Error al obtener el listado de partidos del equipo x.',
+        [err]
+      );
+
+    return response(
+      res,
+      200,
+      'Listado de partidos del equipo x obtenidos con éxito.',
+      results
+    );
+  });
+};
+
 const response = (res, status, msj, data) => {
   res.status(status).send({ status, msj, data });
 };
@@ -262,4 +382,10 @@ module.exports = {
   reporte9,
   reporte10,
   reporte11,
+  reporte12,
+  reporte13,
+  reporte14,
+  reporte15,
+  reporte16,
+  reporte17,
 };

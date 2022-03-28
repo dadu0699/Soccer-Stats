@@ -15,5 +15,11 @@ router.route('/8').get(validateToken, reportes.reporte8);
 router.route('/9').get(validateToken, reportes.reporte9);
 router.route('/10').get(validateToken, reportes.reporte10);
 router.route('/11').get(validateToken, reportes.reporte11);
+router.route('/12').get(validateToken, reportes.reporte12);
+router.route('/13').get(validateToken, reportes.reporte13);
+router.route('/14').get(validateToken, reportes.reporte14);
+router.route('/15').get(validateToken, reportes.reporte15);
+router.route('/16').get(validateToken, reportes.reporte16);
+router.route('/17').get(validateToken, reportes.reporte17);
 
 module.exports = router;
