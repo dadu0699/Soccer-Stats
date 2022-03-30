@@ -2,6 +2,18 @@
   <mat-tab label="Players">
     <div class="holder">
       <mat-grid-list cols="12" rowHeight="100px">
+        <mat-grid-tile colspan="12" rowspan="6">
+          <app-players [report1]="true" > </app-players>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="6" rowspan="6">
+          <app-players [report2]="true" > </app-players>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="6" rowspan="7">
+          <app-players [report3]="true"> </app-players>
+        </mat-grid-tile>
+
         <mat-grid-tile colspan="6" rowspan="6">
           <app-players [report12]="true" > </app-players>
         </mat-grid-tile>

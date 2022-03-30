@@ -13,6 +13,7 @@ export class Player {
   public name_team!: string;
   public competition?: string;
   public count?: number;
+  public age?: number;
 
   constructor() {
     this.name = "";

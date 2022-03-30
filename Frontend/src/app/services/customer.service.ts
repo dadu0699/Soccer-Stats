@@ -19,8 +19,8 @@ export class CustomerService {
     this.url = `${environment.url}:5000/customer`;
   }
 
-  public async report1(id_team: number): Promise<any> {
-    const params = new HttpParams().set('id_team', id_team);
+  public async report1(id_team: number, player: number): Promise<any> {
+    const params = new HttpParams().set('id_team', id_team).append('player', player );
 
     return await this._httpClient.get(`${this.url}/report/1/`, { headers: this.httpOptions.headers, params }).toPromise();
   }

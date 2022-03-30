@@ -1,3 +1,39 @@
+<div *ngIf="report2 || report3" fxLayout="column" fxLayoutAlign="space-evenly center">
+  <h3> Players per age ({{report2? 'older than': 'younger than'}}) </h3>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <app-status-field [options]="personType" (selectOption)="setPersonType($event)">
+    </app-status-field>
+    &nbsp;&nbsp;&nbsp;
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <mat-form-field appearance="outline">
+        <mat-label>Age</mat-label>
+        <input matInput [(ngModel)]="age" name="ageField" #yearField="ngModel" />
+      </mat-form-field>
+      <button mat-stroked-button color="accent" (click)="getReport2_3()">
+        Find
+        <mat-icon class="icon">search</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="report1" fxLayout="column" fxLayoutAlign="space-evenly center">
+  <h3> Top players per Team </h3>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <app-status-field [options]="personType" (selectOption)="setPersonType($event)">
+    </app-status-field>
+    &nbsp;&nbsp;&nbsp;
+    <div fxLayout="column" fxLayoutAlign="space-evenly center">
+      <app-team-field (selectTeam)="selectTeam($event)" class="extra-field">
+      </app-team-field>
+      <button mat-stroked-button color="accent" (click)="getReport1()">
+        Find
+        <mat-icon class="icon">search</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
 <div *ngIf="report12" fxLayout="column" fxLayoutAlign="space-evenly center">
   <h3> Top players per incidences in a competition </h3>
   <div fxLayout="row" fxLayoutAlign="space-evenly center">
@@ -16,7 +52,7 @@
 </div>
 
 <div *ngIf="report13" fxLayout="column" fxLayoutAlign="space-evenly center">
-  <h3 fxFlexAlign="start"> Top players per incidences in a competition in a year </h3>
+  <h3> Top players per incidences in a competition in a year </h3>
   <div fxLayout="row" fxLayoutAlign="space-evenly center">
     <app-status-field [options]="incidenceType" (selectOption)="setIncidence($event)">
     </app-status-field>

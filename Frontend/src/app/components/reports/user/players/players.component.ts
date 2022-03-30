@@ -15,6 +15,9 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class PlayersComponent implements OnInit {
 
+  @Input('report1') report1: boolean;
+  @Input('report2') report2: boolean;
+  @Input('report3') report3: boolean;
   @Input('report12') report12: boolean;
   @Input('report13') report13: boolean;
 
@@ -24,17 +27,24 @@ export class PlayersComponent implements OnInit {
 
   public players: Player[];
   public incidenceType: Option[];
+  public personType: Option[];
 
   public competitionType: number[];
   public competition!: number;
   public incidence!: number;
   public year!: number;
+  public age!: number;
   public team!: number;
+  public whichPerson!: number;
+  public id_team!: number;
 
   constructor(
     private _snackBar: MatSnackBar,
     private _customerService: CustomerService
   ) {
+    this.report1 = false;
+    this.report2 = false;
+    this.report3 = false;
     this.report12 = false;
     this.report13 = false;
 
@@ -49,6 +59,10 @@ export class PlayersComponent implements OnInit {
       { id: 3, description: 'Tarjeta Amarilla' },
       { id: 4, description: 'Tarjeta Roja' },
     ];
+    this.personType = [
+      { id: 0, description: 'Player' },
+      { id: 1, description: 'Technical Director' },
+    ];
 
     this.competitionType = [];
 
@@ -58,19 +72,30 @@ export class PlayersComponent implements OnInit {
   }
 
   private fillTable() {
-    this.dataSource = new MatTableDataSource<any>();
     this.dataTable = [];
     this.players.forEach((element: Player) => {
-      this.dataTable.push({
-        no: element.id,
-        photo: element.photo,
-        name: element.name,
-        lastname: element.lastname,
-        nationality: element.nationality,
-        position: element.position,
-        competition: element.competition,
-        count: element.count
-      });
+      if(this.report1 || this.report2 || this.report3){
+        this.dataTable.push({
+          no: element.id,
+          photo: element.photo,
+          name: element.name,
+          lastname: element.lastname,
+          nationality: element.nationality,
+          position: element.position,
+          age: element.age
+        });
+      } else{
+        this.dataTable.push({
+          no: element.id,
+          photo: element.photo,
+          name: element.name,
+          lastname: element.lastname,
+          nationality: element.nationality,
+          position: element.position,
+          competition: element.competition,
+          count: element.count
+        });
+      }
       this.labels = Object.keys(this.dataTable[0]);
       this.dataSource.data = this.dataTable;
     });
@@ -90,6 +115,47 @@ export class PlayersComponent implements OnInit {
 
   public setIncidence(id_incidence: number) {
     this.incidence = id_incidence;
+  }
+
+  public setPersonType(id_person: number) {
+    this.whichPerson = id_person;
+  }
+
+  public selectTeam(id_team: number) {
+    this.id_team = id_team;
+  }
+
+  public async getReport1(): Promise<void> {
+    try {
+      const response = await this._customerService.report1(this.id_team, this.whichPerson);
+      if (response['status'] === 200) {
+        this.players = response['data'];
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async getReport2_3(): Promise<void> {
+    console.log(this.whichPerson, this.age);
+    let response;
+    try {
+      if (this.report2) {
+        response = await this._customerService.report2(this.age, this.whichPerson);
+      } else {
+        response = await this._customerService.report3(this.age, this.whichPerson);
+      }
+      if (response['status'] === 200) {
+        this.players = response['data'];
+        this.fillTable();
+        this.showSnackbar(response['msg']);
+        console.log(response['data'])
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public async getReport12(): Promise<void> {
