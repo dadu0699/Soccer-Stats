@@ -71,7 +71,6 @@ export class UsersPerParameterComponent implements OnInit {
         if (response['status'] === 200) {
           this.users = response['data']
           this.fillTable();
-          console.log(response);
           this.showSnackbar(response['msg']);
         }
       } catch (error) {
@@ -84,7 +83,6 @@ export class UsersPerParameterComponent implements OnInit {
         if (response['status'] === 200) {
           this.users = response['data']
           this.fillTable();
-          console.log(response);
           this.showSnackbar(response['msg']);
         }
       } catch (error) {

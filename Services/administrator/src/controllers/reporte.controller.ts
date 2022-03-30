@@ -198,7 +198,7 @@ export default class ReporteController {
 
         res.json({
             status: 200,
-            msg: "Usuarios que más dimero han gastado obtenidos con éxito.",
+            msg: "Usuarios que más dinero han gastado obtenidos con éxito.",
             data: reporte
         });
     }

@@ -35,6 +35,18 @@ body {
   backdrop-filter: blur(5px);
 }
 
+.mat-table {
+  background: #fff0;
+}
+
+.mat-paginator {
+  background: #fff0;
+}
+
+.mat-card {
+  background: #fafafa;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

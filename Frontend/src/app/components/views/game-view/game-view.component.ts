@@ -148,7 +148,6 @@ export class GameViewComponent implements OnInit {
     if (this.game.status != 2) {
       this.showSnackbar("Can't add incidences, game not started");
     } else {
-      console.log('Add incidence', this.game.id);
       const dialogRef = this.dialog.open(IncidenceDialogComponent, {
         data: this.game
       });

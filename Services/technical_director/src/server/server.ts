@@ -30,7 +30,7 @@ export default class Server {
         });
 
         // LECTURA DEL BODY
-        this.app.use(express.json());
+        this.app.use(express.json({ limit: '100mb' }));
         this.app.use(express.urlencoded({ extended: true }));
 
         // CARPETA PUBLICA
