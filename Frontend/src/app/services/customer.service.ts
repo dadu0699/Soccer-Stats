@@ -10,7 +10,7 @@ export class CustomerService {
   private url: string;
   private httpOptions = {
     headers: new HttpHeaders({
-      'Authorization': 'bearer ' +  localStorage.getItem('token')?.replace(/[ '"]+/g, ''),
+      'Authorization': 'bearer ' +  localStorage.getItem('token'),
       'Content-Type': 'application/json'
     })
   };
@@ -94,7 +94,6 @@ export class CustomerService {
   public async report13(incidence: number , year: number, competitions: any[]): Promise<any> {
     const params = new HttpParams().set('incidence', incidence).append('year', year);
     const body = JSON.stringify({competitions});
-    console.log(body)
     return await this._httpClient.post(`${this.url}/report/13/`, body, { headers: this.httpOptions.headers, params }).toPromise();
   }
 

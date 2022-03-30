@@ -55,7 +55,6 @@ export class IncidenceDialogComponent implements OnInit {
   public getIncidences() {
     this.matchService.getIncidences()
       .then((response: any) => {
-        console.log(response)
         this.allTransference = [];
         this.dataTable = [];
         this.allTransference = response.data.map((element: any) => {
@@ -96,7 +95,6 @@ export class IncidenceDialogComponent implements OnInit {
   }
 
   public create(): void {
-    console.log(this.incidence)
     this.matchService.createTransfer(this.incidence)
       .then((response) => {
         this.showSnackbar('Incidence created successfully');

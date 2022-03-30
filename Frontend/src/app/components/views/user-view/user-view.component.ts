@@ -138,7 +138,6 @@ export class UserViewComponent implements OnInit {
     try {
       const response = await this._adminService.manageAccount(this.user.id, info.id, info.description);
       this.showSnackbar(response['msg']);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

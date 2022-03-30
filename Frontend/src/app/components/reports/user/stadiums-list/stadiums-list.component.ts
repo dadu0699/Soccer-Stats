@@ -61,7 +61,6 @@ export class StadiumsListComponent implements OnInit {
       const response = await this._customerService.report7(id_country);
       if (response['status'] === 200) {
         this.stadiums = response['data']
-        console.log(response);
         this.fillTable();
         this.showSnackbar(response['msg']);
       }

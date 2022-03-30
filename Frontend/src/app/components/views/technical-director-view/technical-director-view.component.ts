@@ -60,7 +60,6 @@ export class TechnicalDirectorViewComponent implements OnInit {
   getAll = () => {
     this.technicalDirectorService.get()
       .then((response) => {
-        console.log(response);
         this.allTechs = [];
         this.dataTable = [];
         this.allTechs = response.data;
