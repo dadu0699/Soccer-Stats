@@ -28,7 +28,8 @@ export class TeamsComponent implements OnInit {
   public id_country!: number;
   public id_competition!: number;
   public id_person!: number;
-  public whichPerson!: number;
+  public whichPerson: number;
+  public selectTD: boolean;
 
   public teams: Team[];
 
@@ -41,7 +42,7 @@ export class TeamsComponent implements OnInit {
     this.report6 = false;
     this.report10 = false;
 
-    this.labels = ['no.', 'photo', 'name', 'competition', 'country' , 'Foundation Date'];
+    this.labels = ['no.', 'photo', 'name', 'competition', 'country', 'Foundation Date'];
     this.dataTable = [];
     this.dataSource = new MatTableDataSource<any>();
 
@@ -50,6 +51,8 @@ export class TeamsComponent implements OnInit {
       { id: 0, description: 'Player' },
       { id: 1, description: 'Technical Director' },
     ];
+    this.whichPerson = 0;
+    this.selectTD = false;
   }
 
 
@@ -59,24 +62,24 @@ export class TeamsComponent implements OnInit {
   private fillTable() {
     this.dataTable = [];
     this.teams.forEach((element: Team) => {
-        this.dataTable.push({
-          no: element.id_team,
-          photo: element.photo,
-          team: element.team,
-          foundationDate: element.foundation_date,
-          competition: element.competition,
-          country: element.country
-        });
+      this.dataTable.push({
+        no: element.id_team,
+        photo: element.photo,
+        team: element.team,
+        foundationDate: element.foundation_date,
+        competition: element.competition,
+        country: element.country
+      });
       this.labels = Object.keys(this.dataTable[0]);
-      if(!this.report6){
+      if (!this.report6) {
         const index = this.labels.indexOf('foundationDate');
         this.labels.splice(index, 1);
       }
-      if(!this.report4){
+      if (!this.report4) {
         const index = this.labels.indexOf('competition');
         this.labels.splice(index, 1);
       }
-      if(this.report4 || this.report10){
+      if (this.report4 || this.report10) {
         const index = this.labels.indexOf('country');
         this.labels.splice(index, 1);
       }
@@ -86,6 +89,11 @@ export class TeamsComponent implements OnInit {
 
   public setPersonType(id_type: number) {
     this.whichPerson = id_type;
+    this.selectTD = this.whichPerson == 1 ? true : false;
+  }
+
+  public selectPerson(id_person: number) {
+    this.id_person = id_person;
   }
 
   public selectCountry(id_country: number) {
@@ -98,10 +106,10 @@ export class TeamsComponent implements OnInit {
     this.getReport4();
   }
 
-  public getReport(){
-    if(this.report6) {
+  public getReport() {
+    if (this.report6) {
       this.getReport6();
-    }else {
+    } else {
       this.getReport10();
     }
   }

@@ -14,10 +14,11 @@
   </mat-form-field>
   <app-country-field (selectCountry)="selectCountry($event)" class="extra-field" *ngIf="report5">
   </app-country-field>
-  <div fxLayout="row" fxLayoutAlign="space-evenly center">
-    <!-- Campo de tecnicos o jugadores-->
-    <app-status-field [options]="personType" (selectOption)="setPersonType($event)" *ngIf="report10">
+  <div fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="report10">
+    <app-status-field [option]="whichPerson" [options]="personType" (selectOption)="setPersonType($event)" *ngIf="report10" class="campo">
   </app-status-field>
+  <app-player-field [selectTD]="selectTD" (selectPlayer)="selectPerson($event)" >
+  </app-player-field>
   </div>
   <div *ngIf="report10 || report6">
     <button mat-stroked-button color="accent" (click)="getReport()">
