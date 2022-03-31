@@ -8,8 +8,9 @@ const signin = (params, callback) => {
   const user = [params.email, params.password];
   const query = `
     SELECT usuarioID id_usuario, rol id_rol,
-      estado id_status, fechaHoraClaveAcceso expire_date
-    FROM Usuario
+      estado id_status, fechaHoraClaveAcceso expire_date,
+      has_membership
+    FROM usuariosMembresia
     WHERE correo = ? AND claveAcceso = ?;
   `;
   return execute(query, user, callback);
