@@ -1,1 +1,34 @@
-<p>competitions works!</p>
+<div fxLayout="column" fxLayoutAlign="space-evenly center">
+  <h3> Victories per team & competition </h3>
+  <div fxLayout="column" fxLayoutAlign="space-evenly center">
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <app-team-field (selectTeam)="selectTeam($event)" class="extra-field">
+      </app-team-field>
+      <app-competition-field [sendType]="true" (selectCompetition)="pushCompetitionType($event)">
+      </app-competition-field>
+    </div>
+    <button mat-stroked-button color="accent" (click)="getReport14()">
+      Find
+      <mat-icon class="icon">search</mat-icon>
+    </button>
+  </div>
+  <p></p>
+  <mat-chip-list #chipList class="size">
+    <mat-chip *ngFor="let competition of competitionType" (removed)="popCompetitionType(competition)">
+      <section [ngSwitch]="competition">
+        <span *ngSwitchCase="1"> Liga </span>
+        <span *ngSwitchCase="2"> Eliminatoria </span>
+        <span *ngSwitchCase="3"> copa </span>
+        <span *ngSwitchCase="4"> Super Copa </span>
+        <span *ngSwitchCase="5"> Cuadrangular </span>
+        <span *ngSwitchCase="6"> Triangular </span>
+      </section>
+      <button matChipRemove>
+        <mat-icon class="icon">cancel</mat-icon>
+      </button>
+    </mat-chip>
+  </mat-chip-list>
+</div>
+
+<app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
+</app-view-table>

@@ -9,6 +9,8 @@ export class Team {
   public competition!: string;
   public id_team?: number;
   public team?: string;
+  public type?: number;
+  public count?: string;
 
 
   constructor() {
