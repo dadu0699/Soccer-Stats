@@ -9,7 +9,7 @@
 
           <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column | uppercase }}</th>
-            <section *ngIf="column != 'actions' && column != 'photo'">
+            <section *ngIf="column != 'actions' && column != 'photo' && column != 'photoTL' && column != 'photoTV'">
               <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
             </section>
             <section *ngIf="column == 'actions' ">
@@ -19,12 +19,15 @@
                 </button>
               </td>
             </section>
-            <section *ngIf="column == 'photo' ">
+            <section *ngIf="column == 'photo' || column == 'photoTL' || column == 'photoTV' ">
               <td mat-cell *matCellDef="let element">
                 <mat-card class="mat-elevation-z0">
-                  <img mat-card-avatar class="header-image" [src]=" element['photo'] ||
-                      'https://ibalz.com/wp-content/uploads/2019/10/default-profile.png'
-                      " />
+                  <img mat-card-avatar class="header-image" [src]=" element['photo'] || element['photoTL'] ||
+                      'https://ibalz.com/wp-content/uploads/2019/10/default-profile.png'"
+                    *ngIf="column == 'photoTL'" />
+                  <img mat-card-avatar class="header-image" [src]=" element['photoTV'] ||
+                      'https://ibalz.com/wp-content/uploads/2019/10/default-profile.png'"
+                    *ngIf="column == 'photoTV'" />
                 </mat-card>
               </td>
             </section>
@@ -40,4 +43,3 @@
     </div>
   </div>
 </div>
-

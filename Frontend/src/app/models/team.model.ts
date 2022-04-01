@@ -6,6 +6,11 @@ export class Team {
   public id_country: number;
 
   public country!: string;
+  public competition!: string;
+  public id_team?: number;
+  public team?: string;
+  public type?: number;
+  public count?: string;
 
 
   constructor() {

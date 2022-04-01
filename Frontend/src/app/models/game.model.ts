@@ -14,6 +14,8 @@ export class Game {
   public team_local!: string;
   public team_visiting!: string;
   public competition!: string;
+  public photo_local?: string;
+  public photo_visiting?: string;
 
   constructor() {
     this.game_date = "";

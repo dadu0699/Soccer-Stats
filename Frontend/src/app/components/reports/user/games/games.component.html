@@ -1,1 +1,39 @@
-<p>games works!</p>
+<h3> Games per
+  <span *ngIf="report9"> team (Record) </span>
+  <span *ngIf="report11"> goals </span>
+  <span *ngIf="report15"> year </span>
+  <span *ngIf="report16"> vs teams </span>
+  <span *ngIf="report17"> team (List) </span>
+</h3>
+
+<div fxLayout="row" fxLayoutAlign="space-evenly center">
+
+<div *ngIf="!report11 && !report15">
+  <h4>Select Team</h4>
+  <app-team-field (selectTeam)="selectTeamX($event)">
+  </app-team-field>
+</div>
+
+<div *ngIf="report16">
+<h4>Select Team</h4>
+<app-team-field (selectTeam)="selectTeamY($event)">
+</app-team-field>
+</div>
+
+<mat-form-field appearance="outline" *ngIf="report11">
+  <mat-label>Goals</mat-label>
+  <input matInput [(ngModel)]="goals" name="goalsField" #goalsField="ngModel" />
+</mat-form-field>
+
+<mat-form-field appearance="outline" *ngIf="report15">
+  <mat-label>Year</mat-label>
+  <input matInput [(ngModel)]="year" name="yearField" #yearField="ngModel" />
+</mat-form-field>
+
+<button mat-stroked-button color="accent" (click)="getReports()" *ngIf="!report9 && !report17">
+  Find
+  <mat-icon class="icon">search</mat-icon>
+</button>
+</div>
+<app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
+</app-view-table>

@@ -1,6 +1,13 @@
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" *ngIf="!selectTD">
   <mat-label>Player</mat-label>
   <mat-select (selectionChange)="select($event.value)">
     <mat-option *ngFor="let player of players" [value]="player.id">{{player.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline" *ngIf="selectTD">
+  <mat-label>Technical Director</mat-label>
+  <mat-select (selectionChange)="select($event.value)">
+    <mat-option *ngFor="let td of tds" [value]="td.id">{{td.name}}</mat-option>
   </mat-select>
 </mat-form-field>

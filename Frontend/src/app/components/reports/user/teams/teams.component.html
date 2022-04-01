@@ -1,1 +1,35 @@
-<p>teams works!</p>
+<div fxLayout="column" fxLayoutAlign="space-evenly center">
+
+  <h3> Teams per
+    <span *ngIf="report4"> competition </span>
+    <span *ngIf="report6"> age </span>
+    <span *ngIf="report5"> country </span>
+    <span *ngIf="report10"> player/technical director </span>
+  </h3>
+  <app-competition-field (selectCompetition)="selectCompetition($event)" *ngIf="report4">
+  </app-competition-field>
+  <mat-form-field appearance="outline" *ngIf="report6">
+    <mat-label>Age</mat-label>
+    <input matInput [(ngModel)]="year" name="yearField" #yearField="ngModel" />
+  </mat-form-field>
+  <app-country-field (selectCountry)="selectCountry($event)" class="extra-field" *ngIf="report5">
+  </app-country-field>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center" *ngIf="report10">
+    <app-status-field [option]="whichPerson" [options]="personType" (selectOption)="setPersonType($event)" *ngIf="report10" class="campo">
+  </app-status-field>
+  <app-player-field [selectTD]="selectTD" (selectPlayer)="selectPerson($event)" >
+  </app-player-field>
+  </div>
+  <div *ngIf="report10 || report6">
+    <button mat-stroked-button color="accent" (click)="getReport()">
+      Find
+      <mat-icon class="icon">search</mat-icon>
+    </button>
+  </div>
+
+
+</div>
+
+
+<app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource">
+</app-view-table>

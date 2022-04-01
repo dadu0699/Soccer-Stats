@@ -103,14 +103,14 @@ export class PlayersComponent implements OnInit {
 
   public pushCompetitionType(id_competition: number) {
     const index = this.competitionType.indexOf(id_competition);
-    if (this.report13 || !index) this.competitionType.push(id_competition);
+    if (this.report13 && index == -1) this.competitionType.push(id_competition);
     this.competition = id_competition;
   }
 
   public popCompetitionType(competition: any) {
-    console.log(competition);
     const index = this.competitionType.indexOf(competition);
     if (index) this.competitionType.splice(index, 1);
+    if(this.competitionType.length == 1) this.competitionType.pop();
   }
 
   public setIncidence(id_incidence: number) {
@@ -159,7 +159,6 @@ export class PlayersComponent implements OnInit {
   }
 
   public async getReport12(): Promise<void> {
-    console.log(this.incidence, this.competition);
     try {
       const response = await this._customerService.report12(this.incidence, this.competition);
       if (response['status'] === 200) {
