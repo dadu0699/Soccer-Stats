@@ -36,13 +36,25 @@ export class CustomerService {
   }
 
   public async deleteAccount(): Promise<any> {
-    const body = JSON.stringify({id: this.id_user});
+    const body = JSON.stringify({ id: this.id_user });
 
-    return await this._httpClient.delete(`${this.url}/follow/`, {body, headers: this.httpOptions.headers }).toPromise();
+    return await this._httpClient.delete(`${this.url}/`, { body, headers: this.httpOptions.headers }).toPromise();
+  }
+
+  public async getMembership(): Promise<any> {
+    const body = JSON.stringify({ id_client: this.id_user });
+
+    return await this._httpClient.post(`${this.url}/membership/`, body, { headers: this.httpOptions.headers }).toPromise();
+  }
+
+  public async cancelMembership(): Promise<any> {
+    const body = JSON.stringify({ id_client: this.id_user });
+
+    return await this._httpClient.put(`${this.url}/membership/`, body, { headers: this.httpOptions.headers }).toPromise();
   }
 
   public async followTeam(id_team: number): Promise<any> {
-    const body = JSON.stringify({id_team, id_client: this.id_user});
+    const body = JSON.stringify({ id_team, id_client: this.id_user });
 
     return await this._httpClient.post(`${this.url}/follow/`, body, { headers: this.httpOptions.headers }).toPromise();
   }

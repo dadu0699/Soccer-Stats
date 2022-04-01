@@ -66,21 +66,41 @@ export class ProfileComponent implements OnInit {
   }
 
   public allowEditing() {
-    this.getProfile();
     this.edit = true;
     this.readonly = false;
   }
 
-  public delete() {
-    console.log(this.user.id) //TODO delete account
+  public async delete(): Promise<void> {
+    try {
+      const response = await this._customerService.deleteAccount();
+      if (response['status'] === 200) {
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public getMembership() {
-    console.log(this.user.id) //TODO get Membership
+  public async getMembership(): Promise<void> {
+    try {
+      const response = await this._customerService.getMembership();
+      if (response['status'] === 200) {
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public cancelMembership() {
-    console.log(this.user.id) //TODO cancel Membership
+  public async cancelMembership(): Promise<void> {
+    try {
+      const response = await this._customerService.cancelMembership();
+      if (response['status'] === 200) {
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private showSnackbar(message: string = 'Something went wrong :c') {
