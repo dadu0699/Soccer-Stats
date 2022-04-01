@@ -2,13 +2,13 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="'side'" [opened]="opened">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="/soccer-stats/customer/feed">News</a>
-      <a mat-list-item href="/soccer-stats/customer/profile">Profile</a>
-      <a mat-list-item href="/soccer-stats/customer/teams">Teams</a>
-      <a mat-list-item href="/soccer-stats/customer/games">Games</a>
+      <a mat-list-item [routerLink]="['/soccer-stats/customer/feed']">News</a>
+      <a mat-list-item [routerLink]="['/soccer-stats/customer/profile']">Profile</a>
+      <a mat-list-item [routerLink]="['/soccer-stats/customer/teams']" *ngIf="hasMembership == '1'">Teams</a>
+      <a mat-list-item [routerLink]="['/soccer-stats/customer/games']">Games</a>
     </mat-nav-list>
 
-    <mat-action-list>
+    <mat-action-list *ngIf="hasMembership == '1'">
       <button mat-list-item (click)="show()">
         <mat-icon class="icon" *ngIf="!showReports">chevron_right</mat-icon>
         <mat-icon class="icon" *ngIf="showReports">expand_more</mat-icon>
@@ -17,7 +17,7 @@
     </mat-action-list>
 
     <mat-nav-list *ngIf="showReports">
-      <a mat-list-item *ngFor="let report of reports" href="/soccer-stats/customer/{{report.link}}">
+      <a mat-list-item *ngFor="let report of reports" [routerLink]="['/soccer-stats/customer/', report.link]">
         &nbsp;
         &nbsp;
         <mat-icon class="icon">bubble_chart</mat-icon>

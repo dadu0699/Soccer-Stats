@@ -11,6 +11,7 @@ import { PlayersTeamsComponent } from './players-teams/players-teams.component';
 import { GamesCompetitionsComponent } from './games-competitions/games-competitions.component';
 import { StadiumsComponent } from './stadiums/stadiums.component';
 import { TeamListComponent } from './team-list/team-list.component';
+import { HasMembershipGuard } from 'src/app/guards/has-membership.guard';
 
 const routes: Routes = [
   {
@@ -20,18 +21,34 @@ const routes: Routes = [
     children: [
       { path: 'feed', component: FeedComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'teams', component: TeamListComponent },
+      {
+        path: 'teams',
+        component: TeamListComponent,
+        canActivate: [HasMembershipGuard],
+      },
       { path: 'games', component: GamesListComponent },
-      { path: 'players-teams', component: PlayersTeamsComponent },
-      { path: 'games-competitions', component: GamesCompetitionsComponent },
-      { path: 'stadiums', component: StadiumsComponent },
+      {
+        path: 'players-teams',
+        component: PlayersTeamsComponent,
+        canActivate: [HasMembershipGuard],
+      },
+      {
+        path: 'games-competitions',
+        component: GamesCompetitionsComponent,
+        canActivate: [HasMembershipGuard],
+      },
+      {
+        path: 'stadiums',
+        component: StadiumsComponent,
+        canActivate: [HasMembershipGuard],
+      },
       { path: '', redirectTo: 'feed', pathMatch: 'full' },
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CustomerRoutingModule { }
+export class CustomerRoutingModule {}

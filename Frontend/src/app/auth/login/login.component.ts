@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.password = '';
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   public async signin(): Promise<void> {
     try {
@@ -47,6 +47,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
           localStorage.setItem('token', String(data['token']));
           localStorage.setItem('id_user', String(data['id_user']));
           localStorage.setItem('id_rol', String(data['id_rol']));
+          localStorage.setItem(
+            'has_membership',
+            String(data['has_membership'])
+          );
+
           if (data['id_rol'] == 1) {
             this._router.navigate(['/soccer-stats/admin']);
           } else if (data['id_rol'] == 2) {
