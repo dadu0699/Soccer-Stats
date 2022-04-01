@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,25 @@ export class CustomerService {
   constructor(private _httpClient: HttpClient) {
     this.url = `${environment.url}:5000/customer`;
     this.id_user = parseInt(localStorage.getItem('id_user') || '');
+  }
+
+  public async getProfile(): Promise<any> {
+    const params = new HttpParams().set('id', this.id_user);
+
+    return await this._httpClient.get(`${this.url}/`, { headers: this.httpOptions.headers, params }).toPromise();
+  }
+
+  public async updateProfile(user: User): Promise<any> {
+    user.id = this.id_user;
+    const body = JSON.stringify(user);
+
+    return await this._httpClient.put(`${this.url}/`, body, { headers: this.httpOptions.headers }).toPromise();
+  }
+
+  public async deleteAccount(): Promise<any> {
+    const body = JSON.stringify({id: this.id_user});
+
+    return await this._httpClient.delete(`${this.url}/follow/`, {body, headers: this.httpOptions.headers }).toPromise();
   }
 
   public async followTeam(id_team: number): Promise<any> {

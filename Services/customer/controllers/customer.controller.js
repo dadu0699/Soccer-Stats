@@ -38,7 +38,7 @@ const obtenerPerfil = (req, res) => {
     if (err || results.length < 1)
       return response(res, 400, 'Error al obtener el usuario.', [err]);
 
-    results[0]['gender'] = results['gender'] ? 'M' : 'F';
+    results[0]['gender'] = results['gender'] ? 'F' : 'M';
     results[0]['age'] = calcularEdad(results[0]['birth_date']);
 
     response(res, 200, 'Usuario obtenido con éxito.', results);
