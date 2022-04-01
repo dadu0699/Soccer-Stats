@@ -7,11 +7,13 @@ export class Post {
   public date: string;
 
   public team: string;
+  public photo: string;
 
   constructor() {
     this.title = "";
     this.description = "";
     this.date = "";
     this.team = "";
+    this.photo = "";
   }
 }

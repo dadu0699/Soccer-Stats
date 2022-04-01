@@ -39,6 +39,7 @@ import { ViewTableComponent } from './others/view-table/view-table.component';
 import { ManagementOptionsComponent } from './others/management-options/management-options.component';
 import { AccountManagementComponent } from './others/account-management/account-management.component';
 import { UserRegisterFormComponent } from './others/user-register-form/user-register-form.component';
+import { PostComponent } from './others/post/post.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -60,7 +61,6 @@ import { NewViewComponent } from './views/new-view/new-view.component';
 import { MatChipsModule } from '@angular/material/chips';
 
 
-
 @NgModule({
   declarations: [
     UserViewComponent,
@@ -80,6 +80,7 @@ import { MatChipsModule } from '@angular/material/chips';
     IncidenceDialogComponent,
     TransferDialogComponent,
     ForgotPasswordDialogComponent,
+    TransferDialogTechnicalDirectorComponent,
     PlayerFieldComponent,
     UsersPerParameterComponent,
     EmployeesPerParameterComponent,
@@ -93,8 +94,8 @@ import { MatChipsModule } from '@angular/material/chips';
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,
+    PostComponent,
     NewViewComponent,
-    TransferDialogTechnicalDirectorComponent,
   ],
   entryComponents: [
     IncidenceDialogComponent,
@@ -125,6 +126,7 @@ import { MatChipsModule } from '@angular/material/chips';
     CompetitionsComponent,
     StadiumsListComponent,
     ViewTableComponent,
+    PostComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,

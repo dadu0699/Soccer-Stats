@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Post } from 'src/app/models/post.model';
+
+import { NewService } from 'src/app/services/new.service';
+
+
+
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
@@ -7,9 +14,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
-  constructor() { }
+  public posts: Post[];
 
-  ngOnInit(): void {
+  constructor(
+    private _snackBar: MatSnackBar,
+    private _postService: NewService
+  ) {
+    this.posts = [];
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.getNews();
+  }
+
+  async getNews(){
+    try {
+      const response = await this._postService.get();
+      if (response['status'] === 200) {
+        console.log(response['data']);
+        this.posts = response['data'];
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  private showSnackbar(message: string = 'Something went wrong :c') {
+    this._snackBar.open(message, 'CLOSE', { duration: 5000 });
   }
 
 }
