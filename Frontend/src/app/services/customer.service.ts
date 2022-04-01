@@ -21,6 +21,12 @@ export class CustomerService {
     this.id_user = parseInt(localStorage.getItem('id_user') || '');
   }
 
+  public async followTeam(id_team: number): Promise<any> {
+    const body = JSON.stringify({id_team, id_client: this.id_user});
+
+    return await this._httpClient.post(`${this.url}/follow/`, body, { headers: this.httpOptions.headers }).toPromise();
+  }
+
   public async getfavoriteTeams(): Promise<any> {
     const params = new HttpParams().set('id_client', this.id_user);
 

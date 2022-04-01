@@ -31,7 +31,6 @@ export class FeedComponent implements OnInit {
     try {
       const response = await this._postService.get();
       if (response['status'] === 200) {
-        console.log(response['data']);
         this.posts = response['data'];
         this.showSnackbar(response['msg']);
       }
@@ -44,7 +43,6 @@ export class FeedComponent implements OnInit {
     try {
       const response = await this._postService.filter(id_team);
       if (response['status'] === 200) {
-        console.log(response['data']);
         this.posts = response['data'];
         this.showSnackbar(response['msg']);
       }

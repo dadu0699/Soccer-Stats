@@ -29,8 +29,8 @@ const agregarFavorito = (req, res) => {
   });
 };
 
-const response = (res, status, msj, data) => {
-  res.status(status).send({ status, msj, data });
+const response = (res, status, msg, data) => {
+  res.status(status).send({ status, msg, data });
 };
 
 module.exports = { verFavoritos, agregarFavorito };

@@ -1,0 +1,10 @@
+<div class="holder">
+  <div fxLayout="column" fxLayoutAlign="space-evenly center">
+    <h1>Follow your favorite teams</h1>
+  </div>
+  <mat-grid-list cols="12" rowHeight="100px">
+    <mat-grid-tile colspan="3" rowspan="2" *ngFor='let team of teams'>
+      <app-team-card [team]="team" ></app-team-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

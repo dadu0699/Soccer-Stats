@@ -1,0 +1,13 @@
+<div class="border">
+  <mat-card class="mat-elevation-z0">
+    <mat-card-header>
+      <img mat-card-avatar class="header-image" [src]=" team.photo ||
+      'https://ibalz.com/wp-content/uploads/2019/10/default-profile.png'" />
+      <mat-card-title>{{team.name}}</mat-card-title>
+      <mat-card-subtitle>{{team.foundation_date}}</mat-card-subtitle>
+      <button mat-icon-button color="accent" (click)="follow(team.id)">
+        <mat-icon class="icon">star</mat-icon>
+      </button>
+    </mat-card-header>
+  </mat-card>
+</div>

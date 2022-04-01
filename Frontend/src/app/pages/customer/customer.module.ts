@@ -14,10 +14,11 @@ import { ComponentsModule } from '../../components/components.module';
 import { MainComponent } from './main/main.component';
 import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
+import { StadiumsComponent } from './stadiums/stadiums.component';
 import { GamesListComponent } from './games-list/games-list.component';
 import { PlayersTeamsComponent } from './players-teams/players-teams.component';
 import { GamesCompetitionsComponent } from './games-competitions/games-competitions.component';
-import { StadiumsComponent } from './stadiums/stadiums.component';
+import { TeamListComponent } from './team-list/team-list.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -38,6 +39,7 @@ import { MatIconModule } from '@angular/material/icon';
     MainComponent,
     FeedComponent,
     ProfileComponent,
+    TeamListComponent,
     GamesListComponent,
     PlayersTeamsComponent,
     GamesCompetitionsComponent,

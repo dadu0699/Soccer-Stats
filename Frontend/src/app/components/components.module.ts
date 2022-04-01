@@ -39,6 +39,7 @@ import { ViewTableComponent } from './others/view-table/view-table.component';
 import { ManagementOptionsComponent } from './others/management-options/management-options.component';
 import { AccountManagementComponent } from './others/account-management/account-management.component';
 import { UserRegisterFormComponent } from './others/user-register-form/user-register-form.component';
+import { TeamCardComponent } from './others/team-card/team-card.component';
 import { PostComponent } from './others/post/post.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -95,6 +96,7 @@ import { MatChipsModule } from '@angular/material/chips';
     AccountManagementComponent,
     UserRegisterFormComponent,
     PostComponent,
+    TeamCardComponent,
     NewViewComponent,
   ],
   entryComponents: [
@@ -127,6 +129,7 @@ import { MatChipsModule } from '@angular/material/chips';
     StadiumsListComponent,
     ViewTableComponent,
     PostComponent,
+    TeamCardComponent,
     ManagementOptionsComponent,
     AccountManagementComponent,
     UserRegisterFormComponent,

@@ -10,6 +10,7 @@ import { GamesListComponent } from './games-list/games-list.component';
 import { PlayersTeamsComponent } from './players-teams/players-teams.component';
 import { GamesCompetitionsComponent } from './games-competitions/games-competitions.component';
 import { StadiumsComponent } from './stadiums/stadiums.component';
+import { TeamListComponent } from './team-list/team-list.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     children: [
       { path: 'feed', component: FeedComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'teams', component: TeamListComponent },
       { path: 'games', component: GamesListComponent },
       { path: 'players-teams', component: PlayersTeamsComponent },
       { path: 'games-competitions', component: GamesCompetitionsComponent },
