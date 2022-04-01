@@ -66,10 +66,8 @@ export default class ReporteController {
 
         if (membership == '0') {
             let query = `
-                SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
-                Usuario.fotografia, Pais.nombre AS pais FROM Usuario
-                INNER JOIN Pais ON Pais.paisID = Usuario.paisID
-                WHERE usuarioID NOT IN (SELECT usuarioID FROM Membresia);
+            SELECT * FROM usuariosMembresia
+            WHERE rol = 3 AND has_membership = 0;
             `;
 
             const data = await db.query(query, {
@@ -94,10 +92,8 @@ export default class ReporteController {
             });
         } else if (membership == '1') {
             let query = `
-                SELECT Usuario.usuarioID, Usuario.nombre, Usuario.apellido, Usuario.correo,
-                Usuario.fotografia, Pais.nombre AS pais FROM Usuario
-                INNER JOIN Pais ON Pais.paisID = Usuario.paisID
-                WHERE usuarioID IN (SELECT usuarioID FROM Membresia);
+            SELECT * FROM usuariosMembresia
+            WHERE rol = 3 AND has_membership = 1;
             `;
 
             const data = await db.query(query, {

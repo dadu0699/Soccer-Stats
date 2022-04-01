@@ -24,7 +24,7 @@
                 <mat-card class="mat-elevation-z0">
                   <img mat-card-avatar class="header-image" [src]=" element['photo'] || element['photoTL'] ||
                       'https://ibalz.com/wp-content/uploads/2019/10/default-profile.png'"
-                    *ngIf="column == 'photoTL'" />
+                    *ngIf="column == 'photo' || column == 'photoTL'" />
                   <img mat-card-avatar class="header-image" [src]=" element['photoTV'] ||
                       'https://ibalz.com/wp-content/uploads/2019/10/default-profile.png'"
                     *ngIf="column == 'photoTV'" />

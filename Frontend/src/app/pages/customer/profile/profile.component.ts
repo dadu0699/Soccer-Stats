@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Option } from 'src/app/models/option.model';
+
 import { User } from 'src/app/models/user.model';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,27 +16,51 @@ export class ProfileComponent implements OnInit {
   public user: User;
 
   public edit: boolean;
+  public genders: Option[];
+
   public readonly: boolean;
 
-  constructor() {
-    this.user = new User;
+  constructor(
+    private _snackBar: MatSnackBar,
+    private _customerService: CustomerService
+  ) {
+    this.user = new User();
 
+    this.genders = [
+      { id: 1, description: 'Male', char: 'M' },
+      { id: 2, description: 'Female', char: 'F' },
+      { id: 3, description: 'Other', char: 'U' },
+    ];
     this.edit = false;
     this.readonly = true;
   }
 
-  ngOnInit(): void {
-    //TODO Read customer profile
-    this.user = {
-      id: 2, name: 'nombre 2', lastname: 'apellido 2', email: 'mail 2',
-      password: 'contraseña 2', phone: 'telefono 2', birth_date: '2022-02-22',
-      address: 'Direccion 2', id_country: 2, id_gender: 1, gender: 'Male',
-      id_rol: 2, photo: 'https://mn2s-content.s3.eu-west-2.amazonaws.com/wp-content/uploads/2021/03/19174550/Chris-Wood.png', id_status: 2, age: 222,
-    }; //TODO delete info
+  async ngOnInit(): Promise<void> {
+    await this.getProfile();
   }
 
-  public editUser(user: any) {
-    console.log(user) //TODO Update customer
+  public async getProfile(): Promise<void>{
+    try {
+      const response = await this._customerService.getProfile();
+      if (response['status'] === 200) {
+        this.user = response['data'][0];
+        this.user.id_gender = this.genders.find(el => el.char == this.user.gender)?.id || 2
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  public async editUser(user: any): Promise<void> {
+    try {
+      const response = await this._customerService.updateProfile(user);
+      if (response['status'] === 200) {
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
     this.edit = false
     this.readonly = true;
   }
@@ -41,16 +70,40 @@ export class ProfileComponent implements OnInit {
     this.readonly = false;
   }
 
-  public delete() {
-    console.log(this.user.id) //TODO delete account
+  public async delete(): Promise<void> {
+    try {
+      const response = await this._customerService.deleteAccount();
+      if (response['status'] === 200) {
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public getMembership() {
-    console.log(this.user.id) //TODO get Membership
+  public async getMembership(): Promise<void> {
+    try {
+      const response = await this._customerService.getMembership();
+      if (response['status'] === 200) {
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public cancelMembership() {
-    console.log(this.user.id) //TODO cancel Membership
+  public async cancelMembership(): Promise<void> {
+    try {
+      const response = await this._customerService.cancelMembership();
+      if (response['status'] === 200) {
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
+  private showSnackbar(message: string = 'Something went wrong :c') {
+    this._snackBar.open(message, 'CLOSE', { duration: 5000 });
+  }
 }

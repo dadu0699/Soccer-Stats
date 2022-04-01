@@ -97,14 +97,14 @@ export class UsersPerParameterComponent implements OnInit {
       this.dataSource = new MatTableDataSource<any>();
       this.dataTable = [];
     this.users.forEach((element: User) => {
-      if (this.perCountry)
+      if (this.perCountry || this.perMembershipStatus)
         this.dataTable.push({
           no: element.id,
           photo: element.photo,
           name: element.name,
           lastname: element.lastname,
         });
-      if (this.perGender || this.perTeam || this.perMembershipStatus)
+      if (this.perGender || this.perTeam )
         this.dataTable.push({
           no: element.id,
           photo: element.photo,
