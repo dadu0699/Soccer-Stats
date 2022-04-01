@@ -7,7 +7,7 @@ const execute = (query, params, callback) => {
 const get = (params, callback) => {
   const id = params.id;
   let query = `
-    SELECT noticiaID id, e.equipoID id_team, nombre team, usuarioID id_user,
+    SELECT noticiaID id, e.equipoID id_team, nombre team, fotoLogo photo, usuarioID id_user,
     titulo title, descripcion description, DATE_FORMAT(fecha, "%Y-%m-%d") date
     FROM Noticia n, Equipo e
     WHERE n.equipoID = e.equipoID`;
