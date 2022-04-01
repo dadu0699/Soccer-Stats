@@ -28,6 +28,7 @@ const iniciarSesion = (req, res) => {
       id_status: results[0]['id_status'],
       id_rol: results[0]['id_rol'],
       id_user: results[0]['id_usuario'],
+      has_membership: results[0]['has_membership'],
     });
   });
 };

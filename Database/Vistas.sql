@@ -1,4 +1,20 @@
 --------------------------------------------------------------------------------
+CREATE OR REPLACE VIEW usuariosMembresia AS
+SELECT * FROM ((
+	SELECT Usuario.*, 1 has_membership
+	FROM Usuario
+	INNER JOIN Membresia ON (Membresia.usuarioID = Usuario.usuarioID)
+	WHERE (NOW() BETWEEN fechaInicio AND fechaFin)
+)
+UNION
+(
+	SELECT Usuario.*, 0 has_membership 
+	FROM Usuario
+))
+AS usm
+GROUP BY usm.usuarioID
+ORDER BY usm.usuarioID;
+--------------------------------------------------------------------------------
 CREATE OR REPLACE VIEW vistaJugadores AS
 SELECT * FROM ((
 	SELECT Jugador.*, Pais.nombre pais, PosicionJugador.nombre posicion,
