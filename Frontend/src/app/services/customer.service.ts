@@ -111,4 +111,16 @@ export class CustomerService {
     return await this._httpClient.get(`${this.url}/report/15/`, { headers: this.httpOptions.headers, params }).toPromise();
   }
 
+  public async report16(id_team: number , id_opposing_team: number): Promise<any> {
+    const params = new HttpParams().set('id_team', id_team).append('id_opposing_team', id_opposing_team);
+
+    return await this._httpClient.get(`${this.url}/report/16/`, { headers: this.httpOptions.headers, params }).toPromise();
+  }
+
+  public async report17(id_team: number): Promise<any> {
+    const params = new HttpParams().set('id_team', id_team);
+
+    return await this._httpClient.get(`${this.url}/report/17/`, { headers: this.httpOptions.headers, params }).toPromise();
+  }
+
 }

@@ -159,7 +159,6 @@ export class PlayersComponent implements OnInit {
   }
 
   public async getReport12(): Promise<void> {
-    console.log(this.incidence, this.competition);
     try {
       const response = await this._customerService.report12(this.incidence, this.competition);
       if (response['status'] === 200) {
