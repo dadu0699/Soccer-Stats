@@ -40,6 +40,19 @@ export class FeedComponent implements OnInit {
     }
   }
 
+  public async selectTeam(id_team: number): Promise<void>{
+    try {
+      const response = await this._postService.filter(id_team);
+      if (response['status'] === 200) {
+        console.log(response['data']);
+        this.posts = response['data'];
+        this.showSnackbar(response['msg']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   private showSnackbar(message: string = 'Something went wrong :c') {
     this._snackBar.open(message, 'CLOSE', { duration: 5000 });
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { Post } from '../models/post.model';
@@ -23,6 +23,12 @@ export class NewService {
   public async get(): Promise<any> {
     return await this._httpClient.
       get(this.url).toPromise();
+  }
+
+  public async filter(id_team: number): Promise<any> {
+    const params = new HttpParams().set('id', id_team);
+
+    return await this._httpClient.get(`${this.url}/team`, { headers: this.httpOptions.headers, params }).toPromise();
   }
 
   public async create(post: Post): Promise<any> {

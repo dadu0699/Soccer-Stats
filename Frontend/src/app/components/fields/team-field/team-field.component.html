@@ -1,6 +1,13 @@
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" *ngIf="!isFavoriteTeams">
   <mat-label>Team</mat-label>
   <mat-select (selectionChange)="select($event.value)" [ngModel]="commingTeam">
     <mat-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline" *ngIf="isFavoriteTeams">
+  <mat-label>Team</mat-label>
+  <mat-select (selectionChange)="select($event.value)" [ngModel]="commingTeam">
+    <mat-option *ngFor="let team of favoriteTeams" [value]="team.id">{{team.name}}</mat-option>
   </mat-select>
 </mat-form-field>

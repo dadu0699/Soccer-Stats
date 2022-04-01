@@ -1,6 +1,12 @@
 <div class="holder">
   <div fxLayout="column" fxLayoutAlign="space-evenly center">
     <h1>News</h1>
+    <app-team-field [isFavoriteTeams]="true" (selectTeam)="selectTeam($event)" class="extra-field">
+    </app-team-field>
+    <button mat-button color="accent" (click)="getNews()">
+      Show me all
+    </button>
+    <p></p>
   </div>
   <mat-grid-list cols="12" rowHeight="100px">
     <mat-grid-tile colspan="3" rowspan="2" *ngFor='let post of posts'>
