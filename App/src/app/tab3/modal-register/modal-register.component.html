@@ -1,0 +1,102 @@
+<ion-header translucent="true" mode="ios">
+  <ion-toolbar>
+    <ion-title>Create your account</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">Create your account</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form (ngSubmit)="saveChanges()">
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> First Name:
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="data.nombre" name="nombre" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Last Name:
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="data.apellido" name="apellido" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="transgender-outline"></ion-icon> Gender:
+      </ion-label>
+      <ion-select placeholder="Select One">
+        <ion-select-option value="f">Female</ion-select-option>
+        <ion-select-option value="m">Male</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="at-outline"></ion-icon> Email:
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="data.correo" name="correo" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="lock-closed-outline"></ion-icon> Password:
+      </ion-label>
+      <ion-input [type]="passwordType" [(ngModel)]="data.password" name="password" required></ion-input>
+      <ion-icon style="margin-top: 5%;" name="eye-off-outline" slot="end" (click)="togglePassword()"
+        *ngIf="!passwordShow"></ion-icon>
+      <ion-icon style="margin-top: 5%;" name="eye-outline" slot="end" (click)="togglePassword()" *ngIf="passwordShow">
+      </ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="lock-closed-outline"></ion-icon> Password Repeat:
+      </ion-label>
+      <ion-input [type]="passwordType2" [(ngModel)]="data.passwordRepeat" name="passwordRepeat" required></ion-input>
+      <ion-icon style="margin-top: 5%;" name="eye-off-outline" slot="end" (click)="togglePassword2()"
+        *ngIf="!passwordShow2"></ion-icon>
+      <ion-icon style="margin-top: 5%;" name="eye-outline" slot="end" (click)="togglePassword2()" *ngIf="passwordShow2">
+      </ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-icon name="calendar-outline"></ion-icon> Date of Birth:
+      </ion-label>
+    </ion-item>
+    <ion-datetime [(ngModel)]="data.fechaNacimiento" name="fechaNacimiento" display-timezone="utc" presentation="date"
+      required>
+    </ion-datetime>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="phone-portrait-outline"></ion-icon> Phone:
+      </ion-label>
+      <ion-input type="number" [(ngModel)]="data.telefono" name="telefono" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Address:
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="data.nombre" name="nombre" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="flag-outline"></ion-icon> Country:
+      </ion-label>
+      <ion-select placeholder="Select One">
+        <ion-select-option value="f">Female</ion-select-option>
+        <ion-select-option value="m">Male</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button color="dark" expand="block" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      Sign Up
+    </ion-button>
+  </form>
+
+</ion-content>

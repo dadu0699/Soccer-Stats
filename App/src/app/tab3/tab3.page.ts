@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ModalRegisterComponent } from './modal-register/modal-register.component';
 
 @Component({
   selector: 'app-tab3',
@@ -14,7 +16,9 @@ export class Tab3Page {
     password: ''
   }
 
-  constructor() { }
+  constructor(
+    private modalController: ModalController
+  ) { }
 
   //TOGGLE PASSWORD
   togglePassword() {
@@ -27,4 +31,13 @@ export class Tab3Page {
     }
   }
 
+  async presentModalRegistro() {
+    const modal = await this.modalController.create({
+      component: ModalRegisterComponent
+    });
+    modal.onDidDismiss().then((data) => {
+      //DATOS
+    });
+    return await modal.present();
+  }
 }
