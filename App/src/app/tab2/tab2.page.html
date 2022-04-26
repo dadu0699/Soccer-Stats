@@ -1,17 +1,59 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Soccer Stats
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Soccer Stats</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <iframe _ngcontent-vju-c112="" width="100%" height="350" src="https://www.youtube.com/embed/s9Unc5nzIlk"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-title>Soccer Stats</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper, diam quis imperdiet molestie, neque
+      augue
+      tincidunt risus, a faucibus libero ipsum eu felis. Duis eu cursus dui, eget commodo purus. Suspendisse posuere
+      tempor
+      porttitor.
+    </ion-card-content>
+  </ion-card>
+
+  <form class="formulario">
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="person-outline"></ion-icon> Full Name:
+      </ion-label>
+      <ion-input type="text" required="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="person-outline"></ion-icon> Email:
+      </ion-label>
+      <ion-input type="text" required="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="person-outline"></ion-icon> Message:
+      </ion-label>
+      <ion-textarea rows="5" type="text" required="true"></ion-textarea>
+    </ion-item>
+    <ion-button color="dark" expand="block" type="submit">
+      <ion-icon name="send-outline" slot="start"></ion-icon>
+      Contact
+    </ion-button>
+  </form>
+
 </ion-content>
