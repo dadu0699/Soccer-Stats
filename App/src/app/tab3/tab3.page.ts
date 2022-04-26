@@ -6,7 +6,25 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  disabledBtn: boolean = false;
+  passwordType: string = 'password';
+  passwordShow: boolean = false;
+  data = {
+    email: '',
+    password: ''
+  }
 
-  constructor() {}
+  constructor() { }
+
+  //TOGGLE PASSWORD
+  togglePassword() {
+    if (this.passwordShow) {
+      this.passwordShow = false;
+      this.passwordType = 'password';
+    } else {
+      this.passwordShow = true;
+      this.passwordType = 'text';
+    }
+  }
 
 }
