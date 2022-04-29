@@ -16,33 +16,37 @@
     </ion-toolbar>
   </ion-header>
 
+  <div style="width: 100%; height: 350px;">
+    <div class="container">
+      <img class="img-center" [src]="data.photo">
+    </div>
+  </div>
   <form (ngSubmit)="saveChanges()">
     <ion-item>
       <ion-label position="floating">
         <ion-icon name="information-circle-outline"></ion-icon> First Name:
       </ion-label>
-      <ion-input type="text" [(ngModel)]="data.nombre" name="nombre" required></ion-input>
+      <ion-input type="text" [(ngModel)]="data.name" name="name" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">
         <ion-icon name="information-circle-outline"></ion-icon> Last Name:
       </ion-label>
-      <ion-input type="text" [(ngModel)]="data.apellido" name="apellido" required></ion-input>
+      <ion-input type="text" [(ngModel)]="data.lastname" name="lastname" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">
         <ion-icon name="transgender-outline"></ion-icon> Gender:
       </ion-label>
-      <ion-select placeholder="Select One">
-        <ion-select-option value="f">Female</ion-select-option>
-        <ion-select-option value="m">Male</ion-select-option>
+      <ion-select placeholder="Select One" [(ngModel)]="data.gender" name="gender">
+        <ion-select-option value="{{item.char}}" *ngFor="let item of genders">{{item.description}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating">
         <ion-icon name="at-outline"></ion-icon> Email:
       </ion-label>
-      <ion-input type="text" [(ngModel)]="data.correo" name="correo" required></ion-input>
+      <ion-input type="text" [(ngModel)]="data.email" name="email" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">
@@ -56,43 +60,32 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">
-        <ion-icon name="lock-closed-outline"></ion-icon> Password Repeat:
-      </ion-label>
-      <ion-input [type]="passwordType2" [(ngModel)]="data.passwordRepeat" name="passwordRepeat" required></ion-input>
-      <ion-icon style="margin-top: 5%;" name="eye-off-outline" slot="end" (click)="togglePassword2()"
-        *ngIf="!passwordShow2"></ion-icon>
-      <ion-icon style="margin-top: 5%;" name="eye-outline" slot="end" (click)="togglePassword2()" *ngIf="passwordShow2">
-      </ion-icon>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <ion-icon name="calendar-outline"></ion-icon> Date of Birth:
-      </ion-label>
-    </ion-item>
-    <ion-datetime [(ngModel)]="data.fechaNacimiento" name="fechaNacimiento" display-timezone="utc" presentation="date"
-      required>
-    </ion-datetime>
-    <ion-item>
-      <ion-label position="floating">
         <ion-icon name="phone-portrait-outline"></ion-icon> Phone:
       </ion-label>
-      <ion-input type="number" [(ngModel)]="data.telefono" name="telefono" required></ion-input>
+      <ion-input type="number" [(ngModel)]="data.phone" name="phone" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">
         <ion-icon name="information-circle-outline"></ion-icon> Address:
       </ion-label>
-      <ion-input type="text" [(ngModel)]="data.nombre" name="nombre" required></ion-input>
+      <ion-input type="text" [(ngModel)]="data.address" name="address" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">
         <ion-icon name="flag-outline"></ion-icon> Country:
       </ion-label>
-      <ion-select placeholder="Select One">
-        <ion-select-option value="f">Female</ion-select-option>
-        <ion-select-option value="m">Male</ion-select-option>
+      <ion-select placeholder="Select One" [(ngModel)]="data.id_country" name="id_country">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of countries">{{item.name}}</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item>
+      <ion-datetime [(ngModel)]="data.birth_date" name="birth_date" display-timezone="utc" presentation="date" required>
+      </ion-datetime>
+    </ion-item>
+    <ion-button color="tertiary" expand="block" type="button" (click)="libreria()">
+      <ion-icon name="images-outline" slot="start"></ion-icon>
+      Select Image
+    </ion-button>
     <ion-button color="dark" expand="block" type="submit" [disabled]="disabledBtn">
       <ion-icon name="save-outline" slot="start"></ion-icon>
       Sign Up
