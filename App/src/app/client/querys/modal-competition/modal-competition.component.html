@@ -1,0 +1,64 @@
+<ion-header translucent="true" mode="ios">
+  <ion-toolbar>
+    <ion-title>Competition</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">Competition</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <form class="formulario" (ngSubmit)="search()">
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="trophy-outline"></ion-icon> Teams:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="data.id_team" name="id_team">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of teams">{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Types competitions:
+      </ion-label>
+      <ion-select multiple="true" cancelText="Cancel" okText="Ok" [(ngModel)]="data.array" name="array">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of typesCompetitions">{{item.description}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button color="dark" expand="block" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="filter-outline" slot="start"></ion-icon>
+      Filter
+    </ion-button>
+  </form>
+
+  <ion-card *ngFor="let item of filter">
+
+    <ion-card-header>
+      <ion-card-subtitle>{{item.competition}}</ion-card-subtitle>
+      <ion-card-title>{{item.team}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <img [src]="item.photo">
+      </ion-thumbnail>
+      <ion-label><strong>Victorias: </strong>{{item.count}}</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="item.age">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-label>{{item.age}} years old</ion-label>
+    </ion-item>
+  </ion-card>
+
+</ion-content>

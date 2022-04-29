@@ -1,0 +1,30 @@
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="games">
+      <ion-icon name="football-outline"></ion-icon>
+      <ion-label>Games</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="teams" *ngIf="hasMembership==1">
+      <ion-icon name="star-outline"></ion-icon>
+      <ion-label>Teams</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="querys" *ngIf="hasMembership==1">
+      <ion-icon name="stats-chart-outline"></ion-icon>
+      <ion-label>Reports</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="prediction" *ngIf="hasMembership==1">
+      <ion-icon name="share-social-outline"></ion-icon>
+      <ion-label>Prediction</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

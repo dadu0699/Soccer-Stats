@@ -1,0 +1,53 @@
+<ion-header translucent="true" mode="ios">
+  <ion-toolbar>
+    <ion-title>Stadium</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">Stadium</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <form class="formulario" (ngSubmit)="search()">
+    <ion-item *ngIf="number == 1">
+      <ion-label position="floating">
+        <ion-icon name="flag-outline"></ion-icon> Country:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="data.country" name="country">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of countries">{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="number == 2">
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Capacity:
+      </ion-label>
+      <ion-input type="number" [(ngModel)]="data.capacity" name="capacity" required></ion-input>
+    </ion-item>
+    <ion-button color="dark" expand="block" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="filter-outline" slot="start"></ion-icon>
+      Filter
+    </ion-button>
+  </form>
+
+  <ion-card *ngFor="let item of filter">
+    <img [src]="item.photo" style="width: 100%; height: auto;">
+    <ion-card-header>
+      <ion-card-subtitle>{{item.country}}</ion-card-subtitle>
+      <ion-card-title>{{item.stadium}}</ion-card-title>
+    </ion-card-header>
+    <ion-item *ngIf="item.capacity">
+      <ion-icon name="people-outline" slot="start"></ion-icon>
+      <ion-label>{{item.capacity}}</ion-label>
+    </ion-item>
+  </ion-card>
+
+</ion-content>

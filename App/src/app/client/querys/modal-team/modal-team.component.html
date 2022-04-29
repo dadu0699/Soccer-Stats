@@ -1,0 +1,80 @@
+<ion-header translucent="true" mode="ios">
+  <ion-toolbar>
+    <ion-title>Teams</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">Teams</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form class="formulario" (ngSubmit)="search()">
+    <ion-item *ngIf="number == 1">
+      <ion-label position="floating">
+        <ion-icon name="trophy-outline"></ion-icon> Competitions:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="data.competition" name="competition">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of competitions">{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="number == 2">
+      <ion-label position="floating">
+        <ion-icon name="flag-outline"></ion-icon> Country:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="data.country" name="country">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of countries">{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="number == 3">
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Age:
+      </ion-label>
+      <ion-input type="number" [(ngModel)]="data.age" name="age" required></ion-input>
+    </ion-item>
+    <ion-item *ngIf="number == 4">
+      <ion-label position="floating">
+        <ion-icon name="person-outline"></ion-icon> Type Person:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="data.type_person" name="type_person"
+        (ionChange)="segmentChanged($event)">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of personType">{{item.description}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="number == 4">
+      <ion-label position="floating">
+        <ion-icon name="person-outline"></ion-icon> Type Person:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="data.person" name="person">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of persons">{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button color="dark" expand="block" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="filter-outline" slot="start"></ion-icon>
+      Filter
+    </ion-button>
+  </form>
+
+  <div>
+    <ion-list>
+      <ion-item *ngFor="let item of filter">
+        <ion-thumbnail slot="start">
+          <img [src]="item.photo">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <strong>{{item.team}}</strong>
+          <p *ngIf="item.country">{{item.country}}</p>
+          <p *ngIf="item.competition">{{item.competition}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

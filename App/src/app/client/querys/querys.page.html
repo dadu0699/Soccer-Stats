@@ -1,0 +1,129 @@
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-title>
+      Reports
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">Reports</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list lines="none">
+    <ion-list-header>
+      <ion-label class="mayusculas">Players & Teams</ion-label>
+    </ion-list-header>
+    <ion-item button (click)="presentModalPlayer(1)">
+      <ion-label>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        Top players per Team
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalPlayer(2)">
+      <ion-label>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        Players per age (older than)
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalPlayer(3)">
+      <ion-label>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        Players per age (younger than)
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalPlayer(4)">
+      <ion-label>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        Top players per incidences in a competition
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalPlayer(5)">
+      <ion-label>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        Top players per incidences in a competition in a year
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalTeams(1)">
+      <ion-label>
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        Teams per competition
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalTeams(2)">
+      <ion-label>
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        Teams per country
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalTeams(3)">
+      <ion-label>
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        Teams per age
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalTeams(4)">
+      <ion-label>
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        Teams per player/technical director
+      </ion-label>
+    </ion-item>
+    <ion-list-header>
+      <ion-label class="mayusculas">Games & Competitions</ion-label>
+    </ion-list-header>
+    <ion-item button (click)="presentModalGame(1)">
+      <ion-label>
+        <ion-icon name="football-outline" slot="start"></ion-icon>
+        Games per team (Record)
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalGame(2)">
+      <ion-label>
+        <ion-icon name="football-outline" slot="start"></ion-icon>
+        Games per goals
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalGame(3)">
+      <ion-label>
+        <ion-icon name="football-outline" slot="start"></ion-icon>
+        Games per year
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalGame(4)">
+      <ion-label>
+        <ion-icon name="football-outline" slot="start"></ion-icon>
+        Games per vs teams
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalGame(5)">
+      <ion-label>
+        <ion-icon name="football-outline" slot="start"></ion-icon>
+        Games per team (List)
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalCompetition(1)">
+      <ion-label>
+        <ion-icon name="trophy-outline" slot="start"></ion-icon>
+        Victories per team & competition
+      </ion-label>
+    </ion-item>
+    <ion-list-header>
+      <ion-label class="mayusculas">Stadiums</ion-label>
+    </ion-list-header>
+    <ion-item button (click)="presentModalStadium(1)">
+      <ion-label>
+        <ion-icon name="map-outline" slot="start"></ion-icon>
+        Stadiums per country
+      </ion-label>
+    </ion-item>
+    <ion-item button (click)="presentModalStadium(2)">
+      <ion-label>
+        <ion-icon name="map-outline" slot="start"></ion-icon>
+        Stadiums per capacity
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
