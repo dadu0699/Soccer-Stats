@@ -1,3 +1,19 @@
-<p>
-  modal-game works!
-</p>
+<ion-header translucent="true" mode="ios">
+  <ion-toolbar>
+    <ion-title>Game</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">Game</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+</ion-content>
