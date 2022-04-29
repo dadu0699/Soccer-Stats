@@ -13,4 +13,47 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-toolbar>
+    <ion-segment value="all" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        Favorites
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+
+
+  <div *ngIf="selectItem=='all'">
+    <ion-list>
+      <ion-item *ngFor="let item of teams">
+        <ion-thumbnail slot="start">
+          <img [src]="item.photo">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <strong>{{item.name}}</strong>
+          <p>{{item.country}}</p>
+        </ion-label>
+        <ion-button fill="outline" slot="end" color="warning" (click)="addFavorite(item)">
+          <ion-icon name="star-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="selectItem=='favorites'">
+    <ion-list>
+      <ion-item *ngFor="let item of favorites">
+        <ion-thumbnail slot="start">
+          <img [src]="item.photo">
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <strong>{{item.name}}</strong>
+          <p>{{item.country}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -57,6 +57,8 @@ export class Tab3Page {
       localStorage.setItem('id_user', res.data.id_user);
       if (res.data.id_rol == 2) {
         this.router.navigate(['/employee']);
+      } else if (res.data.id_rol == 3) {
+        this.router.navigate(['/client']);
       }
     }).catch(() => {
       this.disabledBtn = false;
