@@ -36,7 +36,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'news',
+    path: 'news/:id',
     loadChildren: () => import('./news/news.module').then(m => m.NewsPageModule)
   }
 ];

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Team } from 'src/app/models/team.model';
 import { CustomerService } from 'src/app/services/customer.service';
 import { NotificacionService } from 'src/app/services/notification.service';
@@ -17,7 +18,8 @@ export class TeamsPage implements OnInit {
   constructor(
     private teamService: TeamService,
     private customerService: CustomerService,
-    private notificacionService: NotificacionService
+    private notificacionService: NotificacionService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -61,6 +63,10 @@ export class TeamsPage implements OnInit {
       .catch((err) => {
         this.notificacionService.presentToast('An error has ocurred, please try again.');
       });
+  }
+
+  navigateToTeam = (team: Team) => {
+    this.router.navigate(['/client/news', team.id]);
   }
 
 }

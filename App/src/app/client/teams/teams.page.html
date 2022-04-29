@@ -45,7 +45,7 @@
 
   <div *ngIf="selectItem=='favorites'">
     <ion-list>
-      <ion-item *ngFor="let item of favorites">
+      <ion-item button *ngFor="let item of favorites" (click)="navigateToTeam(item)">
         <ion-thumbnail slot="start">
           <img [src]="item.photo">
         </ion-thumbnail>
