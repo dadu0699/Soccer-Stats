@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { CustomerService } from 'src/app/services/customer.service';
 import { NotificacionService } from 'src/app/services/notification.service';
+import { CommonService } from 'src/app/services/observable.service';
 import { ModalProfileComponent } from './modal-profile/modal-profile.component';
 
 @Component({
@@ -18,7 +19,8 @@ export class ProfilePage implements OnInit {
     private customerService: CustomerService,
     private notificacionService: NotificacionService,
     private modalController: ModalController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class ProfilePage implements OnInit {
         console.log(res);
         localStorage.setItem('has_membership', '1');
         this.hasMembership = localStorage.getItem('has_membership');
+        this.commonService.sendUpdate('Has membership');
       }).catch((error) => {
         this.notificacionService.presentToast('An error has ocurred, please try again.');
       });
@@ -46,6 +49,7 @@ export class ProfilePage implements OnInit {
         console.log(res);
         localStorage.setItem('has_membership', '0');
         this.hasMembership = localStorage.getItem('has_membership');
+        this.commonService.sendUpdate('Has membership');
       }).catch((error) => {
         this.notificacionService.presentToast('An error has ocurred, please try again.');
       });
