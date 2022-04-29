@@ -63,10 +63,10 @@ export class Tab3Page {
         } else if (res.data.id_rol == 3) {
           this.router.navigate(['/client']);
         }
-      } else if (res.data.id_status == 1) {
-        this.notificacionService.presentToast('Your account is deactivated.');
-      } else {
+      } else if (res.data.id_status == 2) {
         this.notificacionService.presentToast('Your account is pending verification.');
+      } else {
+        this.notificacionService.presentToast('Your account is deactivated.');
       }
     }).catch(() => {
       this.disabledBtn = false;

@@ -17,7 +17,7 @@ export class ProfilePage implements OnInit {
 
   logOut() {
     localStorage.clear();
-    this.router.navigate(['/tabs']);
+    this.router.navigate(['/tabs/tab3']);
   }
 
 }

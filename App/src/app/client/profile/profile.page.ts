@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { CustomerService } from 'src/app/services/customer.service';
 import { NotificacionService } from 'src/app/services/notification.service';
 import { ModalProfileComponent } from './modal-profile/modal-profile.component';
@@ -17,7 +17,8 @@ export class ProfilePage implements OnInit {
     private router: Router,
     private customerService: CustomerService,
     private notificacionService: NotificacionService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -25,7 +26,7 @@ export class ProfilePage implements OnInit {
 
   logOut() {
     localStorage.clear();
-    this.router.navigate(['/tabs']);
+    this.router.navigate(['/tabs/tab3']);
   }
 
   public async getMembership(): Promise<void> {
@@ -56,6 +57,50 @@ export class ProfilePage implements OnInit {
     });
 
     return await modal.present();
+  }
+
+
+  /**
+   * Eliminar cuenta
+   */
+  async deleteAccount() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete account',
+      message: 'Are you sure you want to delete your account?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          id: 'confirm-button',
+          handler: () => {
+            this.delete();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  /**
+   * Eliminar cuenta
+   */
+  delete = () => {
+    this.customerService.deleteAccount()
+      .then((res) => {
+        console.log(res);
+        this.logOut();
+      }).catch((error) => {
+        this.notificacionService.presentToast('An error has ocurred, please try again.');
+      });
   }
 
 }
