@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { NotificacionService } from '../services/notification.service';
 import { ModalRegisterComponent } from './modal-register/modal-register.component';
 
 @Component({
@@ -21,7 +22,8 @@ export class Tab3Page {
   constructor(
     private modalController: ModalController,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private notificacionService: NotificacionService,
   ) { }
 
   //TOGGLE PASSWORD
@@ -48,17 +50,23 @@ export class Tab3Page {
   async login() {
     this.disabledBtn = true;
     this.authService.signIn(this.data.email, this.data.password).then((res) => {
+      console.log(res)
       this.disabledBtn = false;
-      console.log(res.data)
-      localStorage.setItem('token', String(res.data.token));
-      localStorage.setItem('has_membership', res.data.has_membership);
-      localStorage.setItem('id_rol', res.data.id_rol);
-      localStorage.setItem('id_status', res.data.id_status);
-      localStorage.setItem('id_user', res.data.id_user);
-      if (res.data.id_rol == 2) {
-        this.router.navigate(['/employee']);
-      } else if (res.data.id_rol == 3) {
-        this.router.navigate(['/client']);
+      if (res.data.id_status == 1) {
+        localStorage.setItem('token', String(res.data.token));
+        localStorage.setItem('has_membership', res.data.has_membership);
+        localStorage.setItem('id_rol', res.data.id_rol);
+        localStorage.setItem('id_status', res.data.id_status);
+        localStorage.setItem('id_user', res.data.id_user);
+        if (res.data.id_rol == 2) {
+          this.router.navigate(['/employee']);
+        } else if (res.data.id_rol == 3) {
+          this.router.navigate(['/client']);
+        }
+      } else if (res.data.id_status == 1) {
+        this.notificacionService.presentToast('Your account is deactivated.');
+      } else {
+        this.notificacionService.presentToast('Your account is pending verification.');
       }
     }).catch(() => {
       this.disabledBtn = false;

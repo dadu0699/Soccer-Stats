@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { CustomerService } from 'src/app/services/customer.service';
 import { NotificacionService } from 'src/app/services/notification.service';
+import { ModalProfileComponent } from './modal-profile/modal-profile.component';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +16,8 @@ export class ProfilePage implements OnInit {
   constructor(
     private router: Router,
     private customerService: CustomerService,
-    private notificacionService: NotificacionService
+    private notificacionService: NotificacionService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -45,6 +48,14 @@ export class ProfilePage implements OnInit {
       }).catch((error) => {
         this.notificacionService.presentToast('An error has ocurred, please try again.');
       });
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalProfileComponent,
+    });
+
+    return await modal.present();
   }
 
 }
