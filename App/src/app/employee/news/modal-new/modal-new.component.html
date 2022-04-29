@@ -1,0 +1,48 @@
+<ion-header translucent="true" mode="ios">
+  <ion-toolbar>
+    <ion-title>Create post</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">Create post</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form (ngSubmit)="saveChanges()">
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Title:
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="post.title" name="title" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="flag-outline"></ion-icon> Team:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="post.id_team" name="id_team">
+        <ion-select-option value="{{team.id}}" *ngFor="let team of teams">{{team.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Description:
+      </ion-label>
+      <ion-textarea rows="5" maxlength="255" type="text" required="true" [(ngModel)]="post.description"
+        name="description">
+      </ion-textarea>
+    </ion-item>
+    <ion-button color="dark" expand="block" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      Save Changes
+    </ion-button>
+  </form>
+
+</ion-content>

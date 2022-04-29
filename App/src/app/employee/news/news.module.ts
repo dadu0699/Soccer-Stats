@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { NewsPageRoutingModule } from './news-routing.module';
 
 import { NewsPage } from './news.page';
+import { ModalNewComponent } from './modal-new/modal-new.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { NewsPage } from './news.page';
     IonicModule,
     NewsPageRoutingModule
   ],
-  declarations: [NewsPage]
+  declarations: [
+    NewsPage,
+    ModalNewComponent
+  ]
 })
-export class NewsPageModule {}
+export class NewsPageModule { }
