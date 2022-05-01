@@ -28,6 +28,7 @@ pipeline {
     stage('Customer Service') {
       // when { changeset "Services/customer/**"}
       steps {
+        sh 'ls'
         sh 'cd ../../Services/customer'
         sh '''
           rm -rf .env.test
