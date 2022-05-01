@@ -350,7 +350,7 @@ pipeline {
     }
 
     stage('ESB') {
-      when { changeset "ESB/**"}
+      // when { changeset "ESB/**"}
       steps {
         sh '''
           cd ESB
@@ -358,7 +358,7 @@ pipeline {
           docker push ${GCR_ID}/esb:testing
         '''
         sh '''
-          cd ../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment esb-deployment
           kubectl apply -f ./esb.yml
         '''
@@ -366,7 +366,7 @@ pipeline {
     }
 
     stage('Frontend') {
-      when { changeset "Frontend/**"}
+      // when { changeset "Frontend/**"}
       steps {
         sh '''
           cd Frontend
@@ -374,7 +374,7 @@ pipeline {
           docker push ${GCR_ID}/frontend:testing
         '''
         sh '''
-          cd ../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment frontend-deployment
           kubectl apply -f ./frontend.yml
         '''
