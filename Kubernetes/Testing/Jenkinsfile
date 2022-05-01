@@ -28,9 +28,8 @@ pipeline {
     stage('Customer Service') {
       // when { changeset "Services/customer/**"}
       steps {
-        sh 'ls'
-        sh 'cd ../../Services/customer'
         sh '''
+          cd Services/customer
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -38,6 +37,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/customer
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -45,7 +45,7 @@ pipeline {
           docker push ${GCR_ID}/customer-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment customer-deployment
           kubectl apply -f ./customer.yml
         '''
@@ -55,7 +55,7 @@ pipeline {
     stage('Team Service') {
       // when { changeset "Services/team/**"}
       steps {
-        sh 'cd ../../Services/team'
+        sh 'cd Services/team'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -81,7 +81,7 @@ pipeline {
     stage('Match Service') {
       // when { changeset "Services/match/**"}
       steps {
-        sh 'cd ../../Services/match'
+        sh 'cd Services/match'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -107,7 +107,7 @@ pipeline {
     stage('Competition Service') {
       // when { changeset "Services/competition/**"}
       steps {
-        sh 'cd ../../Services/competition'
+        sh 'cd Services/competition'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -133,7 +133,7 @@ pipeline {
     stage('Stadium Service') {
       // when { changeset "Services/stadium/**"}
       steps {
-        sh 'cd ../../Services/stadium'
+        sh 'cd Services/stadium'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -159,7 +159,7 @@ pipeline {
     stage('Teachnical Director Service') {
       // when { changeset "Services/technical_director/**"}
       steps {
-        sh 'cd ../../Services/technical_director'
+        sh 'cd Services/technical_director'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -185,7 +185,7 @@ pipeline {
     stage('Player Service') {
       // when { changeset "Services/player/**"}
       steps {
-        sh 'cd ../../Services/player'
+        sh 'cd Services/player'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -211,7 +211,7 @@ pipeline {
     stage('Post Service') {
       // when { changeset "Services/post/**"}
       steps {
-        sh 'cd ../../Services/post'
+        sh 'cd Services/post'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -237,7 +237,7 @@ pipeline {
     stage('Auth Service') {
       // when { changeset "Services/auth/**"}
       steps {
-        sh 'cd ../../Services/auth'
+        sh 'cd Services/auth'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -263,7 +263,7 @@ pipeline {
     stage('Administrator Service') {
       // when { changeset "Services/administrator/**"}
       steps {
-        sh 'cd ../../Services/administrator'
+        sh 'cd Services/administrator'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -289,7 +289,7 @@ pipeline {
     stage('Employee Service') {
       // when { changeset "Services/employee/**"}
       steps {
-        sh 'cd ../../Services/employee'
+        sh 'cd Services/employee'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
@@ -315,7 +315,7 @@ pipeline {
     stage('Country Service') {
       // when { changeset "Services/country/**"}
       steps {
-        sh 'cd ../../Services/country'
+        sh 'cd Services/country'
         sh '''
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
