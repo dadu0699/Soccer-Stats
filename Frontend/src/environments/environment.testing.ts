@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'http://35.225.32.186',
+  url: 'http://35.222.234.155/esb',
 };

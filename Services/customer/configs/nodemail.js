@@ -2,8 +2,6 @@ const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 
-const ip = process.env.SERVICE_IP;
-
 async function dispatchEmail(to, subject, id) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -29,7 +27,7 @@ async function dispatchEmail(to, subject, id) {
     subject,
     template: 'validate-mail',
     context: {
-      url: `${process.env.FRONTEND}:5010/auth/?id=${id}`,
+      url: `${process.env.PROXYSERVER}/auth/?id=${id}`,
     },
   };
 

@@ -19,8 +19,8 @@ export class MatchService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5002/match`;
-    this.urlEmployee = `${environment.url}:5012/employee`;
+    this.url = `${environment.url}/match`;
+    this.urlEmployee = `${environment.url}/employee`;
   }
 
   public async get(): Promise<any> {
