@@ -12,7 +12,7 @@ export class AdminService {
   private httpOptions: any
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5011/administrator`;
+    this.url = `${environment.url}/administrator`;
 
     this.httpOptions = {
       headers: new HttpHeaders({

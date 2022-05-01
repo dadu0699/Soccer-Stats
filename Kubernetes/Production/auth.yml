@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+  namespace: soccerstats-production
+  labels:
+    app: auth
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth
+  minReadySeconds: 20
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth-container
+          image: gcr.io/sa-1s2022/auth-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5010
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+  namespace: soccerstats-production
+spec:
+  selector:
+    app: auth
+  ports:
+    - port: 5010
+      targetPort: 5010
+  type: ClusterIP

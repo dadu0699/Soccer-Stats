@@ -17,7 +17,7 @@ export class NewService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5007/post`;
+    this.url = `${environment.url}/post`;
   }
 
   public async get(): Promise<any> {

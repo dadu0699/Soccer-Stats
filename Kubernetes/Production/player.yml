@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: player-deployment
+  namespace: soccerstats-production
+  labels:
+    app: player
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: player
+  minReadySeconds: 20
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: player
+    spec:
+      containers:
+        - name: player-container
+          image: gcr.io/sa-1s2022/player-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5006
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: player-service
+  namespace: soccerstats-production
+spec:
+  selector:
+    app: player
+  ports:
+    - port: 5006
+      targetPort: 5006
+  type: ClusterIP

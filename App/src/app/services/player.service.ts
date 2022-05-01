@@ -19,8 +19,8 @@ export class PlayerService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5006/player`;
-    this.urlEmployee = `${environment.url}:5012/employee`;
+    this.url = `${environment.url}/player`;
+    this.urlEmployee = `${environment.url}/employee`;
   }
 
   public async get(): Promise<any> {

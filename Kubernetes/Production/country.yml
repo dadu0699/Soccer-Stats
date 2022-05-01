@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: country-deployment
+  namespace: soccerstats-production
+  labels:
+    app: country
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: country
+  minReadySeconds: 20
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: country
+    spec:
+      containers:
+        - name: country-container
+          image: gcr.io/sa-1s2022/country-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5013
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: country-service
+  namespace: soccerstats-production
+spec:
+  selector:
+    app: country
+  ports:
+    - port: 5013
+      targetPort: 5013
+  type: ClusterIP

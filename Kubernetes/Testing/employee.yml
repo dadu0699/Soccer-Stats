@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-deployment
+  namespace: soccerstats-testing
+  labels:
+    app: employee
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: employee
+  minReadySeconds: 20
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: employee
+    spec:
+      containers:
+        - name: employee-container
+          image: gcr.io/sa-1s2022/employee-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5012
+          env:
+            - name: DATABASE_DB
+              value: SoccerStatsDevelop
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee-service
+  namespace: soccerstats-testing
+spec:
+  selector:
+    app: employee
+  ports:
+    - port: 5012
+      targetPort: 5012
+  type: ClusterIP

@@ -18,7 +18,7 @@ export class CustomerService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5000/customer`;
+    this.url = `${environment.url}/customer`;
     this.id_user = parseInt(localStorage.getItem('id_user') || '');
   }
 

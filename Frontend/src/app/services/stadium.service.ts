@@ -17,7 +17,7 @@ export class StadiumService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5004/stadium`;
+    this.url = `${environment.url}/stadium`;
   }
 
   public async get(): Promise<any> {

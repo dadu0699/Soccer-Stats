@@ -4,13 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CountryService {
   private url: string;
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5013/country`;
+    this.url = `${environment.url}/country`;
   }
 
   public async get(): Promise<any> {

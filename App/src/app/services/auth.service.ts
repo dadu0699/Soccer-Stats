@@ -12,8 +12,8 @@ export class AuthService {
   private headers: HttpHeaders;
 
   constructor(private _httpClient: HttpClient) {
-    this.authUrl = `${environment.url}:5010/auth`;
-    this.customerUrl = `${environment.url}:5000/customer`;
+    this.authUrl = `${environment.url}/auth`;
+    this.customerUrl = `${environment.url}/customer`;
 
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',

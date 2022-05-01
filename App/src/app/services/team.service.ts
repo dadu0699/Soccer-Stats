@@ -17,7 +17,7 @@ export class TeamService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5001/team`;
+    this.url = `${environment.url}/team`;
   }
 
   public async get(): Promise<any> {
