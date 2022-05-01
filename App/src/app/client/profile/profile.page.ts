@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, Platform } from '@ionic/angular';
 import { CustomerService } from 'src/app/services/customer.service';
+import { NotificacionPushService } from 'src/app/services/notificacion-push.service';
 import { NotificacionService } from 'src/app/services/notification.service';
 import { CommonService } from 'src/app/services/observable.service';
 import { ModalProfileComponent } from './modal-profile/modal-profile.component';
@@ -20,15 +21,23 @@ export class ProfilePage implements OnInit {
     private notificacionService: NotificacionService,
     private modalController: ModalController,
     public alertController: AlertController,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private notificacionPushService: NotificacionPushService,
+    private platform: Platform,
   ) { }
-
   ngOnInit() {
   }
 
   logOut() {
     localStorage.clear();
     this.router.navigate(['/tabs/tab3']);
+    if (this.platform.is('android')) {
+      this.notificacionPushService.logOut();
+    }
+  }
+
+  goToRoute(route: string) {
+    this.router.navigate([route]);
   }
 
   public async getMembership(): Promise<void> {

@@ -1,0 +1,28 @@
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/client/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Notifications
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="ios">
+  <ion-header collapse="condense" mode="ios">
+    <ion-toolbar>
+      <ion-title size="large">Notifications</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let item of notifications">
+      <ion-icon name="notifications-outline" slot="start"></ion-icon>
+      <ion-label class="ion-text-wrap">
+        {{item.notificacion}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

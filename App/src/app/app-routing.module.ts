@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ClientGuard } from './guards/client.guard';
 import { EmployeeGuard } from './guards/employee.guard';
+import { HomeGuard } from './guards/home.guard';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [HomeGuard],
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {

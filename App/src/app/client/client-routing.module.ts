@@ -38,7 +38,12 @@ const routes: Routes = [
   {
     path: 'news/:id',
     loadChildren: () => import('./news/news.module').then(m => m.NewsPageModule)
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./notification/notification.module').then(m => m.NotificationPageModule)
   }
+
 ];
 
 @NgModule({
