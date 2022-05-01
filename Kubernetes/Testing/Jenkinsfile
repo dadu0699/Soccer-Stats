@@ -1,0 +1,381 @@
+pipeline {
+  agent any
+  
+  environment {
+    ENV_TEST = credentials('ENV_TEST')
+    ENV_PRODUCTION = credentials('ENV_PRODUCTION')
+    
+    GCR_ID = credentials('PROJECT_ID')
+    // Credenciales (.json) con los permisos de: 'Administrador de Kubernetes Engine', 'Agente de servicios de recursos de nube', 'Visualizador de objetos de Storage' 
+    GOOGLE_APPLICATION_CREDENTIALS = credentials('GOOGLE_APPLICATION_CREDENTIALS')
+
+    KUBECONFIG = credentials('KUBECONFIG')
+  }
+
+  parameters {
+    string(name: 'image_tag', defaultValue: 'latest', description: 'Etiqueta de la imagen')  
+  }
+
+  stages {
+    stage('Set Credentials') {
+      steps {
+        sh 'export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}'
+        sh 'cat ${GOOGLE_APPLICATION_CREDENTIALS} | docker login -u _json_key --password-stdin https://gcr.io'
+        sh 'export KUBECONFIG=${KUBECONFIG}'
+      }
+    }
+
+    stage('Customer Service') {
+      when { changeset "Services/customer/**"}
+      steps {
+        sh 'cd Services/customer'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/customer-service:${image_tag} .
+          docker push ${GCR_ID}/customer-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment customer-deployment
+          kubectl apply -f ./customer.yml
+        '''
+      }
+    }
+
+    stage('Team Service') {
+      when { changeset "Services/team/**"}
+      steps {
+        sh 'cd Services/team'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/team-service:${image_tag} .
+          docker push ${GCR_ID}/team-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment team-deployment
+          kubectl apply -f ./team.yml
+        '''
+      }
+    }
+
+    stage('Match Service') {
+      when { changeset "Services/match/**"}
+      steps {
+        sh 'cd Services/match'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/match-service:${image_tag} .
+          docker push ${GCR_ID}/match-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment match-deployment
+          kubectl apply -f ./match.yml
+        '''
+      }
+    }
+
+    stage('Competition Service') {
+      when { changeset "Services/competition/**"}
+      steps {
+        sh 'cd Services/competition'
+        sh '''
+          cd Services/competition
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/competition-service:${image_tag} .
+          docker push ${GCR_ID}/competition-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment competition-deployment
+          kubectl apply -f ./competition.yml
+        '''
+      }
+    }
+
+    stage('Stadium Service') {
+      when { changeset "Services/stadium/**"}
+      steps {
+        sh 'cd Services/stadium'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/stadium-service:${image_tag} .
+          docker push ${GCR_ID}/stadium-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment stadium-deployment
+          kubectl apply -f ./stadium.yml
+        '''
+      }
+    }
+
+    stage('Teachnical Director Service') {
+      when { changeset "Services/technical_director/**"}
+      steps {
+        sh 'cd Services/technical_director'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/technical-director-service:${image_tag} .
+          docker push ${GCR_ID}/technical-director-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment technical-director-deployment
+          kubectl apply -f ./technical-director.yml
+        '''
+      }
+    }
+
+    stage('Player Service') {
+      when { changeset "Services/player/**"}
+      steps {
+        sh 'cd Services/player'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/player-service:${image_tag} .
+          docker push ${GCR_ID}/player-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment player-deployment
+          kubectl apply -f ./player.yml
+        '''
+      }
+    }
+
+    stage('Post Service') {
+      when { changeset "Services/post/**"}
+      steps {
+        sh 'cd Services/post'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/post-service:${image_tag} .
+          docker push ${GCR_ID}/post-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment post-deployment
+          kubectl apply -f ./post.yml
+        '''
+      }
+    }
+
+    stage('Auth Service') {
+      when { changeset "Services/auth/**"}
+      steps {
+        sh 'cd Services/auth'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/auth-service:${image_tag} .
+          docker push ${GCR_ID}/auth-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment auth-deployment
+          kubectl apply -f ./auth.yml
+        '''
+      }
+    }
+
+    stage('Administrator Service') {
+      when { changeset "Services/administrator/**"}
+      steps {
+        sh 'cd Services/administrator'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/administrator-service:${image_tag} .
+          docker push ${GCR_ID}/administrator-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment administrator-deployment
+          kubectl apply -f ./administrator.yml
+        '''
+      }
+    }
+
+    stage('Employee Service') {
+      when { changeset "Services/employee/**"}
+      steps {
+        sh 'cd Services/employee'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/employee-service:${image_tag} .
+          docker push ${GCR_ID}/employee-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment employee-deployment
+          kubectl apply -f ./employee.yml
+        '''
+      }
+    }
+
+    stage('Country Service') {
+      when { changeset "Services/country/**"}
+      steps {
+        sh 'cd Services/country'
+        sh '''
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/country-service:${image_tag} .
+          docker push ${GCR_ID}/country-service:${image_tag}
+        '''
+        sh '''
+          cd ../../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment country-deployment
+          kubectl apply -f ./country.yml
+        '''
+      }
+    }
+
+    stage('ESB') {
+      when { changeset "ESB/**"}
+      steps {
+        sh 'cd ESB'
+        sh '''
+          docker build -t ${GCR_ID}/esb:testing --file Dockerfile-Testing .
+          docker push ${GCR_ID}/esb:testing
+        '''
+        sh '''
+          docker build -t ${GCR_ID}/esb:${image_tag} .
+          docker push ${GCR_ID}/esb:${image_tag}
+        '''
+        sh '''
+          cd ../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment esb-deployment
+          kubectl apply -f ./esb.yml
+        '''
+      }
+    }
+
+    stage('Frontend') {
+      when { changeset "Frontend/**"}
+      steps {
+        sh 'cd Frontend'
+        sh '''
+          docker build -t ${GCR_ID}/frontend:testing --file Dockerfile-Testing .
+          docker push ${GCR_ID}/frontend:testing
+        '''
+        sh '''
+          docker build -t ${GCR_ID}/frontend:${image_tag} .
+          docker push ${GCR_ID}/frontend:${image_tag}
+        '''
+        sh '''
+          cd ../Kubernetes/Testing
+          kubectl delete -n soccerstats-testing deployment frontend-deployment
+          kubectl apply -f ./frontend.yml
+        '''
+      }
+    }
+  }
+}
