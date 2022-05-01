@@ -55,8 +55,8 @@ pipeline {
     stage('Team Service') {
       // when { changeset "Services/team/**"}
       steps {
-        sh 'cd Services/team'
         sh '''
+          cd Services/team
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -64,6 +64,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/team
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -71,7 +72,7 @@ pipeline {
           docker push ${GCR_ID}/team-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment team-deployment
           kubectl apply -f ./team.yml
         '''
@@ -81,8 +82,8 @@ pipeline {
     stage('Match Service') {
       // when { changeset "Services/match/**"}
       steps {
-        sh 'cd Services/match'
         sh '''
+          cd Services/match
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -90,6 +91,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/match
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -97,7 +99,7 @@ pipeline {
           docker push ${GCR_ID}/match-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment match-deployment
           kubectl apply -f ./match.yml
         '''
@@ -107,8 +109,8 @@ pipeline {
     stage('Competition Service') {
       // when { changeset "Services/competition/**"}
       steps {
-        sh 'cd Services/competition'
         sh '''
+          cd Services/competition
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -116,6 +118,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/competition
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -123,7 +126,7 @@ pipeline {
           docker push ${GCR_ID}/competition-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment competition-deployment
           kubectl apply -f ./competition.yml
         '''
@@ -133,8 +136,8 @@ pipeline {
     stage('Stadium Service') {
       // when { changeset "Services/stadium/**"}
       steps {
-        sh 'cd Services/stadium'
         sh '''
+          cd Services/stadium
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -142,6 +145,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/stadium
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -149,7 +153,7 @@ pipeline {
           docker push ${GCR_ID}/stadium-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment stadium-deployment
           kubectl apply -f ./stadium.yml
         '''
@@ -159,8 +163,8 @@ pipeline {
     stage('Teachnical Director Service') {
       // when { changeset "Services/technical_director/**"}
       steps {
-        sh 'cd Services/technical_director'
         sh '''
+          cd Services/technical_director
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -168,6 +172,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/technical_director
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -175,7 +180,7 @@ pipeline {
           docker push ${GCR_ID}/technical-director-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment technical-director-deployment
           kubectl apply -f ./technical-director.yml
         '''
@@ -185,8 +190,8 @@ pipeline {
     stage('Player Service') {
       // when { changeset "Services/player/**"}
       steps {
-        sh 'cd Services/player'
         sh '''
+          cd Services/player
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -194,6 +199,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/player
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -201,7 +207,7 @@ pipeline {
           docker push ${GCR_ID}/player-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment player-deployment
           kubectl apply -f ./player.yml
         '''
@@ -211,8 +217,8 @@ pipeline {
     stage('Post Service') {
       // when { changeset "Services/post/**"}
       steps {
-        sh 'cd Services/post'
         sh '''
+          cd Services/post
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -220,6 +226,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/post
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -227,7 +234,7 @@ pipeline {
           docker push ${GCR_ID}/post-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment post-deployment
           kubectl apply -f ./post.yml
         '''
@@ -237,8 +244,8 @@ pipeline {
     stage('Auth Service') {
       // when { changeset "Services/auth/**"}
       steps {
-        sh 'cd Services/auth'
         sh '''
+          cd Services/auth
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -246,6 +253,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/auth
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -253,7 +261,7 @@ pipeline {
           docker push ${GCR_ID}/auth-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment auth-deployment
           kubectl apply -f ./auth.yml
         '''
@@ -263,8 +271,8 @@ pipeline {
     stage('Administrator Service') {
       // when { changeset "Services/administrator/**"}
       steps {
-        sh 'cd Services/administrator'
         sh '''
+          cd Services/administrator
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -272,6 +280,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/administrator
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -279,7 +288,7 @@ pipeline {
           docker push ${GCR_ID}/administrator-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment administrator-deployment
           kubectl apply -f ./administrator.yml
         '''
@@ -289,8 +298,8 @@ pipeline {
     stage('Employee Service') {
       // when { changeset "Services/employee/**"}
       steps {
-        sh 'cd Services/employee'
         sh '''
+          cd Services/employee
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -298,6 +307,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/employee
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -305,7 +315,7 @@ pipeline {
           docker push ${GCR_ID}/employee-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment employee-deployment
           kubectl apply -f ./employee.yml
         '''
@@ -315,8 +325,8 @@ pipeline {
     stage('Country Service') {
       // when { changeset "Services/country/**"}
       steps {
-        sh 'cd Services/country'
         sh '''
+          cd Services/country
           rm -rf .env.test
           cp ${ENV_TEST} .env.test
 
@@ -324,6 +334,7 @@ pipeline {
           npm run test
         '''
         sh '''
+          cd Services/country
           rm -rf .env.production
           cp ${ENV_PRODUCTION} .env.production
 
@@ -331,7 +342,7 @@ pipeline {
           docker push ${GCR_ID}/country-service:${image_tag}
         '''
         sh '''
-          cd ../../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment country-deployment
           kubectl apply -f ./country.yml
         '''
@@ -341,14 +352,10 @@ pipeline {
     stage('ESB') {
       // when { changeset "ESB/**"}
       steps {
-        sh 'cd ESB'
         sh '''
+          cd ESB
           docker build -t ${GCR_ID}/esb:testing --file Dockerfile-Testing .
           docker push ${GCR_ID}/esb:testing
-        '''
-        sh '''
-          docker build -t ${GCR_ID}/esb:${image_tag} .
-          docker push ${GCR_ID}/esb:${image_tag}
         '''
         sh '''
           cd ../Kubernetes/Testing
@@ -361,14 +368,10 @@ pipeline {
     stage('Frontend') {
       // when { changeset "Frontend/**"}
       steps {
-        sh 'cd Frontend'
         sh '''
+          cd Frontend
           docker build -t ${GCR_ID}/frontend:testing --file Dockerfile-Testing .
           docker push ${GCR_ID}/frontend:testing
-        '''
-        sh '''
-          docker build -t ${GCR_ID}/frontend:${image_tag} .
-          docker push ${GCR_ID}/frontend:${image_tag}
         '''
         sh '''
           cd ../Kubernetes/Testing
