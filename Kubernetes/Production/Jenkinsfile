@@ -26,7 +26,7 @@ pipeline {
     }
 
     stage('Customer Service') {
-      when { changeset "Services/customer/**"}
+      //when { changeset "Services/customer/**"}
       steps {
         sh '''
           cd Services/customer
@@ -53,7 +53,7 @@ pipeline {
     }
 
     stage('Team Service') {
-      when { changeset "Services/team/**"}
+      //when { changeset "Services/team/**"}
       steps {
         sh '''
           cd Services/team
@@ -80,7 +80,7 @@ pipeline {
     }
 
     stage('Match Service') {
-      when { changeset "Services/match/**"}
+      //when { changeset "Services/match/**"}
       steps {
         sh '''
           cd Services/match
@@ -107,7 +107,7 @@ pipeline {
     }
 
     stage('Competition Service') {
-      when { changeset "Services/competition/**"}
+      //when { changeset "Services/competition/**"}
       steps {
         sh '''
           cd Services/competition
@@ -134,7 +134,7 @@ pipeline {
     }
 
     stage('Stadium Service') {
-      when { changeset "Services/stadium/**"}
+      //when { changeset "Services/stadium/**"}
       steps {
         sh '''
           cd Services/stadium
@@ -161,7 +161,7 @@ pipeline {
     }
 
     stage('Teachnical Director Service') {
-      when { changeset "Services/technical_director/**"}
+      //when { changeset "Services/technical_director/**"}
       steps {
         sh '''
           cd Services/technical_director
@@ -188,7 +188,7 @@ pipeline {
     }
 
     stage('Player Service') {
-      when { changeset "Services/player/**"}
+      //when { changeset "Services/player/**"}
       steps {
         sh '''
           cd Services/player
@@ -215,7 +215,7 @@ pipeline {
     }
 
     stage('Post Service') {
-      when { changeset "Services/post/**"}
+      //when { changeset "Services/post/**"}
       steps {
         sh '''
           cd Services/post
@@ -242,7 +242,7 @@ pipeline {
     }
 
     stage('Auth Service') {
-      when { changeset "Services/auth/**"}
+      //when { changeset "Services/auth/**"}
       steps {
         sh '''
           cd Services/auth
@@ -269,7 +269,7 @@ pipeline {
     }
 
     stage('Administrator Service') {
-      when { changeset "Services/administrator/**"}
+      //when { changeset "Services/administrator/**"}
       steps {
         sh '''
           cd Services/administrator
@@ -296,7 +296,7 @@ pipeline {
     }
 
     stage('Employee Service') {
-      when { changeset "Services/employee/**"}
+      //when { changeset "Services/employee/**"}
       steps {
         sh '''
           cd Services/employee
@@ -323,7 +323,7 @@ pipeline {
     }
 
     stage('Country Service') {
-      when { changeset "Services/country/**"}
+      //when { changeset "Services/country/**"}
       steps {
         sh '''
           cd Services/country
@@ -350,7 +350,7 @@ pipeline {
     }
 
     stage('ESB') {
-      when { changeset "ESB/**"}
+      //when { changeset "ESB/**"}
       steps {
         sh '''
           cd ESB
@@ -366,7 +366,7 @@ pipeline {
     }
 
     stage('Frontend') {
-      when { changeset "Frontend/**"}
+      //when { changeset "Frontend/**"}
       steps {
         sh '''
           cd Frontend
