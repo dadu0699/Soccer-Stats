@@ -286,6 +286,18 @@
         Delete account
       </ion-label>
     </ion-item>
+    <ion-list-header>
+      <ion-label class="mayusculas">Notifications</ion-label>
+    </ion-list-header>
+    <ion-item button (click)="goToRoute('/client/notification')">
+      <ion-label>
+        <ion-icon name="notifications-outline" slot="start"></ion-icon>
+        Notifications
+      </ion-label>
+    </ion-item>
+    <ion-list-header>
+      <ion-label class="mayusculas">Log Out</ion-label>
+    </ion-list-header>
     <ion-item button (click)="logOut()">
       <ion-label>
         <ion-icon name="log-out-outline" slot="start"></ion-icon>

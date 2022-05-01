@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { NotificacionPushService } from '../services/notificacion-push.service';
 import { NotificacionService } from '../services/notification.service';
 import { ModalRegisterComponent } from './modal-register/modal-register.component';
 
@@ -24,6 +25,8 @@ export class Tab3Page {
     private authService: AuthService,
     private router: Router,
     private notificacionService: NotificacionService,
+    private notificacionPushService: NotificacionPushService
+
   ) { }
 
   //TOGGLE PASSWORD
@@ -58,6 +61,7 @@ export class Tab3Page {
         localStorage.setItem('id_rol', res.data.id_rol);
         localStorage.setItem('id_status', res.data.id_status);
         localStorage.setItem('id_user', res.data.id_user);
+        this.notificacionPushService.configuracionInicial();
         if (res.data.id_rol == 2) {
           this.router.navigate(['/employee']);
         } else if (res.data.id_rol == 3) {

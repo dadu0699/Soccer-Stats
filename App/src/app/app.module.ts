@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,7 @@ import { EmployeeGuard } from './guards/employee.guard';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Camera,
+    OneSignal,
     ClientGuard,
     EmployeeGuard
   ],
