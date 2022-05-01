@@ -358,7 +358,7 @@ pipeline {
           docker push ${GCR_ID}/esb:${image_tag}
         '''
         sh '''
-          cd ../Kubernetes/Production
+          cd Kubernetes/Production
           kubectl delete -n soccerstats-production deployment esb-deployment
           kubectl apply -f ./esb.yml
         '''
@@ -374,7 +374,7 @@ pipeline {
           docker push ${GCR_ID}/frontend:${image_tag}
         '''
         sh '''
-          cd ../Kubernetes/Production
+          cd Kubernetes/Production
           kubectl delete -n soccerstats-production deployment frontend-deployment
           kubectl apply -f ./frontend.yml
         '''

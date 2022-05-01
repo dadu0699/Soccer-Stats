@@ -358,7 +358,7 @@ pipeline {
           docker push ${GCR_ID}/esb:testing
         '''
         sh '''
-          cd ../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment esb-deployment
           kubectl apply -f ./esb.yml
         '''
@@ -374,7 +374,7 @@ pipeline {
           docker push ${GCR_ID}/frontend:testing
         '''
         sh '''
-          cd ../Kubernetes/Testing
+          cd Kubernetes/Testing
           kubectl delete -n soccerstats-testing deployment frontend-deployment
           kubectl apply -f ./frontend.yml
         '''
