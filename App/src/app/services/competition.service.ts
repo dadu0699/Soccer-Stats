@@ -17,7 +17,7 @@ export class CompetitionService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}:5003/competition`;
+    this.url = `${environment.url}/competition`;
   }
 
   public async get(): Promise<any> {
