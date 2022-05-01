@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientGuard } from './guards/client.guard';
 import { EmployeeGuard } from './guards/employee.guard';
+import { HomeGuard } from './guards/home.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +27,8 @@ import { EmployeeGuard } from './guards/employee.guard';
     Camera,
     OneSignal,
     ClientGuard,
-    EmployeeGuard
+    EmployeeGuard,
+    HomeGuard
   ],
   bootstrap: [AppComponent],
 })
