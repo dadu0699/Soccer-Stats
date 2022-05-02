@@ -3,7 +3,7 @@ const router = Router();
 
 const {totalPartidos, totalGolesLocal,totalGolesVisitante, 
     equipoLOCAL_goles_encajados_anotados, equipoVISITANTE_goles_encajados_anotados,
-    partidosJugadosComoLocal} = require("../models/predic.model");
+    partidosJugadosComoLocal, partidosJugadosComoVisitante} = require("../models/predic.model");
 
 router.post('/', (req, res) => {
 
