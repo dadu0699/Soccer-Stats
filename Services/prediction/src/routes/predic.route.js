@@ -64,7 +64,7 @@ router.post('/predic', (req, res) => {
                                     golesEsperadosLocal = fuerzaAtaqueLocal * fuerzaDefensaVisitante * promedioGolesLocal;
                                     golesEsperadosVisitante = fuerzaAtaqueVisitante * fuerzaDefensaLocal * promedioGolesVisitante;
     
-                                    res.status(200).json({status:200, msg: "Prediccion obtenida con éxito.", data: [{golesLocal: Math.round(golesEsperadosLocal), golesVisitor: Math.round(golesEsperadosVisitante)}]});
+                                    res.status(200).json({status:200, msg: "Prediccion obtenida con éxito.", data: [{goalsLocal: Math.round(golesEsperadosLocal), goalsVisitor: Math.round(golesEsperadosVisitante)}]});
                                 });
                             });                        
                         });                    
