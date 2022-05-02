@@ -38,7 +38,7 @@ const validarCuenta = (req, res) => {
     if (err) return response(res, 400, 'Error al verificar correo.', [err]);
 
     // response(res, 200, 'Correo verificado con éxito.', []);
-    res.status(301).redirect(`${process.env.PROXYSERVER}/auth/login`);
+    res.status(301).redirect(`${process.env.FRONTEND}/auth/login`);
   });
 };
 
