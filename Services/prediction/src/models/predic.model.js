@@ -52,7 +52,7 @@ function totalGolesVisitante(done) {
 }
 
 function equipoLOCAL_goles_encajados_anotados(id, done){
-    const sql = `select sum(resultadoVisitante) as golesE, sum(resultadoLocal) as golesA from partido where equipoLocalID = ${1};`;
+    const sql = `select sum(resultadoVisitante) as golesE, sum(resultadoLocal) as golesA from partido where equipoLocalID = ${id};`;
 
     try {
         pool.query(sql,function(err, result, fields){
@@ -69,4 +69,22 @@ function equipoLOCAL_goles_encajados_anotados(id, done){
     }
 }
 
-module.exports = {totalPartidos, totalGolesLocal, totalGolesVisitante, equipoLOCAL_goles_encajados_anotados};
+function equipoVISITANTE_goles_encajados_anotados(id, done){
+    const sql = `select sum(resultadoLocal) as golesE, sum(resultadoVisitante) as golesA from partido where equipoVisitaID = ${id};`;
+
+    try {
+        pool.query(sql,function(err, result, fields){
+            if (err) {
+                done(0);
+            }else{
+                const golesE = result[0].golesE;
+                const golesA = result[0].golesA;
+                done(golesE, golesA);
+            }
+        });
+    } catch (error) {
+        done(0);
+    }
+}
+
+module.exports = {totalPartidos, totalGolesLocal, totalGolesVisitante, equipoLOCAL_goles_encajados_anotados, equipoVISITANTE_goles_encajados_anotados};
