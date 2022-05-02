@@ -87,4 +87,23 @@ function equipoVISITANTE_goles_encajados_anotados(id, done){
     }
 }
 
-module.exports = {totalPartidos, totalGolesLocal, totalGolesVisitante, equipoLOCAL_goles_encajados_anotados, equipoVISITANTE_goles_encajados_anotados};
+function partidosJugadosComoLocal(id, done){
+    const sql = `select count(partidoID) as total from partido where equipoLocalID = ${id};`;
+
+    try {
+        pool.query(sql,function(err, result, fields){
+            if (err) {
+                done(0);
+            }else{
+                const total = result[0].total;
+                done(total);
+            }
+        });
+    } catch (error) {
+        done(0);
+    }
+}
+
+module.exports = {totalPartidos, totalGolesLocal, totalGolesVisitante, 
+    equipoLOCAL_goles_encajados_anotados, equipoVISITANTE_goles_encajados_anotados,
+    partidosJugadosComoLocal};
