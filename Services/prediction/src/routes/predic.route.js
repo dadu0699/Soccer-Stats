@@ -5,7 +5,11 @@ const {totalPartidos, totalGolesLocal,totalGolesVisitante,
     equipoLOCAL_goles_encajados_anotados, equipoVISITANTE_goles_encajados_anotados,
     partidosJugadosComoLocal, partidosJugadosComoVisitante} = require("../models/predic.model");
 
-router.post('/', (req, res) => {
+router.get('/', (req, res) => {
+    res.status(200).json({status:200, msg: "Hello World - Server Prediction", data: []});
+});
+
+router.post('/predic', (req, res) => {
 
     const {id_teamLocal, id_teamVisitor} = req.body;
 
