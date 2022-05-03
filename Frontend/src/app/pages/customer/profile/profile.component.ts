@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   public genders: Option[];
 
   public readonly: boolean;
+  public hasMembership: boolean;
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -33,13 +34,17 @@ export class ProfileComponent implements OnInit {
     ];
     this.edit = false;
     this.readonly = true;
+    this.hasMembership = false;
   }
 
   async ngOnInit(): Promise<void> {
     await this.getProfile();
+    this.hasMembership = Boolean(parseInt(localStorage.getItem('has_membership')!));
+    console.log(localStorage.getItem('has_membership'));
+    console.log(this.hasMembership);
   }
 
-  public async getProfile(): Promise<void>{
+  public async getProfile(): Promise<void> {
     try {
       const response = await this._customerService.getProfile();
       if (response['status'] === 200) {
@@ -85,6 +90,11 @@ export class ProfileComponent implements OnInit {
     try {
       const response = await this._customerService.getMembership();
       if (response['status'] === 200) {
+        this.hasMembership = true;
+        localStorage.setItem(
+          'has_membership',
+          '1'
+        );
         this.showSnackbar(response['msg']);
       }
     } catch (error) {
@@ -96,6 +106,11 @@ export class ProfileComponent implements OnInit {
     try {
       const response = await this._customerService.cancelMembership();
       if (response['status'] === 200) {
+        this.hasMembership = false;
+        localStorage.setItem(
+          'has_membership',
+          '0'
+        );
         this.showSnackbar(response['msg']);
       }
     } catch (error) {
