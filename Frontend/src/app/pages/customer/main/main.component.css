@@ -10,3 +10,8 @@
 .show{
   margin: 10px;
 }
+
+.holder{
+  height: 80%;
+  overflow: scroll;;
+}

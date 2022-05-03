@@ -30,6 +30,7 @@ export class GamesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.selectStatus(5);
   }
 
   public async selectStatus(status: any) {

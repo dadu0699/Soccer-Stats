@@ -10,7 +10,7 @@ const verFavoritos = (params, callback) => {
   const query = `
     SELECT Equipo.equipoID AS id, Equipo.nombre AS name,
       Equipo.fotoLogo AS photo, Equipo.paisID AS id_country,
-        Equipo.fechaFundacion AS foundation_date, Pais.nombre AS country
+      DATE_FORMAT(Equipo.fechaFundacion, "%Y-%m-%d") AS foundation_date, Pais.nombre AS country
     FROM Equipo
     INNER JOIN Pais ON Pais.paisID = Equipo.paisID
     INNER JOIN Favorito ON Favorito.equipoID = Equipo.equipoID

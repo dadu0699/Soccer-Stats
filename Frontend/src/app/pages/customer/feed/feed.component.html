@@ -1,4 +1,4 @@
-<div class="holder">
+<div class="content">
   <div fxLayout="column" fxLayoutAlign="space-evenly center">
     <h1>News</h1>
     <app-team-field [isFavoriteTeams]="true" (selectTeam)="selectTeam($event)" class="extra-field">
@@ -8,9 +8,9 @@
     </button>
     <p></p>
   </div>
-  <mat-grid-list cols="12" rowHeight="100px">
-    <mat-grid-tile colspan="3" rowspan="2" *ngFor='let post of posts'>
-      <app-post [post]="post"></app-post>
+  <mat-grid-list cols="12" rowHeight="130px" [gutterSize]="'15px'">
+    <mat-grid-tile colspan="4" rowspan="2" *ngFor='let post of posts'>
+        <app-post [post]="post" class="tile"></app-post>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

@@ -1,43 +1,39 @@
-
-<div class="holder">
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-    <h2>Games</h2>
-    <app-status-field [options]="status" (selectOption)="selectStatus($event)">
-    </app-status-field>
-  </div>
-  <mat-grid-list cols="12" rowHeight="100px">
-    <mat-grid-tile colspan="3" rowspan="2" *ngFor = 'let game of games'>
-      <div class="container">
-        <div fxLayout="row" fxLayoutAlign="space-around center">
-          <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="30">
-            <h1><strong>{{game.result_local}}</strong></h1>
-            <p> {{game.team_local}} </p>
-          </div>
-          <div div fxLayout="column" fxLayoutAlign="space-around center">
-            <strong>VS</strong>
-            <mat-chip-list [ngSwitch]="game.status">
-              <mat-chip selected *ngSwitchCase="1">
-                Not Started
-              </mat-chip>
-              <mat-chip color="warn" selected *ngSwitchCase="2">
-                Live
-              </mat-chip>
-              <mat-chip color="accent" selected *ngSwitchCase="3">
-                Finished
-              </mat-chip>
-              <mat-chip *ngSwitchCase="4">
-                Suspended
-              </mat-chip>
-            </mat-chip-list>
-            <span>{{game.game_date}}</span>
-          </div>
-          <div div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="30">
-            <h1><strong>{{game.result_visiting}}</strong></h1>
-            <p> {{game.team_visiting}} </p>
-          </div>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <h1>Games</h1>
+  <app-status-field [options]="status" (selectOption)="selectStatus($event)">
+  </app-status-field>
+</div>
+<mat-grid-list cols="12" rowHeight="100px" [gutterSize]="'15px'">
+  <mat-grid-tile colspan="3" rowspan="2" *ngFor='let game of games'>
+    <div class="container">
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="30">
+          <h1><strong>{{game.result_local}}</strong></h1>
+          <p> {{game.team_local}} </p>
+        </div>
+        <div div fxLayout="column" fxLayoutAlign="space-around center">
+          <strong>VS</strong>
+          <mat-chip-list [ngSwitch]="game.status">
+            <mat-chip selected *ngSwitchCase="1">
+              Not Started
+            </mat-chip>
+            <mat-chip color="warn" selected *ngSwitchCase="2">
+              Live
+            </mat-chip>
+            <mat-chip color="accent" selected *ngSwitchCase="3">
+              Finished
+            </mat-chip>
+            <mat-chip *ngSwitchCase="4">
+              Suspended
+            </mat-chip>
+          </mat-chip-list>
+          <span>{{game.game_date}}</span>
+        </div>
+        <div div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="30">
+          <h1><strong>{{game.result_visiting}}</strong></h1>
+          <p> {{game.team_visiting}} </p>
         </div>
       </div>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
-
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
