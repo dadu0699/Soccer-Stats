@@ -36,12 +36,14 @@ export class UserViewComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>();
 
     this.user = new User();
+    this.user.gender = 'F',
+    this.user.id_gender = 0,
     this.allUsers = [];
 
     this.genders = [
+      { id: 0, description: 'Female', char: 'F' },
       { id: 1, description: 'Male', char: 'M' },
-      { id: 2, description: 'Female', char: 'F' },
-      { id: 3, description: 'Other', char: 'U' },
+      { id: 2, description: 'Other', char: 'U' },
     ];
     this.roles = [
       { id: 1, description: 'Admin' },
@@ -69,7 +71,7 @@ export class UserViewComponent implements OnInit {
       if (response['status'] === 200) {
         this.allUsers = response['data']
         this.allUsers.forEach(us => {
-          us.id_gender = this.genders.find(el => el.char == us.gender)?.id || 2
+          us.id_gender = this.genders.find(el => el.char == us.gender)?.id;
         });
         this.fillTable();
         this.showSnackbar(response['msg']);
@@ -101,7 +103,6 @@ export class UserViewComponent implements OnInit {
 
   public async done(user: any): Promise<void> {
     this.user = user;
-    this.user.gender = this.genders[Number(this.user.gender) - 1].char || 'U';
     if (this.allowEditing) {
       this.updateExisting();
     } else {
@@ -148,6 +149,7 @@ export class UserViewComponent implements OnInit {
     this.allowEditing = false;
     let user: User = this.allUsers.find(el => el.id === id) || new User();
     this.user = user;
+    console.log(this.user);
   }
 
   public create() {

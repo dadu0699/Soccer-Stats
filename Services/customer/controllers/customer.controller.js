@@ -12,7 +12,6 @@ const crearUsuario = async (req, res) => {
     const { key } = await s3.itemUpload(req.body['photo']);
 
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key;
-    // req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
     req.body['password'] = CryptoJS.AES.encrypt(
       req.body['password'],
       keyCrypto,
@@ -38,7 +37,6 @@ const obtenerPerfil = (req, res) => {
     if (err || results.length < 1)
       return response(res, 400, 'Error al obtener el usuario.', [err]);
 
-    results[0]['gender'] = results['gender'] ? 'F' : 'M';
     results[0]['age'] = calcularEdad(results[0]['birth_date']);
 
     response(res, 200, 'Usuario obtenido con éxito.', results);
@@ -65,8 +63,6 @@ const actualizarPerfil = async (req, res) => {
     const { key } = await s3.itemUpload(req.body['photo']);
     req.body['photo'] = 'https://grupof.s3.us-east-2.amazonaws.com/' + key;
   }
-
-  // req.body['gender'] = req.body['gender'] == 'F' ? 0 : 1;
 
   customerModel.update(req.body, (err, results) => {
     if (err)

@@ -53,9 +53,9 @@ export class UsersPerParameterComponent implements OnInit {
     this.users = [];
 
     this.genders = [
+      { id: 0, description: 'Female', char: 'F' },
       { id: 1, description: 'Male', char: 'M' },
-      { id: 2, description: 'Female', char: 'F' },
-      { id: 3, description: 'Other', char: 'U' },
+      { id: 2, description: 'Other', char: 'U' },
     ];
 
     this.membershipStatus = [
@@ -151,7 +151,8 @@ export class UsersPerParameterComponent implements OnInit {
 
   public async selectGender(id_gender: any): Promise<void>{
     try {
-      const response = await this._adminService.report6(this.genders[id_gender-1].char || 'M');
+      console.log(this.genders[id_gender].char || 'M');
+      const response = await this._adminService.report6(this.genders[id_gender].char || 'M');
       if (response['status'] === 200) {
         this.users = response['data']
         this.fillTable();

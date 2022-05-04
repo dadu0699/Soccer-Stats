@@ -11,7 +11,7 @@ export class User {
   public address: string;
   public id_country: number;
 
-  public id_gender: number;
+  public id_gender: any;
   public id_rol: number;
   public id_status: number;
   public age: number;

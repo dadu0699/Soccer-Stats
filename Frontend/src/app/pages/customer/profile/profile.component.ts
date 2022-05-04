@@ -28,9 +28,9 @@ export class ProfileComponent implements OnInit {
     this.user = new User();
 
     this.genders = [
+      { id: 0, description: 'Female', char: 'F' },
       { id: 1, description: 'Male', char: 'M' },
-      { id: 2, description: 'Female', char: 'F' },
-      { id: 3, description: 'Other', char: 'U' },
+      { id: 2, description: 'Other', char: 'U' },
     ];
     this.edit = false;
     this.readonly = true;
@@ -40,8 +40,6 @@ export class ProfileComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.getProfile();
     this.hasMembership = Boolean(parseInt(localStorage.getItem('has_membership')!));
-    console.log(localStorage.getItem('has_membership'));
-    console.log(this.hasMembership);
   }
 
   public async getProfile(): Promise<void> {
@@ -49,7 +47,7 @@ export class ProfileComponent implements OnInit {
       const response = await this._customerService.getProfile();
       if (response['status'] === 200) {
         this.user = response['data'][0];
-        this.user.id_gender = this.genders.find(el => el.char == this.user.gender)?.id || 2
+        this.user.id_gender = this.genders.find(el => el.char == this.user.gender)?.id;
         this.showSnackbar(response['msg']);
       }
     } catch (error) {
