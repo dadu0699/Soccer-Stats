@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://34.71.127.255:80/esb',
-  //url: 'http://35.222.234.155/esb',
-  //url: 'http://localhost',
+  url: 'http://35.222.234.155/esb',
 };
 
 /*

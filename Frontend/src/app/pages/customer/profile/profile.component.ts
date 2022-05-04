@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Option } from 'src/app/models/option.model';
 
 import { User } from 'src/app/models/user.model';
 import { CustomerService } from 'src/app/services/customer.service';
+import { ConfirmationDialogComponent } from 'src/app/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +26,9 @@ export class ProfileComponent implements OnInit {
   public hasMembership: boolean;
 
   constructor(
+    private _router: Router,
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
     private _customerService: CustomerService
   ) {
     this.user = new User();
@@ -74,14 +80,22 @@ export class ProfileComponent implements OnInit {
   }
 
   public async delete(): Promise<void> {
-    try {
-      const response = await this._customerService.deleteAccount();
-      if (response['status'] === 200) {
-        this.showSnackbar(response['msg']);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe(async (status) => {
+      if (status)
+        try {
+          const response = await this._customerService.deleteAccount();
+          if (response['status'] === 200) {
+            this.showSnackbar(response['msg']);
+            localStorage.clear();
+            this._router.navigate(['/auth/login']);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+    });
+
   }
 
   public async getMembership(): Promise<void> {
@@ -93,6 +107,7 @@ export class ProfileComponent implements OnInit {
           'has_membership',
           '1'
         );
+        this._router.navigate(['/auth/login']);
         this.showSnackbar(response['msg']);
       }
     } catch (error) {
