@@ -5,6 +5,7 @@ import { Option } from 'src/app/models/option.model';
 import { AdminService } from 'src/app/services/admin.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,9 +21,7 @@ export class MainComponent implements OnInit {
   public esbs: Option[];
 
   constructor(
-    private _adminServices: AdminService,
-    private _customerServices: CustomerService,
-    private _auth: AuthService
+    private _router: Router
   ) {
     this.opened = false;
     this.showReports = false;
@@ -32,17 +31,18 @@ export class MainComponent implements OnInit {
       { id: 2, description: 'Employee', link: 'employee-reports' },
       { id: 2, description: 'Logs', link: 'logs' },
     ]
-    this.esbs = [{ id: 0, description: 'A', link: '' },
-    { id: 1, description: 'B', link: '35.226.118.223:3000' },
-    { id: 2, description: 'C', link: '34.132.88.81:7050' },
-    { id: 3, description: 'D', link: '' },
-    { id: 4, description: 'E', link: '' },
-    { id: 5, description: 'F', link: '34.71.127.255:80' },
-    { id: 6, description: 'G', link: '' },
-    { id: 7, description: 'H', link: '' },
-    { id: 8, description: 'I', link: '34.125.81.45:3000' },
-    { id: 9, description: 'J', link: '3.15.227.171:3000' },
-    { id: 10, description: 'K', link: '' },];
+    this.esbs = [{ id: 0, description: 'A', },
+    { id: 1, description: 'B', },
+    { id: 2, description: 'C', },
+    { id: 3, description: 'D', },
+    { id: 4, description: 'E', },
+    { id: 5, description: 'F', },
+    { id: 6, description: 'G', },
+    { id: 7, description: 'H', },
+    { id: 8, description: 'I', },
+    { id: 9, description: 'J', },
+    { id: 10, description: 'K', },
+    { id: 11, description: 'F2', },];
   }
 
   ngOnInit(): void {
@@ -57,7 +57,13 @@ export class MainComponent implements OnInit {
   }
 
   public selectESB(value: any) {
-    console.log(value)
+
+    localStorage.setItem('id_esb', value);
+    localStorage.removeItem('token');
+    localStorage.removeItem('has_membership');
+    localStorage.removeItem('id_user');
+    localStorage.removeItem('id_rol');
+    window.location.reload();
   }
 
 }

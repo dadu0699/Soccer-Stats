@@ -8,6 +8,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class CustomerService {
+  private id_esb: number;
   private url: string;
   private id_user: number;
   private httpOptions = {
@@ -18,7 +19,9 @@ export class CustomerService {
   };
 
   constructor(private _httpClient: HttpClient) {
-    this.url = `${environment.url}/customer`;
+    this.id_esb = parseInt(localStorage.getItem('id_esb') || '5');
+
+    this.url = `${environment.esbs[this.id_esb]}/customer`;
     this.id_user = parseInt(localStorage.getItem('id_user') || '');
   }
 
