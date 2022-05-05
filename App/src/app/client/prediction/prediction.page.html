@@ -13,4 +13,45 @@
     </ion-toolbar>
   </ion-header>
 
+  <form class="formulario" (ngSubmit)="prediction()">
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="trophy-outline"></ion-icon> Team Local:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="data.id_teamLocal" name="id_teamLocal">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of teams1">{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="trophy-outline"></ion-icon> Teams Visitor:
+      </ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="data.id_teamVisitor" name="id_teamVisitor">
+        <ion-select-option value="{{item.id}}" *ngFor="let item of teams2">{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Team Local Goals:
+      </ion-label>
+      <ion-input type="number" [(ngModel)]="data.goals1" name="goals1" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="information-circle-outline"></ion-icon> Team Visitor Goals:
+      </ion-label>
+      <ion-input type="number" [(ngModel)]="data.goals2" name="goals2" required></ion-input>
+    </ion-item>
+    <ion-button color="dark" expand="block" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="filter-outline" slot="start"></ion-icon>
+      Filter
+    </ion-button>
+  </form>
+
+  <div style="text-align: center;">
+    <img *ngIf="goalLocal == data.goals1 && goalVisitor == data.goals2 " src="../../../assets/img/win.svg" width="auto"
+      height="200">
+  </div>
+
 </ion-content>
