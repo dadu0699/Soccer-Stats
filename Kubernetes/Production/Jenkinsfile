@@ -241,6 +241,33 @@ pipeline {
       }
     }
 
+    stage('Prediction Service') {
+      when { changeset "Services/prediction/**"}
+      steps {
+        sh '''
+          cd Services/prediction
+          rm -rf .env.test
+          cp ${ENV_TEST} .env.test
+
+          npm install
+          npm run test
+        '''
+        sh '''
+          cd Services/prediction
+          rm -rf .env.production
+          cp ${ENV_PRODUCTION} .env.production
+
+          docker build -t ${GCR_ID}/prediction-service:${image_tag} .
+          docker push ${GCR_ID}/prediction-service:${image_tag}
+        '''
+        sh '''
+          cd Kubernetes/Production
+          kubectl delete -n soccerstats-production deployment prediction-deployment
+          kubectl apply -f ./prediction.yml
+        '''
+      }
+    }
+
     stage('Auth Service') {
       when { changeset "Services/auth/**"}
       steps {
