@@ -51,7 +51,6 @@ const sendPushNotification = (req, _res) => {
     ] = `El partido de tu equipo favorito '${favorite}' ha sido ${status}`;
 
     settings.body = JSON.stringify(body);
-    console.log(body);
 
     if (!err) {
       try {
