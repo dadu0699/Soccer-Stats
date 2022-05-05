@@ -1,5 +1,6 @@
 const postModel = require('../models/post.model');
 const { writeLog } = require('../helpers/logHandler');
+const { sendPushNotification } = require('../helpers/pushNotificationHandler');
 
 const obtenerNoticias = (req, res) => {
   postModel.get(req.query, (err, results) => {
@@ -18,6 +19,8 @@ const obtenerNoticiasPorEquipo = (req, res) => {
 const crearNoticia = (req, res) => {
   postModel.post(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al crear noticia.', [err]);
+
+    sendPushNotification(req, res);
 
     writeLog(
       {

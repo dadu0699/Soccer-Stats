@@ -1,5 +1,6 @@
 const matchModel = require('../models/match.model');
 const logModel = require('../models/log.model');
+const { sendPushNotification } = require('../helpers/pushNotificationHandler');
 
 const crearPartido = (req, res) => {
   matchModel.crearPartido(req.body, (err, results) => {
@@ -33,6 +34,12 @@ const obtenerPartidos = (req, res) => {
 const actualizarPartido = (req, res) => {
   matchModel.actualizarPartido(req.body, (err, results) => {
     if (err) return response(res, 400, 'Error al actualizar partido.', [err]);
+
+    req.body.id_team = req.body.id_team_visiting;
+    sendPushNotification(req, res);
+
+    req.body.id_team = req.body.id_team_local;
+    sendPushNotification(req, res);
 
     logModel.agregarLog(
       {
