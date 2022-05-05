@@ -1,7 +1,7 @@
 const pool = require('../db_connection');
 
 function totalPartidos(done) {
-    const sql = "select count(partidoID) as total from partido;";
+    const sql = "select count(partidoID) as total from Partido;";
 
     try {
         pool.query(sql,function(err, result, fields){
@@ -18,7 +18,7 @@ function totalPartidos(done) {
 }
 
 function totalGolesLocal(done) {
-    const sql = "select sum(resultadoLocal) as total from partido;";
+    const sql = "select sum(resultadoLocal) as total from Partido;";
 
     try {
         pool.query(sql,function(err, result, fields){
@@ -35,7 +35,7 @@ function totalGolesLocal(done) {
 }
 
 function totalGolesVisitante(done) {
-    const sql = "select sum(resultadoVisitante) as total from partido;";
+    const sql = "select sum(resultadoVisitante) as total from Partido;";
 
     try {
         pool.query(sql,function(err, result, fields){
@@ -52,7 +52,7 @@ function totalGolesVisitante(done) {
 }
 
 function equipoLOCAL_goles_encajados_anotados(id, done){
-    const sql = `select sum(resultadoVisitante) as golesE, sum(resultadoLocal) as golesA from partido where equipoLocalID = ${id};`;
+    const sql = `select sum(resultadoVisitante) as golesE, sum(resultadoLocal) as golesA from Partido where equipoLocalID = ${id};`;
 
     try {
         pool.query(sql,function(err, result, fields){
@@ -70,7 +70,7 @@ function equipoLOCAL_goles_encajados_anotados(id, done){
 }
 
 function equipoVISITANTE_goles_encajados_anotados(id, done){
-    const sql = `select sum(resultadoLocal) as golesE, sum(resultadoVisitante) as golesA from partido where equipoVisitaID = ${id};`;
+    const sql = `select sum(resultadoLocal) as golesE, sum(resultadoVisitante) as golesA from Partido where equipoVisitaID = ${id};`;
 
     try {
         pool.query(sql,function(err, result, fields){
@@ -88,7 +88,7 @@ function equipoVISITANTE_goles_encajados_anotados(id, done){
 }
 
 function partidosJugadosComoLocal(id, done){
-    const sql = `select count(partidoID) as total from partido where equipoLocalID = ${id};`;
+    const sql = `select count(partidoID) as total from Partido where equipoLocalID = ${id};`;
 
     try {
         pool.query(sql,function(err, result, fields){
@@ -105,7 +105,7 @@ function partidosJugadosComoLocal(id, done){
 }
 
 function partidosJugadosComoVisitante(id, done){
-    const sql = `select count(partidoID) as total from partido where equipoVisitaID = ${id};`;
+    const sql = `select count(partidoID) as total from Partido where equipoVisitaID = ${id};`;
 
     try {
         pool.query(sql,function(err, result, fields){
