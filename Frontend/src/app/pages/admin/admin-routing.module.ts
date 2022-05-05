@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
 
 import { EmployeeReportsComponent } from './employee-reports/employee-reports.component';
-import { EsbManagementComponent } from './esb-management/esb-management.component';
 import { LogsComponent } from './logs/logs.component';
 import { MainComponent } from './main/main.component';
 import { UserManagementComponent } from './user-management/user-management.component';
@@ -17,7 +16,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'user-management', component: UserManagementComponent },
-      { path: 'esb-management', component: EsbManagementComponent },
       { path: 'user-reports', component: UserReportsComponent },
       { path: 'employee-reports', component: EmployeeReportsComponent },
       { path: 'logs', component: LogsComponent },

@@ -14,7 +14,6 @@ import { MainComponent } from './main/main.component';
 import { LogsComponent } from './logs/logs.component';
 import { UserReportsComponent } from './user-reports/user-reports.component';
 import { EmployeeReportsComponent } from './employee-reports/employee-reports.component';
-import { EsbManagementComponent } from './esb-management/esb-management.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,6 +23,8 @@ import { MatListModule } from '@angular/material/list';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,6 @@ import { MatIconModule } from '@angular/material/icon';
     LogsComponent,
     UserReportsComponent,
     EmployeeReportsComponent,
-    EsbManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +50,8 @@ import { MatIconModule } from '@angular/material/icon';
     LayoutModule,
     MatButtonModule,
     MatIconModule,
+    MatSelectModule,
+    MatFormFieldModule,
   ],
 })
-export class AdminModule {}
+export class AdminModule { }
