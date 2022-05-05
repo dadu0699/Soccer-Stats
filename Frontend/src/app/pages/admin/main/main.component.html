@@ -2,8 +2,9 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="'side'" [opened]="opened">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="/soccer-stats/admin/user-management">User Management</a>
-      <a mat-list-item href="/soccer-stats/employee/management">Employee Management</a>
+      <a mat-list-item [routerLink]="['/soccer-stats/admin/user-management']">User Management</a>
+      <a mat-list-item [routerLink]="['/soccer-stats/employee/management']">Employee Management</a>
+      <a mat-list-item [routerLink]="['/soccer-stats/admin/esb-management']">ESB Management</a>
     </mat-nav-list>
 
     <mat-action-list>
@@ -15,7 +16,7 @@
     </mat-action-list>
 
     <mat-nav-list *ngIf="showReports">
-      <a mat-list-item *ngFor="let report of reports" href="/soccer-stats/admin/{{report.link}}">
+      <a mat-list-item *ngFor="let report of reports" [routerLink]="'/soccer-stats/admin/'+report.link">
         &nbsp;
         &nbsp;
         <mat-icon class="icon">bubble_chart</mat-icon>

@@ -14,6 +14,7 @@ import { MainComponent } from './main/main.component';
 import { LogsComponent } from './logs/logs.component';
 import { UserReportsComponent } from './user-reports/user-reports.component';
 import { EmployeeReportsComponent } from './employee-reports/employee-reports.component';
+import { EsbManagementComponent } from './esb-management/esb-management.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -31,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
     LogsComponent,
     UserReportsComponent,
     EmployeeReportsComponent,
+    EsbManagementComponent,
   ],
   imports: [
     CommonModule,
