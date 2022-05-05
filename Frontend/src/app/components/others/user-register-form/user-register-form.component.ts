@@ -29,10 +29,12 @@ export class UserRegisterFormComponent implements OnInit {
     private _snackBar: MatSnackBar,
   ) {
     this.user = new User();
+    this.user.gender = 'F';
+    this.user.id_gender = 0;
     this.genders = [
-      { id: 1, description: 'Male' },
-      { id: 2, description: 'Female' },
-      { id: 3, description: 'Other' },
+      { id: 0, description: 'Female', char: 'F' },
+      { id: 1, description: 'Male', char: 'M' },
+      { id: 2, description: 'Other', char: 'U' },
     ];
     this.roles = [
       { id: 1, description: 'Admin' },
@@ -70,7 +72,8 @@ export class UserRegisterFormComponent implements OnInit {
   }
 
   public selectGender(id_gender: any) {
-    this.user.gender = id_gender;
+    this.user.gender = this.genders[id_gender].char || 'U';
+    this.user.id_gender = id_gender;
   }
 
   public selectRol(id_rol: any) {

@@ -48,17 +48,16 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
+  height: 0;
 }
 
 ::-webkit-scrollbar-track {
-  border-radius: 2px;
   background: #ff00;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b2dfdb;
-  border-radius: 2px;
+  background: #212121;
 }
 
 ::-webkit-scrollbar-thumb:hover {

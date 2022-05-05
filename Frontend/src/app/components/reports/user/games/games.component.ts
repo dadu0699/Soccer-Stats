@@ -54,7 +54,6 @@ export class GamesComponent implements OnInit {
   }
 
   private fillTable() {
-    console.log(this.games)
     this.dataTable = [];
     this.games.forEach((element: Game) => {
         this.dataTable.push({

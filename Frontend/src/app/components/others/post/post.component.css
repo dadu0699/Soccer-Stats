@@ -1,6 +1,20 @@
-.border{
+.mat-card {
   border-width: thin;
-  border-radius: 5px;
+  border-radius: 10px;
   border-color: #212121;
   border-style: solid;
+  max-height: 85%;
+}
+
+.mat-card-content {
+  overflow: scroll;
+  max-height: 100px;
+}
+
+.description {
+  margin: 5px;
+}
+
+.header-image{
+  border-radius: 0;
 }

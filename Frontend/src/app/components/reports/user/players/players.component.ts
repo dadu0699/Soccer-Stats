@@ -139,7 +139,6 @@ export class PlayersComponent implements OnInit {
   }
 
   public async getReport2_3(): Promise<void> {
-    console.log(this.whichPerson, this.age);
     let response;
     try {
       if (this.report2) {
@@ -151,7 +150,6 @@ export class PlayersComponent implements OnInit {
         this.players = response['data'];
         this.fillTable();
         this.showSnackbar(response['msg']);
-        console.log(response['data'])
       }
     } catch (error) {
       console.log(error);

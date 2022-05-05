@@ -1,5 +1,8 @@
 .holder{
-  padding: 0;
   overflow: scroll;
-  height: 550px;
+  margin: 15px;
+}
+
+.mat-tab-group{
+  height: 80%;
 }

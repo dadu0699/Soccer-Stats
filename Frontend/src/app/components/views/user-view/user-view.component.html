@@ -10,9 +10,7 @@
 
   <mat-grid-tile colspan="6" rowspan="7">
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
-      <h3>User Management</h3>
-
-      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource"
+      <app-view-table [labels]="labels" [data]="dataTable" [dataSource]="dataSource" [pageSize]="4"
         (selectObject)="selectUser($event)">
       </app-view-table>
 

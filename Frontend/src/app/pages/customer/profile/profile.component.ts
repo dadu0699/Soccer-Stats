@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { Option } from 'src/app/models/option.model';
 
 import { User } from 'src/app/models/user.model';
 import { CustomerService } from 'src/app/services/customer.service';
+import { ConfirmationDialogComponent } from 'src/app/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -19,32 +23,37 @@ export class ProfileComponent implements OnInit {
   public genders: Option[];
 
   public readonly: boolean;
+  public hasMembership: boolean;
 
   constructor(
+    private _router: Router,
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
     private _customerService: CustomerService
   ) {
     this.user = new User();
 
     this.genders = [
+      { id: 0, description: 'Female', char: 'F' },
       { id: 1, description: 'Male', char: 'M' },
-      { id: 2, description: 'Female', char: 'F' },
-      { id: 3, description: 'Other', char: 'U' },
+      { id: 2, description: 'Other', char: 'U' },
     ];
     this.edit = false;
     this.readonly = true;
+    this.hasMembership = false;
   }
 
   async ngOnInit(): Promise<void> {
     await this.getProfile();
+    this.hasMembership = Boolean(parseInt(localStorage.getItem('has_membership')!));
   }
 
-  public async getProfile(): Promise<void>{
+  public async getProfile(): Promise<void> {
     try {
       const response = await this._customerService.getProfile();
       if (response['status'] === 200) {
         this.user = response['data'][0];
-        this.user.id_gender = this.genders.find(el => el.char == this.user.gender)?.id || 2
+        this.user.id_gender = this.genders.find(el => el.char == this.user.gender)?.id;
         this.showSnackbar(response['msg']);
       }
     } catch (error) {
@@ -71,20 +80,34 @@ export class ProfileComponent implements OnInit {
   }
 
   public async delete(): Promise<void> {
-    try {
-      const response = await this._customerService.deleteAccount();
-      if (response['status'] === 200) {
-        this.showSnackbar(response['msg']);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe(async (status) => {
+      if (status)
+        try {
+          const response = await this._customerService.deleteAccount();
+          if (response['status'] === 200) {
+            this.showSnackbar(response['msg']);
+            localStorage.clear();
+            this._router.navigate(['/auth/login']);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+    });
+
   }
 
   public async getMembership(): Promise<void> {
     try {
       const response = await this._customerService.getMembership();
       if (response['status'] === 200) {
+        this.hasMembership = true;
+        localStorage.setItem(
+          'has_membership',
+          '1'
+        );
+        this._router.navigate(['/auth/login']);
         this.showSnackbar(response['msg']);
       }
     } catch (error) {
@@ -96,6 +119,11 @@ export class ProfileComponent implements OnInit {
     try {
       const response = await this._customerService.cancelMembership();
       if (response['status'] === 200) {
+        this.hasMembership = false;
+        localStorage.setItem(
+          'has_membership',
+          '0'
+        );
         this.showSnackbar(response['msg']);
       }
     } catch (error) {

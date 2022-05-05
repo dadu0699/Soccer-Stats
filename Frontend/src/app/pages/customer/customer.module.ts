@@ -32,7 +32,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -66,6 +66,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatChipsModule,
     MatIconModule,
+    MatRadioModule,
   ]
 })
 export class CustomerModule { }

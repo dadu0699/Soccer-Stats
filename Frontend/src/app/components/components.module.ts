@@ -25,6 +25,7 @@ import { IncidenceDialogComponent } from './dialogs/incidence-dialog/incidence-d
 import { TransferDialogComponent } from './dialogs/transfer-dialog/transfer-dialog.component';
 import { ForgotPasswordDialogComponent } from './dialogs/forgot-password-dialog/forgot-password-dialog.component';
 import { TransferDialogTechnicalDirectorComponent } from './dialogs/transfer-dialog-technical-director/transfer-dialog-technical-director.component';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 
 import { UsersPerParameterComponent } from './reports/admin/users-per-parameter/users-per-parameter.component';
 import { EmployeesPerParameterComponent } from './reports/admin/employees-per-parameter/employees-per-parameter.component';
@@ -80,6 +81,7 @@ import { MatChipsModule } from '@angular/material/chips';
     CompetitionFieldComponent,
     IncidenceDialogComponent,
     TransferDialogComponent,
+    ConfirmationDialogComponent,
     ForgotPasswordDialogComponent,
     TransferDialogTechnicalDirectorComponent,
     PlayerFieldComponent,
@@ -103,6 +105,7 @@ import { MatChipsModule } from '@angular/material/chips';
     IncidenceDialogComponent,
     TransferDialogComponent,
     ForgotPasswordDialogComponent,
+    ConfirmationDialogComponent,
   ],
   exports: [
     UserViewComponent,

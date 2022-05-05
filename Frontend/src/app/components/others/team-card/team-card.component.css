@@ -4,3 +4,7 @@
   border-color: #212121;
   border-style: solid;
 }
+
+.header-image{
+  border-radius: 0;
+}

@@ -21,15 +21,16 @@ export class GamesListComponent implements OnInit {
     ];
 
     this.status = [
-      { id: 1, description: 'Sin Iniciar' },
-      { id: 2, description: 'Iniciado' },
-      { id: 3, description: 'Finalizado' },
-      { id: 4, description: 'Suspendido' },
-      { id: 5, description: 'Todos' },
+      { id: 1, description: 'Not Started' },
+      { id: 2, description: 'Live' },
+      { id: 3, description: 'Finished' },
+      { id: 4, description: 'Suspended' },
+      { id: 5, description: 'All' },
     ];
   }
 
   ngOnInit(): void {
+    this.selectStatus(5);
   }
 
   public async selectStatus(status: any) {

@@ -13,11 +13,11 @@
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-around center" class="membership-width" >
-      <button mat-stroked-button color="warn" (click)="getMembership()">
+      <button mat-stroked-button color="warn" (click)="getMembership()" *ngIf="!hasMembership">
         <mat-icon class="icon">money</mat-icon>
         Get Membership!
       </button>
-      <button mat-stroked-button color="accent"  (click)="cancelMembership()">
+      <button mat-stroked-button color="accent"  (click)="cancelMembership()" *ngIf="hasMembership">
         <mat-icon class="icon">cancel</mat-icon>
         Cancel Membership
       </button>
