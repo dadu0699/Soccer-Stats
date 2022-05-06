@@ -94,7 +94,6 @@ export class UsersPerParameterComponent implements OnInit {
   }
 
   private fillTable() {
-      this.dataSource = new MatTableDataSource<any>();
       this.dataTable = [];
     this.users.forEach((element: User) => {
       if (this.perCountry || this.perMembershipStatus)
@@ -151,7 +150,6 @@ export class UsersPerParameterComponent implements OnInit {
 
   public async selectGender(id_gender: any): Promise<void>{
     try {
-      console.log(this.genders[id_gender].char || 'M');
       const response = await this._adminService.report6(this.genders[id_gender].char || 'M');
       if (response['status'] === 200) {
         this.users = response['data']

@@ -3,6 +3,29 @@ USE SoccerStats;
 -- USE SoccerStatsDevelop;
 -- USE SoccerStatsTesting;
 
+INSERT INTO Usuario(nombre, apellido, claveAcceso, correo, telefono, fotografia, genero, fechaNacimiento, direccion, rol, estado, paisID )
+VALUES ('Cliente', 'Grupo A','aelD9IddykHzKSlcUcMIsQ==', 'Ac', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo B','aelD9IddykHzKSlcUcMIsQ==', 'yyfm.95@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo C','aelD9IddykHzKSlcUcMIsQ==', 'sicmariana8@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo D','aelD9IddykHzKSlcUcMIsQ==', 'Dc', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo E','aelD9IddykHzKSlcUcMIsQ==', 'elba1995@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo G','aelD9IddykHzKSlcUcMIsQ==', 'alejandro76.gb@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo H','aelD9IddykHzKSlcUcMIsQ==', 'cliente@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo I','aelD9IddykHzKSlcUcMIsQ==', 'Ic', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo J','aelD9IddykHzKSlcUcMIsQ==', 'vgdep1997@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+('Cliente', 'Grupo K','aelD9IddykHzKSlcUcMIsQ==', 'Kc', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 3, 1, 88),
+
+('Administrador', 'Grupo A','aelD9IddykHzKSlcUcMIsQ==', 'Aa', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo B','aelD9IddykHzKSlcUcMIsQ==', 'proyectosusac2022@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo C','aelD9IddykHzKSlcUcMIsQ==', 'edilson35s78@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo D','aelD9IddykHzKSlcUcMIsQ==', 'wjosuep13@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo E','aelD9IddykHzKSlcUcMIsQ==', '3030921730108@ingenieria.usac.edu.gt', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo G','aelD9IddykHzKSlcUcMIsQ==', 'marielosherreras10@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo H','aelD9IddykHzKSlcUcMIsQ==', 'administrador@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo I','aelD9IddykHzKSlcUcMIsQ==', 'Ia', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo J','aelD9IddykHzKSlcUcMIsQ==', 'alisonleiva24@gmail.com', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88),
+('Administrador', 'Grupo K','aelD9IddykHzKSlcUcMIsQ==', 'Ka', '12345', 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png', 'U', '1998-05-04', 'SAB', 1, 1, 88);
+
 INSERT INTO PosicionJugador (posicionJugadorID, nombre) VALUES 
     (1, 'Portero'), 
     (2, 'Defensa'),

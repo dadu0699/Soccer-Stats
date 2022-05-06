@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.password = '';
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   public async signin(): Promise<void> {
     try {
@@ -39,11 +39,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.email,
         this.password
       );
+      console.log(response);
 
       if (response['status'] == 200) {
         const data = response['data'];
-
-        if (data['id_status'] == 1) {
+        console.log(response['msg']);
+        //TODO remove true & console.logs
+        if (data['id_status'] == 1 || true) {
           localStorage.setItem('token', String(data['token']));
           localStorage.setItem('id_user', String(data['id_user']));
           localStorage.setItem('id_rol', String(data['id_rol']));

@@ -82,7 +82,6 @@ export class UserViewComponent implements OnInit {
   }
 
   private fillTable() {
-    this.dataSource = new MatTableDataSource<any>();
     this.dataTable = [];
 
     this.allUsers.forEach((element: User) => {

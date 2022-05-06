@@ -49,7 +49,6 @@ export class EmployeesPerParameterComponent implements OnInit {
   }
 
   private fillTable() {
-    this.dataSource = new MatTableDataSource<any>();
     this.dataTable = [];
     this.users.forEach((element: User) => {
 

@@ -43,7 +43,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
 
   public logOut() {
     if (this.whichPage != 0) {
-      localStorage.clear();
+      localStorage.removeItem('token');
+      localStorage.removeItem('has_membership');
+      localStorage.removeItem('id_user');
+      localStorage.removeItem('id_rol');
       this._router.navigate(['/auth/login']);
     } else {
       if (localStorage.getItem('id_rol') == '1') {
