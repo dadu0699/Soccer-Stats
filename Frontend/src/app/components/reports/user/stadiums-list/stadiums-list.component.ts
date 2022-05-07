@@ -59,6 +59,7 @@ export class StadiumsListComponent implements OnInit {
   public async selectCountry(id_country: any): Promise<void> {
     try {
       const response = await this._customerService.report7(id_country);
+      console.log(response);
       if (response['status'] === 200) {
         this.stadiums = response['data']
         this.fillTable();
@@ -72,6 +73,7 @@ export class StadiumsListComponent implements OnInit {
   public async selectCapacity(): Promise<void> {
     try {
       const response = await this._customerService.report8(this.capacity);
+      console.log(response);
       if (response['status'] === 200) {
         this.stadiums = response['data']
         this.fillTable();

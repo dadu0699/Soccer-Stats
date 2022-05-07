@@ -101,6 +101,7 @@ export class GamesComponent implements OnInit {
   public async getReport9(): Promise<void> {
     try {
       const response = await this._customerService.report9(this.teamX);
+      console.log(response);
       if (response['status'] === 200) {
         this.games = response['data'];
         this.fillTable();
@@ -114,6 +115,7 @@ export class GamesComponent implements OnInit {
   public async getReport11(): Promise<void> {
     try {
       const response = await this._customerService.report11(this.goals);
+      console.log(response);
       if (response['status'] === 200) {
         this.games = response['data'];
         this.fillTable();
@@ -127,6 +129,7 @@ export class GamesComponent implements OnInit {
   public async getReport15(): Promise<void> {
     try {
       const response = await this._customerService.report15(this.year);
+      console.log(response);
       if (response['status'] === 200) {
         this.games = response['data'];
         this.fillTable();
@@ -140,6 +143,7 @@ export class GamesComponent implements OnInit {
   public async getReport16(): Promise<void> {
     try {
       const response = await this._customerService.report16(this.teamX, this.teamY);
+      console.log(response);
       if (response['status'] === 200) {
         this.games = response['data'];
         this.fillTable();
@@ -153,6 +157,7 @@ export class GamesComponent implements OnInit {
   public async getReport17(): Promise<void> {
     try {
       const response = await this._customerService.report17(this.teamX);
+      console.log(response);
       if (response['status'] === 200) {
         this.games = response['data'];
         this.fillTable();

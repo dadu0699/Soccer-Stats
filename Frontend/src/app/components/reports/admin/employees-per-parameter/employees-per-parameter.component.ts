@@ -71,6 +71,7 @@ export class EmployeesPerParameterComponent implements OnInit {
       this.currentOption = id_option
       try {
         const response = await this._adminService.report8(id_option);
+       console.log(response);
         if (response['status'] === 200) {
           this.users = response['data']
           this.fillTable();
@@ -85,6 +86,7 @@ export class EmployeesPerParameterComponent implements OnInit {
   public async selectTeam(id_team: any): Promise<void> {
     try {
       const response = await this._adminService.report9(this.currentOption, id_team);
+      console.log(response);
       if (response['status'] === 200) {
         this.users = response['data']
         this.fillTable();

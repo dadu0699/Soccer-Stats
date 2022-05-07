@@ -32,10 +32,12 @@ export class TeamListComponent implements OnInit {
   public async getTeams(): Promise<void> {
     try {
       const response = await this._customerService.getfavoriteTeams();
+      console.log(response);
       if (response['status'] === 200) {
         this.favoriteTeams = response['data']
         this.teams = [];
         const responseAll = await this._teamService.get();
+        console.log(response);
         if (response['status'] === 200) {
           responseAll['data'].forEach((team: Team) => {
             if (this.favoriteTeams.findIndex((el) => el.id == team.id) == -1) {

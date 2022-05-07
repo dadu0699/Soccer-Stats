@@ -128,6 +128,7 @@ export class PlayersComponent implements OnInit {
   public async getReport1(): Promise<void> {
     try {
       const response = await this._customerService.report1(this.id_team, this.whichPerson);
+      console.log(response);
       if (response['status'] === 200) {
         this.players = response['data'];
         this.fillTable();
@@ -143,8 +144,10 @@ export class PlayersComponent implements OnInit {
     try {
       if (this.report2) {
         response = await this._customerService.report2(this.age, this.whichPerson);
+       console.log(response);
       } else {
         response = await this._customerService.report3(this.age, this.whichPerson);
+       console.log(response);
       }
       if (response['status'] === 200) {
         this.players = response['data'];
@@ -159,6 +162,7 @@ export class PlayersComponent implements OnInit {
   public async getReport12(): Promise<void> {
     try {
       const response = await this._customerService.report12(this.incidence, this.competition);
+      console.log(response);
       if (response['status'] === 200) {
         this.players = response['data'];
         this.fillTable();
@@ -172,6 +176,7 @@ export class PlayersComponent implements OnInit {
   public async getReport13(): Promise<void> {
     try {
       const response = await this._customerService.report13(this.incidence, this.year, this.competitionType);
+      console.log(response);
       if (response['status'] === 200) {
         this.players = response['data'];
         this.fillTable();

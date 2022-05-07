@@ -51,6 +51,7 @@ export class ProfileComponent implements OnInit {
   public async getProfile(): Promise<void> {
     try {
       const response = await this._customerService.getProfile();
+      console.log(response);
       if (response['status'] === 200) {
         this.user = response['data'][0];
         this.user.id_gender = this.genders.find(el => el.char == this.user.gender)?.id;
@@ -64,6 +65,7 @@ export class ProfileComponent implements OnInit {
   public async editUser(user: any): Promise<void> {
     try {
       const response = await this._customerService.updateProfile(user);
+      console.log(response);
       if (response['status'] === 200) {
         this.showSnackbar(response['msg']);
       }
@@ -86,6 +88,7 @@ export class ProfileComponent implements OnInit {
       if (status)
         try {
           const response = await this._customerService.deleteAccount();
+       console.log(response);
           if (response['status'] === 200) {
             this.showSnackbar(response['msg']);
             localStorage.removeItem('token');
@@ -104,6 +107,7 @@ export class ProfileComponent implements OnInit {
   public async getMembership(): Promise<void> {
     try {
       const response = await this._customerService.getMembership();
+      console.log(response);
       if (response['status'] === 200) {
         this.hasMembership = true;
         localStorage.setItem(
@@ -121,6 +125,7 @@ export class ProfileComponent implements OnInit {
   public async cancelMembership(): Promise<void> {
     try {
       const response = await this._customerService.cancelMembership();
+      console.log(response);
       if (response['status'] === 200) {
         this.hasMembership = false;
         localStorage.setItem(

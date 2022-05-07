@@ -32,6 +32,7 @@ export class TeamCardComponent implements OnInit {
   public async follow(id_team: number): Promise<void>{
     try {
       const response = await this._customerService.followTeam(id_team)
+      console.log(response);
       if (response['status'] === 200) {
         this.showSnackbar(response['msg']);
         this.update.emit();

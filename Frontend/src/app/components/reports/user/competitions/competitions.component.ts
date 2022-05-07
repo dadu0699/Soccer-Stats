@@ -86,6 +86,7 @@ export class CompetitionsComponent implements OnInit {
   public async getReport14(): Promise<void> {
     try {
       const response = await this._customerService.report14(this.id_team, this.competitionType);
+      console.log(response);
       if (response['status'] === 200) {
         this.teams = response['data'];
         this.fillTable();

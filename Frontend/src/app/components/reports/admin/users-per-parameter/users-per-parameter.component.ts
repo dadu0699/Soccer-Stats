@@ -68,6 +68,7 @@ export class UsersPerParameterComponent implements OnInit {
     if (this.perMembershipCount) {
       try {
         const response = await this._adminService.report3();
+       console.log(response);
         if (response['status'] === 200) {
           this.users = response['data']
           this.fillTable();
@@ -80,6 +81,7 @@ export class UsersPerParameterComponent implements OnInit {
     if (this.perMoneySpent) {
       try {
         const response = await this._adminService.report4();
+       console.log(response);
         if (response['status'] === 200) {
           this.users = response['data']
           this.fillTable();
@@ -138,6 +140,7 @@ export class UsersPerParameterComponent implements OnInit {
   public async selectCountry(id_country: any): Promise<void> {
     try {
       const response = await this._adminService.report5(id_country);
+      console.log(response);
       if (response['status'] === 200) {
         this.users = response['data'];
         this.fillTable();
@@ -151,6 +154,7 @@ export class UsersPerParameterComponent implements OnInit {
   public async selectGender(id_gender: any): Promise<void>{
     try {
       const response = await this._adminService.report6(this.genders[id_gender].char || 'M');
+      console.log(response);
       if (response['status'] === 200) {
         this.users = response['data']
         this.fillTable();
@@ -164,6 +168,7 @@ export class UsersPerParameterComponent implements OnInit {
   public async selectAge(): Promise<void> {
     try {
       const response = await this._adminService.report7(this.age);
+      console.log(response);
       if (response['status'] === 200) {
         this.users = response['data']
         this.fillTable();
@@ -177,6 +182,7 @@ export class UsersPerParameterComponent implements OnInit {
   public async selectTeam(id_team: any): Promise<void> {
     try {
       const response = await this._adminService.report1(id_team);
+      console.log(response);
       if (response['status'] === 200) {
         this.users = response['data']
         this.fillTable();
@@ -190,6 +196,7 @@ export class UsersPerParameterComponent implements OnInit {
   public async selectMembershipStatus(id_status: any): Promise<void> {
     try {
       const response = await this._adminService.report2(id_status);
+      console.log(response);
       if (response['status'] === 200) {
         this.users = response['data']
         this.fillTable();

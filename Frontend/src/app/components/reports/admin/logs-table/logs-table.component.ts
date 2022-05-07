@@ -41,6 +41,7 @@ export class LogsTableComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
       const response = await this._adminService.report10();
+       console.log(response);
       if (response['status'] === 200) {
         this.logs = response['data']
         this.fillTable();
