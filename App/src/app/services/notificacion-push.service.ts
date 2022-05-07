@@ -24,6 +24,28 @@ export class NotificacionPushService {
       this.notificacionRecibida(JSON.parse(JSON.stringify(jsonData)));
     });
 
+    OneSignal.setNotificationWillShowInForegroundHandler((notificationReceivedEvent: any) => {
+      console.log("OneSignal: notification will show in foreground:", notificationReceivedEvent);
+      let notification = notificationReceivedEvent.getNotification();
+
+      let notificacion = notification.additionalData.notificacion;
+      console.log("NOTIFICACION ACÁ")
+      console.log(notificacion)
+      this.notificacion.notificacion = notificacion;
+
+      if (localStorage.getItem('notificaciones') === null) {
+        let notifications: any[] = [];
+        notifications.push(this.notificacion);
+        localStorage.setItem('notificaciones', JSON.stringify(notifications));
+      } else {
+        let notifications: any[] = JSON.parse(localStorage.getItem('notificaciones'));
+        notifications.push(this.notificacion);
+        localStorage.setItem('notificaciones', JSON.stringify(notifications));
+      }
+      //Silence notification by calling complete() with no argument
+      notificationReceivedEvent.complete(notification);
+    });
+
     OneSignal.promptForPushNotificationsWithUserResponse((accepted: any) => {
       console.log("User accepted notifications: " + accepted);
     });
@@ -39,25 +61,14 @@ export class NotificacionPushService {
   }
 
   async notificacionRecibida(data: any) {
-    let notificacion = data.notification.additionalData.notificacion;
-    console.log("NOTIFICACION ACÁ")
-    console.log(notificacion)
-    this.notificacion.notificacion = notificacion;
+
 
     await this.navigate();
   }
 
   async navigate() {
     console.log(JSON.stringify(this.notificacion))
-    if (localStorage.getItem('notificaciones') === null) {
-      let notifications: any[] = [];
-      notifications.push(this.notificacion);
-      localStorage.setItem('notificaciones', JSON.stringify(notifications));
-    } else {
-      let notifications: any[] = JSON.parse(localStorage.getItem('notificaciones'));
-      notifications.push(this.notificacion);
-      localStorage.setItem('notificaciones', JSON.stringify(notifications));
-    }
+
 
     await this.router.navigate([`/client/notification`])
   }
