@@ -11,6 +11,8 @@ import { Incidence } from '../models/incidence.model';
 export class MatchService {
   private url: string;
   private urlEmployee: string;
+  private urlPrediction: string;
+
   private httpOptions = {
     headers: new HttpHeaders({
       'Authorization': 'bearer ' + localStorage.getItem('token'),
@@ -21,12 +23,19 @@ export class MatchService {
   constructor(private _httpClient: HttpClient) {
     this.url = `${environment.url}/match`;
     this.urlEmployee = `${environment.url}/employee`;
+    this.urlPrediction = `${environment.url}/prediction/predic`;
+  }
+
+  public async predict(id_teamLocal: number, id_teamVisitor: number): Promise<any> {
+    return await this._httpClient.
+      post(this.urlPrediction, JSON.stringify({id_teamLocal, id_teamVisitor}), this.httpOptions).toPromise();
   }
 
   public async get(): Promise<any> {
     return await this._httpClient.
       get(this.url).toPromise();
   }
+
 
   public async create(match: Game): Promise<any> {
     return await this._httpClient.

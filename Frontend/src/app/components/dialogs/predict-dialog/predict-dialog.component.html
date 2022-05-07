@@ -1,0 +1,15 @@
+<h1 mat-dialog-title><b>Set a possible game result</b></h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" class="fullSize">
+    <mat-label>Results Team Local</mat-label>
+    <input matInput [(ngModel)]="results.local" name="localField" #localField="ngModel" />
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="fullSize">
+    <mat-label>Results Team Visiting</mat-label>
+    <input matInput [(ngModel)]="results.visiting" name="visitingField" #visitingField="ngModel" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+<button mat-button (click)="onNoClick()">Go back</button>
+<button mat-button [mat-dialog-close]="results" cdkFocusInitial>Bet</button>
+</div>

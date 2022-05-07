@@ -18,9 +18,14 @@
           <div div fxLayout="column" fxLayoutAlign="space-around center">
             <strong>VS</strong>
             <mat-chip-list [ngSwitch]="game.status">
-              <mat-chip selected *ngSwitchCase="1">
-                Not Started
-              </mat-chip>
+              <div *ngSwitchCase="1" fxLayout="column" fxLayoutAlign="center center">
+                <button mat-icon-button (click)="predict(game.id_team_local, game.id_team_visiting)" *ngIf="has_membership">
+                  <mat-icon class="icon"> campaign</mat-icon>
+                </button>
+                <mat-chip selected>
+                  Not Started
+                </mat-chip>
+              </div>
               <mat-chip color="warn" selected *ngSwitchCase="2">
                 Live
               </mat-chip>

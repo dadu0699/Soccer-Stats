@@ -26,6 +26,7 @@ import { TransferDialogComponent } from './dialogs/transfer-dialog/transfer-dial
 import { ForgotPasswordDialogComponent } from './dialogs/forgot-password-dialog/forgot-password-dialog.component';
 import { TransferDialogTechnicalDirectorComponent } from './dialogs/transfer-dialog-technical-director/transfer-dialog-technical-director.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { PredictDialogComponent } from './dialogs/predict-dialog/predict-dialog.component';
 
 import { UsersPerParameterComponent } from './reports/admin/users-per-parameter/users-per-parameter.component';
 import { EmployeesPerParameterComponent } from './reports/admin/employees-per-parameter/employees-per-parameter.component';
@@ -84,6 +85,7 @@ import { MatChipsModule } from '@angular/material/chips';
     ConfirmationDialogComponent,
     ForgotPasswordDialogComponent,
     TransferDialogTechnicalDirectorComponent,
+    PredictDialogComponent,
     PlayerFieldComponent,
     UsersPerParameterComponent,
     EmployeesPerParameterComponent,
@@ -106,6 +108,7 @@ import { MatChipsModule } from '@angular/material/chips';
     TransferDialogComponent,
     ForgotPasswordDialogComponent,
     ConfirmationDialogComponent,
+    PredictDialogComponent,
   ],
   exports: [
     UserViewComponent,
